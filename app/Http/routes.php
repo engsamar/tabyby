@@ -29,27 +29,6 @@ Route::resource("complain_details","ComplainDetailController");
 Route::resource("complains","ComplainController");
 Route::resource("reserve_types","ReserveTypeController");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 Route::resource("user_roles","UserRoleController");
 Route::resource("users","UserController");
 Route::resource("examinations","ExaminationController");
->>>>>>> 91cfa88e19898958826077b123c4de61813182a5

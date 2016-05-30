@@ -22,3 +22,4 @@ Route::resource("secertaries","SecertaryController");
 Route::resource("doctor_degrees","DoctorDegreeController");
 Route::resource("user_roles","UserRoleController");
 Route::resource("users","UserController");
+Route::resource("examinations","ExaminationController");

@@ -51,7 +51,7 @@ class ExaminationController extends Controller {
         $examination->fundus = $request->input("fundus");
         $examination->i_o_p = $request->input("i_o_p");
         $examination->angle = $request->input("angle");
-        $examination->reservation_id = $request->input("reservation_id");
+        $examination->reservation_id = 1;
 
 		$examination->save();
 

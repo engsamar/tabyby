@@ -41,9 +41,7 @@ class ComplainDetailController extends Controller {
 		$complain_detail = new ComplainDetail();
 
 		$complain_detail->diagnose = $request->input("diagnose");
-        $complain_detail-> = $request->input("");
         $complain_detail->plan = $request->input("plan");
-
 		$complain_detail->save();
 
 		return redirect()->route('complain_details.index')->with('message', 'Item created successfully.');
@@ -87,7 +85,6 @@ class ComplainDetailController extends Controller {
 		$complain_detail = ComplainDetail::findOrFail($id);
 
 		$complain_detail->diagnose = $request->input("diagnose");
-        $complain_detail-> = $request->input("");
         $complain_detail->plan = $request->input("plan");
 
 		$complain_detail->save();

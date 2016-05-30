@@ -42,7 +42,7 @@ class SecertaryController extends Controller {
 
 		$secertary->degree = $request->input("degree");
         $secertary->national_id = $request->input("national_id");
-
+		$secertary->clinic_id=1;
 		$secertary->save();
 
 		return redirect()->route('secertaries.index')->with('message', 'Item created successfully.');

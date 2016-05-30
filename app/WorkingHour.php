@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Secertary extends Model
+class WorkingHour extends Model
 {
     public function clinic()
     {

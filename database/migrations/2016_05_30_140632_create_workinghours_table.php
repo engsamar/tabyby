@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSecertariesTable extends Migration {
+class CreateWorkingHoursTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,14 @@ class CreateSecertariesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('secertaries', function(Blueprint $table) {
+		Schema::create('working_hours', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('degree');
-            $table->string('national_id')->unique();
+			$table->dateTime('from');
+			$table->dateTime('to');
+			$table->enum('day', array('saturday', 'sunday','monday','tuesday','wednesday','thursday','friday'));
 			$table->integer('clinic_id')->unsigned()->index();
 //			$table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');
-			$table->timestamps();
+            $table->timestamps();
         });
 	}
 
@@ -29,7 +30,7 @@ class CreateSecertariesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('secertaries');
+		Schema::drop('working_hours');
 	}
 
 }

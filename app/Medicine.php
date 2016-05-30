@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Medicine extends Model
 {
-    //
+    public function preceptionDetails()
+    {
+        return $this->hasMany(PreceptionDetail::class);
+    }
+
+    public function consistitues()
+    {
+        return $this->belongsTo(Consistitues::class);
+    }
 }

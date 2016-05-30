@@ -41,7 +41,7 @@ class UserRoleController extends Controller {
 		$user_role = new UserRole();
 
 		$user_role->type = $request->input("type");
-
+		$user_role->user_id=1;
 		$user_role->save();
 
 		return redirect()->route('user_roles.index')->with('message', 'Item created successfully.');

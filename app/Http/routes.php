@@ -20,6 +20,15 @@ Route::resource("medical_history_details","MedicalHistoryDetailController");
 Route::resource("clinics","ClinicController");
 Route::resource("secertaries","SecertaryController");
 Route::resource("doctor_degrees","DoctorDegreeController");
+
+
+Route::resource("preception_details","PreceptionDetailController");
+Route::resource("medicines","MedicineController");
+Route::resource("consistitues","ConsistitueController");
+Route::resource("complain_details","ComplainDetailController");
+Route::resource("complains","ComplainController");
+Route::resource("reserve_types","ReserveTypeController");
+
 Route::resource("user_roles","UserRoleController");
 Route::resource("users","UserController");
 Route::resource("examinations","ExaminationController");

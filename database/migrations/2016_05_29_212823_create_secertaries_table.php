@@ -16,6 +16,8 @@ class CreateSecertariesTable extends Migration {
             $table->increments('id');
             $table->string('degree');
             $table->string('national_id')->unique();
+			$table->integer('clinic_id')->unsigned()->index()->default(0);
+//			$table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 	}

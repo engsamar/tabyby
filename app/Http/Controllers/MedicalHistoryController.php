@@ -42,7 +42,6 @@ class MedicalHistoryController extends Controller {
 
 		$medical_history->type = $request->input("type");
         $medical_history->begin_at = $request->input("begin_at");
-
 		$medical_history->save();
 
 		return redirect()->route('medical_histories.index')->with('message', 'Item created successfully.');

@@ -15,6 +15,8 @@ class CreateMedicalHistoriesTable extends Migration {
 		Schema::create('medical_histories', function(Blueprint $table) {
             $table->increments('id');
             $table->enum('type',array('surgery', 'disease', 'medicine'));
+			$table->integer('user_id')->unsigned()->index()->default(0);
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->date('begin_at');
             $table->timestamps();
         });

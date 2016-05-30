@@ -20,3 +20,5 @@ Route::resource("medical_history_details","MedicalHistoryDetailController");
 Route::resource("clinics","ClinicController");
 Route::resource("secertaries","SecertaryController");
 Route::resource("doctor_degrees","DoctorDegreeController");
+Route::resource("user_roles","UserRoleController");
+Route::resource("users","UserController");

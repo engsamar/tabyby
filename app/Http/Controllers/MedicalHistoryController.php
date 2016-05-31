@@ -27,7 +27,7 @@ class MedicalHistoryController extends Controller {
 	 */
 	public function create()
 	{
-		return view('medical_histories.create');
+		return view('medical_histories.create',['medicalHistoryType'=>ClinicConstants::$medicalHistoryType]);
 	}
 
 	/**

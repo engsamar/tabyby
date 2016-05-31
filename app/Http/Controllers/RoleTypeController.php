@@ -3,10 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Role;
+use App\RoleType;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller {
+class RoleTypeController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,9 +15,9 @@ class RoleController extends Controller {
 	 */
 	public function index()
 	{
-		$roles = Role::orderBy('id', 'desc')->paginate(10);
+		$role_types = RoleType::orderBy('id', 'desc')->paginate(10);
 
-		return view('roles.index', compact('roles'));
+		return view('role_types.index', compact('role_types'));
 	}
 
 	/**
@@ -27,7 +27,7 @@ class RoleController extends Controller {
 	 */
 	public function create()
 	{
-		return view('roles.create');
+		return view('role_types.create');
 	}
 
 	/**
@@ -38,13 +38,13 @@ class RoleController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$role = new Role();
+		$role_type = new RoleType();
 
-		$role->role = $request->input("role");
+		$role_type->roleType = $request->input("roleType");
 
-		$role->save();
+		$role_type->save();
 
-		return redirect()->route('roles.index')->with('message', 'Item created successfully.');
+		return redirect()->route('role_types.index')->with('message', 'Item created successfully.');
 	}
 
 	/**
@@ -55,9 +55,9 @@ class RoleController extends Controller {
 	 */
 	public function show($id)
 	{
-		$role = Role::findOrFail($id);
+		$role_type = RoleType::findOrFail($id);
 
-		return view('roles.show', compact('role'));
+		return view('role_types.show', compact('role_type'));
 	}
 
 	/**
@@ -68,9 +68,9 @@ class RoleController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$role = Role::findOrFail($id);
+		$role_type = RoleType::findOrFail($id);
 
-		return view('roles.edit', compact('role'));
+		return view('role_types.edit', compact('role_type'));
 	}
 
 	/**
@@ -82,13 +82,13 @@ class RoleController extends Controller {
 	 */
 	public function update(Request $request, $id)
 	{
-		$role = Role::findOrFail($id);
+		$role_type = RoleType::findOrFail($id);
 
-		$role->role = $request->input("role");
+		$role_type->roleType = $request->input("roleType");
 
-		$role->save();
+		$role_type->save();
 
-		return redirect()->route('roles.index')->with('message', 'Item updated successfully.');
+		return redirect()->route('role_types.index')->with('message', 'Item updated successfully.');
 	}
 
 	/**
@@ -99,10 +99,10 @@ class RoleController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$role = Role::findOrFail($id);
-		$role->delete();
+		$role_type = RoleType::findOrFail($id);
+		$role_type->delete();
 
-		return redirect()->route('roles.index')->with('message', 'Item deleted successfully.');
+		return redirect()->route('role_types.index')->with('message', 'Item deleted successfully.');
 	}
 
 }

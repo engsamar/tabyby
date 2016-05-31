@@ -1,12 +1,12 @@
 @extends('layout')
 @section('header')
 <div class="page-header">
-        <h1>Roles / Show #{{$role->id}}</h1>
-        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+        <h1>RoleTypes / Show #{{$role_type->id}}</h1>
+        <form action="{{ route('role_types.destroy', $role_type->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="btn-group pull-right" role="group" aria-label="...">
-                <a class="btn btn-warning btn-group" role="group" href="{{ route('roles.edit', $role->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                <a class="btn btn-warning btn-group" role="group" href="{{ route('role_types.edit', $role_type->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                 <button type="submit" class="btn btn-danger">Delete <i class="glyphicon glyphicon-trash"></i></button>
             </div>
         </form>
@@ -23,12 +23,12 @@
                     <p class="form-control-static"></p>
                 </div>
                 <div class="form-group">
-                     <label for="role">ROLE</label>
-                     <p class="form-control-static">{{$role->role}}</p>
+                     <label for="roletype">ROLETYPE</label>
+                     <p class="form-control-static">{{$role_type->roletype}}</p>
                 </div>
             </form>
 
-            <a class="btn btn-link" href="{{ route('roles.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+            <a class="btn btn-link" href="{{ route('role_types.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
 
         </div>
     </div>

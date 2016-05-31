@@ -4,7 +4,7 @@
 @endsection
 @section('header')
     <div class="page-header">
-        <h1><i class="glyphicon glyphicon-edit"></i> Roles / Edit #{{$role->id}}</h1>
+        <h1><i class="glyphicon glyphicon-edit"></i> RoleTypes / Edit #{{$role_type->id}}</h1>
     </div>
 @endsection
 
@@ -14,20 +14,20 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form action="{{ route('roles.update', $role->id) }}" method="POST">
+            <form action="{{ route('role_types.update', $role_type->id) }}" method="POST">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                <div class="form-group @if($errors->has('role')) has-error @endif">
-                       <label for="role-field">Role</label>
-                    <input type="text" id="role-field" name="role" class="form-control" value="{{ $role->role }}"/>
-                       @if($errors->has("role"))
-                        <span class="help-block">{{ $errors->first("role") }}</span>
+                <div class="form-group @if($errors->has('roletype')) has-error @endif">
+                       <label for="roletype-field">RoleType</label>
+                    <input type="text" id="roletype-field" name="roletype" class="form-control" value="{{ $role_type->roletype }}"/>
+                       @if($errors->has("roletype"))
+                        <span class="help-block">{{ $errors->first("roletype") }}</span>
                        @endif
                     </div>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <a class="btn btn-link pull-right" href="{{ route('roles.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+                    <a class="btn btn-link pull-right" href="{{ route('role_types.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
                 </div>
             </form>
 

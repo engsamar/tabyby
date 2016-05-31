@@ -27,7 +27,7 @@ class UserRoleController extends Controller {
 	 */
 	public function create()
 	{
-		return view('user_roles.create');
+		return view('user_roles.create',['eyeType'=>ClinicConstants::$eyeType]);
 	}
 
 	/**

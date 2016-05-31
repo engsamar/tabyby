@@ -21,9 +21,9 @@
                 <div class="form-group @if($errors->has('type')) has-error @endif">
                     <label for="type-field">Type</label>
                     <select id="type-field" name="type" class="form-control">
-                            <option value='surgery'>surgery</option>
-                            <option value='disease'>disease</option>
-                            <option value='medicine'>medicine</option>
+                        @foreach($medicalHistoryType as $key->$type)
+                            <option value={{ $key }}>{{ $type }}</option>
+                        @endforeach
                     </select>
                     @if($errors->has("type"))
                         <span class="help-block">{{ $errors->first("type") }}</span>

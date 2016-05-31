@@ -31,3 +31,4 @@ Route::resource("users","UserController");
 Route::resource("examinations","ExaminationController");
 Route::resource("working_hours","WorkingHourController");
 Route::resource("reservations","ReservationController");
+Route::resource("roles","RoleController");

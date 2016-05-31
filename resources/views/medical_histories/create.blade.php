@@ -1,6 +1,7 @@
 @extends('layout')
 @section('css')
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css"
+          rel="stylesheet">
 @endsection
 @section('header')
     <div class="page-header">
@@ -18,22 +19,28 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group @if($errors->has('type')) has-error @endif">
-                       <label for="type-field">Type</label>
-                    <input type="text" id="type-field" name="type" class="form-control" value="{{ old("type") }}"/>
-                       @if($errors->has("type"))
+                    <label for="type-field">Type</label>
+                    <select id="type-field" name="type" class="form-control">
+                            <option value='surgery'>surgery</option>
+                            <option value='disease'>disease</option>
+                            <option value='medicine'>medicine</option>
+                    </select>
+                    @if($errors->has("type"))
                         <span class="help-block">{{ $errors->first("type") }}</span>
-                       @endif
-                    </div>
-                    <div class="form-group @if($errors->has('begin_at')) has-error @endif">
-                       <label for="begin_at-field">Begin_at</label>
-                    <input type="text" id="begin_at-field" name="begin_at" class="form-control date-picker" value="{{ old("begin_at") }}"/>
-                       @if($errors->has("begin_at"))
+                    @endif
+                </div>
+                <div class="form-group @if($errors->has('begin_at')) has-error @endif">
+                    <label for="begin_at-field">Begin_at</label>
+                    <input type="date" id="begin_at-field" name="begin_at" class="form-control"
+                           value="{{ old("begin_at") }}"/>
+                    @if($errors->has("begin_at"))
                         <span class="help-block">{{ $errors->first("begin_at") }}</span>
-                       @endif
-                    </div>
+                    @endif
+                </div>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
-                    <a class="btn btn-link pull-right" href="{{ route('medical_histories.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
+                    <a class="btn btn-link pull-right" href="{{ route('medical_histories.index') }}"><i
+                                class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>
             </form>
 
@@ -41,9 +48,8 @@
     </div>
 @endsection
 @section('scripts')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
-  <script>
-    $('.date-picker').datepicker({
-    });
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $('.date-picker').datepicker({});
+    </script>
 @endsection

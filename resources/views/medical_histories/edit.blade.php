@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group @if($errors->has('begin_at')) has-error @endif">
                        <label for="begin_at-field">Begin_at</label>
-                    <input type="text" id="begin_at-field" name="begin_at" class="form-control date-picker" value="{{ $medical_history->begin_at }}"/>
+                    <input type="date" id="begin_at-field" name="begin_at" class="form-control" value="{{ $medical_history->begin_at }}"/>
                        @if($errors->has("begin_at"))
                         <span class="help-block">{{ $errors->first("begin_at") }}</span>
                        @endif

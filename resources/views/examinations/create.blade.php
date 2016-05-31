@@ -19,7 +19,11 @@
 
                 <div class="form-group @if($errors->has('eye_type')) has-error @endif">
                        <label for="eye_type-field">Eye_type</label>
-                    <input type="text" id="eye_type-field" name="eye_type" class="form-control" value="{{ old("eye_type") }}"/>
+                        <select id="eye_type-field" name="eye_type" class="form-control">
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                        </select>
+                    {{--<input type="text" id="eye_type-field" name="eye_type" class="form-control" value="{{ old("eye_type") }}"/>--}}
                        @if($errors->has("eye_type"))
                         <span class="help-block">{{ $errors->first("eye_type") }}</span>
                        @endif

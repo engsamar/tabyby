@@ -20,21 +20,21 @@
 
                 <div class="form-group @if($errors->has('from')) has-error @endif">
                        <label for="from-field">From</label>
-                    <input type="text" id="from-field" name="from" class="form-control date-picker" value="{{ $working_hour->from }}"/>
+                    <input type="date" id="from-field" name="from" class="form-control" value="{{ $working_hour->from }}"/>
                        @if($errors->has("from"))
                         <span class="help-block">{{ $errors->first("from") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('to')) has-error @endif">
                        <label for="to-field">To</label>
-                    <input type="text" id="to-field" name="to" class="form-control date-picker" value="{{ $working_hour->to }}"/>
+                    <input type="date" id="to-field" name="to" class="form-control" value="{{ $working_hour->to }}"/>
                        @if($errors->has("to"))
                         <span class="help-block">{{ $errors->first("to") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('day')) has-error @endif">
                        <label for="day-field">Day</label>
-                    <input type="text" id="day-field" name="day" class="form-control date-picker" value="{{ $working_hour->day }}"/>
+                    <input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>
                        @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
                        @endif

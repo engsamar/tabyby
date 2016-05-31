@@ -1,9 +1,9 @@
- <?php
+<?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateprescriptionsTable extends Migration {
+class CreateRolesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,9 @@ class CreateprescriptionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('prescriptions', function(Blueprint $table) {
+		Schema::create('roles', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('reservation_id')->unsigned();
-            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('role');
             $table->timestamps();
         });
 	}
@@ -27,8 +26,7 @@ class CreateprescriptionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('prescriptions');
+		Schema::drop('roles');
 	}
 
 }
-

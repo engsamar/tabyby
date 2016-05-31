@@ -32,7 +32,7 @@
                 </div>
                     <div class="form-group">
                      <label for="day">DAY</label>
-                     <p class="form-control-static">{{$working_hour->day}}</p>
+                     <p class="form-control-static">{{$day[$working_hour->day]}}</p>
                 </div>
                     <div class="form-group">
                      <label for="clinic_id">CLINIC_ID</label>

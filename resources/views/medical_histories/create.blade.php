@@ -21,7 +21,7 @@
                 <div class="form-group @if($errors->has('type')) has-error @endif">
                     <label for="type-field">Type</label>
                     <select id="type-field" name="type" class="form-control">
-                        @foreach($medicalHistoryType as $key->$type)
+                        @foreach($medicalHistoryType as $key=>$type)
                             <option value={{ $key }}>{{ $type }}</option>
                         @endforeach
                     </select>

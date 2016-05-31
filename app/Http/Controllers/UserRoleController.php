@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\UserRole;
 use Illuminate\Http\Request;
 
@@ -15,9 +15,9 @@ class UserRoleController extends Controller {
 	 */
 	public function index()
 	{
-		$user_roles = UserRole::orderBy('id', 'desc')->paginate(10);
+		$user_roles = UserRole::orderBy('id', 'asc')->paginate(10);
 
-		return view('user_roles.index', compact('user_roles'));
+		return view('user_roles.index', compact('user_roles'),['role' => ClinicConstants::$role]);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class UserRoleController extends Controller {
 	 */
 	public function create()
 	{
-		return view('user_roles.create',['eyeType'=>ClinicConstants::$eyeType]);
+		return view('user_roles.create',['role' => ClinicConstants::$role]);
 	}
 
 	/**
@@ -57,7 +57,7 @@ class UserRoleController extends Controller {
 	{
 		$user_role = UserRole::findOrFail($id);
 
-		return view('user_roles.show', compact('user_role'));
+		return view('user_roles.show', compact('user_role'),['role' => ClinicConstants::$role]);
 	}
 
 	/**
@@ -70,7 +70,7 @@ class UserRoleController extends Controller {
 	{
 		$user_role = UserRole::findOrFail($id);
 
-		return view('user_roles.edit', compact('user_role'));
+		return view('user_roles.edit', compact('user_role'),['role' => ClinicConstants::$role]);
 	}
 
 	/**

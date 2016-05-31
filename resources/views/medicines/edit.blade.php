@@ -27,8 +27,18 @@
                     </div>
                     <div class="form-group @if($errors->has('type')) has-error @endif">
                        <label for="type-field">Type</label>
-                    <input type="text" id="type-field" name="type" class="form-control" value="{{ $medicine->type }}"/>
-                       @if($errors->has("type"))
+                    {{--<input type="text" id="type-field" name="type" class="form-control" value="{{ $medicine->type }}"/>--}}
+                        <select id="type-field" name="type" class="form-control">
+                            @foreach($medicineType as $key=>$types)
+                                @if($medicine->type==$key)
+                                    <option selected value={{ $types[$medicine->type] }}>{{ $types }}</option>
+                                @else
+                                    <option value={{ $key }}>{{ $types }}</option>
+                                @endif
+
+                            @endforeach
+                        </select>
+                        @if($errors->has("type"))
                         <span class="help-block">{{ $errors->first("type") }}</span>
                        @endif
                     </div>

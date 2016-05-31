@@ -29,7 +29,7 @@
                     @foreach($medical_histories as $medical_history)
                         <tr>
                             <td>{{ $medical_history->id }}</td>
-                            <td>{{ $medical_history->type }}</td>
+                            <td>{{ $medicalHistoryType[$medical_history->type] }}</td>
                             <td>{{ $medical_history->begin_at }}</td>
                             <td class="text-right">
                                 <a class="btn btn-xs btn-primary"

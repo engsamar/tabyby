@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                      <label for="type">TYPE</label>
-                     <p class="form-control-static">{{$medical_history->type}}</p>
+                     <p class="form-control-static">{{ $medicalHistoryType[$medical_history->type] }}</p>
                 </div>
                     <div class="form-group">
                      <label for="begin_at">BEGIN_AT</label>

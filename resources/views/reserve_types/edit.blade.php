@@ -20,8 +20,18 @@
 
                 <div class="form-group @if($errors->has('type')) has-error @endif">
                        <label for="type-field">Type</label>
-                    <input type="text" id="type-field" name="type" class="form-control" value="{{ $reserve_type->type }}"/>
-                       @if($errors->has("type"))
+                    {{--<input type="text" id="type-field" name="type" class="form-control" value="{{ $reserve_type->type }}"/>--}}
+                    <select id="type-field" name="type" class="form-control">
+                        @foreach($reservationType as $key=>$types)
+                            @if($reserve_type->type==$key)
+                                <option selected value={{ $types[$reserve_type->type->type] }}>{{ $types }}</option>
+                            @else
+                                <option value={{ $key }}>{{ $types }}</option>
+                            @endif
+
+                        @endforeach
+                    </select>
+                    @if($errors->has("type"))
                         <span class="help-block">{{ $errors->first("type") }}</span>
                        @endif
                     </div>

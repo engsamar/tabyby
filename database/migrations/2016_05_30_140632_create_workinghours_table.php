@@ -16,7 +16,7 @@ class CreateWorkingHoursTable extends Migration {
             $table->increments('id');
 			$table->dateTime('from');
 			$table->dateTime('to');
-			$table->enum('day', array('saturday', 'sunday','monday','tuesday','wednesday','thursday','friday'));
+			$table->integer('day');
 			$table->integer('clinic_id')->unsigned()->index();
 			$table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

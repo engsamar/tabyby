@@ -22,7 +22,7 @@
                     <label for="type-field">Type</label>
                     {{--<input type="text" id="type-field" name="type" class="form-control" value="{{ old("type") }}"/>--}}
                     <select id="type-field" name="type" class="form-control">
-                        @foreach($eyeType as $key=>$value)
+                        @foreach($role as $key=>$value)
                             <option value={{ $key }}>{{ $value }}</option>
                         @endforeach
                     </select>

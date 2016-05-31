@@ -19,8 +19,13 @@
 
                 <div class="form-group @if($errors->has('type')) has-error @endif">
                        <label for="type-field">Type</label>
-                    <input type="text" id="type-field" name="type" class="form-control" value="{{ old("type") }}"/>
-                       @if($errors->has("type"))
+                    {{--<input type="text" id="type-field" name="type" class="form-control" value="{{ old("type") }}"/>--}}
+                    <select id="type-field" name="type" class="form-control">
+                        @foreach($reservationType as $key=>$value)
+                            <option value={{ $key }}>{{ $value }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has("type"))
                         <span class="help-block">{{ $errors->first("type") }}</span>
                        @endif
                     </div>

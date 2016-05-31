@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\WorkingHour;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class WorkingHourController extends Controller {
 	{
 		$working_hours = WorkingHour::orderBy('id', 'desc')->paginate(10);
 
-		return view('working_hours.index', compact('working_hours'));
+		return view('working_hours.index', compact('working_hours'),['day' => ClinicConstants::$day]);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class WorkingHourController extends Controller {
 	 */
 	public function create()
 	{
-		return view('working_hours.create');
+		return view('working_hours.create',['day' => ClinicConstants::$day]);
 	}
 
 	/**
@@ -60,7 +60,7 @@ class WorkingHourController extends Controller {
 	{
 		$working_hour = WorkingHour::findOrFail($id);
 
-		return view('working_hours.show', compact('working_hour'));
+		return view('working_hours.show', compact('working_hour'),['day' => ClinicConstants::$day]);
 	}
 
 	/**
@@ -73,7 +73,7 @@ class WorkingHourController extends Controller {
 	{
 		$working_hour = WorkingHour::findOrFail($id);
 
-		return view('working_hours.edit', compact('working_hour'));
+		return view('working_hours.edit', compact('working_hour'),['day' => ClinicConstants::$day]);
 	}
 
 	/**

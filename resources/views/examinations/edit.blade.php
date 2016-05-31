@@ -20,15 +20,35 @@
 
                 <div class="form-group @if($errors->has('eye_type')) has-error @endif">
                        <label for="eye_type-field">Eye_type</label>
-                    <input type="text" id="eye_type-field" name="eye_type" class="form-control" value="{{ $examination->eye_type }}"/>
-                       @if($errors->has("eye_type"))
+                    {{--<input type="text" id="eye_type-field" name="eye_type" class="form-control" value="{{ $examination->eye_type }}"/>--}}
+                    <select id="eye_type-field" name="eye_type" class="form-control">
+                        @foreach($eyeType as $key=>$types)
+                            @if($examination->eye_type==$key)
+                                <option selected value={{ $types[$examination->eye_type] }}>{{ $types }}</option>
+                            @else
+                                <option value={{ $key }}>{{ $types }}</option>
+                            @endif
+
+                        @endforeach
+                    </select>
+                    @if($errors->has("eye_type"))
                         <span class="help-block">{{ $errors->first("eye_type") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('vision')) has-error @endif">
                        <label for="vision-field">Vision</label>
-                    <input type="text" id="vision-field" name="vision" class="form-control" value="{{ $examination->vision }}"/>
-                       @if($errors->has("vision"))
+                    {{--<input type="text" id="vision-field" name="vision" class="form-control" value="{{ $examination->vision }}"/>--}}
+                        <select id="vision-field" name="vision" class="form-control">
+                            @foreach($vision as $key=>$types)
+                                @if($examination->vision==$key)
+                                    <option selected value={{ $types[$examination->vision] }}>{{ $types }}</option>
+                                @else
+                                    <option value={{ $key }}>{{ $types }}</option>
+                                @endif
+
+                            @endforeach
+                        </select>
+                        @if($errors->has("vision"))
                         <span class="help-block">{{ $errors->first("vision") }}</span>
                        @endif
                     </div>

@@ -33,8 +33,13 @@
                     </div>
                     <div class="form-group @if($errors->has('day')) has-error @endif">
                        <label for="day-field">Day</label>
-                    <input type="date" id="day-field" name="day" class="form-control" value="{{ old("day") }}"/>
-                       @if($errors->has("day"))
+                    {{--<input type="date" id="day-field" name="day" class="form-control" value="{{ old("day") }}"/>--}}
+                        <select multiple id="type-field" name="type" class="form-control">
+                            @foreach($day as $key=>$value)
+                                <option value={{ $key }}>{{ $value }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
                        @endif
                     </div>

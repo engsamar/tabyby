@@ -32,7 +32,7 @@
                                 <td>{{$working_hour->id}}</td>
                                 <td>{{$working_hour->from}}</td>
                     <td>{{$working_hour->to}}</td>
-                    <td>{{$working_hour->day}}</td>
+                    <td>{{$day[$working_hour->day]}}</td>
                     <td>{{$working_hour->clinic_id}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('working_hours.show', $working_hour->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>

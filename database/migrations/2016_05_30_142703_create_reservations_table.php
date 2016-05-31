@@ -22,7 +22,7 @@ class CreateReservationsTable extends Migration {
 			$table->foreign('reservation_type_id')->references('id')->on('reserve_types')->onDelete('cascade')->onUpdate('cascade');
 			$table->integer('parent_id')->unsigned()->index();
 			$table->dateTime('time');
-			$table->enum('status',array('cancelled','postponed','onTime'));
+			$table->integer('status');
 			$table->date('duration');
             $table->timestamps();
         });

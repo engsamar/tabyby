@@ -2,8 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Clinic;
 use App\ClinicConstants;
 use App\WorkingHour;
+//use App\DB;
 use Illuminate\Http\Request;
 
 class WorkingHourController extends Controller {
@@ -16,8 +18,8 @@ class WorkingHourController extends Controller {
 	public function index()
 	{
 		$working_hours = WorkingHour::orderBy('id', 'desc')->paginate(10);
-
-		return view('working_hours.index', compact('working_hours'),['day' => ClinicConstants::$day]);
+//		$clinic=WorkingHour::$clinic;
+		return view('working_hours.index', compact('working_hours'));
 	}
 
 	/**
@@ -27,7 +29,7 @@ class WorkingHourController extends Controller {
 	 */
 	public function create()
 	{
-		return view('working_hours.create',['day' => ClinicConstants::$day]);
+		return view('working_hours.create');
 	}
 
 	/**
@@ -43,7 +45,15 @@ class WorkingHourController extends Controller {
 		$working_hour->from = $request->input("from");
         $working_hour->to = $request->input("to");
         $working_hour->day = $request->input("day");
-        $working_hour->clinic_id = 1;
+        $name = $request->input("clinic_id");
+		$clinic=Clinic::where('name',$name)->first();
+//		echo "<pre>";
+//		var_dump($clinic->id);
+//		echo "</pre>";
+//		die('end');
+//		$clinic=$working_hour->clinic;
+		$working_hour->clinic_id = $clinic->id;
+//        $working_hour->clinic_id = 1;
 
 		$working_hour->save();
 
@@ -60,7 +70,7 @@ class WorkingHourController extends Controller {
 	{
 		$working_hour = WorkingHour::findOrFail($id);
 
-		return view('working_hours.show', compact('working_hour'),['day' => ClinicConstants::$day]);
+		return view('working_hours.show', compact('working_hour'));
 	}
 
 	/**
@@ -73,7 +83,7 @@ class WorkingHourController extends Controller {
 	{
 		$working_hour = WorkingHour::findOrFail($id);
 
-		return view('working_hours.edit', compact('working_hour'),['day' => ClinicConstants::$day]);
+		return view('working_hours.edit', compact('working_hour'));
 	}
 
 	/**
@@ -91,7 +101,9 @@ class WorkingHourController extends Controller {
         $working_hour->to = $request->input("to");
         $working_hour->day = $request->input("day");
 //		$clinic_name=$request->input("clinic_id");
-		$clinic=$working_hour->clinic;
+		$name = $request->input("clinic_id");
+		$clinic=Clinic::where('name',$name)->first();
+//		$clinic=$working_hour->clinic;
         $working_hour->clinic_id = $clinic->id;
 
 		$working_hour->save();

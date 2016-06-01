@@ -54,14 +54,14 @@ class ReservationController extends Controller {
         $user_name  = $request->input("name");
 		$userID  = User::where('username',$user_name)->value('id');
         $reservation->user_id = $userID;
-        // $count = Reservation::where('user_id',$userID)->count();
-        // if($count==0)
-        // {
-        // 	$reservation->parent_id =null;
-        // }
-        // elseif ($count==1) {
-        // 	$reservation->parent_id =;
-        // }
+        $count = Reservation::where('user_id',$userID)->count();
+        if($count==0)
+        {
+        	$reservation->parent_id =null;
+        }
+        elseif ($count==1) {
+        	$reservation->parent_id =Reservation::where('user_id',$userID)->value('id');
+        }
        
 		$reservation->save();
 

@@ -1,9 +1,12 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\Reservation;
+use App\Clinic;
+use App\User;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller {
@@ -27,7 +30,12 @@ class ReservationController extends Controller {
 	 */
 	public function create()
 	{
-		return view('reservations.create');
+		$clinic = Clinic::all();
+		// $address=[];
+		// foreach ($clinic as $key => $value) {
+		// 	array_push($address, $value->address);
+		// }
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $clinic);
 	}
 
 	/**
@@ -39,14 +47,22 @@ class ReservationController extends Controller {
 	public function store(Request $request)
 	{
 		$reservation = new Reservation();
-
 		$reservation->time = $request->input("time");
         $reservation->status = $request->input("status");
-        $reservation->user_id = 1;
-        $reservation->clinic_id = 1;
+        $reservation->clinic_id = $request->input("address");
         $reservation->reservation_type_id = 1;
-        $reservation->parent_reservation_id =1;
-
+        $user_name  = $request->input("name");
+		$userID  = User::where('username',$user_name)->value('id');
+        $reservation->user_id = $userID;
+        // $count = Reservation::where('user_id',$userID)->count();
+        // if($count==0)
+        // {
+        // 	$reservation->parent_id =null;
+        // }
+        // elseif ($count==1) {
+        // 	$reservation->parent_id =;
+        // }
+       
 		$reservation->save();
 
 		return redirect()->route('reservations.index')->with('message', 'Item created successfully.');

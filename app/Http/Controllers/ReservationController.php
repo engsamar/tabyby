@@ -1,6 +1,6 @@
 <?php 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ClinicConstants;
@@ -8,7 +8,6 @@ use App\Reservation;
 use App\Clinic;
 use App\User;
 use Illuminate\Http\Request;
-
 class ReservationController extends Controller {
 
 	/**
@@ -18,7 +17,9 @@ class ReservationController extends Controller {
 	 */
 	public function index()
 	{
-		$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
+		$mytime = Carbon::now();
+		$reservations = Reservation::where('time',$mytime->toDateTimeString());
+		//$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
 
 		return view('reservations.index', compact('reservations'));
 	}

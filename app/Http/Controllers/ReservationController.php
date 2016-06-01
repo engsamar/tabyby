@@ -1,9 +1,12 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\Reservation;
+use App\Clinic;
+use App\User;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller {
@@ -27,7 +30,12 @@ class ReservationController extends Controller {
 	 */
 	public function create()
 	{
-		return view('reservations.create');
+		$clinic = Clinic::all();
+		$address=[];
+		foreach ($clinic as $key => $value) {
+			array_push($address, $value->address);
+		}
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $address);
 	}
 
 	/**
@@ -39,13 +47,13 @@ class ReservationController extends Controller {
 	public function store(Request $request)
 	{
 		$reservation = new Reservation();
-
+		$user = new User();
 		$reservation->time = $request->input("time");
         $reservation->status = $request->input("status");
         $reservation->user_id = 1;
         $reservation->clinic_id = 1;
         $reservation->reservation_type_id = 1;
-        $reservation->parent_reservation_id =1;
+        // $reservation->parent_reservation_id =1;
 
 		$reservation->save();
 

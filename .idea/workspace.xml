@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4bbb4984-2959-471e-83c3-c394cae78058" name="Default" comment="edit working hours table&#10;edit working hours views&#10;edit working hours controller&#10;">
+    <list default="true" id="4bbb4984-2959-471e-83c3-c394cae78058" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_05_30_140632_create_workinghours_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_05_30_140632_create_workinghours_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/working_hours/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/working_hours/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/working_hours/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/working_hours/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/working_hours/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/working_hours/show.blade.php" />
     </list>
     <ignored path="Tabyby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -326,7 +322,7 @@
       <workItem from="1464596652483" duration="25218000" />
       <workItem from="1464683343021" duration="6271000" />
       <workItem from="1464714760995" duration="14702000" />
-      <workItem from="1464770936820" duration="6324000" />
+      <workItem from="1464770936820" duration="6355000" />
     </task>
     <task id="LOCAL-00001" summary="models and views">
       <created>1464613353186</created>
@@ -377,11 +373,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464777128945</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="edit working hours table&#10;edit working hours views&#10;edit working hours controller&#10;">
+      <created>1464777459321</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1464777459321</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58501000" />
+    <option name="totallyTimeSpent" value="58532000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="61" y="24" width="1305" height="744" extended-state="6" />

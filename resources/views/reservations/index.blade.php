@@ -37,7 +37,7 @@
                     <td>{{$reservation->user_id}}</td>
                     <td>{{$reservation->clinic_id}}</td>
                     <td>{{$reservation->reservation_type_id}}</td>
-                    <td>{{$reservation->parent_reservation_id}}</td>
+                    <td>{{$reservation->parent_id}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('reservations.show', $reservation->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('reservations.edit', $reservation->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>

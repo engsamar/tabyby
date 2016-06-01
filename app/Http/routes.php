@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::resource("medical_histories","MedicalHistoryController");
 Route::resource("medical_history_details","MedicalHistoryDetailController");
@@ -33,5 +33,13 @@ Route::resource("working_hours","WorkingHourController");
 Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
 
-
 Route::resource("user_profiles","UserProfileController");
+Route::auth();
+
+
+Route::get('logout', array('uses' => 'HomeController@logout'));
+Route::group(['middleware' => ['web']], function () {
+    // Put all your routes inside here.
+    Route::get('/', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
+});

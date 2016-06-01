@@ -50,7 +50,7 @@ class UserController extends Controller {
 
 		$user->save();
 
-		return redirect()->route('users.index')->with('message', 'Item created successfully.');
+		return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
 	}
 
 	/**

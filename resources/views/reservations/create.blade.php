@@ -51,7 +51,8 @@
                        <label for="address-field">Address</label>
                          <select id="type-field" name="address" class="form-control">
                         @foreach($address as $key=>$value)
-                            <option value={{ $key+1 }}>{{ $value }}</option>
+
+                            <option value={{ $value->id }}>{{ $value->address }}</option>
                         @endforeach
                     </select>
                        @if($errors->has("address"))

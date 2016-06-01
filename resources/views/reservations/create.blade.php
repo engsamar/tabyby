@@ -39,7 +39,7 @@
                    <!-- {{--<input type="text" id="status-field" name="status" class="form-control" value="{{ old("status") }}"/>--}} -->
                          <select id="type-field" name="status" class="form-control">
                         @foreach($status as $key=>$value)
-                            <option value={{ $key+1 }}>{{ $value }}</option>
+                            <option value={{ $key }}>{{ $value }}</option>
                         @endforeach
                     </select>
                        @if($errors->has("status"))
@@ -93,8 +93,10 @@
         
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" class="btn btn-primary"><a href="{{ route('users.create') }}" style="color:white">New User</a></button>
                     <a class="btn btn-link pull-right" href="{{ route('reservations.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>
+
             </form>
 
         </div>

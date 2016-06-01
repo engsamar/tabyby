@@ -47,14 +47,14 @@ class ReservationController extends Controller {
 	public function store(Request $request)
 	{
 		$reservation = new Reservation();
-		$user = new User();
+		$user_name  = $request->input("name");
+		$user  = User::where('username',$user_name)->value('id');
 		$reservation->time = $request->input("time");
         $reservation->status = $request->input("status");
-        $reservation->user_id = 1;
+        $reservation->user_id = $user;
         $reservation->clinic_id = 1;
         $reservation->reservation_type_id = 1;
         // $reservation->parent_reservation_id =1;
-
 		$reservation->save();
 
 		return redirect()->route('reservations.index')->with('message', 'Item created successfully.');

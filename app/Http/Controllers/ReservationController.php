@@ -39,7 +39,6 @@ class ReservationController extends Controller {
 	public function store(Request $request)
 	{
 		$reservation = new Reservation();
-
 		$reservation->time = $request->input("time");
         $reservation->status = $request->input("status");
         $reservation->user_id = 1;

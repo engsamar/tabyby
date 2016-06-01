@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\ClinicConstants;
 use App\MedicalHistory;
 use Illuminate\Http\Request;
+use App\MedicalHistoryDetail;
 
 class MedicalHistoryController extends Controller
 {
@@ -44,6 +45,12 @@ class MedicalHistoryController extends Controller
         $medical_history->begin_at = $request->input("begin_at");
         $medical_history->user_id = 1;
         $medical_history->save();
+
+
+        $medical_history_detail = new MedicalHistoryDetail();
+        $medical_history_detail->description = $request->input("description");
+        $medical_history_detail->medicalHistory_id=$medical_history->id;
+        $medical_history_detail->save();
 
         return redirect()->route('medical_histories.index')->with('message', 'Item created successfully.');
     }

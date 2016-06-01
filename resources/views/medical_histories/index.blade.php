@@ -19,7 +19,9 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                         <th>Patient Name</th>
                         <th>TYPE</th>
+                        <th>Description</th>
                         <th>BEGIN_AT</th>
                         <th class="text-right">OPTIONS</th>
                     </tr>
@@ -29,7 +31,12 @@
                     @foreach($medical_histories as $medical_history)
                         <tr>
                             <td>{{ $medical_history->id }}</td>
+                            <td><a href='/user_profiles/{{$medical_history->user_id}}'>{{ $medical_history->user->username }}</a></td>
                             <td>{{ $medicalHistoryType[$medical_history->type] }}</td>
+                            
+                             <td>{{ $medical_history->description }}</td>
+
+
                             <td>{{ $medical_history->begin_at }}</td>
                             <td class="text-right">
                                 <a class="btn btn-xs btn-primary"

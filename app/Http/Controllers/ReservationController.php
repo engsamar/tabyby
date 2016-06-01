@@ -55,6 +55,7 @@ class ReservationController extends Controller {
         $user_name  = $request->input("name");
 		$userID  = User::where('username',$user_name)->value('id');
         $reservation->user_id = $userID;
+        $reservation->parent_id=null;
         // $count = Reservation::where('user_id',$userID)->count();
         // if($count==0)
         // {
@@ -111,7 +112,7 @@ class ReservationController extends Controller {
         $reservation->user_id = $request->input("user_id");
         $reservation->clinic_id = $request->input("clinic_id");
         $reservation->reservation_type_id = $request->input("reservation_type_id");
-        $reservation->parent_reservation_id = $request->input("parent_reservation_id");
+        $reservation->parent_reservation_id = $request->input("parent_id");
 
 		$reservation->save();
 

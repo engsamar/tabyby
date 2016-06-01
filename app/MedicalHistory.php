@@ -10,4 +10,12 @@ class MedicalHistory extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function medicalHistoryDetail()
+    {
+        return $this->hasMany(MedicalHistory::class);
+    }
+   /* public function medicalhistory()
+    {
+        return $this->belongsTo(MedicalHistoryDetail::class);
+    }*/
 }

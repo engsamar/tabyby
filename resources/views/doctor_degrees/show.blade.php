@@ -38,6 +38,10 @@
                      <label for="graduate_date">GRADUATE_DATE</label>
                      <p class="form-control-static">{{$doctor_degree->graduate_date}}</p>
                 </div>
+                    <div class="form-group">
+                     <label for="user_role_id">USER_ROLE_ID</label>
+                     <p class="form-control-static">{{$doctor_degree->user_role_id}}</p>
+                </div>
             </form>
 
             <a class="btn btn-link" href="{{ route('doctor_degrees.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>

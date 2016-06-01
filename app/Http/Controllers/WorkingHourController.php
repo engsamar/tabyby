@@ -90,7 +90,9 @@ class WorkingHourController extends Controller {
 		$working_hour->from = $request->input("from");
         $working_hour->to = $request->input("to");
         $working_hour->day = $request->input("day");
-        $working_hour->clinic_id = $request->input("clinic_id");
+//		$clinic_name=$request->input("clinic_id");
+		$clinic=$working_hour->clinic;
+        $working_hour->clinic_id = $clinic->id;
 
 		$working_hour->save();
 

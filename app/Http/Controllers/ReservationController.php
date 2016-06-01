@@ -54,7 +54,7 @@ class ReservationController extends Controller {
         $reservation->user_id = $user;
         $reservation->clinic_id = 1;
         $reservation->reservation_type_id = 1;
-        $reservation->parent_id =1;
+        // $reservation->parent_id =1;
 		$reservation->save();
 
 		return redirect()->route('reservations.index')->with('message', 'Item created successfully.');

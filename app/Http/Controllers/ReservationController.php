@@ -17,9 +17,9 @@ class ReservationController extends Controller {
 	 */
 	public function index()
 	{
-		$mytime = Carbon::now();
-		$reservations = Reservation::where('time',$mytime->toDateTimeString());
-		//$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
+		// $mytime = Carbon::now();
+		// $reservations = Reservation::where('time',$mytime->toDateTimeString());
+		$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
 
 		return view('reservations.index', compact('reservations'));
 	}
@@ -51,7 +51,7 @@ class ReservationController extends Controller {
 		$reservation->time = $request->input("time");
         $reservation->status = $request->input("status");
         $reservation->clinic_id = $request->input("address");
-        $reservation->reservation_type_id = 1;
+        $reservation->reservation_type_id = $request->input("reserveType");
         $user_name  = $request->input("name");
 		$userID  = User::where('username',$user_name)->value('id');
         $reservation->user_id = $userID;
@@ -63,7 +63,18 @@ class ReservationController extends Controller {
         elseif ($count==1) {
         	$reservation->parent_id =Reservation::where('user_id',$userID)->value('id');
         }
-       
+        elseif ($count==2) {
+        	$parent =Reservation::where('user_id',$userID)->skip(1)->take(1)->get();
+        	foreach ($parent as $key => $value) {
+        		$reservation->parent_id =$value->id;
+        	}
+        }
+        elseif ($count==3) {
+        	$parent =Reservation::where('user_id',$userID)->skip(2)->take(1)->get();
+        	foreach ($parent as $key => $value) {
+        		$reservation->parent_id =$value->id;
+        	}
+        }
 		$reservation->save();
 
 		return redirect()->route('reservations.index')->with('message', 'Item created successfully.');

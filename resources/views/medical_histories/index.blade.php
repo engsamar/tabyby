@@ -34,7 +34,12 @@
                             <td><a href='/user_profiles/{{$medical_history->user_id}}'>{{ $medical_history->user->username }}</a></td>
                             <td>{{ $medicalHistoryType[$medical_history->type] }}</td>
                             
-                             <td>{{ $medical_history->description }}</td>
+                             <td>@foreach($medical_history->medicalHistoryDetail as $detail)
+
+                             {{ $detail->description}}
+
+                             @endforeach
+                             </td>
 
 
                             <td>{{ $medical_history->begin_at }}</td>

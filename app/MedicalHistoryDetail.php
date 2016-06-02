@@ -8,7 +8,7 @@ class MedicalHistoryDetail extends Model
 {
 	public function medicalhistory()
     {
-        return $this->belongsTo(MedicalHistoryDetail::class);
+        return $this->belongsTo(MedicalHistory::class);
     }
    
 }

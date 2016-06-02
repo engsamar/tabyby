@@ -49,7 +49,7 @@ class MedicalHistoryController extends Controller
 
         $medical_history_detail = new MedicalHistoryDetail();
         $medical_history_detail->description = $request->input("description");
-        $medical_history_detail->medicalHistory_id=$medical_history->id;
+        $medical_history_detail->medical_history_id=$medical_history->id;
         $medical_history_detail->save();
 
         return redirect()->route('medical_histories.index')->with('message', 'Item created successfully.');

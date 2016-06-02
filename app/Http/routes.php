@@ -33,7 +33,8 @@ Route::resource("working_hours","WorkingHourController");
 Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
 
-Route::resource("user_profiles/{id}","UserProfileController");
+//Route::resource("user_profile{id}","UserProfileController");
+Route::get("user_profiles/{id}","UserProfileController@index");
 Route::auth();
 
 

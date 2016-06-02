@@ -22,7 +22,7 @@ class UserProfileController extends Controller
 
         $histories = DB::table('users')
             ->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
-            ->join('medical_history_details', 'medicalHistory_id', '=', 'medical_histories.id')
+            ->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
             ->select('users.*', 'medical_histories.*','medical_history_details.*')
             ->where('users.id', $id)
             ->get();

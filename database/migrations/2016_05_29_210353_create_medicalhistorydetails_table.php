@@ -15,8 +15,8 @@ class CreateMedicalHistoryDetailsTable extends Migration {
 		Schema::create('medical_history_details', function(Blueprint $table) {
             $table->increments('id');
             $table->string('description');
-            $table->integer('medicalHistory_id')->unsigned();
-            $table->foreign('medicalHistory_id')->references('id')->on('medical_histories')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('medical_history_id')->unsigned();
+            $table->foreign('medical_history_id')->references('id')->on('medical_histories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 	}

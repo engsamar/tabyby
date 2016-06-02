@@ -12,7 +12,7 @@ class MedicalHistory extends Model
     }
     public function medicalHistoryDetail()
     {
-        return $this->hasMany(MedicalHistory::class);
+        return $this->hasMany(MedicalHistoryDetail::class);
     }
    /* public function medicalhistory()
     {

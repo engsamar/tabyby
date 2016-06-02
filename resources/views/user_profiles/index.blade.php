@@ -55,6 +55,7 @@
 	}
 
 	echo "<br /><b>Medicines: </b><br />";
+	var_dump($medicines);
 	foreach ($medicines as $medicine) {
 		echo "Name: ".($medicine->medicine_name)."<br />";
 		echo "History Of medicine: ".($medicine->no_times)."<br />";
@@ -62,7 +63,6 @@
 		echo "Plan: ".($medicine->duaration)."<br />";
 		echo "------------------------------------<br />";
 	}
-
 	echo "<br /><b>Glass Examinatoins: </b><br />";
 	foreach ($glassExams as $exam) {
 		echo "Eye Postion: ".($exam->eye_type)."<br />";

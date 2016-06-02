@@ -43,7 +43,7 @@ class UserProfileController extends Controller
             ->select('complains.*','reservations.*','complain_details.*')
             ->where('users.id', $id)
             ->get();
-       
+
         $medicines = DB::table('users')
             ->join('reservations', 'users.id', '=', 'reservations.user_id')
             ->join('prescriptions', 'reservation_id', '=', 'reservations.id')

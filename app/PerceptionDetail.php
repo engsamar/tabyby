@@ -11,8 +11,8 @@ class PerceptionDetail extends Model
         return $this->belongsTo(Medicine::class);
     }
 
-    public function preception()
+    public function prescription()
     {
-        return $this->belongsTo(Preception::class);
+        return $this->belongsTo(Prescription::class);
     }
 }

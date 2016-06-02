@@ -43,7 +43,7 @@ class UserProfileController extends Controller
             ->select('complains.*','reservations.*','complain_details.*')
             ->where('users.id', $id)
             ->get();
-        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains'));
+
 
 
         $medicines = DB::table('users')

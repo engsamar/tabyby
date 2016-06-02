@@ -1,7 +1,10 @@
-$('#clinic_id').on('change',function (e) {
-    var id =e.target.value;
-    console.log('hi');
-    $.get('/ajax?id'+id,function () {
+console.log('hello');
+function selectVal(e) {
+    console.log(e);
+    var id = e;
+    $.get('/ajax?id=' + id, function (data) {
         console.log(data);
+        console.log('hello ajax');
     });
-});
+}
+// });

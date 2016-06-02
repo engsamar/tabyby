@@ -1,10 +1,11 @@
 @extends('layout')
 @section('content')
+
     <div class="row">
         <div id="clinicInfo" class="col-sm-4">
             <h1>clinicInfo</h1>
             <form>
-                <select id="clinic_id-field" name="clinic_id" class="form-control">
+                <select onchange="selectVal(this.value)" id="clinic_id-field" name="clinic_id" class="form-control">
                     @foreach($clinics as $clinic)
                         <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
                     @endforeach

@@ -51,3 +51,5 @@ Route::get('/ajax',function(){
     $workinghours=WorkingHour::where('id','=',$id)->get();
     return Response::json($workinghours);
 });
+
+Route::get("patient/{id}/{patient_id}","ReservationController@show");

@@ -49,8 +49,8 @@ class UserProfileController extends Controller
         $medicines = DB::table('users')
             ->join('reservations', 'users.id', '=', 'reservations.user_id')
             ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
-            ->join('perception_details', 'preception_id', '=', 'perception_details.id')
-            ->select('prescriptions.*','perception_details.*','reservations.*')
+            ->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
+            ->select('prescriptions.*','prescription_details.*','reservations.*')
             ->where('users.id', $id)
             ->get();
         return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains','medicines'));

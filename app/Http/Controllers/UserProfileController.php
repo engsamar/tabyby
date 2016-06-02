@@ -36,7 +36,7 @@ class UserProfileController extends Controller
             ->get();
 
 
-        $complain = DB::table('users')
+        $complains = DB::table('users')
             ->join('reservations', 'users.id', '=', 'reservations.user_id')
             ->join('complains', 'reservation_id', '=', 'reservations.id')
             ->join('complain_details', 'complain_id', '=', 'complains.id')

@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prescription extends Model
 {
-    public function perceptionDetails(){
-    	return $this->hasMany(PreceptionDetail::class);
+    public function PrescriptionDetails()
+    {
+        return $this->hasMany(PrescriptionDetail::class);
     }
 }

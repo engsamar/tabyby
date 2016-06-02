@@ -20,8 +20,6 @@ Route::resource("medical_history_details","MedicalHistoryDetailController");
 Route::resource("clinics","ClinicController");
 Route::resource("secertaries","SecertaryController");
 Route::resource("doctor_degrees","DoctorDegreeController");
-Route::resource("prescriptions","PrescriptionController");
-Route::resource("preception_details","PerceptionDetailController");
 Route::resource("medicines","MedicineController");
 Route::resource("consistitues","ConsistitueController");
 Route::resource("complain_details","ComplainDetailController");
@@ -34,6 +32,9 @@ Route::resource("working_hours","WorkingHourController");
 Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
 Route::resource("/doctorHome","UserController@doctorHome");
+Route::resource("user_profiles","UserProfileController");
+Route::resource("prescription_details","PrescriptionDetailController");
+Route::resource("prescriptions","PrescriptionController");
 Route::get("user_profiles/{id}","UserProfileController@index");
 Route::auth();
 
@@ -43,4 +44,10 @@ Route::group(['middleware' => ['web']], function () {
     // Put all your routes inside here.
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
+});
+Route::get('/ajax',function(){
+//    console.log('sdfsdf');
+    $id=Input::get('id');
+    $workinghours=WorkingHour::where('id','=',$id)->get();
+    return Response::json($workinghours);
 });

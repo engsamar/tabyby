@@ -23,6 +23,8 @@
 			echo "medicines <br />";
 		}
 		echo "Beginned at: ". $history->begin_at;
+		echo "Description: ". $history->description;
+
 	}
 
 	//-------------------------------------------
@@ -42,6 +44,7 @@
 		echo "i_o_p: ".($exam->i_o_p)."<br />";
 		echo "------------------------------------<br />";
 	}
+
 	echo "<br /><b>Complains: </b><br />";
 	foreach ($complains as $complain) {
 		echo "Complain: ".($complain->complain)."<br />";
@@ -51,5 +54,13 @@
 		echo "------------------------------------<br />";
 	}
 
+	echo "<br /><b>Medicines: </b><br />";
+	foreach ($medicines as $medicine) {
+		echo "Name: ".($medicine->medicine_name)."<br />";
+		echo "History Of medicine: ".($medicine->no_times)."<br />";
+		echo "Diagnose: ".($medicine->quantity)."<br />";
+		echo "Plan: ".($medicine->duaration)."<br />";
+		echo "------------------------------------<br />";
+	}
 ?>
 @stop

@@ -11,7 +11,6 @@ use App\MedicalHistory;
 use App\Examination;
 use DB;
 
-
 class UserProfileController extends Controller
 {
     public function index($id)
@@ -44,8 +43,6 @@ class UserProfileController extends Controller
             ->where('users.id', $id)
             ->get();
 
-
-
         $medicines = DB::table('users')
             ->join('reservations', 'users.id', '=', 'reservations.user_id')
             ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
@@ -53,6 +50,16 @@ class UserProfileController extends Controller
             ->select('prescriptions.*','prescription_details.*','reservations.*')
             ->where('users.id', $id)
             ->get();
-        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains','medicines'));
+        
+         $glassExams = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('exam_glasses', 'reservation_id', '=', 'reservations.id')
+            ->select('exam_glasses.*','reservations.time')
+            ->where('users.id', $id)
+            ->get();
+
+        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains','medicines','glassExams'));
+
+       
 	}
 }

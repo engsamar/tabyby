@@ -63,6 +63,15 @@
 		echo "Plan: ".($medicine->duaration)."<br />";
 		echo "------------------------------------<br />";
 	}
-	
+	echo "<br /><b>Glass Examinatoins: </b><br />";
+	foreach ($glassExams as $exam) {
+		echo "Eye Postion: ".($exam->eye_type)."<br />";
+		echo "Examination Type: ".($exam->exam_glass_type)."<br />";
+		echo "sql: ".($exam->spl)."<br />";
+		echo "cyl: ".($exam->cyl)."<br />";
+		echo "axis: ".($exam->axis)."<br />";
+		echo "Time: ".($exam->time)."<br />";
+		echo "------------------------------------<br />";
+	}
 ?>
 @stop

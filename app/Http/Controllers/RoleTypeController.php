@@ -15,7 +15,7 @@ class RoleTypeController extends Controller {
 	 */
 	public function index()
 	{
-		$role_types = RoleType::orderBy('id', 'desc')->paginate(10);
+		$role_types = RoleType::orderBy('id', 'asc')->paginate(10);
 
 		return view('role_types.index', compact('role_types'));
 	}

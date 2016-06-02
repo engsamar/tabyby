@@ -15,7 +15,7 @@ class ClinicController extends Controller {
 	 */
 	public function index()
 	{
-		$clinics = Clinic::orderBy('id', 'desc')->paginate(10);
+		$clinics = Clinic::orderBy('id', 'asc')->paginate(10);
 
 		return view('clinics.index', compact('clinics'));
 	}

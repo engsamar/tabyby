@@ -17,52 +17,87 @@
             <form action="{{ route('reservations.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                <div class="form-group @if($errors->has('time')) has-error @endif">
-                       <label for="time-field">Time</label>
-                    <input type="text" id="time-field" name="time" class="form-control" value="{{ old("time") }}"/>
-                       @if($errors->has("time"))
-                        <span class="help-block">{{ $errors->first("time") }}</span>
+
+                <div class="form-group @if($errors->has('name')) has-error @endif">
+                       <label for="name-field">Patient Name</label>
+                    <input type="text" id="name-field" name="name" class="form-control" value="{{ old("name") }}"/>
+                       @if($errors->has("name"))
+                        <span class="help-block">{{ $errors->first("name") }}</span>
                        @endif
                     </div>
+
+
+  <!--               <div class="form-group @if($errors->has('birth')) has-error @endif">
+                       <label for="birth-field">Birth Date</label>
+                    <input type="date" id="birth-field" name="birth" class="form-control" value="{{ old("birth") }}"/>
+                       @if($errors->has("birth"))
+                        <span class="help-block">{{ $errors->first("birth") }}</span>
+                       @endif
+                    </div> -->
                     <div class="form-group @if($errors->has('status')) has-error @endif">
                        <label for="status-field">Status</label>
-                    <input type="text" id="status-field" name="status" class="form-control" value="{{ old("status") }}"/>
+                   <!-- {{--<input type="text" id="status-field" name="status" class="form-control" value="{{ old("status") }}"/>--}} -->
+                         <select id="type-field" name="status" class="form-control">
+                        @foreach($status as $key=>$value)
+                            <option value={{ $key }}>{{ $value }}</option>
+                        @endforeach
+                    </select>
                        @if($errors->has("status"))
                         <span class="help-block">{{ $errors->first("status") }}</span>
                        @endif
                     </div>
-                    <div class="form-group @if($errors->has('user_id')) has-error @endif">
+
+                    <div class="form-group @if($errors->has('address')) has-error @endif">
+                       <label for="address-field">Address</label>
+                         <select id="type-field" name="address" class="form-control">
+                        @foreach($address as $key=>$value)
+
+                            <option value={{ $value->id }}>{{ $value->address }}</option>
+                        @endforeach
+                    </select>
+                       @if($errors->has("address"))
+                        <span class="help-block">{{ $errors->first("address") }}</span>
+                       @endif
+                    </div>
+
+                    <div class="form-group @if($errors->has('reserveType')) has-error @endif">
+                       <label for="reserveType-field">Reservation Type</label>
+                         <select id="type-field" name="reserveType" class="form-control">
+                        @foreach($reserveType as $key=>$value)
+                            <option value={{ $key+1 }}>{{ $value }}</option>
+                        @endforeach
+                    </select>
+                       @if($errors->has("reserveType"))
+                        <span class="help-block">{{ $errors->first("reserveType") }}</span>
+                       @endif
+                    </div>
+
+
+
+
+                <div class="form-group @if($errors->has('time')) has-error @endif">
+                       <label for="time-field">Appoinment</label>
+                    <input type="datetime-local" id="time-field" name="time" class="form-control" value="{{ old("time") }}"/>
+                       @if($errors->has("time"))
+                        <span class="help-block">{{ $errors->first("time") }}</span>
+                       @endif
+                    </div>
+
+ <!--                    <div class="form-group @if($errors->has('user_id')) has-error @endif">
                        <label for="user_id-field">User_id</label>
                     <input type="text" id="user_id-field" name="user_id" class="form-control" value="{{ old("user_id") }}"/>
                        @if($errors->has("user_id"))
                         <span class="help-block">{{ $errors->first("user_id") }}</span>
                        @endif
-                    </div>
-                    <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
-                       <label for="clinic_id-field">Clinic_id</label>
-                    <input type="text" id="clinic_id-field" name="clinic_id" class="form-control" value="{{ old("clinic_id") }}"/>
-                       @if($errors->has("clinic_id"))
-                        <span class="help-block">{{ $errors->first("clinic_id") }}</span>
-                       @endif
-                    </div>
-                    <div class="form-group @if($errors->has('reservation_type_id')) has-error @endif">
-                       <label for="reservation_type_id-field">Reservation_type_id</label>
-                    <input type="text" id="reservation_type_id-field" name="reservation_type_id" class="form-control" value="{{ old("reservation_type_id") }}"/>
-                       @if($errors->has("reservation_type_id"))
-                        <span class="help-block">{{ $errors->first("reservation_type_id") }}</span>
-                       @endif
-                    </div>
-                    <div class="form-group @if($errors->has('parent_reservation_id')) has-error @endif">
-                       <label for="parent_reservation_id-field">Parent_reservation_id</label>
-                    <input type="text" id="parent_reservation_id-field" name="parent_reservation_id" class="form-control" value="{{ old("parent_reservation_id") }}"/>
-                       @if($errors->has("parent_reservation_id"))
-                        <span class="help-block">{{ $errors->first("parent_reservation_id") }}</span>
-                       @endif
-                    </div>
+                    </div> -->
+      
+        
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" class="btn btn-primary"><a href="{{ route('users.create') }}" style="color:white">New User</a></button>
                     <a class="btn btn-link pull-right" href="{{ route('reservations.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>
+
             </form>
 
         </div>

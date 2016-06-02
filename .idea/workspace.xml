@@ -2,7 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bbb4984-2959-471e-83c3-c394cae78058" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.phpintel/0f43deade0ec730ed6e7894a6d0cb4c8" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.phpintel/35f411873c0e7995732cfc050f8a1949" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.phpintel/64e7aa36e4697973dfb8cb91cccbb242" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.phpintel/abc06b93af374180cca8588fb7ef1378" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.phpintel/b08e7bfe5a53db5bc666514516bd6168" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.phpintel/e8d39e245ae563cc26e67bb0918830e4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.phpintel/b595edb3cf24878c85195b718cefdfbb" afterPath="$PROJECT_DIR$/.phpintel/b595edb3cf24878c85195b718cefdfbb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.phpintel/index" afterPath="$PROJECT_DIR$/.phpintel/index" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ExaminationController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExaminationController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ReservationController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReservationController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UserProfileController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserProfileController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_05_31_121145_create_examinations_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_05_31_121145_create_examinations_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_05_31_121347_create_complaindetails_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_05_31_121347_create_complaindetails_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layout.blade.php" afterPath="$PROJECT_DIR$/resources/views/layout.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user_profiles/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/user_profiles/index.blade.php" />
     </list>
     <ignored path="Tabyby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,9 +62,11 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="35" column="37" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="-280">
+              <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+              <folding>
+                <marker date="1464877411867" expanded="false" signature="9:390" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -431,7 +448,7 @@
       <workItem from="1464714760995" duration="14702000" />
       <workItem from="1464770936820" duration="6355000" />
       <workItem from="1464792605001" duration="1231000" />
-      <workItem from="1464866378469" duration="7836000" />
+      <workItem from="1464866378469" duration="7923000" />
     </task>
     <task id="LOCAL-00001" summary="models and views">
       <created>1464613353186</created>
@@ -514,11 +531,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67599000" />
+    <option name="totallyTimeSpent" value="67686000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.49730977" order="0" side_tool="false" content_ui="tabs" />
@@ -529,7 +546,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35049963" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35049963" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32786885" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -959,9 +976,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="35" column="37" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="37" />
-          <folding />
+        <state relative-caret-position="-280">
+          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+          <folding>
+            <marker date="1464877411867" expanded="false" signature="9:390" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

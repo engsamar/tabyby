@@ -31,8 +31,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="#about">Cinic Info</a></li>
+                <li class="active"><a href="/doctorHome">Home</a></li>
+                <li><a href="/clinics">Cinic Info</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="/reservations">Reserved Patient</a></li>
             </ul>

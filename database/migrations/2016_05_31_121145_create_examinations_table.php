@@ -14,7 +14,7 @@ class CreateExaminationsTable extends Migration {
     {
         Schema::create('examinations', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('eyeType');
+            $table->integer('eye_type');
             $table->integer('vision');
             $table->string('lid');
             $table->string('conjunctiva');

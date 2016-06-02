@@ -20,8 +20,8 @@
                             <th>ID</th>
                             <th>TIME</th>
                         <th>STATUS</th>
-                        <th>USER_ID</th>
-                        <th>CLINIC_ID</th>
+                        <th>USER_Name</th>
+                        <th>CLINIC_Name</th>
                         <th>RESERVATION_TYPE_ID</th>
                         <th>PARENT_RESERVATION_ID</th>
                             <th class="text-right">OPTIONS</th>
@@ -34,8 +34,8 @@
                                 <td>{{$reservation->id}}</td>
                                 <td>{{$reservation->time}}</td>
                     <td>{{$reservation->status}}</td>
-                    <td>{{$reservation->user_id}}</td>
-                    <td>{{$reservation->clinic_id}}</td>
+                    <td><a href='/user_profiles/{{$reservation->user_id}}'>{{$reservation->user->username}}</a></td>
+                    <td>{{$reservation->clinic->name}}</td>
                     <td>{{$reservation->reservation_type_id}}</td>
                     <td>{{$reservation->parent_id}}</td>
                                 <td class="text-right">

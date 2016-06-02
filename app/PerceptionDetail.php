@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PreceptionDetail extends Model
+class PerceptionDetail extends Model
 {
     public function medicine()
     {

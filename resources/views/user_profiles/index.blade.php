@@ -31,7 +31,7 @@
 	foreach ($examinations as $exam) {
 		echo "Time of reservation: ".($exam->time)."<br />";
 		echo "Eye: ";
-		if(($exam->eyeType) == 0) echo 'left'; else echo 'right'; echo "<br />";
+		if(($exam->eye_type) == 0) echo 'left'; else echo 'right'; echo "<br />";
 		echo "vision: ".($exam->vision)."<br />";
 		echo "lid: ".($exam->lid)."<br />";
 		echo "conjunctiva: ".($exam->conjunctiva)."<br />";

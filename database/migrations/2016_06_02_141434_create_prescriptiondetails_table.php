@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePerceptionDetailsTable extends Migration {
+class CreatePrescriptionDetailsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePerceptionDetailsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('perception_details', function(Blueprint $table) {
+		Schema::create('prescription_details', function(Blueprint $table) {
             $table->increments('id');
 			$table->string('medicine_name');
 			$table->tinyInteger('no_times');
@@ -33,7 +33,7 @@ class CreatePerceptionDetailsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('perception_details');
+		Schema::drop('prescription_details');
 	}
 
 }

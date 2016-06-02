@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PerceptionDetail extends Model
+class PrescriptionDetail extends Model
 {
     public function medicine()
     {
         return $this->belongsTo(Medicine::class);
     }
 
-    public function preception()
+    public function prescription()
     {
-        return $this->belongsTo(Preception::class);
+        return $this->belongsTo(Prescription::class);
     }
 }

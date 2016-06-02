@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bbb4984-2959-471e-83c3-c394cae78058" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/PrescriptionDetailController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/seeds/PrescriptionDetailTableSeeder.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Http/Controllers/PerceptionDetailController.php" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/PerceptionDetail.php" afterPath="$PROJECT_DIR$/app/PrescriptionDetail.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2016_06_02_112823_create_perceptiondetails_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_06_02_141434_create_prescriptiondetails_table.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/perception_details/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/prescription_details/create.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/perception_details/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/prescription_details/edit.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/perception_details/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/prescription_details/index.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/perception_details/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/prescription_details/show.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Prescription.php" afterPath="$PROJECT_DIR$/app/Prescription.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/users/doctorHome.blade.php" afterPath="$PROJECT_DIR$/resources/views/users/doctorHome.blade.php" />
     </list>
     <ignored path="Tabyby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -444,7 +431,7 @@
       <workItem from="1464714760995" duration="14702000" />
       <workItem from="1464770936820" duration="6355000" />
       <workItem from="1464792605001" duration="1231000" />
-      <workItem from="1464866378469" duration="7716000" />
+      <workItem from="1464866378469" duration="7830000" />
     </task>
     <task id="LOCAL-00001" summary="models and views">
       <created>1464613353186</created>
@@ -509,11 +496,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464867411215</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="edit models">
+      <created>1464877223320</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1464877223320</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67479000" />
+    <option name="totallyTimeSpent" value="67593000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
@@ -561,7 +555,8 @@
     <MESSAGE value="Roles table" />
     <MESSAGE value="edit working hours table&#10;edit working hours views&#10;edit working hours controller&#10;" />
     <MESSAGE value="Merge branch 'master' of https://github.com/engsamar/tabyby&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;app/Http/routes.php&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/engsamar/tabyby&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;app/Http/routes.php&#10;" />
+    <MESSAGE value="edit models" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit models" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

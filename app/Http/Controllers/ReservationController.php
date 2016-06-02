@@ -131,7 +131,7 @@ class ReservationController extends Controller {
         $reservation->user_id = $request->input("user_id");
         $reservation->clinic_id = $request->input("clinic_id");
         $reservation->reservation_type_id = $request->input("reservation_type_id");
-        $reservation->parent_reservation_id = $request->input("parent_id");
+        $reservation->parent _id = $request->input("parent_id");
 
 		$reservation->save();
 

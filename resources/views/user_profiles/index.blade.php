@@ -42,6 +42,14 @@
 		echo "i_o_p: ".($exam->i_o_p)."<br />";
 		echo "------------------------------------<br />";
 	}
+	echo "<br /><b>Complains: </b><br />";
+	foreach ($complains as $complain) {
+		echo "Complain: ".($complain->complain)."<br />";
+		echo "History Of Complain: ".($complain->h_of_complain)."<br />";
+		echo "Diagnose: ".($complain->diagnose)."<br />";
+		echo "Plan: ".($complain->plan)."<br />";
+		echo "------------------------------------<br />";
+	}
 
 ?>
 @stop

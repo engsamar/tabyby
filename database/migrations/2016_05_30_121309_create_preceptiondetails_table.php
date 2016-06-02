@@ -18,6 +18,8 @@ class CreatePreceptionDetailsTable extends Migration {
             $table->tinyInteger('no_times');
             $table->tinyInteger('quantity');
             $table->string('duaration');
+            $table->integer('preception_id')->unsigned()->index();
+            $table->foreign('preception_id')->references('id')->on('prescriptions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 	}

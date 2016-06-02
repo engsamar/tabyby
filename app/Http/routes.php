@@ -36,8 +36,6 @@ Route::resource("role_types","RoleTypeController");
 //Route::resource("user_profile{id}","UserProfileController");
 Route::get("user_profiles/{id}","UserProfileController@index");
 Route::auth();
-
-
 Route::get('logout', array('uses' => 'HomeController@logout'));
 Route::group(['middleware' => ['web']], function () {
     // Put all your routes inside here.

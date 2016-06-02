@@ -43,3 +43,4 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
 });
+Route::get("/working_hours/date/{id}","WorkingHourController@retreve");

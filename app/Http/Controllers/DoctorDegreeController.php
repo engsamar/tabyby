@@ -44,6 +44,7 @@ class DoctorDegreeController extends Controller {
         $doctor_degree->university = $request->input("university");
         $doctor_degree->description = $request->input("description");
         $doctor_degree->graduate_date = $request->input("graduate_date");
+        $doctor_degree->user_role_id = $request->input("user_role_id");
 
 		$doctor_degree->save();
 
@@ -91,6 +92,7 @@ class DoctorDegreeController extends Controller {
         $doctor_degree->university = $request->input("university");
         $doctor_degree->description = $request->input("description");
         $doctor_degree->graduate_date = $request->input("graduate_date");
+        $doctor_degree->user_role_id = $request->input("user_role_id");
 
 		$doctor_degree->save();
 

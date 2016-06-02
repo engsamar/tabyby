@@ -34,9 +34,25 @@ class UserProfileController extends Controller
             ->select('examinations.*','reservations.*')
             ->where('users.id', $id)
             ->get();
-  
-     return view('user_profiles.index', compact('histories', 'examinations', 'userInfo'));
 
 
+        $complain = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('complains', 'reservation_id', '=', 'reservations.id')
+            ->join('complain_details', 'complain_id', '=', 'complains.id')
+            ->select('complains.*','reservations.*','complain_details.*')
+            ->where('users.id', $id)
+            ->get();
+        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains'));
+
+
+        $medicines = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
+            ->join('preception_details', 'complain_id', '=', 'complains.id')
+            ->select('complains.*','reservations.*','complain_details.*')
+            ->where('users.id', $id)
+            ->get();
+        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains'));
 	}
 }

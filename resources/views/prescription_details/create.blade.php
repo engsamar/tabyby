@@ -4,7 +4,7 @@
 @endsection
 @section('header')
     <div class="page-header">
-        <h1><i class="glyphicon glyphicon-plus"></i> PreceptionDetails / Create </h1>
+        <h1><i class="glyphicon glyphicon-plus"></i> PrescriptionDetails / Create </h1>
     </div>
 @endsection
 
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form action="{{ route('preception_details.store') }}" method="POST">
+            <form action="{{ route('prescription_details.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group @if($errors->has('medicine_name')) has-error @endif">
@@ -38,16 +38,23 @@
                         <span class="help-block">{{ $errors->first("quantity") }}</span>
                        @endif
                     </div>
-                    <div class="form-group @if($errors->has('duaration')) has-error @endif">
-                       <label for="duaration-field">Duaration</label>
-                    <input type="text" id="duaration-field" name="duaration" class="form-control" value="{{ old("duaration") }}"/>
-                       @if($errors->has("duaration"))
-                        <span class="help-block">{{ $errors->first("duaration") }}</span>
+                    <div class="form-group @if($errors->has('duration')) has-error @endif">
+                       <label for="duration-field">Duration</label>
+                    <input type="text" id="duration-field" name="duration" class="form-control" value="{{ old("duration") }}"/>
+                       @if($errors->has("duration"))
+                        <span class="help-block">{{ $errors->first("duration") }}</span>
+                       @endif
+                    </div>
+                    <div class="form-group @if($errors->has('preception_id')) has-error @endif">
+                       <label for="preception_id-field">Preception_id</label>
+                    <input type="text" id="preception_id-field" name="preception_id" class="form-control" value="{{ old("preception_id") }}"/>
+                       @if($errors->has("preception_id"))
+                        <span class="help-block">{{ $errors->first("preception_id") }}</span>
                        @endif
                     </div>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
-                    <a class="btn btn-link pull-right" href="{{ route('preception_details.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
+                    <a class="btn btn-link pull-right" href="{{ route('prescription_details.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>
             </form>
 

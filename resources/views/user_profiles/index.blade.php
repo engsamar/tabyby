@@ -23,6 +23,8 @@
 			echo "medicines <br />";
 		}
 		echo "Beginned at: ". $history->begin_at;
+		echo "Description: ". $history->description;
+
 	}
 
 	//-------------------------------------------
@@ -31,7 +33,7 @@
 	foreach ($examinations as $exam) {
 		echo "Time of reservation: ".($exam->time)."<br />";
 		echo "Eye: ";
-		if(($exam->eyeType) == 0) echo 'left'; else echo 'right'; echo "<br />";
+		if(($exam->eye_type) == 0) echo 'left'; else echo 'right'; echo "<br />";
 		echo "vision: ".($exam->vision)."<br />";
 		echo "lid: ".($exam->lid)."<br />";
 		echo "conjunctiva: ".($exam->conjunctiva)."<br />";
@@ -43,5 +45,33 @@
 		echo "------------------------------------<br />";
 	}
 
+	echo "<br /><b>Complains: </b><br />";
+	foreach ($complains as $complain) {
+		echo "Complain: ".($complain->complain)."<br />";
+		echo "History Of Complain: ".($complain->h_of_complain)."<br />";
+		echo "Diagnose: ".($complain->diagnose)."<br />";
+		echo "Plan: ".($complain->plan)."<br />";
+		echo "------------------------------------<br />";
+	}
+
+	echo "<br /><b>Medicines: </b><br />";
+	var_dump($medicines);
+	foreach ($medicines as $medicine) {
+		echo "Name: ".($medicine->medicine_name)."<br />";
+		echo "History Of medicine: ".($medicine->no_times)."<br />";
+		echo "Diagnose: ".($medicine->quantity)."<br />";
+		echo "Plan: ".($medicine->duaration)."<br />";
+		echo "------------------------------------<br />";
+	}
+	echo "<br /><b>Glass Examinatoins: </b><br />";
+	foreach ($glassExams as $exam) {
+		echo "Eye Postion: ".($exam->eye_type)."<br />";
+		echo "Examination Type: ".($exam->exam_glass_type)."<br />";
+		echo "sql: ".($exam->spl)."<br />";
+		echo "cyl: ".($exam->cyl)."<br />";
+		echo "axis: ".($exam->axis)."<br />";
+		echo "Time: ".($exam->time)."<br />";
+		echo "------------------------------------<br />";
+	}
 ?>
 @stop

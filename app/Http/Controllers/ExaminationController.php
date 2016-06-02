@@ -17,7 +17,7 @@ class ExaminationController extends Controller {
 	{
 		$examinations = Examination::orderBy('id', 'asc')->paginate(10);
 
-		return view('examinations.index', compact('examinations'),['eyeType' => ClinicConstants::$eyeType],['vision' => ClinicConstants::$vision]);
+		return view('examinations.index', compact('examinations'),['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class ExaminationController extends Controller {
 	 */
 	public function create()
 	{
-		return view('examinations.create',['eyeType' => ClinicConstants::$eyeType],['vision' => ClinicConstants::$vision]);
+		return view('examinations.create',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
 	}
 
 	/**
@@ -51,7 +51,7 @@ class ExaminationController extends Controller {
         $examination->fundus = $request->input("fundus");
         $examination->i_o_p = $request->input("i_o_p");
         $examination->angle = $request->input("angle");
-        $examination->reservation_id = 1;
+        $examination->reservation_id = $request->input("reservation_id");;
 
 		$examination->save();
 

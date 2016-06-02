@@ -40,9 +40,16 @@
                     </div>
                     <div class="form-group @if($errors->has('graduate_date')) has-error @endif">
                        <label for="graduate_date-field">Graduate_date</label>
-                    <input type="date" id="graduate_date-field" name="graduate_date" class="form-control" value="{{ old("graduate_date") }}"/>
+                    <input type="text" id="graduate_date-field" name="graduate_date" class="form-control date-picker" value="{{ old("graduate_date") }}"/>
                        @if($errors->has("graduate_date"))
                         <span class="help-block">{{ $errors->first("graduate_date") }}</span>
+                       @endif
+                    </div>
+                    <div class="form-group @if($errors->has('user_role_id')) has-error @endif">
+                       <label for="user_role_id-field">User_role_id</label>
+                    <input type="text" id="user_role_id-field" name="user_role_id" class="form-control" value="{{ old("user_role_id") }}"/>
+                       @if($errors->has("user_role_id"))
+                        <span class="help-block">{{ $errors->first("user_role_id") }}</span>
                        @endif
                     </div>
                 <div class="well well-sm">

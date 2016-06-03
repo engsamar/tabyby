@@ -43,8 +43,8 @@ class WorkingHourController extends Controller {
 	{
 		$working_hour = new WorkingHour();
 
-		$working_hour->from = $request->input("from");
-        $working_hour->to = $request->input("to");
+		$working_hour->fromTime = $request->input("from");
+        $working_hour->toTime = $request->input("to");
         $working_hour->day = $request->input("day");
 //        $name = $request->input("clinic_id");
 //		$clinic=Clinic::where('name',$name)->first();
@@ -55,7 +55,7 @@ class WorkingHourController extends Controller {
 //		$clinic=$working_hour->clinic;
 //		$working_hour->clinic_id = $clinic->id;
 		$working_hour->clinic_id = $request->input("clinic_id");
-		$working_hour->	reservations_number = 0;
+		// $working_hour->	reservations_number = 0;
 //        $working_hour->clinic_id = 1;
 
 		$working_hour->save();

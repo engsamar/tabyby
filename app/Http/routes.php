@@ -35,7 +35,7 @@ Route::resource("/doctorHome","UserController@doctorHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
-Route::get("user_profiles/{id}","UserProfileController@index");
+Route::get("user_profiles/{id}/","UserProfileController@index");
 Route::auth();
 
 

@@ -52,7 +52,7 @@
                     @endif
                 </div>
                 <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
-                    <label for="clinic_id-field">Clinic_NAME</label>
+                    <label for="clinic_id-field">Clinic_name</label>
                     <input type="text" id="clinic_id-field" name="clinic_id" class="form-control"
                            value="{{ $working_hour->clinic->name}}"/>
                     @if($errors->has("clinic_id"))

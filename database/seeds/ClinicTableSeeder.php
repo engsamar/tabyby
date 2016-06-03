@@ -10,6 +10,10 @@ class ClinicTableSeeder extends Seeder {
     public function run()
     {
         // TestDummy::times(20)->create('App\Post');
+        $clinic=new \App\Clinic();
+        $clinic=array(
+            ['id'=>1,''],
+        );
     }
 
 }

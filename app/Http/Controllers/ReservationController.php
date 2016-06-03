@@ -1,5 +1,6 @@
 <?php 
 namespace App\Http\Controllers;
+use App\WorkingHour;
 use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -35,11 +36,16 @@ class ReservationController extends Controller {
 	public function create()
 	{
 		$clinic = Clinic::all();
+		$appointments=WorkingHour::all();
 		// $address=[];
 		// foreach ($clinic as $key => $value) {
 		// 	array_push($address, $value->address);
 		// }
-		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $clinic);
+//		echo "<pre>";
+//		var_dump($appointments);
+//		echo "</pre>";
+//		die();
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $clinic)->with('appointment', $appointments);
 	}
 
 	/**
@@ -50,10 +56,16 @@ class ReservationController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		
 		$reservation = new Reservation();
 		$reservation->time = $request->input("time");
         $reservation->status = $request->input("status");
         $reservation->clinic_id = $request->input("address");
+//		echo "<pre>";
+//		var_dump($request->input("address")	);
+//		echo "</pre>";
+//		die();
+		DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
         $reservation->reservation_type_id = $request->input("reserveType");
         $user_name  = $request->input("name");
 		$userID  = User::where('username',$user_name)->value('id');

@@ -8,6 +8,11 @@
                 <td style="width: 48%;">
                     <div id="clinicInfo" class="col-sm-4" style="width:93%;height:40%;border-color: black">
                         <h1>clinicInfo</h1>
+                            {{--//show Schedule--}}
+                        @foreach($reservation as $data)
+                            <li>{{ $data->clinic->name }}</li>
+                            <li>{{ $reservationType[$data->reservation_type_id] }}</li>
+                            @endforeach
                     </div>
                 </td>
                 <td style="width: 70%;">
@@ -19,7 +24,7 @@
             <tr>
                 <td>
                     <div id="doctorBio" class="col-sm-4" style="width:22%;height:40%">
-                        <h3>Doctor Bio</h3>
+                        <h1>Doctor Bio</h1>
                         <table>
                             <tr>
                                 <td><h4>DoctorName</h4></td>
@@ -42,12 +47,9 @@
                     </div>
                 </td>
                 <td>
-
                 </td>
-                {{--<td></td>--}}
             </tr>
         </table>
 
     </div>
-
 @stop

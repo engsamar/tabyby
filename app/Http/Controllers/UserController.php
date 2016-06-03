@@ -2,10 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\User;
 use App\UserRole;
 use App\Clinic;
+use App\Reservation;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -22,8 +23,10 @@ class UserController extends Controller
         //select all clinics address
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
-
-        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics]);
+        $user_id=1;
+        $reservation=Reservation::where('user_id',$user_id)->get();
+//        $clinic_name=Clinic::where
+        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics,'reservation'=>$reservation,'reservationType' => ClinicConstants::$reservationType]);
     }
 
     public function secretaryHome()
@@ -151,21 +154,5 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
     }
 
-//    public function searchAutoComplete()
-//    {
-//        $term = Input::get('term');
-//
-//        $results = array();
-//
-//        $queries = DB::table('users')
-//            ->where('first_name', 'LIKE', '%' . $term . '%')
-//            ->orWhere('last_name', 'LIKE', '%' . $term . '%')
-//            ->take(5)->get();
-//
-//        foreach ($queries as $query) {
-//            $results[] = ['id' => $query->id, 'value' => $query->first_name . ' ' . $query->last_name];
-//        }
-//        return Response::json($results);
-//    }
 
 }

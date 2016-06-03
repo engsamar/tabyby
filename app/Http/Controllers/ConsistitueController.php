@@ -15,7 +15,7 @@ class ConsistitueController extends Controller {
 	 */
 	public function index()
 	{
-		$consistitues = Consistitue::orderBy('id', 'desc')->paginate(10);
+		$consistitues = Consistitue::orderBy('id', 'asc')->paginate(10);
 
 		return view('consistitues.index', compact('consistitues'));
 	}

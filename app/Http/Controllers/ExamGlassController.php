@@ -15,7 +15,7 @@ class ExamGlassController extends Controller {
 	 */
 	public function index()
 	{
-		$exam_glasses = ExamGlass::orderBy('id', 'desc')->paginate(10);
+		$exam_glasses = ExamGlass::orderBy('id', 'asc')->paginate(10);
 
 		return view('exam_glasses.index', compact('exam_glasses'));
 	}

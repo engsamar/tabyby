@@ -9,10 +9,26 @@
                     <div id="clinicInfo" class="col-sm-4" style="width:93%;height:40%;border-color: black">
                         <h1>clinicInfo</h1>
                             {{--//show Schedule--}}
+                        <table>
                         @foreach($reservation as $data)
-                            <li>{{ $data->clinic->name }}</li>
-                            <li>{{ $reservationType[$data->reservation_type_id] }}</li>
+                            <tr>
+                                <td>Clinic</td>
+                                <td>:</td>
+                                <td>{{ $data->clinic->name }}</td>
+                            </tr>
+                                <tr>
+                                    <td>Reservation</td>
+                                    <td>:</td>
+                                    <td>{{ $reservationType[$data->reservation_type_id] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Appointment</td>
+                                    <td>:</td>
+                                    <td>{{ $data->day }}</td>
+                                </tr>
+
                             @endforeach
+                        </table>
                     </div>
                 </td>
                 <td style="width: 70%;">

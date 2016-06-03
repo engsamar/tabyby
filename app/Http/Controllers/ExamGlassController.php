@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\ExamGlass;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class ExamGlassController extends Controller {
 	{
 		$exam_glasses = ExamGlass::orderBy('id', 'asc')->paginate(10);
 
-		return view('exam_glasses.index', compact('exam_glasses'));
+		return view('exam_glasses.index', compact('exam_glasses'),['examGlassType' => ClinicConstants::$examGlassType]);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class ExamGlassController extends Controller {
 	 */
 	public function create()
 	{
-		return view('exam_glasses.create');
+		return view('exam_glasses.create',['examGlassType' => ClinicConstants::$examGlassType]);
 	}
 
 	/**
@@ -39,13 +39,12 @@ class ExamGlassController extends Controller {
 	public function store(Request $request)
 	{
 		$exam_glass = new ExamGlass();
-
-		$exam_glass->from = $request->input("from");
+		$exam_glass->eye_type=1;
         $exam_glass->exam_glass_type = $request->input("exam_glass_type");
         $exam_glass->spl = $request->input("spl");
         $exam_glass->cyl = $request->input("cyl");
         $exam_glass->axis = $request->input("axis");
-
+		$exam_glass->reservation_id=1;
 		$exam_glass->save();
 
 		return redirect()->route('exam_glasses.index')->with('message', 'Item created successfully.');
@@ -61,7 +60,7 @@ class ExamGlassController extends Controller {
 	{
 		$exam_glass = ExamGlass::findOrFail($id);
 
-		return view('exam_glasses.show', compact('exam_glass'));
+		return view('exam_glasses.show', compact('exam_glass'),['examGlassType' => ClinicConstants::$examGlassType]);
 	}
 
 	/**
@@ -74,7 +73,7 @@ class ExamGlassController extends Controller {
 	{
 		$exam_glass = ExamGlass::findOrFail($id);
 
-		return view('exam_glasses.edit', compact('exam_glass'));
+		return view('exam_glasses.edit', compact('exam_glass'),['examGlassType' => ClinicConstants::$examGlassType]);
 	}
 
 	/**
@@ -88,7 +87,6 @@ class ExamGlassController extends Controller {
 	{
 		$exam_glass = ExamGlass::findOrFail($id);
 
-		$exam_glass->from = $request->input("from");
         $exam_glass->exam_glass_type = $request->input("exam_glass_type");
         $exam_glass->spl = $request->input("spl");
         $exam_glass->cyl = $request->input("cyl");

@@ -33,10 +33,12 @@ Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
 Route::resource("/doctorHome","UserController@doctorHome");
 Route::resource("/patientHome","UserController@patientHome");
+Route::resource("/insertExamination","ExaminationController@doctorExamination");
 Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
+Route::resource("exam_glasses","ExamGlassController");
 Route::get("user_profiles/{id}/","UserProfileController@index");
 Route::auth();
 

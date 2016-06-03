@@ -37,14 +37,6 @@ class ReservationController extends Controller {
 	{
 		$clinic = Clinic::all();
 		$appointments=WorkingHour::all();
-		// $address=[];
-		// foreach ($clinic as $key => $value) {
-		// 	array_push($address, $value->address);
-		// }
-//		echo "<pre>";
-//		var_dump($appointments);
-//		echo "</pre>";
-//		die();
 		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $clinic)->with('appointment', $appointments);
 	}
 

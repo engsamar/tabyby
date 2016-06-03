@@ -43,7 +43,7 @@ class WorkingHourController extends Controller {
 	{
 		$working_hour = new WorkingHour();
 
-		$working_hour->from = $request->input("from");
+		$working_hour->fromTime = $request->input("from");
         $working_hour->to = $request->input("to");
         $working_hour->day = $request->input("day");
 //        $name = $request->input("clinic_id");
@@ -99,9 +99,8 @@ class WorkingHourController extends Controller {
 	public function update(Request $request, $id)
 	{
 		$working_hour = WorkingHour::findOrFail($id);
-
-		$working_hour->from = $request->input("from");
-        $working_hour->to = $request->input("to");
+		$working_hour->fromTime = $request->input("from");
+        $working_hour->toTime = $request->input("to");
         $working_hour->day = $request->input("day");
 //		$clinic_name=$request->input("clinic_id");
 		$name = $request->input("clinic_id");

@@ -18,7 +18,21 @@ class UserController extends Controller
      */
     public function patientHome()
     {
-        
+        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
+        //select all clinics address
+        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
+        //clinic appointments
+
+        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics]);
+    }
+    public function secretaryHome()
+    {
+        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
+        //select all clinics address
+        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
+        //clinic appointments
+
+        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics]);
     }
 
     public function doctorHome()

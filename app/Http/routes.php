@@ -33,6 +33,7 @@ Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
 Route::resource("/doctorHome","UserController@doctorHome");
 Route::resource("/patientHome","UserController@patientHome");
+Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
@@ -46,12 +47,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
 });
-Route::get('/ajax',function(){
-//    console.log('sdfsdf');
-    $id=Input::get('id');
-    $workinghours=WorkingHour::where('id','=',$id)->get();
-    return Response::json($workinghours);
-});
+
 
 Route::get("patient/{id}/{patient_id}","ReservationController@show");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");

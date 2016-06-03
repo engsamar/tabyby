@@ -29,7 +29,8 @@ class WorkingHourController extends Controller {
 	 */
 	public function create()
 	{
-		return view('working_hours.create');
+		$clinic = Clinic::all();
+		return view('working_hours.create')->with('name', $clinic);
 	}
 
 	/**
@@ -45,14 +46,16 @@ class WorkingHourController extends Controller {
 		$working_hour->from = $request->input("from");
         $working_hour->to = $request->input("to");
         $working_hour->day = $request->input("day");
-        $name = $request->input("clinic_id");
-		$clinic=Clinic::where('name',$name)->first();
+//        $name = $request->input("clinic_id");
+//		$clinic=Clinic::where('name',$name)->first();
 //		echo "<pre>";
 //		var_dump($clinic->id);
 //		echo "</pre>";
 //		die('end');
 //		$clinic=$working_hour->clinic;
-		$working_hour->clinic_id = $clinic->id;
+//		$working_hour->clinic_id = $clinic->id;
+		$working_hour->clinic_id = $request->input("clinic_id");
+		$working_hour->	reservations_number = 0;
 //        $working_hour->clinic_id = 1;
 
 		$working_hour->save();
@@ -123,6 +126,20 @@ class WorkingHourController extends Controller {
 		$working_hour->delete();
 
 		return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
+	}
+	public function retreve($id)
+	{
+//		$working_hour = WorkingHour::findOrFail($id);
+		$working_hour=WorkingHour::where('clinic_id',$id)->get();
+//		echo "<pre>";
+//		var_dump($id);
+//		var_dump(integerValue($id));
+//		var_dump((int)$id);
+//		var_dump($working_hour);
+//		echo "</pre>";
+//		die('end');
+		return $working_hour;
+//		return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
 	}
 
 }

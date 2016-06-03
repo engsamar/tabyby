@@ -11,7 +11,6 @@ use App\MedicalHistory;
 use App\Examination;
 use DB;
 
-
 class UserProfileController extends Controller
 {
     public function index($id)
@@ -43,16 +42,24 @@ class UserProfileController extends Controller
             ->select('complains.*','reservations.*','complain_details.*')
             ->where('users.id', $id)
             ->get();
-        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains'));
-
 
         $medicines = DB::table('users')
             ->join('reservations', 'users.id', '=', 'reservations.user_id')
             ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
-            ->join('perception_details', 'preception_id', '=', 'perception_details.id')
-            ->select('prescriptions.*','perception_details.*','reservations.*')
+            ->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
+            ->select('prescriptions.*','prescription_details.*','reservations.*')
             ->where('users.id', $id)
             ->get();
-        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains','medicines'));
+        
+         $glassExams = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('exam_glasses', 'reservation_id', '=', 'reservations.id')
+            ->select('exam_glasses.*','reservations.time')
+            ->where('users.id', $id)
+            ->get();
+
+        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains','medicines','glassExams'));
+
+       
 	}
 }

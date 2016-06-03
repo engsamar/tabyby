@@ -36,7 +36,7 @@ Route::resource("/patientHome","UserController@patientHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
-Route::get("user_profiles/{id}","UserProfileController@index");
+Route::get("user_profiles/{id}/","UserProfileController@index");
 Route::auth();
 
 
@@ -52,3 +52,6 @@ Route::get('/ajax',function(){
     $workinghours=WorkingHour::where('id','=',$id)->get();
     return Response::json($workinghours);
 });
+
+Route::get("patient/{id}/{patient_id}","ReservationController@show");
+Route::get("/working_hours/date/{id}","WorkingHourController@retreve");

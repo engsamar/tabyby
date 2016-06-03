@@ -1,5 +1,6 @@
 <?php 
 namespace App\Http\Controllers;
+use App\WorkingHour;
 use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -7,6 +8,9 @@ use App\ClinicConstants;
 use App\Reservation;
 use App\Clinic;
 use App\User;
+use App\MedicalHistory;
+use App\Examination;
+use DB;
 use Illuminate\Http\Request;
 class ReservationController extends Controller {
 
@@ -32,11 +36,16 @@ class ReservationController extends Controller {
 	public function create()
 	{
 		$clinic = Clinic::all();
+		$appointments=WorkingHour::all();
 		// $address=[];
 		// foreach ($clinic as $key => $value) {
 		// 	array_push($address, $value->address);
 		// }
-		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $clinic);
+//		echo "<pre>";
+//		var_dump($appointments);
+//		echo "</pre>";
+//		die();
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $clinic)->with('appointment', $appointments);
 	}
 
 	/**
@@ -47,10 +56,16 @@ class ReservationController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		
 		$reservation = new Reservation();
 		$reservation->time = $request->input("time");
         $reservation->status = $request->input("status");
         $reservation->clinic_id = $request->input("address");
+//		echo "<pre>";
+//		var_dump($request->input("address")	);
+//		echo "</pre>";
+//		die();
+		DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
         $reservation->reservation_type_id = $request->input("reserveType");
         $user_name  = $request->input("name");
 		$userID  = User::where('username',$user_name)->value('id');
@@ -95,11 +110,47 @@ class ReservationController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($id,$patient_id)
 	{
 		$reservation = Reservation::findOrFail($id);
 
-		return view('reservations.show', compact('reservation'));
+		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
+
+        $histories = DB::table('users')
+            ->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
+            ->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
+            ->select('users.*', 'medical_histories.*','medical_history_details.*')
+            ->where('users.id', $patient_id)
+            ->get();
+
+
+        $examinations = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('examinations', 'reservation_id', '=', 'reservations.id')
+            ->select('examinations.*','reservations.*')
+            ->where('users.id', $patient_id)
+            ->get();
+
+
+        $complains = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('complains', 'reservation_id', '=', 'reservations.id')
+            ->join('complain_details', 'complain_id', '=', 'complains.id')
+            ->select('complains.*','reservations.*','complain_details.*')
+            ->where('users.id', $id)
+            ->get();
+
+
+
+        $medicines = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
+            ->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
+            ->select('prescriptions.*','prescription_details.*','reservations.*')
+            ->where('users.id', $patient_id)
+            ->get();
+
+		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines'));
 	}
 
 	/**

@@ -24,11 +24,11 @@
                 {{--</div>--}}
                 <div class="form-group">
                      <label for="from">FROM</label>
-                     <p class="form-control-static">{{$working_hour->from}}</p>
+                     <p class="form-control-static">{{$working_hour->fromTime}}</p>
                 </div>
                     <div class="form-group">
                      <label for="to">TO</label>
-                     <p class="form-control-static">{{$working_hour->to}}</p>
+                     <p class="form-control-static">{{$working_hour->toTime}}</p>
                 </div>
                     <div class="form-group">
                      <label for="day">DAY</label>

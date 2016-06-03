@@ -139,9 +139,9 @@
 //                        console.log(content.to);
 //                        console.log(content.day);
 //                        console.log(i);
-                        var appointments=(((content.to-content.from)*60)/20);
+                        var appointments=(((content.toTime-content.fromTime)*60)/20);
                         if (content.reservations_number>appointments){return true;}
-                        appointment.append("<option>" + content.day +", from " +content.from + ", to" + content.to + "</option>");
+                        appointment.append("<option>" + content.day +", from " +content.fromTime + ", to " + content.toTime + "</option>");
                     });
                     $("#contain").html(appointment);
                     }else {

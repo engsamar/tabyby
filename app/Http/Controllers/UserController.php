@@ -25,6 +25,7 @@ class UserController extends Controller
 
         return view('users.patientHome', compact('userRole'), ['clinics' => $clinics]);
     }
+
     public function secretaryHome()
     {
         $userRole = UserRole::where('type', '=', 0)->firstOrFail();
@@ -149,5 +150,22 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
     }
+
+//    public function searchAutoComplete()
+//    {
+//        $term = Input::get('term');
+//
+//        $results = array();
+//
+//        $queries = DB::table('users')
+//            ->where('first_name', 'LIKE', '%' . $term . '%')
+//            ->orWhere('last_name', 'LIKE', '%' . $term . '%')
+//            ->take(5)->get();
+//
+//        foreach ($queries as $query) {
+//            $results[] = ['id' => $query->id, 'value' => $query->first_name . ' ' . $query->last_name];
+//        }
+//        return Response::json($results);
+//    }
 
 }

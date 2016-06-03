@@ -53,3 +53,12 @@ Route::get("patient/{id}/{patient_id}","ReservationController@show");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 Route::get("/working_hours/{id}","WorkingHourController@update");
 
+
+//Route::get('/search', function(){
+//    return View::make('admin.search');
+//});
+//
+//Route::get('/searches', function(){
+//    $in = array('one'=>'ON','two'=>'TW','three'=>'TH','four'=>'FO');
+//    return Response::json($in);
+//});

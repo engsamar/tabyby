@@ -26,7 +26,7 @@
                             <label for="day-field">Day</label>
 
                             <input type="date" id="day-field" name="day" class="form-control"/>
-                            <input type="text" id="clinic_id_field" name="clinic_id_field" class="form-control"/>
+                            <input type="hidden" id="clinic_id_field" name="clinic_id_field" class="form-control"/>
                             <button type="submit" class="btn btn-primary">Save</button>
                             <a class="btn btn-link pull-right" href="{{ route('working_hours.index') }}"/>
                             {{--class="glyphicon glyphicon-backward"></i> Back</a>--}}
@@ -41,12 +41,11 @@
                     </div>
                 </td>
                 <td>
-                    <div id="searchPatient" class="col-sm-4" style="width:22%;height:40%">
+                    <div id="searchPatient" class="col-sm-4" style="width:100%;height:40%">
                         <h1>searchPatient</h1>
-                        <input type="search">
-                        <div>
-                            b55
-                        </div>
+
+                        {{--search input--}}
+                        <input type="text" name="country" id="autocomplete" placeholder="EnterName" class="form-control"/>
                     </div>
                 </td>
             </tr>
@@ -85,38 +84,4 @@
         </table>
 
     </div>
-@section('scripts')
-
-    <script>
-        $(document).ready(function () {
-
-            console.log("hiii in ready");
-            $("select[name='clinic_id']").change(function () {
-                console.log('iam in');
-                $id = this.value;
-                console.log('hi', $id);
-                $.get("/working_hours/date/" + this.value).done(function (data, status) {
-                    console.log(data);
-                    if (data.length > 0) {
-                        var idd = data[0]['id'];
-                        console.log(idd);
-                        $('#formN').attr('action', '/working_hours/' + idd);
-                        $('#from-field').val(data[0]['fromTime']);
-                        $('#to-field').val(data[0]['toTime']);
-                        $('#clinic_id_field').val(data[0]['clinic_id']);
-                        $('#day-field').val(data[0]['day']);
-                    }
-                    else {
-                        $('#from-field').val(null);
-                        $('#to-field').val(null);
-                        $('#clinic_id_field').val(null);
-                        $('#day-field').val(null);
-                    }
-                });
-            });
-        });
-
-    </script>
-@endsection
-
 @stop

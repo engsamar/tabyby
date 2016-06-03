@@ -52,12 +52,7 @@
 
                 <div id="contain" class="form-group @if($errors->has('day')) has-error @endif">
                     <label for="day-field">Day</label>
-                    {{--<select id="type-field" name="day" class="form-control">--}}
-                        {{--@foreach($appointment as $key=>$value)--}}
 
-                            {{--<option value={{ $value->id }}>{{ $value->date }}</option>--}}
-                        {{--@endforeach--}}
-                    {{--</select>--}}
 
                     @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
@@ -126,12 +121,7 @@
 //                    alert("Data: " + data + "\nStatus: " + status);
 //                    console.log("Data: " + data + "\nStatus: " + status);
 //                    console.log(data);
-                    {{--<select id="type-field" name="day" class="form-control">--}}
-                            {{--@foreach($appointment as $key=>$value)--}}
 
-                            {{--<option value={{ $value->id }}>{{ $value->date }}</option>--}}
-                    {{--@endforeach--}}
-                    {{--</select>--}}
                             if (data.length>0){
                     var appointment =$("<select></select>").attr("id", "type-field").attr("name", "day").attr("class", "form-control");
                     $.each(data, function (i, content) {
@@ -139,9 +129,9 @@
 //                        console.log(content.to);
 //                        console.log(content.day);
 //                        console.log(i);
-                        var appointments=(((content.to-content.from)*60)/20);
+                        var appointments=(((content.toTime-content.fromTime)*60)/20);
                         if (content.reservations_number>appointments){return true;}
-                        appointment.append("<option>" + content.day +", from " +content.from + ", to" + content.to + "</option>");
+                        appointment.append("<option>" + content.day +", from " +content.fromTime + ", to " + content.toTime + "</option>");
                     });
                     $("#contain").html(appointment);
                     }else {
@@ -149,13 +139,7 @@
                     }
                 });
             });
-//            $("select[name='address']").change(function () {
-//                alert("Handler for .change() called.");
-//                console.log("hiii");
-//            });
-//            $('address').on("change", function () {
-//                console.log("hiii");
-//            });
+
         });
 
     </script>

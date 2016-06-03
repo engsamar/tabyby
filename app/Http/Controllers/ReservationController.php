@@ -61,10 +61,10 @@ class ReservationController extends Controller {
 		$reservation->time = $request->input("time");
         $reservation->status = "postponed";
         $reservation->clinic_id = $request->input("address");
-//		echo "<pre>";
-//		var_dump($request->input("address")	);
-//		echo "</pre>";
-//		die();
+		echo "<pre>";
+		var_dump($request->input("day")	);
+		echo "</pre>";
+		die();
 		DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
         $reservation->reservation_type_id = $request->input("reserveType");
         $user_name  = $request->input("name");

@@ -35,25 +35,14 @@
                         <span class="help-block">{{ $errors->first("birth") }}</span>
                        @endif
                         </div> -->
-                <div class="form-group @if($errors->has('status')) has-error @endif">
-                    <label for="status-field">Status</label>
-                    <!-- {{--<input type="text" id="status-field" name="status" class="form-control" value="{{ old("status") }}"/>--}} -->
-                    <select id="type-field" name="status" class="form-control">
-                        @foreach($status as $key=>$value)
-                            <option value={{ $key }}>{{ $value }}</option>
-                        @endforeach
-                    </select>
-                    @if($errors->has("status"))
-                        <span class="help-block">{{ $errors->first("status") }}</span>
-                    @endif
-                </div>
+       
 
                 <div  class="form-group @if($errors->has('address')) has-error @endif">
                     <label for="address-field">Address</label>
                     <select id="type-field" name="address" class="form-control">
                         @foreach($address as $key=>$value)
 
-                                <option value={{ $value->id }}>{{ $value->name }}</option>
+                                <option value={{ $value->id }}>{{ $value->name }} :: {{ $value->address }}</option>
                                 @endforeach
                     </select>
                     @if($errors->has("address"))

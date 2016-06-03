@@ -9,14 +9,14 @@
                     <div id="clinicInfo" class="col-sm-4" style="width:48%;height:40%;border-color: black">
                         <h1>clinicInfo</h1>
 
-                        <form action="{{ route('working_hours.update',$working_hour->id) }}" method="POST">
-                        <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <select id="clinic_id-field" name="clinic_id" class="form-control">
-                            @foreach($clinics as $clinic)
-                                <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
-                            @endforeach
-                        </select>
+                        <form name="formN" id="formN" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <select id="clinic_id-field" name="clinic_id" class="form-control">
+                                @foreach($clinics as $clinic)
+                                    <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
+                                @endforeach
+                            </select>
                             <label for="from-field">From</label>
                             <input type="text" id="from-field" name="from" class="form-control"/>
 
@@ -26,12 +26,12 @@
                             <label for="day-field">Day</label>
 
                             <input type="date" id="day-field" name="day" class="form-control"/>
-                            <input type="hidden" id="clinic_id-field" name="clinic_id" class="form-control"/>
+                            <input type="text" id="clinic_id_field" name="clinic_id_field" class="form-control"/>
                             <button type="submit" class="btn btn-primary">Save</button>
                             <a class="btn btn-link pull-right" href="{{ route('working_hours.index') }}"/>
                             {{--class="glyphicon glyphicon-backward"></i> Back</a>--}}
                             {{--</div>--}}
-                            </form>
+                        </form>
 
                     </div>
                 </td>
@@ -98,26 +98,22 @@
                 $.get("/working_hours/date/" + this.value).done(function (data, status) {
                     console.log(data);
                     if (data.length > 0) {
-                        console.log('fffffff');
+                        var idd = data[0]['id'];
+                        console.log(idd);
+                        $('#formN').attr('action', '/working_hours/' + idd);
                         $('#from-field').val(data[0]['fromTime']);
                         $('#to-field').val(data[0]['toTime']);
-                        $('#clinic_id-field').val(data[0]['clinic_id']);
+                        $('#clinic_id_field').val(data[0]['clinic_id']);
                         $('#day-field').val(data[0]['day']);
-                    } else {
+                    }
+                    else {
                         $('#from-field').val(null);
                         $('#to-field').val(null);
-                        $('#clinic_id-field').val(null);
+                        $('#clinic_id_field').val(null);
                         $('#day-field').val(null);
                     }
                 });
             });
-//            $("select[name='address']").change(function () {
-//                alert("Handler for .change() called.");
-//                console.log("hiii");
-//            });
-//            $('address').on("change", function () {
-//                console.log("hiii");
-//            });
         });
 
     </script>

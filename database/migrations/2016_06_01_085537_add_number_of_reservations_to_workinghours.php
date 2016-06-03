@@ -14,7 +14,7 @@ class AddNumberOfReservationsToWorkinghours extends Migration
     {
         //
         Schema::table('working_hours', function(Blueprint $table) {
-            $table->integer('reservations_number');
+            $table->boolean('status');
         });
     }
 

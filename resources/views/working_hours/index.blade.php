@@ -31,8 +31,8 @@
                     @foreach($working_hours as $working_hour)
                         <tr>
 {{--                            <td>{{$working_hour->id}}</td>--}}
-                            <td>{{$working_hour->from}}</td>
-                            <td>{{$working_hour->to}}</td>
+                            <td>{{$working_hour->fromTime}}</td>
+                            <td>{{$working_hour->toTime}}</td>
                             <td>{{$working_hour->day}}</td>
                             <td>{{$working_hour->clinic->name}}
 

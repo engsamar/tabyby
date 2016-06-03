@@ -22,7 +22,9 @@ class CreateReservationsTable extends Migration {
 			$table->foreign('reservation_type_id')->references('id')->on('reserve_types')->onDelete('cascade')->onUpdate('cascade');
 			$table->integer('parent_id')->unsigned()->index()->nullable();
     		$table->foreign('parent_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
-			$table->dateTime('time');
+			$table->date('day');
+			$table->time('time');
+			$table->time('appoinment');
 			$table->integer('status');
 			$table->date('duration');
             $table->timestamps();

@@ -32,7 +32,7 @@ class UserController extends Controller
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
 
-        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics]);
+        return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics]);
     }
 
     public function doctorHome()

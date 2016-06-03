@@ -51,7 +51,7 @@ class ReservationController extends Controller {
 		
 		$reservation = new Reservation();
 		$reservation->time = $request->input("time");
-        $reservation->status = $request->input("status");
+        $reservation->status = "postponed";
         $reservation->clinic_id = $request->input("address");
 //		echo "<pre>";
 //		var_dump($request->input("address")	);

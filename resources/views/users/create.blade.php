@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group @if($errors->has('password')) has-error @endif">
                        <label for="password-field">Password</label>
-                    <input type="text" id="password-field" name="password" class="form-control" value="{{ old("password") }}"/>
+                    <input type="password" id="password-field" name="password" class="form-control" value="{{ old("password") }}"/>
                        @if($errors->has("password"))
                         <span class="help-block">{{ $errors->first("password") }}</span>
                        @endif

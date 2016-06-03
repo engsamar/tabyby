@@ -16,8 +16,8 @@ class CreateComplainDetailsTable extends Migration {
             $table->increments('id');
             $table->string('diagnose');
             $table->string('plan');
-            $table->integer('complaint_id')->unsigned();
-            $table->foreign('complaint_id')->references('id')->on('complains')->onDelete('cascade');
+            $table->integer('complain_id')->unsigned();
+            $table->foreign('complain_id')->references('id')->on('complains')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateReserveTypesTable extends Migration
     {
         Schema::create('reserve_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', array('examination','firstConsultation','secondConsultation','thirdConsultation','glassesPrescription'));
+            $table->integer('type');
             $table->timestamps();
         });
     }

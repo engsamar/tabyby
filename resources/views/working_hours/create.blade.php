@@ -19,14 +19,14 @@
 
                 <div class="form-group @if($errors->has('from')) has-error @endif">
                        <label for="from-field">From</label>
-                    <input type="date" id="from-field" name="from" class="form-control" value="{{ old("from") }}"/>
+                    <input type="text" id="from-field" name="from" class="form-control" value="{{ old("from") }}"/>
                        @if($errors->has("from"))
                         <span class="help-block">{{ $errors->first("from") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('to')) has-error @endif">
                        <label for="to-field">To</label>
-                    <input type="date" id="to-field" name="to" class="form-control" value="{{ old("to") }}"/>
+                    <input type="text" id="to-field" name="to" class="form-control" value="{{ old("to") }}"/>
                        @if($errors->has("to"))
                         <span class="help-block">{{ $errors->first("to") }}</span>
                        @endif
@@ -34,13 +34,24 @@
                     <div class="form-group @if($errors->has('day')) has-error @endif">
                        <label for="day-field">Day</label>
                     <input type="date" id="day-field" name="day" class="form-control" value="{{ old("day") }}"/>
-                       @if($errors->has("day"))
+                        {{--<select multiple id="type-field" name="type" class="form-control">--}}
+                            {{--@foreach($day as $key=>$value)--}}
+                                {{--<option value={{ $key }}>{{ $value }}</option>--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                        @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
-                       <label for="clinic_id-field">Clinic_id</label>
-                    <input type="text" id="clinic_id-field" name="clinic_id" class="form-control" value="{{ old("clinic_id") }}"/>
+                       <label for="clinic_id-field">Clinic_address</label>
+                    {{--<input type="text" id="clinic_id-field" name="clinic_id" class="form-control" value="{{ old("clinic_id") }}"/>--}}
+                        <select id="type-field" name="clinic_id" class="form-control">
+                            @foreach($name as $key=>$value)
+
+                                <option value={{ $value->id }}>{{ $value->name }}</option>
+                            @endforeach
+                        </select>
                        @if($errors->has("clinic_id"))
                         <span class="help-block">{{ $errors->first("clinic_id") }}</span>
                        @endif

@@ -14,8 +14,8 @@ class CreateExaminationsTable extends Migration {
     {
         Schema::create('examinations', function(Blueprint $table) {
             $table->increments('id');
-            $table->enum('eye_type', array('Right', 'Left'));
-            $table->enum('vision', array('6/6', '6/9', '6/12', '6/18', '6/24', '6/36', '6/60', '5/60', '4/60', '3/60', '2/60', '1/60', 'H.M', 'PL', 'No_Pl'));
+            $table->integer('eye_type');
+            $table->integer('vision');
             $table->string('lid');
             $table->string('conjunctiva');
             $table->string('cornea');

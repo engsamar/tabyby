@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\Medicine;
 use Illuminate\Http\Request;
 
@@ -15,9 +15,9 @@ class MedicineController extends Controller {
 	 */
 	public function index()
 	{
-		$medicines = Medicine::orderBy('id', 'desc')->paginate(10);
+		$medicines = Medicine::orderBy('id', 'asc')->paginate(10);
 
-		return view('medicines.index', compact('medicines'));
+		return view('medicines.index', compact('medicines'),['medicineType' => ClinicConstants::$medicineType]);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class MedicineController extends Controller {
 	 */
 	public function create()
 	{
-		return view('medicines.create');
+		return view('medicines.create',['medicineType' => ClinicConstants::$medicineType]);
 	}
 
 	/**
@@ -59,7 +59,7 @@ class MedicineController extends Controller {
 	{
 		$medicine = Medicine::findOrFail($id);
 
-		return view('medicines.show', compact('medicine'));
+		return view('medicines.show', compact('medicine'),['medicineType' => ClinicConstants::$medicineType]);
 	}
 
 	/**
@@ -72,7 +72,7 @@ class MedicineController extends Controller {
 	{
 		$medicine = Medicine::findOrFail($id);
 
-		return view('medicines.edit', compact('medicine'));
+		return view('medicines.edit', compact('medicine'),['medicineType' => ClinicConstants::$medicineType]);
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\ReserveType;
 use Illuminate\Http\Request;
 
@@ -15,9 +15,9 @@ class ReserveTypeController extends Controller {
 	 */
 	public function index()
 	{
-		$reserve_types = ReserveType::orderBy('id', 'desc')->paginate(10);
+		$reserve_types = ReserveType::orderBy('id', 'asc')->paginate(10);
 
-		return view('reserve_types.index', compact('reserve_types'));
+		return view('reserve_types.index', compact('reserve_types'),['reservationType' => ClinicConstants::$reservationType]);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class ReserveTypeController extends Controller {
 	 */
 	public function create()
 	{
-		return view('reserve_types.create');
+		return view('reserve_types.create',['reservationType' => ClinicConstants::$reservationType]);
 	}
 
 	/**
@@ -57,7 +57,7 @@ class ReserveTypeController extends Controller {
 	{
 		$reserve_type = ReserveType::findOrFail($id);
 
-		return view('reserve_types.show', compact('reserve_type'));
+		return view('reserve_types.show', compact('reserve_type'),['reservationType' => ClinicConstants::$reservationType]);
 	}
 
 	/**
@@ -70,7 +70,7 @@ class ReserveTypeController extends Controller {
 	{
 		$reserve_type = ReserveType::findOrFail($id);
 
-		return view('reserve_types.edit', compact('reserve_type'));
+		return view('reserve_types.edit', compact('reserve_type'),['reservationType' => ClinicConstants::$reservationType]);
 	}
 
 	/**

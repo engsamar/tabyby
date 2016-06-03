@@ -24,11 +24,11 @@
                 </div>
                 <div class="form-group">
                      <label for="eye_type">EYE_TYPE</label>
-                     <p class="form-control-static">{{$examination->eye_type}}</p>
+                     <p class="form-control-static">{{$eyeType[$examination->eye_type]}}</p>
                 </div>
                     <div class="form-group">
                      <label for="vision">VISION</label>
-                     <p class="form-control-static">{{$examination->vision}}</p>
+                     <p class="form-control-static">{{$vision[$examination->vision]}}</p>
                 </div>
                     <div class="form-group">
                      <label for="lid">LID</label>

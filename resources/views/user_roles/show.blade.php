@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                      <label for="type">TYPE</label>
-                     <p class="form-control-static">{{$user_role->type}}</p>
+                     <p class="form-control-static">{{$role[$user_role->type]}}</p>
                 </div>
             </form>
 

@@ -18,25 +18,32 @@
         <div class="col-md-12">
 
             <form action="#">
-                <div class="form-group">
-                    <label for="nome">ID</label>
-                    <p class="form-control-static"></p>
-                </div>
+                {{--<div class="form-group">--}}
+                    {{--<label for="nome">ID</label>--}}
+                    {{--<p class="form-control-static"></p>--}}
+                {{--</div>--}}
                 <div class="form-group">
                      <label for="from">FROM</label>
-                     <p class="form-control-static">{{$working_hour->from}}</p>
+                     <p class="form-control-static">{{$working_hour->fromTime}}</p>
                 </div>
                     <div class="form-group">
                      <label for="to">TO</label>
-                     <p class="form-control-static">{{$working_hour->to}}</p>
+                     <p class="form-control-static">{{$working_hour->toTime}}</p>
                 </div>
                     <div class="form-group">
                      <label for="day">DAY</label>
                      <p class="form-control-static">{{$working_hour->day}}</p>
                 </div>
                     <div class="form-group">
-                     <label for="clinic_id">CLINIC_ID</label>
-                     <p class="form-control-static">{{$working_hour->clinic_id}}</p>
+                     <label for="clinic_id">CLINIC_NAME</label>
+                        <?php
+//                            die($working_hour->clinic->name);
+                        ?>
+                        {{--@foreach($working_hour->clinic as $key=>$clinic)--}}
+                            {{--{{$key}}--}}
+                            {{--{{$clinic}}--}}
+                        {{--@endforeach--}}
+                     <p class="form-control-static">{{$working_hour->clinic->name}}</p>
                 </div>
             </form>
 

@@ -15,7 +15,7 @@ class CreateprescriptionsTable extends Migration {
 		Schema::create('prescriptions', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('reservation_id')->unsigned();
-            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 	}

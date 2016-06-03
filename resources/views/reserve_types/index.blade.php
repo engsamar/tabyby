@@ -27,7 +27,7 @@
                         @foreach($reserve_types as $reserve_type)
                             <tr>
                                 <td>{{$reserve_type->id}}</td>
-                                <td>{{$reserve_type->type}}</td>
+                                <td>{{$reservationType[$reserve_type->type]}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('reserve_types.show', $reserve_type->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('reserve_types.edit', $reserve_type->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>

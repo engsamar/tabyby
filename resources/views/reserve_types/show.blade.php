@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                      <label for="type">TYPE</label>
-                     <p class="form-control-static">{{$reserve_type->type}}</p>
+                     <p class="form-control-static">{{$reservationType[$reserve_type->type]}}</p>
                 </div>
             </form>
 

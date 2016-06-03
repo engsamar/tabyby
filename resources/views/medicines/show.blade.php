@@ -28,7 +28,7 @@
                 </div>
                     <div class="form-group">
                      <label for="type">TYPE</label>
-                     <p class="form-control-static">{{$medicine->type}}</p>
+                     <p class="form-control-static">{{$medicineType[$medicine->type]}}</p>
                 </div>
                     <div class="form-group">
                      <label for="company">COMPANY</label>

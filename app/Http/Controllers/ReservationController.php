@@ -51,7 +51,14 @@ class ReservationController extends Controller {
 		
 		$reservation = new Reservation();
 		// $reservation->time = $request->input("time");
+		// $gded=(strtotime('12:45:00')-strtotime('11:00:00'))/60/60;
+		// echo $gded;
+		// $selectedTime = "9:15:00";
+		// $endTime = strtotime("+15 minutes", strtotime($selectedTime));
+		// echo date('h:i:s', $endTime);
+		// die();
         $reservation->status = "postponed";
+        $clinicID = $request->input("address");
         $reservation->clinic_id = $request->input("address");
 		// DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
         $reservation->reservation_type_id = $request->input("reserveType");
@@ -63,9 +70,12 @@ class ReservationController extends Controller {
         $reservation->day=$pieces[0];
         $reservation->fromTime=$pieces[2];
         $reservation->toTime=$pieces[4];
-        $numOfReserve=((($pieces[4]-$pieces[2])*60)/15);
-        $count = Reservation::where('day',$pieces[0])->count();
-        $reservation->appoinment=$pieces[2]+(($count*15)/60);
+        // $numOfReserve=((($pieces[4]-$pieces[2])*60)/15);
+        $count = Reservation::where('day',$pieces[0])->where('clinic_id',$clinicID)->count();
+        $reserveTime = strtotime("+".( $count*15)." minutes", strtotime($pieces[2]-12));
+		// echo date('h:i:s', $reserveTime);
+		// die();
+        $reservation->appoinment=$reserveTime;
         // echo $reservation->time;
         // die();
         $count = Reservation::where('user_id',$userID)->count();

@@ -28,11 +28,11 @@
                 </div>
 
 
-                <!--               <div class="form-group @if($errors->has('birth')) has-error @endif">
-                       <label for="birth-field">Birth Date</label>
-                    <input type="date" id="birth-field" name="birth" class="form-control" value="{{ old("birth") }}"/>
+<!--                               <div class="form-group @if($errors->has('time')) has-error @endif">
+                       <label for="time-field">Time</label>
+                    <input type="time" id="birth-field" name="time" class="form-control" value="{{ old("birth") }}"/>
                        @if($errors->has("birth"))
-                        <span class="help-block">{{ $errors->first("birth") }}</span>
+                        <span class="help-block">{{ $errors->first("time") }}</span>
                        @endif
                         </div> -->
        

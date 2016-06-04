@@ -16,6 +16,7 @@ class CreateReserveTypesTable extends Migration
         Schema::create('reserve_types', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('type');
+            $table->integer('dependantOn');
             $table->timestamps();
         });
     }

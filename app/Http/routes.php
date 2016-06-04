@@ -38,6 +38,7 @@ Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
+Route::resource("vacations","VacationController");
 
 Route::get("user_profiles/{id}","UserProfileController@index");
 

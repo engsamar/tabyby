@@ -36,14 +36,6 @@ class ReservationController extends Controller {
 	{
 		$clinic = Clinic::all();
 		$appointments=WorkingHour::all();
-		// $address=[];
-		// foreach ($clinic as $key => $value) {
-		// 	array_push($address, $value->address);
-		// }
-//		echo "<pre>";
-//		var_dump($appointments);
-//		echo "</pre>";
-//		die();
 		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $clinic)->with('appointment', $appointments);
 	}
 
@@ -57,27 +49,24 @@ class ReservationController extends Controller {
 	{
 		
 		$reservation = new Reservation();
-		$reservation->time = $request->input("time");
+		// $reservation->time = $request->input("time");
         $reservation->status = "postponed";
         $reservation->clinic_id = $request->input("address");
-//		echo "<pre>";
-//		var_dump($request->input("address")	);
-//		echo "</pre>";
-//		die();
-		DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
+		// DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
         $reservation->reservation_type_id = $request->input("reserveType");
         $user_name  = $request->input("name");
 		$userID  = User::where('username',$user_name)->value('id');
         $reservation->user_id = $userID;
-        // $count = Reservation::where('user_id',$userID)->count();
-        // if($count==0)
-        // {
-        // 	$reservation->parent_id =null;
-        // }
-        // elseif ($count==1) {
-        // 	$reservation->parent_id =;
-        // }
-
+        $data=$request->input("day");
+        $pieces = explode(" ", $data);
+        $reservation->day=$pieces[0];
+        $reservation->fromTime=$pieces[2];
+        $reservation->toTime=$pieces[4];
+        $numOfReserve=((($pieces[4]-$pieces[2])*60)/15);
+        $count = Reservation::where('day',$pieces[0])->count();
+        $reservation->appoinment=$pieces[2]+(($count*15)/60);
+        // echo $reservation->time;
+        // die();
         $count = Reservation::where('user_id',$userID)->count();
         if($count==0)
         {

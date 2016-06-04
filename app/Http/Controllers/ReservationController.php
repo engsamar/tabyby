@@ -11,6 +11,7 @@ use App\User;
 use App\MedicalHistory;
 use App\Examination;
 use DB;
+use Auth;
 use Illuminate\Http\Request;
 class ReservationController extends Controller {
 
@@ -47,45 +48,57 @@ class ReservationController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		
 		$reservation = new Reservation();
-        $reservation->status = "postponed";
-        $clinicID = $request->input("address");
-        $reservation->clinic_id = $request->input("address");
-		// DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
-        $reservation->reservation_type_id = $request->input("reserveType");
-        $user_name  = $request->input("name");
-		$userID  = User::where('username',$user_name)->value('id');
-        $reservation->user_id = $userID;
-        $data=$request->input("day");
-        $pieces = explode(" ", $data);
-        $reservation->day=$pieces[0];
-        $reservation->fromTime=$pieces[2];
-        $reservation->toTime=$pieces[4];
-        // $numOfReserve=((($pieces[4]-$pieces[2])*60)/15);
-        $count = Reservation::where('day',$pieces[0])->where('clinic_id',$clinicID)->count();
-        $reserveTime = strtotime("+".(($count+1)*15)." minutes", strtotime($pieces[2]));
-        $reservation->appointment=date('h:i:s', $reserveTime);
-        $count = Reservation::where('user_id',$userID)->count();
-        if($count==0)
-        {
-        	$reservation->parent_id =null;
-        }
-        elseif ($count==1) {
-        	$reservation->parent_id =Reservation::where('user_id',$userID)->value('id');
-        }
-        elseif ($count==2) {
-        	$parent =Reservation::where('user_id',$userID)->skip(1)->take(1)->get();
-        	foreach ($parent as $key => $value) {
-        		$reservation->parent_id =$value->id;
-        	}
-        }
-        elseif ($count==3) {
-        	$parent =Reservation::where('user_id',$userID)->skip(2)->take(1)->get();
-        	foreach ($parent as $key => $value) {
-        		$reservation->parent_id =$value->id;
-        	}
-        }
+        $user = Auth::user();
+        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+        //doctor reservation
+ 		if($userRole==1)
+ 		{
+ 			$this->newRserve($reservation,$request);
+ 			$user_name  = $request->input("name");
+			$userID  = User::where('username',$user_name)->value('id');
+			$reservation->user_id=$userID;
+			$count = Reservation::where('user_id',$userID)->count();
+			if ($count==1) 
+	        {
+	        	$reservation->parent_id =Reservation::where('user_id',$userID)->value('id');
+	        }
+	        elseif ($count==2) 
+			{
+	        	$parent =Reservation::where('user_id',$userID)->skip(1)->take(1)->get();
+	        	foreach ($parent as $key => $value) {
+	        		$reservation->parent_id =$value->id;
+	        	}
+	        }
+	        elseif ($count==3) {
+	        	$parent =Reservation::where('user_id',$userID)->skip(2)->take(1)->get();
+	        	foreach ($parent as $key => $value) {
+	        		$reservation->parent_id =$value->id;
+	        	}
+	        }
+
+ 		}
+ 		// secertary reservation
+ 		elseif ($userRole==2) {
+ 			# code...
+ 			$this->newRserve($reservation,$request);
+ 			$reservation->reservation_type_id =1;
+ 			$reservation->parent_id =null;
+ 			$user_name  = $request->input("name");
+			$reservation->user_id  = User::where('username',$user_name)->value('id');
+			$reservation->duration =null;
+ 			
+ 		}
+ 		// patient reservation
+ 		else
+ 		{
+ 			$this->newRserve($reservation,$request);
+ 			$reservation->reservation_type_id =1;
+ 			$reservation->parent_id =null;
+ 			$reservation->user_id =$user->id;
+			$reservation->duration =null;
+ 		}
+
 		$reservation->save();
 
 		return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
@@ -217,6 +230,24 @@ class ReservationController extends Controller {
 	{
 		$reservations = Reservation::where('user_id',$id)->paginate(10);
 		return view('reservations.userReserv', compact('reservations'));
+	}
+
+
+	public function newRserve($reservation,$request)
+	{
+		// Mautual Data
+        $reservation->status = 3;
+        $clinicID = $request->input("address");
+        $reservation->clinic_id = $request->input("address");
+        $data=$request->input("day");
+        $pieces = explode(" ", $data);
+        $reservation->day=$pieces[0];
+        $reservation->fromTime=$pieces[2];
+        $reservation->toTime=$pieces[4];      
+        // $numOfReserve=((($pieces[4]-$pieces[2])*60)/15);
+        $count = Reservation::where('day',$pieces[0])->where('clinic_id',$clinicID)->count();
+        $reserveTime = strtotime("+".(($count+1)*15)." minutes", strtotime($pieces[2]));
+        $reservation->appointment=date('h:i:s', $reserveTime);
 	}
 
 }

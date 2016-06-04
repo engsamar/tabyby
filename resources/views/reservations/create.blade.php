@@ -61,7 +61,7 @@
                 </div>
 
 
-                <div class="form-group @if($errors->has('reserveType')) has-error @endif">
+<!--                 <div class="form-group @if($errors->has('reserveType')) has-error @endif">
                     <label for="reserveType-field">Reservation Type</label>
                     <select id="type-field" name="reserveType" class="form-control">
                         @foreach($reserveType as $key=>$value)
@@ -71,7 +71,7 @@
                     @if($errors->has("reserveType"))
                         <span class="help-block">{{ $errors->first("reserveType") }}</span>
                     @endif
-                </div>
+                </div> -->
 
 
                 {{--<div class="form-group @if($errors->has('time')) has-error @endif">--}}

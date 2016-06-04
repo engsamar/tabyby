@@ -54,3 +54,4 @@ Route::get('/ajax',function(){
 
 Route::get("patient/{id}/{patient_id}","ReservationController@show");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
+Route::get("/user/check/","WorkingHourController@valid");

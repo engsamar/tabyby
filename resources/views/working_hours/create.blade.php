@@ -19,14 +19,14 @@
 
                 <div class="form-group @if($errors->has('from')) has-error @endif">
                        <label for="from-field">From</label>
-                    <input type="text" id="from-field" name="from" class="form-control" value="{{ old("from") }}"/>
+                    <input type="time" id="from-field" name="from" class="form-control" value="{{ $time}}"/>
                        @if($errors->has("from"))
                         <span class="help-block">{{ $errors->first("from") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('to')) has-error @endif">
                        <label for="to-field">To</label>
-                    <input type="text" id="to-field" name="to" class="form-control" value="{{ old("to") }}"/>
+                    <input type="time" id="to-field" name="to" class="form-control" value="{{ $time }}"/>
                        @if($errors->has("to"))
                         <span class="help-block">{{ $errors->first("to") }}</span>
                        @endif
@@ -67,6 +67,7 @@
 @endsection
 @section('scripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="/js/working_hours_validation.js"></script>
   <script>
     $('.date-picker').datepicker({
     });

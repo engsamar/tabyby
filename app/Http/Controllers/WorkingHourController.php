@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Clinic;
 use App\ClinicConstants;
 use App\WorkingHour;
+use Carbon\Carbon;
 //use App\DB;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,13 @@ class WorkingHourController extends Controller {
 	public function create()
 	{
 		$clinic = Clinic::all();
-		return view('working_hours.create')->with('name', $clinic);
+		$date=Carbon::now(new \DateTimeZone('Africa/Cairo'));
+//		echo "<pre>";
+//		var_dump(\DateTimeZone::listIdentifiers());
+//		echo "</pre>";
+//		die('end');
+		$time=$date->toTimeString();
+		return view('working_hours.create')->with('name', $clinic)->with('time',$time)	;
 	}
 
 	/**

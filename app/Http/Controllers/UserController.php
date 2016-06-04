@@ -52,6 +52,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $user = new User();
 
         $user->username = $request->input("username");
@@ -126,6 +127,18 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+
+        return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
+    }
+    public function valid(Request $request)
+    {
+        echo "<pre>";
+		var_dump($request);
+		echo "</pre>";
+		die('end');
+//        switch ($request)
+//        $user = User::findOrFail($id);
+//        $user->delete();
 
         return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
     }

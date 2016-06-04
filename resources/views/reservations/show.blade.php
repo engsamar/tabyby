@@ -70,9 +70,9 @@
             <table class="table">
 
                 @foreach($histories as $history)
-                <tr><td>{{$histories->type}}</td><td>{{$histories->type}}</td></tr>
-                <tr><td>Beginned at</td><td>{{$histories->begin_at}}</td></tr>
-                <tr><td>Description</td><td>{{$histories->description}}</td></tr>
+                    <tr><td>{{$histories->type}}</td><td>{{$histories->type}}</td></tr>
+                    <tr><td>Beginned at</td><td>{{$histories->begin_at}}</td></tr>
+                    <tr><td>Description</td><td>{{$histories->description}}</td></tr>
                 @endforeach
             </table>
         </div>
@@ -115,8 +115,9 @@
                 <tr><td>Duration</td><td>{{$medicine->duaration}}</td></tr>
                 @endforeach
             </table>
+            <a class="btn btn-link" href="{{ route('prescription_details.create') }}"><i class="glyphicon glyphicon-backward"></i>Add New</a>
         </div>
-        
+
     </div>
 </div>
 

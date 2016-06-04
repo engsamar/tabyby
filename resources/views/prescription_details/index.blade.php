@@ -34,7 +34,7 @@
                                 <td>{{$prescription_detail->medicine_name}}</td>
                     <td>{{$prescription_detail->no_times}}</td>
                     <td>{{$prescription_detail->quantity}}</td>
-                    <td>{{$prescription_detail->duration}}</td>
+                    <td>{{$prescription_detail->duaration}}</td>
                     <td>{{$prescription_detail->preception_id}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('prescription_details.show', $prescription_detail->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>

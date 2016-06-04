@@ -38,9 +38,13 @@ Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
+
+Route::get("user_profiles/{id}","UserProfileController@index");
+
 Route::resource("exam_glasses","ExamGlassController");
 Route::get("user_profiles/{id}/","UserProfileController@index");
 Route::auth();
+
 
 
 Route::get('logout', array('uses' => 'HomeController@logout'));
@@ -51,6 +55,8 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
+Route::get("patient/{id}","ReservationController@patientReserv");
+Route::get("/latest","ReservationController@latest");
 Route::get("patient/{id}/{patient_id}","ReservationController@show");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 Route::get("/working_hours/{id}","WorkingHourController@update");

@@ -40,6 +40,8 @@
                 <div  class="form-group @if($errors->has('address')) has-error @endif">
                     <label for="address-field">Address</label>
                     <select id="type-field" name="address" class="form-control">
+                    <option value="0">Choose Clinic</option>}
+                    option
                         @foreach($address as $key=>$value)
 
                                 <option value={{ $value->id }}>{{ $value->name }} :: {{ $value->address }}</option>

@@ -51,7 +51,13 @@
                 </div>
 
 
-  
+                <div id="contain" class="form-group @if($errors->has('day')) has-error @endif">
+                <label for='day-field'>Day</label>
+                    @if($errors->has("day"))
+                        <span class="help-block">{{ $errors->first("day") }}</span>
+                    @endif
+                </div>
+
 
                 <div class="form-group @if($errors->has('reserveType')) has-error @endif">
                     <label for="reserveType-field">Reservation Type</label>
@@ -115,45 +121,32 @@
 //                    alert("Data: " + data + "\nStatus: " + status);
 //                    console.log("Data: " + data + "\nStatus: " + status);
 //                    console.log(data);
-                    {{--<select id="type-field" name="day" class="form-control">--}}
-                            {{--@foreach($appointment as $key=>$value)--}}
 
-                            {{--<option value={{ $value->id }}>{{ $value->date }}</option>--}}
+
+                    {{--<option value={{ $value->id }}>{{ $value->date }}</option>--}}
                     {{--@endforeach--}}
                     {{--</select>--}}
                     if (data.length>0){
                     // var appointment1 =$("<select></select>").attr("name", "time").attr("class", "form-control");
                     // var appointment2 =$("<select></select>").attr("name", "day").attr("class", "form-control");
                     var appointment =$("<select></select>").attr("name", "day").attr("class", "form-control");
+
                     $.each(data, function (i, content) {
-//                        console.log(content.from);
-//                        console.log(content.to);
-//                        console.log(content.day);
-//                        console.log(i);
-                        var appointments=(((content.toTime-content.fromTime)*60)/20);
-                        if (content.reservations_number>appointments){return true;}
 
                         // appointment1.append("<option> from " +content.fromTime + ", to " + content.toTime + "</option>");
                         // appointment2.append("<option>" + content.day +"</option>");
-
-                        appointment.append("<option>" + content.day +", from " +content.fromTime + ", to " + content.toTime + "</option>");
-
+                        appointment.append("<option>" + content.day +" from "+ content.fromTime + " ,to " + content.toTime +  "</option>");
                     });
                     $("#contain").html(appointment);
                     // $("#contain1").html(appointment1);
                     // $("#contain2").html(appointment2);
-                    }else {
-                        $("#containr").text("there is no data");
+                    }
+                    else {
+                        $("#contain").text("there is no data");
                     }
                 });
             });
-//            $("select[name='address']").change(function () {
-//                alert("Handler for .change() called.");
-//                console.log("hiii");
-//            });
-//            $('address').on("change", function () {
-//                console.log("hiii");
-//            });
+
         });
 
     </script>

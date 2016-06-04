@@ -19,16 +19,27 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group @if($errors->has('from')) has-error @endif">
-                       <label for="from-field">From</label>
-                    <input type="text" id="from-field" name="from" class="form-control" value="{{ $exam_glass->from }}"/>
+                       {{--<label for="from-field">From</label>--}}
+                    {{--<input type="text" id="from-field" name="from" class="form-control" value="{{ $exam_glass->from }}"/>--}}
                        @if($errors->has("from"))
                         <span class="help-block">{{ $errors->first("from") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('exam_glass_type')) has-error @endif">
                        <label for="exam_glass_type-field">Exam_glass_type</label>
-                    <input type="text" id="exam_glass_type-field" name="exam_glass_type" class="form-control" value="{{ $exam_glass->exam_glass_type }}"/>
-                       @if($errors->has("exam_glass_type"))
+                    {{--<input type="text" id="exam_glass_type-field" name="exam_glass_type" class="form-control" value="{{ $exam_glass->exam_glass_type }}"/>--}}
+                        <select id="exam_glass_type-field" name="exam_glass_type" class="form-control">
+                            @foreach($examGlassType as $type)
+                                {{--@if($examGlassType->type==$key)--}}
+                                    {{--<option selected value={{ $types[$examination->eye_type] }}>{{ $types }}</option>--}}
+                                {{--@else--}}
+                                    {{--<option value={{ $key }}>{{ $types }}</option>--}}
+                                {{--@endif--}}
+                                <option value="{{ $type }}"> {{ $type }} </option>
+                            @endforeach
+
+                        </select>
+                        @if($errors->has("exam_glass_type"))
                         <span class="help-block">{{ $errors->first("exam_glass_type") }}</span>
                        @endif
                     </div>

@@ -6,7 +6,7 @@
         <table>
             <tr>
                 <td style="width: 48%;">
-                    <div id="clinicInfo" class="col-sm-4" style="width:48%;height:40%;border-color: black">
+                    <div id="clinicInfo" class="col-sm-4" style="width:93%;height:40%;border-color: black">
                         <h1>clinicInfo</h1>
 
                         <form name="formN" id="formN" method="POST">
@@ -29,8 +29,7 @@
                             <input type="hidden" id="clinic_id_field" name="clinic_id_field" class="form-control"/>
                             <button type="submit" class="btn btn-primary">Save</button>
                             <a class="btn btn-link pull-right" href="{{ route('working_hours.index') }}"/>
-                            {{--class="glyphicon glyphicon-backward"></i> Back</a>--}}
-                            {{--</div>--}}
+
                         </form>
 
                     </div>
@@ -38,14 +37,6 @@
                 <td style="width: 70%;">
                     <div id="recentPost" class="col-sm-6">
                         <h1>recentPost</h1>
-                    </div>
-                </td>
-                <td>
-                    <div id="searchPatient" class="col-sm-4" style="width:100%;height:40%">
-                        <h1>searchPatient</h1>
-
-                        {{--search input--}}
-                        <input type="text" name="country" id="autocomplete" placeholder="EnterName" class="form-control"/>
                     </div>
                 </td>
             </tr>
@@ -75,11 +66,7 @@
                     </div>
                 </td>
                 <td>
-                    <div id="writePost" class="col-sm-6">
-                        <h1>writePost</h1>
-                    </div>
                 </td>
-                {{--<td></td>--}}
             </tr>
         </table>
 

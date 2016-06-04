@@ -2,10 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\ClinicConstants;
 use App\User;
 use App\UserRole;
 use App\Clinic;
+use App\Reservation;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,6 +17,28 @@ class UserController extends Controller
      *
      * @return Response
      */
+    public function patientHome()
+    {
+        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
+        //select all clinics address
+        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
+        //clinic appointments
+        $user_id=1;
+        $reservation=Reservation::where('user_id',$user_id)->get();
+//        $clinic_name=Clinic::where
+        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics,'reservation'=>$reservation,'reservationType' => ClinicConstants::$reservationType]);
+    }
+
+    public function secretaryHome()
+    {
+        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
+        //select all clinics address
+        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
+        //clinic appointments
+
+        return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics]);
+    }
+
     public function doctorHome()
     {
         // clinic Info
@@ -23,15 +46,15 @@ class UserController extends Controller
         //select all clinics address
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
-        
-        return view('users.doctorHome', compact('userRole'),['clinics'=>$clinics]);
+
+        return view('users.doctorHome', compact('userRole'), ['clinics' => $clinics]);
     }
 
     public function index()
     {
         $users = User::orderBy('id', 'asc')->paginate(10);
 
-        return view('users.index',compact('users'));
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -60,51 +83,52 @@ class UserController extends Controller
         $user->address = $request->input("address");
         $user->telephone = $request->input("telephone");
         $user->mobile = $request->input("mobile");
-        $user->password = $request->input("password");
+        $user->password = bcrypt($request->input("password"));
         $user->birthdate = $request->input("birthdate");
 
         $user->save();
 
-        return redirect()->route('users.index')->with('message', 'Item created successfully.');
+        return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
     }
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$user = User::findOrFail($id);
 
-		return view('users.show', compact('user'));
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$user = User::findOrFail($id);
+        return view('users.show', compact('user'));
+    }
 
-		return view('users.edit', compact('user'));
-	}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @param Request $request
-	 * @return Response
-	 */
-	public function update(Request $request, $id)
-	{
-		$user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
+    }
 
-		$user->username = $request->input("username");
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->username = $request->input("username");
         $user->email = $request->input("email");
         $user->address = $request->input("address");
         $user->telephone = $request->input("telephone");
@@ -142,5 +166,6 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
     }
+
 
 }

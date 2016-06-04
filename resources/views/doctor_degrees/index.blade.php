@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            @if($doctor_degrees->count())
+            @if($doc_info->count())
                 <table class="table table-condensed table-striped">
                     <thead>
                         <tr>
@@ -28,14 +28,18 @@
                     </thead>
 
                     <tbody>
-                        @foreach($doctor_degrees as $doctor_degree)
+                        @foreach($doc_info as $info)
                             <tr>
-                                <td>{{$doctor_degree->id}}</td>
-                                <td>{{$doctor_degree->degree}}</td>
-                    <td>{{$doctor_degree->university}}</td>
-                    <td>{{$doctor_degree->description}}</td>
-                    <td>{{$doctor_degree->graduate_date}}</td>
-                    <td>{{$doctor_degree->user_role_id}}</td>
+                                <td>{{$info->username}}</td>
+                                <td>{{$info->user_role_id}}</td>
+                                <td>{{$info->user_role_id}}</td>
+                                <td>{{$info->user_role_id}}</td>
+                                <td>{{$info->id}}</td>
+                                <td>{{$info->degree}}</td>
+                                <td>{{$info->university}}</td>
+                                <td>{{$info->description}}</td>
+                                <td>{{$info->graduate_date}}</td>
+                                
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('doctor_degrees.show', $doctor_degree->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('doctor_degrees.edit', $doctor_degree->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
@@ -49,7 +53,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {!! $doctor_degrees->render() !!}
+                {!! $doc_info->render() !!}
             @else
                 <h3 class="text-center alert alert-info">Empty!</h3>
             @endif

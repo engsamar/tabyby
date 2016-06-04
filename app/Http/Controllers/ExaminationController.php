@@ -13,6 +13,11 @@ class ExaminationController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function doctorExamination()
+	{
+		return view('examinations.insertExam',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
+	}
+
 	public function index()
 	{
 		$examinations = Examination::orderBy('id', 'asc')->paginate(10);
@@ -39,8 +44,8 @@ class ExaminationController extends Controller {
 	public function store(Request $request)
 	{
 		$examination = new Examination();
-
-		$examination->eye_type = $request->input("eye_type");
+		$examination1 = new Examination();
+		$examination->eye_type = 1;
         $examination->vision = $request->input("vision");
         $examination->lid = $request->input("lid");
         $examination->conjunctiva = $request->input("conjunctiva");
@@ -54,6 +59,21 @@ class ExaminationController extends Controller {
         $examination->reservation_id = $request->input("reservation_id");;
 
 		$examination->save();
+
+		$examination1->eye_type = 0;
+		$examination1->vision = $request->input("vision1");
+		$examination1->lid = $request->input("lid1");
+		$examination1->conjunctiva = $request->input("conjunctiva1");
+		$examination1->cornea = $request->input("cornea1");
+		$examination1->a_c = $request->input("a_c1");
+		$examination1->pupil = $request->input("pupil1");
+		$examination1->lens = $request->input("lens1");
+		$examination1->fundus = $request->input("fundus1");
+		$examination1->i_o_p = $request->input("i_o_p1");
+		$examination1->angle = $request->input("angle1");
+		$examination1->reservation_id = $request->input("reservation_id1");;
+
+		$examination1->save();
 
 		return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
 	}

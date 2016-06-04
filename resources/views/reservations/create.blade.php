@@ -28,11 +28,11 @@
                 </div>
 
 
-                <!--               <div class="form-group @if($errors->has('birth')) has-error @endif">
-                       <label for="birth-field">Birth Date</label>
-                    <input type="date" id="birth-field" name="birth" class="form-control" value="{{ old("birth") }}"/>
+<!--                               <div class="form-group @if($errors->has('time')) has-error @endif">
+                       <label for="time-field">Time</label>
+                    <input type="time" id="birth-field" name="time" class="form-control" value="{{ old("birth") }}"/>
                        @if($errors->has("birth"))
-                        <span class="help-block">{{ $errors->first("birth") }}</span>
+                        <span class="help-block">{{ $errors->first("time") }}</span>
                        @endif
                         </div> -->
        
@@ -40,6 +40,8 @@
                 <div  class="form-group @if($errors->has('address')) has-error @endif">
                     <label for="address-field">Address</label>
                     <select id="type-field" name="address" class="form-control">
+                    <option value="0">Choose Clinic</option>}
+                    option
                         @foreach($address as $key=>$value)
 
                                 <option value={{ $value->id }}>{{ $value->name }} :: {{ $value->address }}</option>
@@ -50,14 +52,14 @@
                     @endif
                 </div>
 
+
                 <div id="contain" class="form-group @if($errors->has('day')) has-error @endif">
-                    <label for="day-field">Day</label>
-
-
+                <label for='day-field'>Day</label>
                     @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
                     @endif
                 </div>
+
 
                 <div class="form-group @if($errors->has('reserveType')) has-error @endif">
                     <label for="reserveType-field">Reservation Type</label>
@@ -122,19 +124,26 @@
 //                    console.log("Data: " + data + "\nStatus: " + status);
 //                    console.log(data);
 
-                            if (data.length>0){
-                    var appointment =$("<select></select>").attr("id", "type-field").attr("name", "day").attr("class", "form-control");
+
+                    {{--<option value={{ $value->id }}>{{ $value->date }}</option>--}}
+                    {{--@endforeach--}}
+                    {{--</select>--}}
+                    if (data.length>0){
+                    // var appointment1 =$("<select></select>").attr("name", "time").attr("class", "form-control");
+                    // var appointment2 =$("<select></select>").attr("name", "day").attr("class", "form-control");
+                    var appointment =$("<select></select>").attr("name", "day").attr("class", "form-control");
+
                     $.each(data, function (i, content) {
-//                        console.log(content.from);
-//                        console.log(content.to);
-//                        console.log(content.day);
-//                        console.log(i);
-                        var appointments=(((content.toTime-content.fromTime)*60)/20);
-                        if (content.reservations_number>appointments){return true;}
-                        appointment.append("<option>" + content.day +", from " +content.fromTime + ", to " + content.toTime + "</option>");
+
+                        // appointment1.append("<option> from " +content.fromTime + ", to " + content.toTime + "</option>");
+                        // appointment2.append("<option>" + content.day +"</option>");
+                        appointment.append("<option>" + content.day +" from "+ content.fromTime + " ,to " + content.toTime +  "</option>");
                     });
                     $("#contain").html(appointment);
-                    }else {
+                    // $("#contain1").html(appointment1);
+                    // $("#contain2").html(appointment2);
+                    }
+                    else {
                         $("#contain").text("there is no data");
                     }
                 });

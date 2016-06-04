@@ -14,8 +14,8 @@ class CreateWorkingHoursTable extends Migration {
 	{
 		Schema::create('working_hours', function(Blueprint $table) {
             $table->increments('id');
-			$table->integer('fromTime');
-			$table->integer('toTime');
+			$table->time('fromTime');
+			$table->time('toTime');
 			$table->date('day');
 			$table->integer('clinic_id')->unsigned()->index();
 			$table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');

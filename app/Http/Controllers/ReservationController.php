@@ -50,10 +50,10 @@ class ReservationController extends Controller {
 	{
 		
 		$reservation = new Reservation();
-		$reservation->time = $request->input("time");
+		// $reservation->time = $request->input("time");
         $reservation->status = "postponed";
         $reservation->clinic_id = $request->input("address");
-		DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
+		// DB::table('working_hours')->where('clinic_id', $request->input("address"))->increment('reservations_number');;
         $reservation->reservation_type_id = $request->input("reserveType");
         $user_name  = $request->input("name");
 		$userID  = User::where('username',$user_name)->value('id');
@@ -61,7 +61,8 @@ class ReservationController extends Controller {
         $data=$request->input("day");
         $pieces = explode(" ", $data);
         $reservation->day=$pieces[0];
-        $reservation->time=$pieces[2].",".$pieces[4];
+        $reservation->fromTime=$pieces[2];
+        $reservation->toTime=$pieces[4];
         $numOfReserve=((($pieces[4]-$pieces[2])*60)/15);
         $count = Reservation::where('day',$pieces[0])->count();
         $reservation->appoinment=$pieces[2]+(($count*15)/60);

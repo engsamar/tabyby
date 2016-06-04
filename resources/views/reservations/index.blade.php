@@ -22,8 +22,8 @@
                         <th>STATUS</th>
                         <th>USER_Name</th>
                         <th>CLINIC_Name</th>
+                        <th>Appointment</th>
                         <th>RESERVATION_TYPE_ID</th>
-                        <th>PARENT_RESERVATION_ID</th>
                             <th class="text-right">OPTIONS</th>
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
                     <td>{{$reservation->status}}</td>
                     <td><a href='/user_profiles/{{$reservation->user_id}}'>{{$reservation->user->username}}</a></td>
                     <td>{{$reservation->clinic->name}}</td>
-                    <td>{{$reservation->reservation_type_id}}</td>
+                    <td>{{$reservation->appointment}}</td>
                     <td>{{$reservation->parent_id}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('reservations.show', $reservation->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>

@@ -25,7 +25,7 @@ class CreateReservationsTable extends Migration {
 			$table->date('day');
 			$table->time('fromTime');
 			$table->time('toTime');
-			$table->time('appoinment');
+			$table->time('appointment');
 			$table->integer('status');
 			$table->date('duration');
             $table->timestamps();

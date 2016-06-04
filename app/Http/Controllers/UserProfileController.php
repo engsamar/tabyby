@@ -16,8 +16,6 @@ class UserProfileController extends Controller
 {
     public function index($id)
 	{	
-		// $users = User::find(1);
-
         $userInfo = DB::table('users')->where('users.id', $id)->get();
 
         $histories = DB::table('users')
@@ -59,8 +57,6 @@ class UserProfileController extends Controller
             ->where('users.id', $id)
             ->get();
 
-        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains','medicines','glassExams'));
-
-       
+        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains','medicines','glassExams')); 
 	}
 }

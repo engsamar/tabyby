@@ -19,20 +19,21 @@
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                <div class="form-group @if($errors->has('from')) has-error @endif">
-                    <label for="from-field">From</label>
-                    <input type="time" id="from-field" name="from" class="form-control"
+                <div class="form-group @if($errors->has('fromTime')) has-error @endif">
+                    <label for="fromTime-field">From</label>
+                    <input type="time" id="fromTime-field" name="fromTime" class="form-control"
                            value="{{ $working_hour->fromTime }}"/>
-                    @if($errors->has("from"))
+                    @if($errors->has("fromTime"))
                         <span class="help-block">{{ $errors->first("from") }}</span>
                     @endif
                 </div>
-                <div class="form-group @if($errors->has('to')) has-error @endif">
-                    <label for="to-field">To</label>
-                    <input type="time" id="to-field" name="to" class="form-control"
+                <div class="form-group @if($errors->has('toTime')) has-error @endif">
+                    <label for="toTime-field">To</label>
+                    <input type="time" id="toTime-field" name="toTime" class="form-control"
                            value="{{ $working_hour->toTime }}"/>
-                    @if($errors->has("to"))
-                        <span class="help-block">{{ $errors->first("to") }}</span>
+                    <span id="error" class="help-block"></span>
+                    @if($errors->has("toTime"))
+                        <span class="help-block">{{ $errors->first("toTime") }}</span>
                     @endif
                 </div>
                 <div class="form-group @if($errors->has('day')) has-error @endif">

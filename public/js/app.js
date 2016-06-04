@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    console.log("hiii in ready");
+    // console.log("hiii in ready");
     $("select[name='clinic_id']").change(function () {
         console.log('iam in');
         $id = this.value;

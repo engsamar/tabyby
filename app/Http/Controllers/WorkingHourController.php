@@ -49,10 +49,15 @@ class WorkingHourController extends Controller
      */
     public function store(Request $request)
     {
-        $working_hour = new WorkingHour();
+        $this->validate($request, [
+            'fromTime' => 'required|date_format:H:i:s',
+            'toTime' => 'required|date_format:H:i:s|after:fromTime',
+            'day' => 'required|date|after:yesterday',
 
-        $working_hour->fromTime = $request->input("from");
-        $working_hour->toTime = $request->input("to");
+        ]);
+        $working_hour = new WorkingHour();
+        $working_hour->fromTime = $request->input("fromTime");
+        $working_hour->toTime = $request->input("toTime");
         $working_hour->day = $request->input("day");
 //        $name = $request->input("clinic_id");
 //		$clinic=Clinic::where('name',$name)->first();
@@ -108,8 +113,8 @@ class WorkingHourController extends Controller
     {
         $working_hour = WorkingHour::findOrFail($id);
 
-        $working_hour->fromTime = $request->input("from");
-        $working_hour->toTime = $request->input("to");
+        $working_hour->fromTime = $request->input("fromTime");
+        $working_hour->toTime = $request->input("toTime");
         $working_hour->day = $request->input("day");
 //		$clinic_name=$request->input("clinic_id");
         $name = $request->input("clinic_id");

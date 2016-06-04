@@ -5,26 +5,31 @@ $(document).ready(function () {
     // console.log("hiii in ready");
 
 
-    $(":input[name='to']").on("blur", function () {
-        // console.log($(":input[name='from']").val());
-        // console.log($(":input[name='to']").val());
-        // console.log($(":input[name='from']").val().split(":"));
-        // console.log($(":input[name='to']").val().split(":"));
-        var hours1 = $(":input[name='from']").val().split(":")["0"];
-        var hours2 = $(":input[name='to']").val().split(":")["0"];
-        var minute1 = $(":input[name='from']").val().split(":")["1"];
-        var minute2 = $(":input[name='to']").val().split(":")["1"];
+    $(":input[name='toTime']").on("blur", function () {
+        // console.log($(":input[name='fromTime']").val());
+        // console.log($(":input[name='toTime']").val());
+        // console.log($(":input[name='fromTime']").val().split(":"));
+        // console.log($(":input[name='toTime']").val().split(":"));
+        var hours1 = $(":input[name='fromTime']").val().split(":")["0"];
+        var hours2 = $(":input[name='toTime']").val().split(":")["0"];
+        var minute1 = $(":input[name='fromTime']").val().split(":")["1"];
+        var minute2 = $(":input[name='toTime']").val().split(":")["1"];
         if (hours2 - hours1 >= 0) {
-            if (minute2 - minute1 > 0) {
-                $(":input[name='to']").next().text("enter correct time").hide();
+            if (minute2 - minute1 >= 15 || hours2 - hours1 > 0 ) {
+                // console.log("hiii in ready1");
+                $(":input[name='toTime']").next().text("enter correct time").hide();
             } else {
-                $(":input[name='to']").next().text("enter correct time").show();
+                // console.log("hiii in ready2");
+
+                $(":input[name='toTime']").next().text("enter correct time").show();
             }
-            // console.log($(":input[name='to']").val());
-            // $(":input[name='to']").next().text("enter correct time").hide();
+            // console.log($(":input[name='toTime']").val());
+            // $(":input[name='toTime']").next().text("enter correct time").hide();
             //     $("#error").text("enter correct time").show();
         } else {
-            $(":input[name='to']").next().text("enter correct time").show();
+            // console.log("hiii in ready3");
+
+            $(":input[name='toTime']").next().text("enter correct time").show();
         }
         // $("#error").show;
         //
@@ -41,7 +46,7 @@ $(document).ready(function () {
         // $.ajax({
         //     url: '/working_hours/checkdata/',
         // type: "get",
-        // data: {'from':$('input[name=from]').val(), 'to': $('input[name=to]').val()},
+        // data: {'fromTime':$('input[name=fromTime]').val(), 'toTime': $('input[name=toTime]').val()},
         //
         // success: function(data){
         //     alert(data);
@@ -52,21 +57,21 @@ $(document).ready(function () {
     });
     // $(":input[name='day']").on("blur", function () {
     //    
-    //     var hours1 = $(":input[name='from']").val().split(":")["0"];
-    //     var hours2 = $(":input[name='to']").val().split(":")["0"];
-    //     var minute1 = $(":input[name='from']").val().split(":")["1"];
-    //     var minute2 = $(":input[name='to']").val().split(":")["1"];
+    //     var hours1 = $(":input[name='fromTime']").val().split(":")["0"];
+    //     var hours2 = $(":input[name='toTime']").val().split(":")["0"];
+    //     var minute1 = $(":input[name='fromTime']").val().split(":")["1"];
+    //     var minute2 = $(":input[name='toTime']").val().split(":")["1"];
     //     if (hours2 - hours1 >= 0 ) {
     //         if (minute2 - minute1 > 0){
-    //             $(":input[name='to']").next().text("enter correct time").hide();
+    //             $(":input[name='toTime']").next().text("enter correct time").hide();
     //         }else {
-    //             $(":input[name='to']").next().text("enter correct time").show();
+    //             $(":input[name='toTime']").next().text("enter correct time").show();
     //         }
-    //         // console.log($(":input[name='to']").val());
-    //         // $(":input[name='to']").next().text("enter correct time").hide();
+    //         // console.log($(":input[name='toTime']").val());
+    //         // $(":input[name='toTime']").next().text("enter correct time").hide();
     //         //     $("#error").text("enter correct time").show();
     //     } else {
-    //         $(":input[name='to']").next().text("enter correct time").show();
+    //         $(":input[name='toTime']").next().text("enter correct time").show();
     //     }
     //    
     // });

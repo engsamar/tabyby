@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Prescription;
+use App\PrescriptionDetail;
 use Illuminate\Http\Request;
 
 class PrescriptionController extends Controller {
@@ -13,26 +14,38 @@ class PrescriptionController extends Controller {
 		$prescriptions = Prescription::orderBy('id', 'desc')->paginate(10);
 
 		return view('prescriptions.index', compact('prescriptions'));
+
 	}
 
 	public function create()
 	{
-		return view('prescriptions.create');
+		return view('prescription_details.create');
 	}
+
 
 	public function store(Request $request)
 	{
-		$prescription = new Prescription();
+		// $prescription = new Prescription();
+		// $prescription->reservation_id = 1;
+		// $prescription->save();
 
-		$prescription->save();
+		$prescription_detail = new PrescriptionDetail();
+		$prescription_detail->medicine_name = $request->input("medicine_name");
+		$prescription_detail->no_times = $request->input("no_times");
+		$prescription_detail->quantity = $request->input("quantity");
+		$prescription_detail->duaration = $request->input("duration");
 
-		return redirect()->route('prescriptions.index')->with('message', 'Item created successfully.');
+		$prescription_detail->preception_id = 1;
+		$prescription_detail->medicine_id = 1;
+
+		$prescription_detail->save();
+
+        return redirect()->route('prescription_details.index')->with('message', 'Item created successfully.');
 	}
 
 	public function show($id)
 	{
 		$prescription = Prescription::findOrFail($id);
-
 		return view('prescriptions.show', compact('prescription'));
 	}
 
@@ -46,9 +59,6 @@ class PrescriptionController extends Controller {
 	public function update(Request $request, $id)
 	{
 		$prescription = Prescription::findOrFail($id);
-
-		
-
 		$prescription->save();
 
 		return redirect()->route('prescriptions.index')->with('message', 'Item updated successfully.');

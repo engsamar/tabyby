@@ -38,9 +38,14 @@ Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
+Route::resource("vacations","VacationController");
+
+Route::get("user_profiles/{id}","UserProfileController@index");
+
 Route::resource("exam_glasses","ExamGlassController");
 Route::get("user_profiles/{id}/","UserProfileController@index");
 Route::auth();
+
 
 
 Route::get('logout', array('uses' => 'HomeController@logout'));
@@ -69,3 +74,7 @@ Route::get("newComplain/{id}/{patient_id}","ComplainController@create");
 //    $in = array('one'=>'ON','two'=>'TW','three'=>'TH','four'=>'FO');
 //    return Response::json($in);
 //});
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

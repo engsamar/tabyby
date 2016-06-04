@@ -122,6 +122,19 @@
             </div>
 
         </div>
+
+        <div id="content-5">
+            <table class="table">
+                @foreach($medicines as $medicine)
+                <tr><td>Medicine</td><td>{{$medicine->medicine_name}}</td></tr>
+                <tr><td>No. of times</td><td>{{$medicine->no_times}}</td></tr>
+                <tr><td>Quantity</td><td>{{$medicine->quantity}}</td></tr>
+                <tr><td>Duration</td><td>{{$medicine->duaration}}</td></tr>
+                @endforeach
+            </table>
+            <a class="btn btn-link" href="{{ route('prescription_details.create') }}"><i class="glyphicon glyphicon-backward"></i>Add New</a>
+        </div>
+
     </div>
 
 

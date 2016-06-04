@@ -6,6 +6,7 @@
     <div class="page-header">
         <h1><i class="glyphicon glyphicon-plus"></i> WorkingHours / Create </h1>
     </div>
+    <meta name="_token" content="{!! csrf_token() !!}"/>
 @endsection
 
 @section('content')
@@ -21,14 +22,15 @@
                        <label for="from-field">From</label>
                     <input type="time" id="from-field" name="from" class="form-control" value="{{ $time}}"/>
                        @if($errors->has("from"))
-                        <span class="help-block">{{ $errors->first("from") }}</span>
+                        <span  class="help-block">{{ $errors->first("from") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('to')) has-error @endif">
                        <label for="to-field">To</label>
                     <input type="time" id="to-field" name="to" class="form-control" value="{{ $time }}"/>
-                       @if($errors->has("to"))
-                        <span class="help-block">{{ $errors->first("to") }}</span>
+                        <span id="error" class="help-block"></span>
+                             @if($errors->has("to"))
+                       <span class="help-block">{{ $errors->first("to") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('day')) has-error @endif">
@@ -39,6 +41,7 @@
                                 {{--<option value={{ $key }}>{{ $value }}</option>--}}
                             {{--@endforeach--}}
                         {{--</select>--}}
+                        <span id="error" class="help-block"></span>
                         @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
                        @endif

@@ -21,8 +21,7 @@ class ReservationController extends Controller {
 	 */
 	public function index()
 	{
-		// $mytime = Carbon::now();
-		// $reservations = Reservation::where('time',$mytime->toDateTimeString());
+
 		$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
 
 		return view('reservations.index', compact('reservations'));
@@ -110,46 +109,14 @@ class ReservationController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id,$patient_id)
+	public function show($id)
 	{
 		$reservation = Reservation::findOrFail($id);
-
-		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
-
-        $histories = DB::table('users')
-            ->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
-            ->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
-            ->select('users.*', 'medical_histories.*','medical_history_details.*')
-            ->where('users.id', $patient_id)
-            ->get();
-
-
-        $examinations = DB::table('users')
-            ->join('reservations', 'users.id', '=', 'reservations.user_id')
-            ->join('examinations', 'reservation_id', '=', 'reservations.id')
-            ->select('examinations.*','reservations.*')
-            ->where('users.id', $patient_id)
-            ->get();
-
-
-        $complains = DB::table('users')
-            ->join('reservations', 'users.id', '=', 'reservations.user_id')
-            ->join('complains', 'reservation_id', '=', 'reservations.id')
-            ->join('complain_details', 'complain_id', '=', 'complains.id')
-            ->select('complains.*','reservations.*','complain_details.*')
-            ->where('users.id', $id)
-            ->get();
-
-
-
-        $medicines = DB::table('users')
-            ->join('reservations', 'users.id', '=', 'reservations.user_id')
-            ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
-            ->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
-            ->select('prescriptions.*','prescription_details.*','reservations.*')
-            ->where('users.id', $patient_id)
-            ->get();
-
+		$histories=[];
+		$examinations=[];
+		$userInfo=[];
+		$complains=[];
+		$medicines=[];
 		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines'));
 	}
 
@@ -201,6 +168,67 @@ class ReservationController extends Controller {
 		$reservation->delete();
 
 		return redirect()->route('reservations.index')->with('message', 'Item deleted successfully.');
+	}
+
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function latest()
+	{
+		$reservations = Reservation::where('day', '=',Carbon::today()->toDateString())->paginate(10);
+		return view('reservations.index', compact('reservations'));
+	}
+
+
+	public function patient($id,$patient_id)
+	{
+		$reservation = Reservation::findOrFail($id);
+
+		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
+
+        $histories = DB::table('users')
+            ->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
+            ->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
+            ->select('users.*', 'medical_histories.*','medical_history_details.*')
+            ->where('medical_histories.user_id', $patient_id)
+            ->get();
+
+
+        $examinations = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('examinations', 'reservation_id', '=', 'reservations.id')
+            ->select('examinations.*','reservations.*')
+            ->where('examinations.reservation_id', $id)
+            ->get();
+
+
+        $complains = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('complains', 'reservation_id', '=', 'reservations.id')
+            ->join('complain_details', 'complain_id', '=', 'complains.id')
+            ->select('complains.*','reservations.*','complain_details.*')
+            ->where('complains.reservation_id', $id)
+            ->get();
+
+
+
+        $medicines = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
+            ->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
+            ->select('prescriptions.*','prescription_details.*','reservations.*')
+            ->where('prescriptions.reservation_id', $id)
+            ->get();
+
+		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines'));
+	}
+	public function patientReserv($id)
+	{
+		$reservations = Reservation::where('user_id',$id)->paginate(10);
+		return view('reservations.userReserv', compact('reservations'));
 	}
 
 }

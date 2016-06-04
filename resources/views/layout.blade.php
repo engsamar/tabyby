@@ -33,7 +33,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/doctorHome">Home</a></li>
                 <li><a href="/clinics">Cinic Info</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/latest">latestReservation</a></li>
                 <li><a href="/reservations">Reserved Patient</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

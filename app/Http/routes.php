@@ -52,5 +52,7 @@ Route::get('/ajax',function(){
     return Response::json($workinghours);
 });
 
-Route::get("patient/{id}/{patient_id}","ReservationController@show");
+Route::get("patient/{id}/{patient_id}","ReservationController@patient");
+Route::get("patient/{id}","ReservationController@patientReserv");
+Route::get("/latest","ReservationController@latest");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");

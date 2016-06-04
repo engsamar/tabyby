@@ -22,14 +22,14 @@
                 <div class="form-group @if($errors->has('from')) has-error @endif">
                     <label for="from-field">From</label>
                     <input type="text" id="from-field" name="from" class="form-control"
-                           value="{{ $working_hour->from }}"/>
+                           value="{{ $working_hour->fromTime }}"/>
                     @if($errors->has("from"))
                         <span class="help-block">{{ $errors->first("from") }}</span>
                     @endif
                 </div>
                 <div class="form-group @if($errors->has('to')) has-error @endif">
                     <label for="to-field">To</label>
-                    <input type="text" id="to-field" name="to" class="form-control" value="{{ $working_hour->to }}"/>
+                    <input type="text" id="to-field" name="to" class="form-control" value="{{ $working_hour->toTime }}"/>
                     @if($errors->has("to"))
                         <span class="help-block">{{ $errors->first("to") }}</span>
                     @endif
@@ -37,22 +37,12 @@
                 <div class="form-group @if($errors->has('day')) has-error @endif">
                     <label for="day-field">Day</label>
                     <input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>
-                    {{--<select multiple id="type-field" name="type" class="form-control">--}}
-                        {{--@foreach($day as $key=>$types)--}}
-                            {{--@if($working_hour->day==$key)--}}
-                                {{--<option selected value={{ $types[$working_hour->day] }}>{{ $types }}</option>--}}
-                            {{--@else--}}
-                                {{--<option value={{ $key }}>{{ $types }}</option>--}}
-                            {{--@endif--}}
-
-                        {{--@endforeach--}}
-                    {{--</select>--}}
                     @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
                     @endif
                 </div>
                 <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
-                    <label for="clinic_id-field">Clinic_NAME</label>
+                    <label for="clinic_id-field">Clinic_name</label>
                     <input type="text" id="clinic_id-field" name="clinic_id" class="form-control"
                            value="{{ $working_hour->clinic->name}}"/>
                     @if($errors->has("clinic_id"))

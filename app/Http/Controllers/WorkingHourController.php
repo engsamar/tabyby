@@ -2,9 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\users;
 use App\Clinic;
 use App\ClinicConstants;
 use App\WorkingHour;
+use Illuminate\Support\Facades\Redirect;
 //use App\DB;
 use Illuminate\Http\Request;
 
@@ -29,7 +31,8 @@ class WorkingHourController extends Controller {
 	 */
 	public function create()
 	{
-		return view('working_hours.create');
+		$clinic = Clinic::all();
+		return view('working_hours.create')->with('name', $clinic);
 	}
 
 	/**
@@ -41,20 +44,11 @@ class WorkingHourController extends Controller {
 	public function store(Request $request)
 	{
 		$working_hour = new WorkingHour();
-
-		$working_hour->from = $request->input("from");
-        $working_hour->to = $request->input("to");
+		$working_hour->fromTime = $request->input("from");
+        $working_hour->toTime = $request->input("to");
         $working_hour->day = $request->input("day");
-        $name = $request->input("clinic_id");
-		$clinic=Clinic::where('name',$name)->first();
-//		echo "<pre>";
-//		var_dump($clinic->id);
-//		echo "</pre>";
-//		die('end');
-//		$clinic=$working_hour->clinic;
-		$working_hour->clinic_id = $clinic->id;
-//        $working_hour->clinic_id = 1;
 
+		$working_hour->clinic_id = $request->input("clinic_id");
 		$working_hour->save();
 
 		return redirect()->route('working_hours.index')->with('message', 'Item created successfully.');
@@ -96,19 +90,34 @@ class WorkingHourController extends Controller {
 	public function update(Request $request, $id)
 	{
 		$working_hour = WorkingHour::findOrFail($id);
-
-		$working_hour->from = $request->input("from");
-        $working_hour->to = $request->input("to");
+		$working_hour->fromTime = $request->input("from");
+        $working_hour->toTime = $request->input("to");
         $working_hour->day = $request->input("day");
 //		$clinic_name=$request->input("clinic_id");
+        if (!empty($request->input("clinic_id_field")))
+        {
+            //my solution
+            $working_hour->clinic_id = $request->input("clinic_id_field");
+            ///////
+			$working_hour->save();
+//			return redirect()->route('users.secretaryHome');
+			return redirect::back();
+		}
+        else
+        {
+//           function solution
 		$name = $request->input("clinic_id");
 		$clinic=Clinic::where('name',$name)->first();
-//		$clinic=$working_hour->clinic;
         $working_hour->clinic_id = $clinic->id;
+			$working_hour->save();
 
-		$working_hour->save();
+			return redirect()->route('working_hours.index')->with('message', 'Item updated successfully.');
+        }
 
-		return redirect()->route('working_hours.index')->with('message', 'Item updated successfully.');
+        
+
+
+
 	}
 
 	/**
@@ -123,6 +132,20 @@ class WorkingHourController extends Controller {
 		$working_hour->delete();
 
 		return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
+	}
+	public function retreve($id)
+	{
+//		$working_hour = WorkingHour::findOrFail($id);
+		$working_hour=WorkingHour::where('clinic_id',$id)->get();
+//		echo "<pre>";
+//		var_dump($id);
+//		var_dump(integerValue($id));
+//		var_dump((int)$id);
+//		var_dump($working_hour);
+//		echo "</pre>";
+//		die('end');
+		return $working_hour;
+//		return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
 	}
 
 }

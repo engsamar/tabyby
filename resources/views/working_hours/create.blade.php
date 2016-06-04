@@ -44,8 +44,14 @@
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
-                       <label for="clinic_id-field">Clinic_name</label>
-                    <input type="text" id="clinic_id-field" name="clinic_id" class="form-control" value="{{ old("clinic_id") }}"/>
+                       <label for="clinic_id-field">Clinic_address</label>
+                    {{--<input type="text" id="clinic_id-field" name="clinic_id" class="form-control" value="{{ old("clinic_id") }}"/>--}}
+                        <select id="type-field" name="clinic_id" class="form-control">
+                            @foreach($name as $key=>$value)
+
+                                <option value={{ $value->id }}>{{ $value->name }}</option>
+                            @endforeach
+                        </select>
                        @if($errors->has("clinic_id"))
                         <span class="help-block">{{ $errors->first("clinic_id") }}</span>
                        @endif

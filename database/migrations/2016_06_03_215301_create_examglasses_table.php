@@ -14,13 +14,13 @@ class CreateExamGlassesTable extends Migration {
 	{
 		Schema::create('exam_glasses', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('eye_type');
-            $table->integer('exam_glass_type');
-            $table->float('spl');
-            $table->float('cyl');
-            $table->float('axis');
-            $table->integer('reservation_id')->unsigned();
-            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
+			$table->integer('eye_type');
+			$table->integer('exam_glass_type');
+			$table->float('spl');
+			$table->float('cyl');
+			$table->float('axis');
+			$table->integer('reservation_id')->unsigned();
+			$table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 	}

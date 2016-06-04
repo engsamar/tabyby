@@ -15,7 +15,7 @@ class DoctorDegreeController extends Controller {
 
 	public function index()
 	{
-		$doctor_degrees = DoctorDegree::orderBy('id', 'desc')->paginate(10);
+		$doctor_degrees = DoctorDegree::orderBy('id', 'asc')->paginate(10);
 
 		return view('doctor_degrees.index', compact('doctor_degrees'));
 	}

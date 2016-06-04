@@ -17,7 +17,8 @@
 
             <form action="{{ route('medical_histories.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                <input type="hidden" name="patient_id" value="{{ $patient_id }}">
+                <input type="hidden" name="res_id" value="{{ $res_id }}">
                 <div class="form-group @if($errors->has('type')) has-error @endif">
                     <label for="type-field">Type</label>
                     <select id="type-field" name="type" class="form-control">

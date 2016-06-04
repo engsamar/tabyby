@@ -6,6 +6,7 @@ use App\ClinicConstants;
 use App\MedicalHistory;
 use Illuminate\Http\Request;
 use App\MedicalHistoryDetail;
+use Illuminate\Support\Facades\Redirect;
 
 class MedicalHistoryController extends Controller
 {
@@ -27,11 +28,11 @@ class MedicalHistoryController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($res_id,$patient_id)
     {
-        return view('medical_histories.create',['medicalHistoryType' => ClinicConstants::$medicalHistoryType]);
+        return view('medical_histories.create',['patient_id'=>$patient_id,'res_id'=>$res_id,'medicalHistoryType' => ClinicConstants::$medicalHistoryType]);
     }
-
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -43,16 +44,16 @@ class MedicalHistoryController extends Controller
         $medical_history = new MedicalHistory();
         $medical_history->type = $request->input("type");
         $medical_history->begin_at = $request->input("begin_at");
-        $medical_history->user_id = 1;
+        $medical_history->user_id = $request->input("patient_id");
         $medical_history->save();
-
 
         $medical_history_detail = new MedicalHistoryDetail();
         $medical_history_detail->description = $request->input("description");
         $medical_history_detail->medical_history_id=$medical_history->id;
         $medical_history_detail->save();
-
-        return redirect()->route('medical_histories.index')->with('message', 'Item created successfully.');
+        return redirect('/patient/'.$request->input("res_id").'/'.$request->input("patient_id"));
+        //return redirect()->route('medical_histories.index')->with('message', 'Item created successfully.');
+        // return redirect()->action('ReservationController@patient', array('id' => 2,'patient_id'=>1));
     }
 
     /**

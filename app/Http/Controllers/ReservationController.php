@@ -67,7 +67,7 @@ class ReservationController extends Controller {
         $userRoleID = \App\UserRole::where('user_id', '=', $user->id)->value('id');
         $dateTime = DateTime::createFromFormat('m/d/Y', $request->input("date"));
 		$myFormat = $dateTime->format('Y-m-d');
-		$reservation->status = 3;
+		$reservation->status = 2;
 		$reservation->date=$request->input("date");
 		$vacations=Vacation::where('from_day','<=',$myFormat)->where('to_day','>=',$myFormat)->count();
 		if($vacations){
@@ -89,7 +89,7 @@ class ReservationController extends Controller {
 				// echo $request->input("date");
 				//die();
 				//doctor reservation
-				if($userRole==1)
+				if($userRole==0)
 				{
 					$user_name  = $request->input("name");
 					$userID  = User::where('username',$user_name)->value('id');
@@ -99,7 +99,7 @@ class ReservationController extends Controller {
 				}
 
  		// secertary reservation
-				elseif($userRole==2) {
+				elseif($userRole==1) {
 					$secertary_clinic=Secertary::where('userRole_id', '=', $userRoleID)->value('clinic_id');
 					$reservation->clinic_id=$secertary_clinic;
 					$reservation->reservation_type_id =$request->input("examination");
@@ -262,7 +262,7 @@ class ReservationController extends Controller {
 		$reservations = Reservation::where('date', '=',Carbon::today()->toDateString())->paginate(10);
 		$reserveType =ClinicConstants::$reservationType;
         $status= ClinicConstants::$status;
-		return view('reservations.index', compact('reservations','status','reserveType''userRole'));
+		return view('reservations.index', compact('reservations','status','reserveType','userRole'));
 	}
 
 

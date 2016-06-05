@@ -22,6 +22,7 @@
                 <div class="form-group @if($errors->has('name')) has-error @endif">
                     <label for="name-field">Patient Name</label>
                     <input type="text" id="name-field" name="name" class="form-control" value="{{ old("name") }}"/>
+                    <input type="button" id="name-field" name="search" class="btn" value="Search" />
                     @if($errors->has("name"))
                         <span class="help-block">{{ $errors->first("name") }}</span>
                     @endif
@@ -52,45 +53,28 @@
                     @endif
                 </div>
 
-
-                <div id="contain" class="form-group @if($errors->has('day')) has-error @endif">
-                <label for='day-field'>Day</label>
-                    @if($errors->has("day"))
-                        <span class="help-block">{{ $errors->first("day") }}</span>
+    
+                <div class="form-group @if($errors->has('date')) has-error @endif">
+                    <label for="date-field">date</label>
+                    <input type="date" id="date-field" name="date" class="form-control"
+                           value="{{ old("date") }}"/>
+                    @if($errors->has("date"))
+                        <span class="help-block">{{ $errors->first("date") }}</span>
                     @endif
                 </div>
 
-
-                <div class="form-group @if($errors->has('reserveType')) has-error @endif">
-                    <label for="reserveType-field">Reservation Type</label>
-                    <select id="type-field" name="reserveType" class="form-control">
-                        @foreach($reserveType as $key=>$value)
-                            <option value={{ $key+1 }}>{{ $value }}</option>
-                        @endforeach
+                
+                <div  class="form-group @if($errors->has('examination')) has-error @endif">
+                    <label for="examination-field">Examination Type</label>
+                    <select id="type-field" name="examination" class="form-control">
+                    <option value="0">Choose Examination</option>}
+                        <option value="1"> examination</option>
+                        <option value="5">glasses prescription</option>
                     </select>
-                    @if($errors->has("reserveType"))
-                        <span class="help-block">{{ $errors->first("reserveType") }}</span>
+                    @if($errors->has("examination"))
+                        <span class="help-block">{{ $errors->first("examination") }}</span>
                     @endif
                 </div>
-
-
-                {{--<div class="form-group @if($errors->has('time')) has-error @endif">--}}
-                {{--<label for="time-field">Appoinment</label>--}}
-                {{--<input type="datetime-local" id="time-field" name="time" class="form-control"--}}
-                {{--value="{{ old("time") }}"/>--}}
-                {{--@if($errors->has("time"))--}}
-                {{--<span class="help-block">{{ $errors->first("time") }}</span>--}}
-                {{--@endif--}}
-                {{--</div>--}}
-
-                        <!--                    <div class="form-group @if($errors->has('user_id')) has-error @endif">
-                       <label for="user_id-field">User_id</label>
-                    <input type="text" id="user_id-field" name="user_id" class="form-control" value="{{ old("user_id") }}"/>
-                       @if($errors->has("user_id"))
-                        <span class="help-block">{{ $errors->first("user_id") }}</span>
-                       @endif
-                        </div> -->
-
 
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
@@ -116,38 +100,38 @@
         $(document).ready(function () {
 
             console.log("hiii in ready");
-            $("select[name='address']").change(function(){
-//                alert("Handler for .change() called.");
-//                console.log(this.value);
-                $.get("/working_hours/date/"+this.value).done(function (data, status) {
-//                    alert("Data: " + data + "\nStatus: " + status);
-//                    console.log("Data: " + data + "\nStatus: " + status);
-//                    console.log(data);
+//             $("select[name='address']").change(function(){
+// //                alert("Handler for .change() called.");
+// //                console.log(this.value);
+//                 $.get("/working_hours/date/"+this.value).done(function (data, status) {
+// //                    alert("Data: " + data + "\nStatus: " + status);
+// //                    console.log("Data: " + data + "\nStatus: " + status);
+// //                    console.log(data);
 
 
-                    {{--<option value={{ $value->id }}>{{ $value->date }}</option>--}}
-                    {{--@endforeach--}}
-                    {{--</select>--}}
-                    if (data.length>0){
-                    // var appointment1 =$("<select></select>").attr("name", "time").attr("class", "form-control");
-                    // var appointment2 =$("<select></select>").attr("name", "day").attr("class", "form-control");
-                    var appointment =$("<select></select>").attr("name", "day").attr("class", "form-control");
+//                     {{--<option value={{ $value->id }}>{{ $value->date }}</option>--}}
+//                     {{--@endforeach--}}
+//                     {{--</select>--}}
+//                     if (data.length>0){
+//                     // var appointment1 =$("<select></select>").attr("name", "time").attr("class", "form-control");
+//                     // var appointment2 =$("<select></select>").attr("name", "day").attr("class", "form-control");
+//                     var appointment =$("<select></select>").attr("name", "day").attr("class", "form-control");
 
-                    $.each(data, function (i, content) {
+//                     $.each(data, function (i, content) {
 
-                        // appointment1.append("<option> from " +content.fromTime + ", to " + content.toTime + "</option>");
-                        // appointment2.append("<option>" + content.day +"</option>");
-                        appointment.append("<option>" + content.day +" from "+ content.fromTime + " ,to " + content.toTime +  "</option>");
-                    });
-                    $("#contain").html(appointment);
-                    // $("#contain1").html(appointment1);
-                    // $("#contain2").html(appointment2);
-                    }
-                    else {
-                        $("#contain").text("there is no data");
-                    }
-                });
-            });
+//                         // appointment1.append("<option> from " +content.fromTime + ", to " + content.toTime + "</option>");
+//                         // appointment2.append("<option>" + content.day +"</option>");
+//                         appointment.append("<option>" + content.day +" from "+ content.fromTime + " ,to " + content.toTime +  "</option>");
+//                     });
+//                     $("#contain").html(appointment);
+//                     // $("#contain1").html(appointment1);
+//                     // $("#contain2").html(appointment2);
+//                     }
+//                     else {
+//                         $("#contain").text("there is no data");
+//                     }
+//                 });
+//             });
 
         });
 

@@ -38,6 +38,7 @@ Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
+Route::resource("vacations","VacationController");
 
 Route::get("user_profiles/{id}","UserProfileController@index");
 
@@ -57,9 +58,12 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get("patient/{id}","ReservationController@patientReserv");
 Route::get("/latest","ReservationController@latest");
-Route::get("patient/{id}/{patient_id}","ReservationController@show");
+Route::get("patient/{id}/{patient_id}","ReservationController@patient");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 Route::get("/working_hours/{id}","WorkingHourController@update");
+
+Route::get("newMedicalHistory/{id}/{patient_id}","MedicalHistoryController@create");
+Route::get("newComplain/{id}/{patient_id}","ComplainController@create");
 
 
 //Route::get('/search', function(){
@@ -71,3 +75,7 @@ Route::get("/working_hours/{id}","WorkingHourController@update");
 //    return Response::json($in);
 //});
 Route::post("/users/checkdata/","UserController@valid");
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

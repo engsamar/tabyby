@@ -11,6 +11,7 @@
 @endsection
 
 @section('content')
+
 <div class="row">
     <div class="col-md-12">
         @if($reservations->count())
@@ -33,11 +34,11 @@
             <tbody>
                 @foreach($reservations as $reservation)
                 <tr>
-                    <td>{{$reservation->status}}</td>
+                    <td>{{$status[$reservation->status]}}</td>
                     <td><a href='/patient/{{$reservation->user_id}}'>{{$reservation->user->username}}</a></td>
                     <td>{{$reservation->clinic->name}}</td>
                     <td>{{$reservation->appointment}}</td>
-                     <td>{{$res_type[$reservation->reservationType->type]}}</td>
+                    <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td>{{$reservation->parent_id}}</td>
                     @if($userRole == 1)
                     <td class="text-right">

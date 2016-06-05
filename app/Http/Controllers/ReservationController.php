@@ -29,7 +29,11 @@ class ReservationController extends Controller {
 		$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
 		$user = Auth::user();
         $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.index',['res_type' => ClinicConstants::$reservationType], compact('reservations','userRole'));
+
+		$reserveType =ClinicConstants::$reservationType;
+        $status= ClinicConstants::$status;
+		return view('reservations.index', compact('reservations','status','reserveType','userRole'));
+
 	}
 
 	/**
@@ -149,15 +153,49 @@ class ReservationController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($id,$patient_id)
 	{
 		$reservation = Reservation::findOrFail($id);
-		$histories=[];
-		$examinations=[];
-		$userInfo=[];
-		$complains=[];
-		$medicines=[];
-		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines'));
+		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
+
+        $histories = DB::table('users')
+            ->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
+            ->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
+            ->select('users.*', 'medical_histories.*','medical_history_details.*')
+            ->where('medical_histories.user_id', $patient_id)
+            ->get();
+
+
+        $examinations = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('examinations', 'reservation_id', '=', 'reservations.id')
+            ->select('examinations.*','reservations.*')
+            ->where('examinations.reservation_id', $id)
+            ->get();
+
+
+        $complains = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('complains', 'reservation_id', '=', 'reservations.id')
+            ->join('complain_details', 'complain_id', '=', 'complains.id')
+            ->select('complains.*','reservations.*','complain_details.*')
+            ->where('complains.reservation_id', $id)
+            ->get();
+
+
+
+        $medicines = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
+            ->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
+            ->select('prescriptions.*','prescription_details.*','reservations.*')
+            ->where('prescriptions.reservation_id', $id)
+            ->get();
+
+        $reserveType =ClinicConstants::$reservationType;
+        $status= ClinicConstants::$status;
+        $medicalHistoryType=ClinicConstants::$medicalHistoryType;
+		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 	}
 
 	/**
@@ -218,17 +256,21 @@ class ReservationController extends Controller {
 	 */
 	public function latest()
 	{
+
 		$user = Auth::user();
         $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 		$reservations = Reservation::where('date', '=',Carbon::today()->toDateString())->paginate(10);
-		return view('reservations.index',['res_type' => ClinicConstants::$reservationType], compact('reservations','userRole'));
+		$reserveType =ClinicConstants::$reservationType;
+        $status= ClinicConstants::$status;
+		return view('reservations.index', compact('reservations','status','reserveType''userRole'));
 	}
 
 
 	public function patient($id,$patient_id)
 	{
 		$reservation = Reservation::findOrFail($id);
-
+		//echo $patient_id;
+		//die();
 		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
 
 		$histories = DB::table('users')
@@ -265,12 +307,18 @@ class ReservationController extends Controller {
 		->where('prescriptions.reservation_id', $id)
 		->get();
 
-		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines'));
+        $reserveType =ClinicConstants::$reservationType;
+        $status= ClinicConstants::$status;
+        $medicalHistoryType=ClinicConstants::$medicalHistoryType;
+
+		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 	}
 	public function patientReserv($id)
 	{
+		$reserveType =ClinicConstants::$reservationType;
+        $status= ClinicConstants::$status;
 		$reservations = Reservation::where('user_id',$id)->paginate(10);
-		return view('reservations.userReserv', compact('reservations'));
+		return view('reservations.userReserv', compact('reservations','status','reserveType'));
 	}
 
 

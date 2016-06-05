@@ -17,7 +17,6 @@
 
             <form action="{{ route('examinations.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="patient_id" value="{{ $patient_id }}">
                 <input type="hidden" name="res_id" value="{{ $res_id }}">
                 <div class="form-group @if($errors->has('eye_type')) has-error @endif">
                     <label for="eye_type-field">Eye_type</label>
@@ -107,14 +106,6 @@
                         <span class="help-block">{{ $errors->first("angle") }}</span>
                     @endif
                 </div>
-<!--                 <div class="form-group @if($errors->has('reservation_id')) has-error @endif">
-                    <label for="reservation_id-field">Reservation_id</label>
-                    <input type="text" id="reservation_id-field" name="reservation_id" class="form-control"
-                           value="{{ old("reservation_id") }}"/>
-                    @if($errors->has("reservation_id"))
-                        <span class="help-block">{{ $errors->first("reservation_id") }}</span>
-                    @endif
-                </div >-->
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
                     <a class="btn btn-link pull-right" href="{{ route('examinations.index') }}"><i

@@ -58,13 +58,13 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get("patient/{id}","ReservationController@patientReserv");
 Route::get("/latest","ReservationController@latest");
-Route::get("patient/{id}/{patient_id}","ReservationController@patient");
+Route::get("patient/{id}","ReservationController@patient");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 Route::get("/working_hours/{id}","WorkingHourController@update");
 
-Route::get("newMedicalHistory/{id}/{patient_id}","MedicalHistoryController@create");
-Route::get("newComplain/{res_id}/{patient_id}","ComplainController@create");
-Route::get("newExamination/{id}/{patient_id}","ExaminationController@create");
+Route::get("newMedicalHistory/{id}","MedicalHistoryController@create");
+Route::get("newComplain/{res_id}","ComplainController@create");
+Route::get("newExamination/{id}","ExaminationController@create");
 
 
 

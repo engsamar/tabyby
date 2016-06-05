@@ -105,16 +105,10 @@ class ReservationController extends Controller {
 
 				$reservation->save();
 				echo "save";
-
-
-
-
 			}
 			else{
 				echo "notallow";
 			}
-
-
 			die();
 		}
 
@@ -129,16 +123,21 @@ class ReservationController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id,$patient_id)
+	public function show($id)
 	{
+        $usery = DB::table('users')
+            ->join('reservations', 'users.id', '=', $id)
+            ->get();
+        
+        $user_id = $usery->id;
 		$reservation = Reservation::findOrFail($id);
-		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
+		$userInfo = DB::table('users')->where('users.id', $user_id)->get();
 
         $histories = DB::table('users')
             ->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
             ->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
             ->select('users.*', 'medical_histories.*','medical_history_details.*')
-            ->where('medical_histories.user_id', $patient_id)
+            ->where('medical_histories.user_id', $user_id)
             ->get();
 
 
@@ -218,18 +217,28 @@ class ReservationController extends Controller {
 	}
 
 
-	public function patient($id,$patient_id)
+	public function patient($id)
 	{
+
+		$usery = DB::table('users')
+            ->join('reservations', 'users.id', '=','reservations.user_id')
+            ->where('reservations.id',$id)
+            ->get();
+        $user_id = null;
+        foreach ($usery as $value) {
+        	$user_id = $value->id;
+        }
+        
 		$reservation = Reservation::findOrFail($id);
-		//echo $patient_id;
+		//echo $user_id;
 		//die();
-		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
+		$userInfo = DB::table('users')->where('users.id', $user_id)->get();
 
 		$histories = DB::table('users')
 		->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
 		->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
 		->select('users.*', 'medical_histories.*','medical_history_details.*')
-		->where('medical_histories.user_id', $patient_id)
+		->where('medical_histories.user_id', $user_id)
 		->get();
 
 

@@ -16,7 +16,6 @@
 
             <form action="{{ route('complains.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="patient_id" value="{{ $patient_id }}">
                 <input type="hidden" name="res_id" value="{{ $res_id }}">
 
 

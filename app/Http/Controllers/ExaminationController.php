@@ -30,9 +30,9 @@ class ExaminationController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($res_id,$patient_id)
+	public function create($res_id)
 	{
-		return view('examinations.create',['patient_id'=>$patient_id,'res_id'=>$res_id,
+		return view('examinations.create',['res_id'=>$res_id,
 			'eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
 	}
 
@@ -75,6 +75,7 @@ class ExaminationController extends Controller {
 
 		$examination1->save();
 		return redirect('/patient/'.$request->input("res_id").'/'.$request->input("patient_id"));
+	// 	return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
 	 }
 
 	/**

@@ -22,11 +22,10 @@ class ComplainController extends Controller {
 		return view('complains.index', compact('complains'));
 	}
 
-	public function create($res_id,$patient_id)
+	public function create($res_id)
 	{
-		return view('complains.create',['patient_id'=>$patient_id,'res_id'=>$res_id]);
+		return view('complains.create',['res_id'=>$res_id]);
 	}
-
 
 	// href="{!!route('route', ['key'=>'value'])!!}"
 	public function store(Request $request)
@@ -44,10 +43,8 @@ class ComplainController extends Controller {
         $complain_details->complain_id=$complain->id;
         $complain_details->save();
 
-        return redirect('/patient/'.$request->input("res_id").'/'.$request->input("patient_id"));
-        // http://localhost:8000/patient/4/1
-        // return redirect('/patient/'.$complain->reservation_id.'/'.);
-	}
+        return redirect('/patient/'.$request->input("res_id"));
+    }
 
 	/**
 	 * Display the specified resource.

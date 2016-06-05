@@ -57,17 +57,17 @@
         <div id="content-1">
             <table class="table">
                 @foreach($userInfo as $user)
-                <tr><td>username</td><td>{{$user->username}}</td></tr>
-                <tr><td>Email</td><td>{{$user->email}}</td></tr>
-                <tr><td>Telephone</td><td>{{$user->telephone}}</td></tr>
-                <tr><td>Mobile</td><td>{{$user->mobile}}</td></tr>
-                <tr><td>BirthDate</td><td>{{$user->birthdate}}</td></tr>
+                    <tr><td>username</td><td>{{$user->username}}</td></tr>
+                    <tr><td>Email</td><td>{{$user->email}}</td></tr>
+                    <tr><td>Telephone</td><td>{{$user->telephone}}</td></tr>
+                    <tr><td>Mobile</td><td>{{$user->mobile}}</td></tr>
+                    <tr><td>BirthDate</td><td>{{$user->birthdate}}</td></tr>
                 @endforeach
             </table>
         </div>
 
         <div id="content-2">
-            <a class="btn btn-xs btn-primary" href='/newMedicalHistory/{{$reservation->id}}/{{$reservation->user_id}}'><i class="glyphicon glyphicon-eye-open"></i> New Medical History</a>
+            <a class="btn btn-xs btn-primary" href='/newMedicalHistory/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New Medical History</a>
             <table class="table">
                 @foreach($histories as $history)
                 <tr><td>{{$medicalHistoryType[$history->type]}}</td><td>{{$history->type}}</td></tr>
@@ -79,7 +79,7 @@
             </div>
             <div id="content-3">
 
-            <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservation->id}}/{{$reservation->user_id}}'><i class="glyphicon glyphicon-eye-open"></i> New Complain</a>
+            <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservation->id}}}'><i class="glyphicon glyphicon-eye-open"></i> New Complain</a>
                 <table class="table" border="1px">
                 <tr><th>Complain</th><th>History of Complain</th><th>Diagnose</th><th>Plan</th></tr>
                     @foreach($complains as $complain)
@@ -96,12 +96,12 @@
             </div>
 
             <div id="content-4">
-            <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservation->id}}/{{$reservation->user_id}}'><i class="glyphicon glyphicon-eye-open"></i> New Examination</a>
+            <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New Examination</a>
                 <table class="table" >
                 <tr><th>Eye</th><th>vision</th><th>Lid</th><th>Conjunctiva</th><th>Pupil</th><th>A/C</th><th>Lens</th><th>Fundus</th><th>I.O.P</th>
                     <tr>    
                     @foreach($examinations as $exam) 
-                        <td>{{$exam->eye_type}}</td>
+                        <td>{{$exam->eye_type}}  </td>
                         <td>{{$exam->vision}}</td>
                         <td>{{$exam->lid}}</td>
                         <td>{{$exam->conjunctiva}}</td>

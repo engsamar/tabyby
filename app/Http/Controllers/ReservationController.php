@@ -158,8 +158,6 @@ class ReservationController extends Controller {
             ->where('complains.reservation_id', $id)
             ->get();
 
-
-
         $medicines = DB::table('users')
             ->join('reservations', 'users.id', '=', 'reservations.user_id')
             ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
@@ -174,12 +172,6 @@ class ReservationController extends Controller {
 		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
 		$reservation = Reservation::findOrFail($id);
@@ -187,13 +179,6 @@ class ReservationController extends Controller {
 		return view('reservations.edit', compact('reservation'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @param Request $request
-	 * @return Response
-	 */
 	public function update(Request $request, $id)
 	{
 		$reservation = Reservation::findOrFail($id);
@@ -210,12 +195,6 @@ class ReservationController extends Controller {
 		return redirect()->route('reservations.index')->with('message', 'Item updated successfully.');
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		$reservation = Reservation::findOrFail($id);
@@ -270,8 +249,6 @@ class ReservationController extends Controller {
 		->where('complains.reservation_id', $id)
 		->get();
 
-
-
 		$medicines = DB::table('users')
 		->join('reservations', 'users.id', '=', 'reservations.user_id')
 		->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
@@ -285,6 +262,7 @@ class ReservationController extends Controller {
         $medicalHistoryType=ClinicConstants::$medicalHistoryType;
 
 		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
+
 	}
 	public function patientReserv($id)
 	{

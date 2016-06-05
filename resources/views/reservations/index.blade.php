@@ -11,7 +11,6 @@
 @endsection
 
 @section('content')
-<<<<<<< HEAD
 <div class="row">
     <div class="col-md-12">
         @if($reservations->count())

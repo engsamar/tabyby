@@ -38,14 +38,16 @@ Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
-Route::resource("vacations","VacationController");
 
-Route::get("user_profiles/{id}","UserProfileController@index");
+Route::get("reservations/{id}","UserProfileController@show");
 
+
+Route::get("user_profiles/{id}","UserProfileController@show");
 Route::resource("exam_glasses","ExamGlassController");
-Route::get("user_profiles/{id}/","UserProfileController@index");
+
 Route::auth();
 
+// Route::resource("prescription_details/{p_id}/","PrescriptionController@store");
 
 
 Route::get('logout', array('uses' => 'HomeController@logout'));
@@ -58,15 +60,11 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get("patient/{id}","ReservationController@patientReserv");
 Route::get("/latest","ReservationController@latest");
-Route::get("patient/{id}/{patient_id}","ReservationController@patient");
+Route::get("patient/{id}/{patient_id}","ReservationController@show");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 Route::get("/working_hours/{id}","WorkingHourController@update");
 
-Route::get("newMedicalHistory/{id}/{patient_id}","MedicalHistoryController@create");
-Route::get("newComplain/{res_id}/{patient_id}","ComplainController@create");
-Route::get("newExamination/{id}/{patient_id}","ExaminationController@create");
-
-
+Route::get("reservations/complains/{r_id}","ReservationController@show");
 
 //Route::get('/search', function(){
 //    return View::make('admin.search');
@@ -76,7 +74,3 @@ Route::get("newExamination/{id}/{patient_id}","ExaminationController@create");
 //    $in = array('one'=>'ON','two'=>'TW','three'=>'TH','four'=>'FO');
 //    return Response::json($in);
 //});
-
-Route::auth();
-
-Route::get('/home', 'HomeController@index');

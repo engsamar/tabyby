@@ -23,6 +23,7 @@
                     <label for="username-field">Username</label>
                     <input type="text" id="username-field" name="username" class="form-control"
                            value="{{ old("username") }}"/>
+                    <span id="error" class="help-block"></span>
                     @if($errors->has("username"))
                         <span class="help-block">{{ $errors->first("username") }}</span>
                     @endif
@@ -30,6 +31,7 @@
                 <div class="form-group @if($errors->has('email')) has-error @endif">
                     <label for="email-field">Email</label>
                     <input type="text" id="email-field" name="email" class="form-control" value="{{ old("email") }}"/>
+                    <span id="error" class="help-block"></span>
                     @if($errors->has("email"))
                         <span class="help-block">{{ $errors->first("email") }}</span>
                     @endif
@@ -90,8 +92,6 @@
     <script>
         $('.date-picker').datepicker({});
         console.log("hiii in ready");
-
-
 
 
     </script>

@@ -70,3 +70,4 @@ Route::get("/working_hours/{id}","WorkingHourController@update");
 //    $in = array('one'=>'ON','two'=>'TW','three'=>'TH','four'=>'FO');
 //    return Response::json($in);
 //});
+Route::post("/users/checkdata/","UserController@valid");

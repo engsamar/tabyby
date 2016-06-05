@@ -23,10 +23,10 @@ class UserController extends Controller
         //select all clinics address
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
-        $user_id=1;
-        $reservation=Reservation::where('user_id',$user_id)->get();
+        $user_id = 1;
+        $reservation = Reservation::where('user_id', $user_id)->get();
 //        $clinic_name=Clinic::where
-        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics,'reservation'=>$reservation,'reservationType' => ClinicConstants::$reservationType]);
+        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics, 'reservation' => $reservation, 'reservationType' => ClinicConstants::$reservationType]);
     }
 
     public function secretaryHome()
@@ -154,17 +154,42 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
     }
+
     public function valid(Request $request)
     {
-        echo "<pre>";
-		var_dump($request);
-		echo "</pre>";
-		die('end');
-//        switch ($request)
+//        echo "<pre>";
+//		var_dump($request->input("username"));
+//		var_dump($request->input("action"));
+//		echo "</pre>";
+//		die('end');
+        switch ($request->input("action")) {
+            case "username":
+//                echo "action";
+//                $name = User::findOrFail($request->input("username"))->first();
+                $name = User::where('username', $request->input("username"))->first();
+                if ($name) {
+                    var_dump($request->input("username"));
+                    return "yes";
+                } else {
+                    var_dump($request->input("username"));
+                    return "no";
+                }
+                break;
+            case "email":
+//                echo "email";
+                $email = User::where('email', $request->input("email"))->first();
+                if ($email) {
+                    var_dump($request->input("email"));
+                    return "yes";
+                } else {
+                    var_dump($request->input("email"));
+                    return "no";
+                }
+                break;
+        }
 //        $user = User::findOrFail($id);
 //        $user->delete();
-
-        return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
+//        return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
     }
 
 

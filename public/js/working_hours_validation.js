@@ -6,6 +6,7 @@ $(document).ready(function () {
 
 
     $(":input[name='toTime']").on("blur", function () {
+        // console.log($('input[name=fromTime]').val());
         // console.log($(":input[name='fromTime']").val());
         // console.log($(":input[name='toTime']").val());
         // console.log($(":input[name='fromTime']").val().split(":"));

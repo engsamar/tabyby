@@ -19,7 +19,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" name="username"
                                            value="{{ old('username') }}">
-
+                                    <span id="error" class="help-block"></span>
                                     @if ($errors->has('username'))
                                         <span class="help-block">
                                     <strong>{{ $errors->first('username') }}</strong>
@@ -34,7 +34,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email"
                                            value="{{ old('email') }}">
-
+                                    <span id="error" class="help-block"></span>
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>

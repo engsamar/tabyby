@@ -2,9 +2,11 @@
 namespace App\Http\Controllers;
 use App\WorkingHour;
 use Carbon\Carbon;
+use \DateTime;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ClinicConstants;
+use App\Secertary;
 use App\Vacation;
 use App\Reservation;
 use App\Clinic;
@@ -25,8 +27,9 @@ class ReservationController extends Controller {
 	{
 
 		$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
-
-		return view('reservations.index', compact('reservations'));
+		$user = Auth::user();
+        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		return view('reservations.index',['res_type' => ClinicConstants::$reservationType], compact('reservations','userRole'));
 	}
 
 	/**
@@ -38,9 +41,9 @@ class ReservationController extends Controller {
 	{
 		$clinic = Clinic::all();
 		$appointments=WorkingHour::all();
-		// $user = Auth::user();
-  //       $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('address', $clinic)->with('appointment', $appointments);
+		$user = Auth::user();
+        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments);
 	}
 
 	/**
@@ -52,12 +55,17 @@ class ReservationController extends Controller {
 	public function store(Request $request)
 	{
 		$reservation = new Reservation();
-        // $user = Auth::user();
-        // $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		$no_of_patient="" ;
+		$no_of_reserve="";
+		$from_time="";
+        $user = Auth::user();
+        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+        $userRoleID = \App\UserRole::where('user_id', '=', $user->id)->value('id');
+        $dateTime = DateTime::createFromFormat('m/d/Y', $request->input("date"));
+		$myFormat = $dateTime->format('Y-m-d');
 		$reservation->status = 3;
-		
-
-		$vacations=Vacation::where('from_day','<=',$reservation->date)->where('to_day','>=',$reservation->date)->count();
+		$reservation->date=$request->input("date");
+		$vacations=Vacation::where('from_day','<=',$myFormat)->where('to_day','>=',$myFormat)->count();
 		if($vacations){
 			echo "not available";
 			die();
@@ -65,15 +73,17 @@ class ReservationController extends Controller {
 			
 			$working_hours = WorkingHour::where('clinic_id',1)->where('day',date('l',strtotime($request->input("date"))))->get();
 			foreach ($working_hours as $working_hour) {
+				$from_time=$working_hour->fromTime;
 				$no_of_patient=(strtotime($working_hour->toTime)-strtotime($working_hour->fromTime))/(15*60);
 			}
 			
-			$no_of_reserve = Reservation::where('date', $request->input("date"))->where('clinic_id',1)->count();
+			$no_of_reserve = Reservation::where('date', $myFormat)->where('clinic_id',1)->count();
 
 			if ($no_of_reserve < $no_of_patient) {
-
-				$reservation->date = $request->input("date");
-
+				
+				$reservation->date = $myFormat;
+				// echo $request->input("date");
+				//die();
 				//doctor reservation
 				if($userRole==1)
 				{
@@ -86,6 +96,8 @@ class ReservationController extends Controller {
 
  		// secertary reservation
 				elseif($userRole==2) {
+					$secertary_clinic=Secertary::where('userRole_id', '=', $userRoleID)->value('clinic_id');
+					$reservation->clinic_id=$secertary_clinic;
 					$reservation->reservation_type_id =$request->input("examination");
 					$reservation->parent_id =null;
 					$user_name  = $request->input("name");
@@ -97,13 +109,21 @@ class ReservationController extends Controller {
 				else
 				{
 					$reservation->clinic_id = $request->input("address");
-					$reservation->reservation_type_id =1;
+					$reservation->reservation_type_id =$request->input("examination");
 					$reservation->parent_id =null;
 					$reservation->user_id =$user->id;
 				}
 
+				$reserveTime = strtotime("+".(($no_of_reserve+1)*15)." minutes", strtotime($from_time));
+        		$reservation->appointment=date('h:i:s', $reserveTime);
+
+        		$reservationCheck = Reservation::where('date',$myFormat)->where('user_id',$reservation->user_id)->count();
+        		if (!$reservationCheck){
 				$reservation->save();
 				echo "save";
+			}else{
+				echo "this reservation already exist";
+			}
 
 
 
@@ -111,6 +131,7 @@ class ReservationController extends Controller {
 			}
 			else{
 				echo "notallow";
+				echo $no_of_reserve;
 			}
 
 
@@ -197,8 +218,10 @@ class ReservationController extends Controller {
 	 */
 	public function latest()
 	{
-		$reservations = Reservation::where('day', '=',Carbon::today()->toDateString())->paginate(10);
-		return view('reservations.index', compact('reservations'));
+		$user = Auth::user();
+        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		$reservations = Reservation::where('date', '=',Carbon::today()->toDateString())->paginate(10);
+		return view('reservations.index',['res_type' => ClinicConstants::$reservationType], compact('reservations','userRole'));
 	}
 
 

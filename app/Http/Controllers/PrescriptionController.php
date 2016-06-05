@@ -39,9 +39,6 @@ class PrescriptionController extends Controller {
 	public function store(Request $request)
 	{
 		$prescription = new Prescription();
-
-		
-
 		$prescription->save();
 
 		return redirect()->route('prescriptions.index')->with('message', 'Item created successfully.');

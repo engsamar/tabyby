@@ -23,24 +23,36 @@
                     <p class="form-control-static"></p>
                 </div>
                 <div class="form-group">
-                     <label for="from">FROM</label>
-                     <p class="form-control-static">{{$exam_glass->from}}</p>
+                     <label for="sphr">SPHR</label>
+                     <p class="form-control-static">{{$exam_glass->sphr}}</p>
                 </div>
                     <div class="form-group">
-                     <label for="exam_glass_type">EXAM_GLASS_TYPE</label>
-                     <p class="form-control-static">{{$exam_glass->exam_glass_type}}</p>
+                     <label for="cylr">CYLR</label>
+                     <p class="form-control-static">{{$exam_glass->cylr}}</p>
                 </div>
                     <div class="form-group">
-                     <label for="spl">SPL</label>
-                     <p class="form-control-static">{{$exam_glass->spl}}</p>
+                     <label for="axisr">AXISR</label>
+                     <p class="form-control-static">{{$exam_glass->axisr}}</p>
                 </div>
                     <div class="form-group">
-                     <label for="cyl">CYL</label>
-                     <p class="form-control-static">{{$exam_glass->cyl}}</p>
+                     <label for="sphl">SPHL</label>
+                     <p class="form-control-static">{{$exam_glass->sphl}}</p>
                 </div>
                     <div class="form-group">
-                     <label for="axis">AXIS</label>
-                     <p class="form-control-static">{{$exam_glass->axis}}</p>
+                     <label for="cyll">CYLL</label>
+                     <p class="form-control-static">{{$exam_glass->cyll}}</p>
+                </div>
+                    <div class="form-group">
+                     <label for="axisl">AXISL</label>
+                     <p class="form-control-static">{{$exam_glass->axisl}}</p>
+                </div>
+                    <div class="form-group">
+                     <label for="type">Exam_Glass_TYPE</label>
+                     <p class="form-control-static">{{$examGlassType[$exam_glass->exam_glass_type]}}</p>
+                </div>
+                    <div class="form-group">
+                     <label for="reservation_id">RESERVATION_ID</label>
+                     <p class="form-control-static">{{$exam_glass->reservation_id}}</p>
                 </div>
             </form>
 

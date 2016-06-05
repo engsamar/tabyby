@@ -39,6 +39,7 @@ Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
 Route::resource("exam_glasses","ExamGlassController");
+Route::resource("examGlassHome","ExamGlassController@examGlass");
 Route::get("user_profiles/{id}/","UserProfileController@index");
 Route::auth();
 
@@ -54,6 +55,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::get("patient/{id}/{patient_id}","ReservationController@show");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 Route::get("/working_hours/{id}","WorkingHourController@update");
+Route::resource("exam_glass_notes","ExamGlassNoteController");
 
 
 //Route::get('/search', function(){

@@ -16,7 +16,7 @@ h1 {
     width: 90%;  /* Ancho del contenedor */
 }
 
-#container input {
+#container input[type="radio"] {
     height: 2.5em;
     visibility: hidden;
 }

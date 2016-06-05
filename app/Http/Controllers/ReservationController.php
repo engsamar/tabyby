@@ -65,35 +65,54 @@ class ReservationController extends Controller {
         $user = Auth::user();
         $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
         $userRoleID = \App\UserRole::where('user_id', '=', $user->id)->value('id');
-        $dateTime = DateTime::createFromFormat('m/d/Y', $request->input("date"));
-		$myFormat = $dateTime->format('Y-m-d');
+        $dateCheck=$request->input("date");
+        if ($userRole == 0) {
+        	$now=Carbon::today();
+        	$dateCheck= $now->addDays($request->input("date"))->toDateString();
+        	// echo $dateCheck;
+        	// die();
+        }
+        else{
+      
+        $dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
+		$dateCheck = $dateTime->format('Y-m-d');
+	}
 		$reservation->status = 2;
-		$reservation->date=$request->input("date");
-		$vacations=Vacation::where('from_day','<=',$myFormat)->where('to_day','>=',$myFormat)->count();
+		$reservation->date=$dateCheck;
+
+		$vacations=Vacation::where('from_day','<=',$dateCheck)->where('to_day','>=',$dateCheck)->count();
 		if($vacations){
 			echo "not available";
 			die();
 		}else{
 			
-			$working_hours = WorkingHour::where('clinic_id',1)->where('day',date('l',strtotime($request->input("date"))))->get();
+			$working_hours = WorkingHour::where('clinic_id',1)->where('day',date('l',strtotime($dateCheck)))->get();
 			foreach ($working_hours as $working_hour) {
 				$from_time=$working_hour->fromTime;
 				$no_of_patient=(strtotime($working_hour->toTime)-strtotime($working_hour->fromTime))/(15*60);
 			}
 			
-			$no_of_reserve = Reservation::where('date', $myFormat)->where('clinic_id',1)->count();
+			$no_of_reserve = Reservation::where('date', $dateCheck)->where('clinic_id',1)->count();
 
 			if ($no_of_reserve < $no_of_patient) {
 				
-				$reservation->date = $myFormat;
-				// echo $request->input("date");
+				$reservation->date = $dateCheck;
+				// echo $dateCheck;
 				//die();
 				//doctor reservation
 				if($userRole==0)
 				{
-					$user_name  = $request->input("name");
-					$userID  = User::where('username',$user_name)->value('id');
-					$reservation->user_id=$userID;
+					$reservation->user_id=$request->input("user_id");
+					$reservation->clinic_id=$request->input("clinic_id");
+					$reservation->parent_id=$request->input("res_id");
+					////////////////////check////////////////
+					if ($request->input("res_type_id")<4 && $request->input("res_type_id")>=0) {
+						# code...
+						$reservation->reservation_type_id=$request->input("res_type_id")+1;
+					}else{
+						echo "this patient take three Consultation ,, ";
+					}
+					
 
 
 				}
@@ -102,6 +121,8 @@ class ReservationController extends Controller {
 				elseif($userRole==1) {
 					$secertary_clinic=Secertary::where('userRole_id', '=', $userRoleID)->value('clinic_id');
 					$reservation->clinic_id=$secertary_clinic;
+					echo $secertary_clinic;
+					die();
 					$reservation->reservation_type_id =$request->input("examination");
 					$reservation->parent_id =null;
 					$user_name  = $request->input("name");
@@ -117,11 +138,13 @@ class ReservationController extends Controller {
 					$reservation->parent_id =null;
 					$reservation->user_id =$user->id;
 				}
-
-				$reserveTime = strtotime("+".(($no_of_reserve+1)*15)." minutes", strtotime($from_time));
+				if ($no_of_reserve != 0) {
+					$no_of_reserve=$no_of_reserve+1;
+				}
+				$reserveTime = strtotime("+".(($no_of_reserve)*15)." minutes", strtotime($from_time));
         		$reservation->appointment=date('h:i:s', $reserveTime);
 
-        		$reservationCheck = Reservation::where('date',$myFormat)->where('user_id',$reservation->user_id)->count();
+        		$reservationCheck = Reservation::where('date',$dateCheck)->where('user_id',$reservation->user_id)->count();
         		if (!$reservationCheck){
 				$reservation->save();
 				echo "save";
@@ -328,7 +351,7 @@ class ReservationController extends Controller {
 		$reservation->status = 3;
 		$clinicID = $request->input("address");
 		$reservation->clinic_id = $request->input("address");
-		$reservation->date = $request->input("date");
+		//$reservation->date = $dateCheck;
 		$no_of_reserve = Reservation::where('date', $reservation->date)->where('clinic_id',$clinicID)->count();
         //$reserveTime = strtotime("+".(($no_of_reserve+1)*15)." minutes", strtotime($pieces[2]));
         //$reservation->appointment=date('h:i:s', $reserveTime);

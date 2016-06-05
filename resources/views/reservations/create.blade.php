@@ -67,9 +67,9 @@ rel="stylesheet">
                 <div  class="form-group @if($errors->has('examination')) has-error @endif">
                     <label for="examination-field">Examination Type</label>
                     <select id="type-field" name="examination" class="form-control">
-                        <option value="0">Choose Examination</option>}
-                        <option value="1"> examination</option>
-                        <option value="5">glasses prescription</option>
+                        <option >Choose Examination</option>}
+                        <option value="0"> examination</option>
+                        <option value="4">glasses prescription</option>
                     </select>
                     @if($errors->has("examination"))
                     <span class="help-block">{{ $errors->first("examination") }}</span>

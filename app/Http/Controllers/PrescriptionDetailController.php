@@ -2,7 +2,9 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\ClinicConstants;
 
+use App\Prescription;
 use App\PrescriptionDetail;
 use Illuminate\Http\Request;
 
@@ -17,18 +19,29 @@ class PrescriptionDetailController extends Controller {
 
 	public function create()
 	{
-		return view('prescription_details.create');
+		$medicineType= ClinicConstants::$medicineType;
+//		$prescription= Prescription::all();
+		$exsist=Prescription::where('reservation_id','=','1')->get();
+		if (!$exsist){
+		$prescription= new Prescription();
+		$prescription->reservation_id=1;
+		$prescription->save();
+		}
+		return view('prescription_details.create',compact('medicineType'));
 	}
 
 	public function store(Request $request)
 	{
+
 		$prescription_detail = new PrescriptionDetail();
+
 
 		$prescription_detail->medicine_name = $request->input("medicine_name");
         $prescription_detail->no_times = $request->input("no_times");
         $prescription_detail->quantity = $request->input("quantity");
-        $prescription_detail->duration = $request->input("duration");
-        $prescription_detail->preception_id = $request->input("preception_id");
+		$prescription_detail->duration = $request->input("duration");
+		$prescription= Prescription::where('reservation_id','=','1');
+		$prescription_detail->preception_id =$prescription->id;
 
 		$prescription_detail->save();
 
@@ -56,7 +69,8 @@ class PrescriptionDetailController extends Controller {
         $prescription_detail->no_times = $request->input("no_times");
         $prescription_detail->quantity = $request->input("quantity");
         $prescription_detail->duration = $request->input("duration");
-        $prescription_detail->preception_id = $request->input("preception_id");
+		$prescription= Prescription::where('reservation_id','=','1');
+		$prescription_detail->preception_id =$prescription->id;
 
 		$prescription_detail->save();
 

@@ -79,3 +79,5 @@ Route::post("/users/checkdata/","UserController@valid");
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::post('/medicines/find/','MedicineController@find');
+Route::post('/consistitues/find','ConsistitueController@find');

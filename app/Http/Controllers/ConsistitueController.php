@@ -104,5 +104,20 @@ class ConsistitueController extends Controller {
 
 		return redirect()->route('consistitues.index')->with('message', 'Item deleted successfully.');
 	}
+	public function find(Request $request)
+	{
+//		echo "<pre>";
+//		var_dump($request->input("name"));
+//		var_dump($request->input("action"));
+//		echo "</pre>";
+//		die('end');
+		$name=$request->input("name");
+		$medicine=Consistitue::where('active_consistitue','LIKE',"%$name%")->get();
+//		echo "<pre>";
+//		var_dump($medicine);
+//		echo "</pre>";
+//		die('end');
+		return $medicine;
+	}
 
 }

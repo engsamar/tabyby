@@ -5,12 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
+      <link rel="stylesheet" href="/css/jquery-ui.css">
 
-    <script src="/js/jquery-1.11.3.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/tinymce/tinymce.min.js"></script>
-
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"  src="/js/app.js"></script>
+    <script type="text/javascript"  src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript"  src="/js/tinymce/tinymce.min.js"></script>
+    <script>
+  $(function() {
+    $( ".datepicker" ).datepicker();
+  });
+  </script>
 
     @yield('css')
 </head>

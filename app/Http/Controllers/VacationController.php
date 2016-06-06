@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use \DateTime;
 use App\Vacation;
 use Illuminate\Http\Request;
 
@@ -51,9 +51,12 @@ class VacationController extends Controller {
 	public function store(Request $request)
 	{
 		$vacation = new Vacation();
-
-		$vacation->from_day = $request->input("from_day");
-        $vacation->to_day = $request->input("to_day");
+		$dateTime1 = DateTime::createFromFormat('m/d/Y', $request->input("from_day"));
+		$from = $dateTime1->format('Y-m-d');
+		$dateTime2 = DateTime::createFromFormat('m/d/Y', $request->input("to_day"));
+		$to = $dateTime2->format('Y-m-d');
+		$vacation->from_day = $from;
+        $vacation->to_day = $to;
 
 		$vacation->save();
 

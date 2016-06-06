@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ClinicConstants;
 
+use App\Medicine;
 use App\Prescription;
 use App\PrescriptionDetail;
 use Illuminate\Http\Request;
@@ -21,10 +22,14 @@ class PrescriptionDetailController extends Controller {
 	{
 		$medicineType= ClinicConstants::$medicineType;
 //		$prescription= Prescription::all();
-		$exsist=Prescription::where('reservation_id','=','1')->get();
-		if (!$exsist){
+		$exist=Prescription::where('reservation_id','=','2')->get();
+		if (count($exist)==0){
+//			echo "<pre>";
+//			var_dump($exist);
+//			echo "</pre>";
+//			die("end");
 		$prescription= new Prescription();
-		$prescription->reservation_id=1;
+		$prescription->reservation_id=2;
 		$prescription->save();
 		}
 		return view('prescription_details.create',compact('medicineType'));
@@ -32,19 +37,20 @@ class PrescriptionDetailController extends Controller {
 
 	public function store(Request $request)
 	{
-
 		$prescription_detail = new PrescriptionDetail();
-
-
 		$prescription_detail->medicine_name = $request->input("medicine_name");
-        $prescription_detail->no_times = $request->input("no_times");
-        $prescription_detail->quantity = $request->input("quantity");
-		$prescription_detail->duration = $request->input("duration");
-		$prescription= Prescription::where('reservation_id','=','1');
+		$prescription_detail->no_times = $request->input("no_times");
+		$prescription_detail->quantity = $request->input("quantity");
+		$medicine= Medicine::where('name','=',$request->input("medicine_name"))->first();
+//		echo "<pre>";
+//		var_dump($medicine->id);
+//		echo "</pre>";
+//		die("end");
+		$prescription_detail->medicine_id =$medicine->id;
+		$prescription_detail->duaration = $request->input("duration");
+		$prescription= Prescription::where('reservation_id','=','2')->first();
 		$prescription_detail->preception_id =$prescription->id;
-
 		$prescription_detail->save();
-
 		return redirect()->route('prescription_details.index')->with('message', 'Item created successfully.');
 	}
 

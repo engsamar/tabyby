@@ -8,6 +8,7 @@ use App\UserRole;
 use App\Clinic;
 use App\Reservation;
 use Illuminate\Http\Request;
+use League\Flysystem\Adapter\NullAdapter;
 
 class UserController extends Controller
 {
@@ -167,22 +168,41 @@ class UserController extends Controller
 //                echo "action";
 //                $name = User::findOrFail($request->input("username"))->first();
                 $name = User::where('username', $request->input("username"))->first();
+//                $name = $request->input("username");
+//                $name1 = "mosatafa";
+//                echo "<pre>";
+//                var_dump($name);
+//                var_dump($name1);
+//                echo "</pre>";
+//                die('end');
                 if ($name) {
-                    var_dump($request->input("username"));
+//                    echo "<pre>";
+//                    var_dump($name);
+//                    var_dump($name1);
+//                    echo "</pre>";
+//                    die('end');
+//                    var_dump($request->input("username"));
+//                    var_dump($name);
+//                    var_dump($name1);
                     return "yes";
                 } else {
-                    var_dump($request->input("username"));
+//                    var_dump($name);
+//                    var_dump($name1);
+//                    var_dump($request->input("username"));
                     return "no";
                 }
                 break;
             case "email":
 //                echo "email";
                 $email = User::where('email', $request->input("email"))->first();
+//                var_dump($email);
                 if ($email) {
-                    var_dump($request->input("email"));
+//                    var_dump($email);
+//                    var_dump($request->input("email"));
                     return "yes";
                 } else {
-                    var_dump($request->input("email"));
+//                    var_dump($email);
+//                    var_dump($request->input("email"));
                     return "no";
                 }
                 break;

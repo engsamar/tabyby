@@ -8,6 +8,6 @@ class Consistitue extends Model
 {
     public function medicines()
     {
-        return $this->hasMany(Medicine::class);
+        return $this->belongsTo(Medicine::class);
     }
 }

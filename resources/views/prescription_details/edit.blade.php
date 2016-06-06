@@ -38,12 +38,6 @@
                     <label for="type-field">Medicine_type</label>
                     {{--<input type="text" id="type-field" name="type" class="form-control"--}}
                     {{--value="{{ old("type") }}"/>--}}
-                    {{--<select id="type-field" name="type" class="form-control">--}}
-                    {{--@foreach($day as $key=>$value)--}}
-                    {{--<option selected value="1">NAME</option>--}}
-                    {{--<option value="2">ACTIVE CONSTITUENT</option>--}}
-                    {{--@endforeach--}}
-                    {{--</select>--}}
                     <select id="type-field" name="type" class="form-control">
                         @foreach($medicineType as $key=>$value)
                             <option value={{ $key }}>{{ $value }}</option>

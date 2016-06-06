@@ -11,8 +11,8 @@ class Medicine extends Model
         return $this->hasMany(PreceptionDetail::class);
     }
 
-    public function consistitues()
+    public function constituent()
     {
-        return $this->belongsTo(Consistitues::class);
+        return $this->hasMany(Consistitue::class);
     }
 }

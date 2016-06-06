@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form action="{{ route('prescriptions.store') }}" method="POST">
+            <form action="{{ route('prescription_details.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group @if($errors->has('search_by')) has-error @endif">

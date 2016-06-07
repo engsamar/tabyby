@@ -148,4 +148,5 @@ class WorkingHourController extends Controller {
 //		return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
 	}
 
+
 }

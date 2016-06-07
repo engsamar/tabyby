@@ -1,18 +1,16 @@
 @extends('homeViewLayout')
 @section('nav_bar')
-    <li><a href="#" >Reservations</a></li>
-    <li><a href="#" >Secretary</a></li>
-    <li><a href="#" >MedicalHistory</a></li>
+    <li><a href="#">Reservations</a></li>
+    <li><a href="#">secretary</a></li>
 @endsection
 @section('content')
-
-    <div class="row">
-        {{--/////////////////////--}}
-        <table>
-            <tr>
-                <td style="width: 48%;">
-                    <div id="clinicInfo" class="col-sm-4" style="width:48%;height:40%;border-color: black">
-                        <h1>clinicInfo</h1>
+    <div class="container-fluid">
+        <!-- /.row -->
+        <div class="row margin-b-2">
+            <div class="col-sm-3" id="divHome">
+                <div class="caption">
+                    <div>
+                        <h3>clinicInfo</h3>
 
                         <form name="formN" id="formN" method="POST">
                             <input type="hidden" name="_method" value="PUT">
@@ -20,7 +18,6 @@
                             <select id="clinic_id_field" name="clinic_id_field" class="form-control">
                                 <option>Select Clinic Name</option>
                                 @foreach($clinics as $clinic)
-
                                     <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
                                 @endforeach
                             </select>
@@ -42,26 +39,35 @@
                         </form>
 
                     </div>
-                </td>
-                <td style="width: 70%;">
-                    <div id="recentPost" class="col-sm-6">
-                        <h1>recentPost</h1>
+                </div>
+            </div>
+            <div class="col-sm-4" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="recentPost" class="col-sm-4">
+                        <h3>recentPost</h3>
                     </div>
-                </td>
-                <td>
-                    <div id="searchPatient" class="col-sm-4" style="width:100%;height:40%">
-                        <h1>searchPatient</h1>
-
+                </div>
+            </div>
+            <div class="col-sm-3" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="searchPatient" >
+                        <h4>searchPatient</h4>
                         {{--search input--}}
                         <input type="text" name="country" id="autocomplete" placeholder="EnterName"
                                class="form-control"/>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="doctorBio" class="col-sm-4" style="width:22%;height:40%">
-                        <h1>Doctor Bio</h1>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row margin-b-2" >
+            <div class="col-sm-3" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="doctorBio" >
+                        <h4>DoctorBio</h4>
                         <table>
                             <tr>
                                 <td><h4>DoctorName</h4></td>
@@ -82,14 +88,21 @@
                             @endforeach
                         </table>
                     </div>
-                </td>
-                <td>
-                    <div id="writePost" class="col-sm-6">
+                </div>
+            </div>
+            <div class="col-sm-4" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="writePost" >
                         <h1>writePost</h1>
                     </div>
-                </td>
-                {{--<td></td>--}}
-            </tr>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+
         </table>
 
     </div>

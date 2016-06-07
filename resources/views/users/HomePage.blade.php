@@ -12,6 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js"></script>
     <!-- Custom Theme files -->
+    <link href="css/homes.css" rel='stylesheet' type='text/css'/>
     <link href="css/style.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -312,13 +313,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-5 contact-grid-left">
                         <h4>contact information</h4>
                         <ul>
-                            {{--                            {{ $clinics->workingHours->fromTime }}--}}
-                            {{--<select class="form-control">--}}
-                            {{--@foreach($clinics as $clinic)--}}
-                            {{--<option>{{ $clinic->name }}</option>--}}
-                            {{--@endforeach--}}
-                            {{--</select>--}}
-                            {{--/////////////--}}
                             <select id="clinic_id" name="clinic_id" class="form-control">
                                 <option>Select Clinic Name</option>
                                 @foreach($clinics as $clinic)

@@ -24,5 +24,24 @@ $(document).ready(function () {
             }
         });
     });
+    $("select[name='clinic_id']").change(function () {
+        console.log('iam in');
+        $id = this.value;
+        console.log('hi', $id);
+        $.get("/working_hours/date/" + this.value).done(function (data, status) {
+            console.log(data);
+            if (data.length > 0) {
+                var idd = data[0]['id'];
+                $('#fromTime').text(data[0]['fromTime']);
+                $('#toTime').text(data[0]['toTime']);
+                $('#day').text(data[0]['day']);
+            }
+            else {
+                $('#fromTime').text("00:00");
+                $('#toTime').text("00:00");
+                $('#day').text("");
+            }
+        });
+    });
     
 });

@@ -1,4 +1,8 @@
-@extends('layout')
+@extends('homeViewLayout')
+@section('nav_bar')
+    <li><a href="#" >Reservation</a></li>
+    <li><a href="#" >MedicalHistory</a></li>
+@endsection
 @section('content')
 
     <div class="row">

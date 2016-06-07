@@ -10,11 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
+Route::get("/","UserController@homePage");
 Route::resource("medical_histories","MedicalHistoryController");
 Route::resource("medical_history_details","MedicalHistoryDetailController");
 Route::resource("clinics","ClinicController");
@@ -52,7 +48,7 @@ Route::auth();
 Route::get('logout', array('uses' => 'HomeController@logout'));
 Route::group(['middleware' => ['web']], function () {
     // Put all your routes inside here.
-    Route::get('/', 'HomeController@index');
+   // Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
 });
 
@@ -77,8 +73,6 @@ Route::get("newComplain/{id}/{patient_id}","ComplainController@create");
 //    return Response::json($in);
 //});
 Route::post("/users/checkdata/","UserController@valid");
-
-Route::auth();
 
 Route::get('/home', 'HomeController@index');
 Route::post('/medicines/find/','MedicineController@find');

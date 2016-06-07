@@ -32,11 +32,21 @@ Route::resource("working_hours","WorkingHourController");
 Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
 Route::resource("/doctorHome","UserController@doctorHome");
+Route::resource("/patientHome","UserController@patientHome");
+Route::resource("/insertExamination","ExaminationController@doctorExamination");
+Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
+Route::resource("vacations","VacationController");
+
+Route::get("user_profiles/{id}","UserProfileController@index");
+
+Route::resource("exam_glasses","ExamGlassController");
+Route::resource("examGlassHome","ExamGlassController@examGlass");
 Route::get("user_profiles/{id}/","UserProfileController@index");
 Route::auth();
+
 
 
 Route::get('logout', array('uses' => 'HomeController@logout'));
@@ -45,12 +55,31 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
 });
-Route::get('/ajax',function(){
-//    console.log('sdfsdf');
-    $id=Input::get('id');
-    $workinghours=WorkingHour::where('id','=',$id)->get();
-    return Response::json($workinghours);
-});
 
-Route::get("patient/{id}/{patient_id}","ReservationController@show");
+
+Route::get("patient/{id}","ReservationController@patientReserv");
+Route::get("/latest","ReservationController@latest");
+Route::get("patient/{id}/{patient_id}","ReservationController@patient");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
+Route::get("/working_hours/{id}","WorkingHourController@update");
+Route::resource("exam_glass_notes","ExamGlassNoteController");
+
+Route::get("newMedicalHistory/{id}/{patient_id}","MedicalHistoryController@create");
+Route::get("newComplain/{id}/{patient_id}","ComplainController@create");
+
+
+//Route::get('/search', function(){
+//    return View::make('admin.search');
+//});
+//
+//Route::get('/searches', function(){
+//    $in = array('one'=>'ON','two'=>'TW','three'=>'TH','four'=>'FO');
+//    return Response::json($in);
+//});
+Route::post("/users/checkdata/","UserController@valid");
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+Route::post('/medicines/find/','MedicineController@find');
+Route::post('/consistitues/find','ConsistitueController@find');

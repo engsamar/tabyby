@@ -15,7 +15,7 @@ class ConsistitueController extends Controller {
 	 */
 	public function index()
 	{
-		$consistitues = Consistitue::orderBy('id', 'desc')->paginate(10);
+		$consistitues = Consistitue::orderBy('id', 'asc')->paginate(10);
 
 		return view('consistitues.index', compact('consistitues'));
 	}
@@ -103,6 +103,21 @@ class ConsistitueController extends Controller {
 		$consistitue->delete();
 
 		return redirect()->route('consistitues.index')->with('message', 'Item deleted successfully.');
+	}
+	public function find(Request $request)
+	{
+//		echo "<pre>";
+//		var_dump($request->input("name"));
+//		var_dump($request->input("action"));
+//		echo "</pre>";
+//		die('end');
+		$name=$request->input("name");
+		$medicine=Consistitue::where('active_consistitue','LIKE',"%$name%")->get();
+//		echo "<pre>";
+//		var_dump($medicine);
+//		echo "</pre>";
+//		die('end');
+		return $medicine;
 	}
 
 }

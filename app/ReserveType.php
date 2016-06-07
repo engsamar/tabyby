@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReserveType extends Model
 {
-    public function reservations()
+    public function reserveType()
     {
         return $this->hasMany(Reservation::class);
     }

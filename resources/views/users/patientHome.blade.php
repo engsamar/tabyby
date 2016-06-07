@@ -4,22 +4,21 @@
     <li><a href="#" >MedicalHistory</a></li>
 @endsection
 @section('content')
+    <div class="container-fluid">
+        <!-- /.row -->
+        <div class="row margin-b-2">
+            <div class="col-sm-3" id="divHome">
+                <div class="caption">
+                    <div>
+                        <h3>clinicInfo</h3>
 
-    <div class="row">
-        {{--/////////////////////--}}
-        <table>
-            <tr>
-                <td style="width: 48%;">
-                    <div id="clinicInfo" class="col-sm-4" style="width:93%;height:40%;border-color: black">
-                        <h1>clinicInfo</h1>
-                            {{--//show Schedule--}}
                         <table>
-                        @foreach($reservation as $data)
-                            <tr>
-                                <td>Clinic</td>
-                                <td>:</td>
-                                <td>{{ $data->clinic->name }}</td>
-                            </tr>
+                            @foreach($reservation as $data)
+                                <tr>
+                                    <td>Clinic</td>
+                                    <td>:</td>
+                                    <td>{{ $data->clinic->name }}</td>
+                                </tr>
                                 <tr>
                                     <td>Reservation</td>
                                     <td>:</td>
@@ -33,18 +32,27 @@
 
                             @endforeach
                         </table>
+
                     </div>
-                </td>
-                <td style="width: 70%;">
-                    <div id="recentPost" class="col-sm-6">
-                        <h1>recentPost</h1>
+                </div>
+            </div>
+            <div class="col-sm-6" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="recentPost" class="col-sm-4">
+                        <h3>recentPost</h3>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="doctorBio" class="col-sm-4" style="width:22%;height:40%">
-                        <h1>Doctor Bio</h1>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <div class="row margin-b-2" >
+            <div class="col-sm-3" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="doctorBio" >
+                        <h4>DoctorBio</h4>
                         <table>
                             <tr>
                                 <td><h4>DoctorName</h4></td>
@@ -65,10 +73,13 @@
                             @endforeach
                         </table>
                     </div>
-                </td>
-                <td>
-                </td>
-            </tr>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+
         </table>
 
     </div>

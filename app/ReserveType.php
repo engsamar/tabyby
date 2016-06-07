@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReserveType extends Model
 {
-    public function reserveType()
+   /* public function reserveType()
     {
         return $this->hasMany(Reservation::class);
-    }
+    }*/
 }

@@ -17,7 +17,7 @@ rel="stylesheet">
 
         <form action="{{ route('reservations.store') }}" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+            {{$userRole}}
             @if($userRole == 1 || $userRole == 0)
             <div class="form-group @if($errors->has('name')) has-error @endif">
                 <label for="name-field">Patient Name</label>

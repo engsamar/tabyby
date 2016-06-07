@@ -11,9 +11,9 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::resource("medical_histories","MedicalHistoryController");
 Route::resource("medical_history_details","MedicalHistoryDetailController");

@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // console.log("hiii in ready");
-    $("select[name='clinic_id']").change(function () {
+    $("select[name='clinic_id_field']").change(function () {
         console.log('iam in');
         $id = this.value;
         console.log('hi', $id);
@@ -11,16 +11,16 @@ $(document).ready(function () {
                 var idd = data[0]['id'];
                 console.log(idd);
                 $('#formN').attr('action', '/working_hours/' + idd);
-                $('#from-field').val(data[0]['fromTime']);
-                $('#to-field').val(data[0]['toTime']);
-                $('#clinic_id_field').val(data[0]['clinic_id']);
-                $('#day-field').val(data[0]['day']);
+                $('#fromTime').val(data[0]['fromTime']);
+                $('#toTime').val(data[0]['toTime']);
+                $('#clinic_id').val(data[0]['clinic_id']);
+                $('#day').val(data[0]['day']);
             }
             else {
-                $('#from-field').val(null);
-                $('#to-field').val(null);
-                $('#clinic_id_field').val(null);
-                $('#day-field').val(null);
+                $('#fromTime').val(null);
+                $('#toTime').val(null);
+                $('#clinic_id').val(null);
+                $('#day').val(null);
             }
         });
     });

@@ -12,25 +12,28 @@
                         <form name="formN" id="formN" method="POST">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <select id="clinic_id-field" name="clinic_id" class="form-control">
+                            <select id="clinic_id_field" name="clinic_id_field" class="form-control">
+                                <option>Select Clinic Name</option>
                                 @foreach($clinics as $clinic)
+
                                     <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
                                 @endforeach
                             </select>
-                            <label for="from-field">From</label>
-                            <input type="text" id="from-field" name="from" class="form-control"/>
+                            <label for="fromTime">From</label>
+                            <input type="time" id="fromTime" name="fromTime" class="form-control"/>
 
-                            <label for="to-field">To</label>
-                            <input type="text" id="to-field" name="to" class="form-control"/>
+                            <label for="toTime">To</label>
+                            <input type="time" id="toTime" name="toTime" class="form-control"/>
 
-                            <label for="day-field">Day</label>
-
-                            <input type="date" id="day-field" name="day" class="form-control"/>
-                            <input type="hidden" id="clinic_id_field" name="clinic_id_field" class="form-control"/>
+                            <label for="day">Day</label>
+                            <select id="day" name="day" class="form-control">
+                                <option>Select Day</option>
+                                @foreach($day as $type)
+                                    <option value="{{ $type }}">{{ $type }}</option>
+                                @endforeach
+                            </select>
+                            <input type="hidden" id="clinic_id" name="clinic_id" class="form-control"/>
                             <button type="submit" class="btn btn-primary">Save</button>
-                            <a class="btn btn-link pull-right" href="{{ route('working_hours.index') }}"/>
-                            {{--class="glyphicon glyphicon-backward"></i> Back</a>--}}
-                            {{--</div>--}}
                         </form>
 
                     </div>
@@ -45,7 +48,8 @@
                         <h1>searchPatient</h1>
 
                         {{--search input--}}
-                        <input type="text" name="country" id="autocomplete" placeholder="EnterName" class="form-control"/>
+                        <input type="text" name="country" id="autocomplete" placeholder="EnterName"
+                               class="form-control"/>
                     </div>
                 </td>
             </tr>

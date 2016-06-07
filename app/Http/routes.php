@@ -76,7 +76,8 @@ Route::get("newComplain/{id}/{patient_id}","ComplainController@create");
 //    $in = array('one'=>'ON','two'=>'TW','three'=>'TH','four'=>'FO');
 //    return Response::json($in);
 //});
-
-Route::auth();
+Route::post("/users/checkdata/","UserController@valid");
 
 Route::get('/home', 'HomeController@index');
+Route::post('/medicines/find/','MedicineController@find');
+Route::post('/consistitues/find','ConsistitueController@find');

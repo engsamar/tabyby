@@ -2,141 +2,149 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\users;
 use App\Clinic;
 use App\ClinicConstants;
 use App\WorkingHour;
-use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
 //use App\DB;
 use Illuminate\Http\Request;
 
-class WorkingHourController extends Controller {
+class WorkingHourController extends Controller
+{
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$working_hours = WorkingHour::orderBy('id', 'desc')->paginate(10);
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $working_hours = WorkingHour::orderBy('id', 'desc')->paginate(10);
 //		$clinic=WorkingHour::$clinic;
-		return view('working_hours.index', compact('working_hours'));
-	}
+        return view('working_hours.index', compact('working_hours'));
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		$clinic = Clinic::all();
-		return view('working_hours.create')->with('name', $clinic);
-	}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        $clinic = Clinic::all();
+        $date = Carbon::now(new \DateTimeZone('Africa/Cairo'));
+//		echo "<pre>";
+//		var_dump(\DateTimeZone::listIdentifiers());
+//		echo "</pre>";
+//		die('end');
+        $time = $date->toTimeString();
+        return view('working_hours.create')->with('name', $clinic)->with('time', $time);
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param Request $request
-	 * @return Response
-	 */
-	public function store(Request $request)
-	{
-		$working_hour = new WorkingHour();
-		$working_hour->fromTime = $request->input("from");
-        $working_hour->toTime = $request->input("to");
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'fromTime' => 'required|date_format:H:i:s',
+            'toTime' => 'required|date_format:H:i:s|after:fromTime',
+            'day' => 'required|date|after:yesterday',
+
+        ]);
+        $working_hour = new WorkingHour();
+        $working_hour->fromTime = $request->input("fromTime");
+        $working_hour->toTime = $request->input("toTime");
         $working_hour->day = $request->input("day");
+//        $name = $request->input("clinic_id");
+//		$clinic=Clinic::where('name',$name)->first();
+//		echo "<pre>";
+//		var_dump($clinic->id);
+//		echo "</pre>";
+//		die('end');
+//		$clinic=$working_hour->clinic;
+//		$working_hour->clinic_id = $clinic->id;
+        $working_hour->clinic_id = $request->input("clinic_id");
+        // $working_hour->	reservations_number = 0;
+//        $working_hour->clinic_id = 1;
 
-		$working_hour->clinic_id = $request->input("clinic_id");
-		$working_hour->save();
+        $working_hour->save();
 
-		return redirect()->route('working_hours.index')->with('message', 'Item created successfully.');
-	}
+        return redirect()->route('working_hours.index')->with('message', 'Item created successfully.');
+    }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$working_hour = WorkingHour::findOrFail($id);
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $working_hour = WorkingHour::findOrFail($id);
 
-		return view('working_hours.show', compact('working_hour'));
-	}
+        return view('working_hours.show', compact('working_hour'));
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$working_hour = WorkingHour::findOrFail($id);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $working_hour = WorkingHour::findOrFail($id);
 
-		return view('working_hours.edit', compact('working_hour'));
-	}
+        return view('working_hours.edit', compact('working_hour'));
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @param Request $request
-	 * @return Response
-	 */
-	public function update(Request $request, $id)
-	{
-		$working_hour = WorkingHour::findOrFail($id);
-		$working_hour->fromTime = $request->input("from");
-        $working_hour->toTime = $request->input("to");
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        $working_hour = WorkingHour::findOrFail($id);
+
+        $working_hour->fromTime = $request->input("fromTime");
+        $working_hour->toTime = $request->input("toTime");
         $working_hour->day = $request->input("day");
 //		$clinic_name=$request->input("clinic_id");
-        if (!empty($request->input("clinic_id_field")))
-        {
-            //my solution
-            $working_hour->clinic_id = $request->input("clinic_id_field");
-            ///////
-			$working_hour->save();
-//			return redirect()->route('users.secretaryHome');
-			return redirect::back();
-		}
-        else
-        {
-//           function solution
-		$name = $request->input("clinic_id");
-		$clinic=Clinic::where('name',$name)->first();
+        $name = $request->input("clinic_id");
+        $clinic = Clinic::where('name', $name)->first();
+//		$clinic=$working_hour->clinic;
         $working_hour->clinic_id = $clinic->id;
-			$working_hour->save();
 
-			return redirect()->route('working_hours.index')->with('message', 'Item updated successfully.');
-        }
+        $working_hour->save();
 
-        
+        return redirect()->route('working_hours.index')->with('message', 'Item updated successfully.');
+    }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $working_hour = WorkingHour::findOrFail($id);
+        $working_hour->delete();
 
+        return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
+    }
 
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		$working_hour = WorkingHour::findOrFail($id);
-		$working_hour->delete();
-
-		return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
-	}
-	public function retreve($id)
-	{
+    public function retreve($id)
+    {
 //		$working_hour = WorkingHour::findOrFail($id);
-		$working_hour=WorkingHour::where('clinic_id',$id)->get();
+        $working_hour = WorkingHour::where('clinic_id', $id)->get();
 //		echo "<pre>";
 //		var_dump($id);
 //		var_dump(integerValue($id));
@@ -144,9 +152,29 @@ class WorkingHourController extends Controller {
 //		var_dump($working_hour);
 //		echo "</pre>";
 //		die('end');
-		return $working_hour;
+        return $working_hour;
 //		return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
-	}
+    }
+
+    public function valid()
+    {
+//		$working_hour = WorkingHour::findOrFail($id);
+//		$working_hour=WorkingHour::where('clinic_id',$id)->get();
+//		echo "<pre>";
+//		var_dump($data);
+//		var_dump(integerValue($id));
+//		var_dump((int)$id);
+//		var_dump($working_hour);
+//		echo "</pre>";
+//		die('end');
+//		return $working_hour;
+//		return redirect()->route('working_hours.index')->with('message', 'Item deleted successfully.');
+//		if(Request::ajax()) {
+//			$data = Input::all();
+//			print_r($data);die;
+//		}
+        die('iam in function');
+    }
 
 
 }

@@ -108,5 +108,21 @@ class MedicineController extends Controller {
 
 		return redirect()->route('medicines.index')->with('message', 'Item deleted successfully.');
 	}
+	public function find(Request $request)
+	{
+//		echo "<pre>";
+//		var_dump($request->input("name"));
+//		var_dump($request->input("action"));
+//		echo "</pre>";
+//		die('end');
+		$name=$request->input("name");
+		$type=$request->input("id");
+		$medicine=Medicine::where('type','=',"$type")->where('name','LIKE',"%$name%")->get();
+//		echo "<pre>";
+//		var_dump($medicine);
+//		echo "</pre>";
+//		die('end');
+		return $medicine;
+	}
 
 }

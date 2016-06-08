@@ -109,6 +109,7 @@
         </div>
 
         <div id="content-5">
+            <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
             <table class="table">
                 @foreach($medicines as $medicine)
                 <tr><td>Medicine</td><td>{{$medicine->medicine_name}}</td></tr>

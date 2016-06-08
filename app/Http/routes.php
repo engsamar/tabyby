@@ -79,3 +79,4 @@ Route::post('/medicines/find/','MedicineController@find');
 Route::post('/consistitues/find','ConsistitueController@find');
 
 Route::get("reservations/searchKey/{key}","ReservationController@searchKey");
+Route::get("/newPrescriptionDetails/{res_id}","PrescriptionDetailController@create");

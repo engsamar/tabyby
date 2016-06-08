@@ -354,6 +354,7 @@ class ReservationController extends Controller {
 			->where('prescriptions.reservation_id', $user_id)
 			->where('users.id',$user_id)
 			->get();
+			
 			array_push($arr,$reserv, $histories, $examinations, $complains, $medicines);
 		}
 

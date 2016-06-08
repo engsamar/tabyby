@@ -10,7 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get("/","UserController@homePage");
+
+/*Route::get('/', function () {
+    return view('welcome');
+});*/
+
 Route::resource("medical_histories","MedicalHistoryController");
 Route::resource("medical_history_details","MedicalHistoryDetailController");
 Route::resource("clinics","ClinicController");
@@ -27,51 +31,40 @@ Route::resource("examinations","ExaminationController");
 Route::resource("working_hours","WorkingHourController");
 Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
-
-//Roles Patients
 Route::resource("/doctorHome","UserController@doctorHome");
 Route::resource("/patientHome","UserController@patientHome");
-Route::resource("/secretaryHome","UserController@secretaryHome");
-
 Route::resource("/insertExamination","ExaminationController@doctorExamination");
-
+Route::resource("/secretaryHome","UserController@secretaryHome");
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
-Route::resource("vacations","VacationController");
 
-Route::get("user_profiles/{id}","UserProfileController@index");
+Route::get("reservations/{id}","UserProfileController@show");
 
+
+Route::get("user_profiles/{id}","UserProfileController@show");
 Route::resource("exam_glasses","ExamGlassController");
-Route::resource("examGlassHome","ExamGlassController@examGlass");
-Route::get("user_profiles/{id}/","UserProfileController@index");
+
 Route::auth();
 
+// Route::resource("prescription_details/{p_id}/","PrescriptionController@store");
 
 
 Route::get('logout', array('uses' => 'HomeController@logout'));
 Route::group(['middleware' => ['web']], function () {
     // Put all your routes inside here.
-   // Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
 });
 
 
 Route::get("patient/{id}","ReservationController@patientReserv");
 Route::get("/latest","ReservationController@latest");
-Route::get("patient/{id}","ReservationController@patient");
+Route::get("patient/{id}/{patient_id}","ReservationController@show");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 Route::get("/working_hours/{id}","WorkingHourController@update");
-Route::resource("exam_glass_notes","ExamGlassNoteController");
 
-Route::get("newMedicalHistory/{id}","MedicalHistoryController@create");
-Route::get("newComplain/{res_id}","ComplainController@create");
-Route::get("newExamination/{id}","ExaminationController@create");
-
-// Route::get("/patient/getReservations","ReservationController@getReservations");
-Route::get("/Elsayed/{res_id}","ReservationController@getReservations");
-
-
+Route::get("reservations/complains/{r_id}","ReservationController@show");
 
 //Route::get('/search', function(){
 //    return View::make('admin.search');
@@ -81,10 +74,3 @@ Route::get("/Elsayed/{res_id}","ReservationController@getReservations");
 //    $in = array('one'=>'ON','two'=>'TW','three'=>'TH','four'=>'FO');
 //    return Response::json($in);
 //});
-Route::post("/users/checkdata/","UserController@valid");
-
-Route::get('/home', 'HomeController@index');
-Route::post('/medicines/find/','MedicineController@find');
-Route::post('/consistitues/find','ConsistitueController@find');
-
-Route::get("reservations/searchKey/{key}","ReservationController@searchKey");

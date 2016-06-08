@@ -5,7 +5,9 @@ use App\Http\Controllers\Controller;
 
 use App\Complain;
 use Illuminate\Http\Request;
+use App\ComplainDetail;
 
+use Illuminate\Support\Facades\Redirect;
 class ComplainController extends Controller {
 
 	/**
@@ -20,33 +22,29 @@ class ComplainController extends Controller {
 		return view('complains.index', compact('complains'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+	public function create($res_id)
 	{
-		return view('complains.create');
+		return view('complains.create',['res_id'=>$res_id]);
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param Request $request
-	 * @return Response
-	 */
+	// href="{!!route('route', ['key'=>'value'])!!}"
 	public function store(Request $request)
 	{
 		$complain = new Complain();
-
 		$complain->complain = $request->input("complain");
         $complain->h_of_complain = $request->input("h_of_complain");
+        $complain->reservation_id = $request->input("res_id");
 
-		$complain->save();
+        $complain->save();
 
-		return redirect()->route('complains.index')->with('message', 'Item created successfully.');
-	}
+		$complain_details = new ComplainDetail();
+        $complain_details->diagnose = $request->input("diagnose");
+        $complain_details->plan = $request->input("plan");
+        $complain_details->complain_id=$complain->id;
+        $complain_details->save();
+
+        return redirect('/patient/'.$request->input("res_id"));
+    }
 
 	/**
 	 * Display the specified resource.

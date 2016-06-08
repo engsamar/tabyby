@@ -19,11 +19,7 @@ use Auth;
 use Illuminate\Http\Request;
 class ReservationController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+
 	public function index()
 	{
 
@@ -37,11 +33,6 @@ class ReservationController extends Controller {
 
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
 		$clinic = Clinic::all();
@@ -51,12 +42,6 @@ class ReservationController extends Controller {
 		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"");
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param Request $request
-	 * @return Response
-	 */
 	public function store(Request $request)
 	{
 		$reservation = new Reservation();
@@ -183,24 +168,22 @@ class ReservationController extends Controller {
 		return redirect()->route('reservations.index')->with('message',$message);
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id,$patient_id)
+	public function show($id)
 	{
+        $usery = DB::table('users')
+            ->join('reservations', 'users.id', '=', $id)
+            ->get(); 
+        
+        $user_id = $usery->id;
 		$reservation = Reservation::findOrFail($id);
-		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
+		$userInfo = DB::table('users')->where('users.id', $user_id)->get();
 
-		$histories = DB::table('users')
-		->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
-		->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
-		->select('users.*', 'medical_histories.*','medical_history_details.*')
-		->where('medical_histories.user_id', $patient_id)
-		->get();
-
+        $histories = DB::table('users')
+            ->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
+            ->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
+            ->select('users.*', 'medical_histories.*','medical_history_details.*')
+            ->where('medical_histories.user_id', $user_id)
+            ->get();
 
 		$examinations = DB::table('users')
 		->join('reservations', 'users.id', '=', 'reservations.user_id')
@@ -218,15 +201,13 @@ class ReservationController extends Controller {
 		->where('complains.reservation_id', $id)
 		->get();
 
-
-
-		$medicines = DB::table('users')
-		->join('reservations', 'users.id', '=', 'reservations.user_id')
-		->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
-		->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
-		->select('prescriptions.*','prescription_details.*','reservations.*')
-		->where('prescriptions.reservation_id', $id)
-		->get();
+        $medicines = DB::table('users')
+            ->join('reservations', 'users.id', '=', 'reservations.user_id')
+            ->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
+            ->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
+            ->select('prescriptions.*','prescription_details.*','reservations.*')
+            ->where('prescriptions.reservation_id', $id)
+            ->get();
 
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
@@ -234,12 +215,6 @@ class ReservationController extends Controller {
 		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
 		$reservation = Reservation::findOrFail($id);
@@ -247,13 +222,6 @@ class ReservationController extends Controller {
 		return view('reservations.edit', compact('reservation'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @param Request $request
-	 * @return Response
-	 */
 	public function update(Request $request, $id)
 	{
 		$reservation = Reservation::findOrFail($id);
@@ -264,18 +232,11 @@ class ReservationController extends Controller {
 		$reservation->clinic_id = $request->input("clinic_id");
 		$reservation->reservation_type_id = $request->input("reservation_type_id");
 		$reservation->parent_id = $request->input("parent_id");
-
 		$reservation->save();
 
 		return redirect()->route('reservations.index')->with('message', 'Item updated successfully.');
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		$reservation = Reservation::findOrFail($id);
@@ -284,12 +245,6 @@ class ReservationController extends Controller {
 		return redirect()->route('reservations.index')->with('message', 'Item deleted successfully.');
 	}
 
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function latest()
 	{
 
@@ -302,19 +257,110 @@ class ReservationController extends Controller {
 		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'));
 	}
 
+	public function getReservations($res_id){
+		$usery = DB::table('users')
+            ->join('reservations', 'users.id', '=','reservations.user_id')
+            ->where('reservations.id',$res_id)
+            ->get();
 
-	public function patient($id,$patient_id)
+        $user_id = null;
+        foreach ($usery as $value) {
+        	$user_id = $value->id;
+        }
+        
+		//display collapse titles
+		$all_reservations = DB::table('reservations')
+			->join('users', 'user_id', '=', 'users.id')
+			->where('users.id', $user_id)
+			->get();
+
+		// $userInfo = [];
+		// $histories = [];
+		// $examinations = [];
+		// $complains = [];
+		// $medicines = [];
+
+		$arr = [];	
+		foreach ($all_reservations as $reserv) 
+		{
+			$reserv_id = $reserv->id;
+			$userInfo = DB::table('users')->where('users.id', $user_id)->get();
+
+			$histories = DB::table('users')
+			->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
+			->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
+			->select('users.*', 'medical_histories.*','medical_history_details.*')
+			->where('users.id', $user_id)
+			->get();
+
+
+			$examinations = DB::table('users')
+			->join('reservations', 'users.id', '=', 'reservations.user_id')
+			->join('examinations', 'reservation_id', '=', 'reservations.id')
+			->select('examinations.*','reservations.*')
+			->where('examinations.reservation_id', $user_id)
+			->where('users.id',$user_id)
+			->get();
+
+
+			$complains = DB::table('users')
+			->join('reservations', 'users.id', '=', 'reservations.user_id')
+			->join('complains', 'reservation_id', '=', 'reservations.id')
+			->join('complain_details', 'complain_id', '=', 'complains.id')
+			->select('complains.*','reservations.*','complain_details.*')
+			->where('complains.reservation_id', $user_id)
+			->where('users.id',$user_id)
+			->get();
+
+			$medicines = DB::table('users')
+			->join('reservations', 'users.id', '=', 'reservations.user_id')
+			->join('prescriptions', 'reservation_id', '=', 'prescriptions.id')
+			->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
+			->select('prescriptions.*','prescription_details.*','reservations.*')
+			->where('prescriptions.reservation_id', $user_id)
+			->where('users.id',$user_id)
+			->get();
+			array_push($arr,$histories, $examinations, $complains, $medicines);
+		}
+
+
+        $reserveType =ClinicConstants::$reservationType;
+        $status= ClinicConstants::$status;
+        $medicalHistoryType=ClinicConstants::$medicalHistoryType;
+
+		return view('reservations.all_reservations', compact('arr','all_reservations','reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
+	}
+
+	public function patient($id)
 	{
+
+		$usery = DB::table('users')
+            ->join('reservations', 'users.id', '=','reservations.user_id')
+            ->where('reservations.user_id',$id)
+            ->get();
+
+        $user_id = null;
+        foreach ($usery as $value) {
+        	$user_id = $value->id;
+        }
+        
 		$reservation = Reservation::findOrFail($id);
-		//echo $patient_id;
+		//echo $user_id;
 		//die();
-		$userInfo = DB::table('users')->where('users.id', $patient_id)->get();
+		$userInfo = DB::table('users')->where('users.id', $user_id)->get();
+		// die(count($userInfo));
+
+// SELECT *
+// FROM users, medical_histories, medical_history_details
+// WHERE users.id = medical_histories.user_id
+// AND medical_history_details.medical_history_id = medical_histories.id
+// AND users.id =1
 
 		$histories = DB::table('users')
 		->join('medical_histories', 'users.id', '=', 'medical_histories.user_id')
 		->join('medical_history_details', 'medical_history_id', '=', 'medical_histories.id')
 		->select('users.*', 'medical_histories.*','medical_history_details.*')
-		->where('medical_histories.user_id', $patient_id)
+		->where('users.id', 1)
 		->get();
 
 
@@ -323,6 +369,7 @@ class ReservationController extends Controller {
 		->join('examinations', 'reservation_id', '=', 'reservations.id')
 		->select('examinations.*','reservations.*')
 		->where('examinations.reservation_id', $id)
+		->where('users.id',$user_id)
 		->get();
 
 
@@ -332,9 +379,8 @@ class ReservationController extends Controller {
 		->join('complain_details', 'complain_id', '=', 'complains.id')
 		->select('complains.*','reservations.*','complain_details.*')
 		->where('complains.reservation_id', $id)
+		->where('users.id',$user_id)
 		->get();
-
-
 
 		$medicines = DB::table('users')
 		->join('reservations', 'users.id', '=', 'reservations.user_id')
@@ -342,6 +388,7 @@ class ReservationController extends Controller {
 		->join('prescription_details', 'preception_id', '=', 'prescription_details.id')
 		->select('prescriptions.*','prescription_details.*','reservations.*')
 		->where('prescriptions.reservation_id', $id)
+		->where('users.id',$user_id)
 		->get();
 
 		$reserveType =ClinicConstants::$reservationType;
@@ -349,7 +396,9 @@ class ReservationController extends Controller {
 		$medicalHistoryType=ClinicConstants::$medicalHistoryType;
 
 		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
+
 	}
+
 	public function patientReserv($id)
 	{
 		$reserveType =ClinicConstants::$reservationType;

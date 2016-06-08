@@ -30,9 +30,10 @@ class ExaminationController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($res_id)
 	{
-		return view('examinations.create',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
+		return view('examinations.create',['res_id'=>$res_id,
+			'eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
 	}
 
 	/**
@@ -56,8 +57,7 @@ class ExaminationController extends Controller {
         $examination->fundus = $request->input("fundus");
         $examination->i_o_p = $request->input("i_o_p");
         $examination->angle = $request->input("angle");
-        $examination->reservation_id = $request->input("reservation_id");;
-
+        $examination->reservation_id = $request->input("res_id");;
 		$examination->save();
 
 		$examination1->eye_type = 0;
@@ -71,12 +71,12 @@ class ExaminationController extends Controller {
 		$examination1->fundus = $request->input("fundus1");
 		$examination1->i_o_p = $request->input("i_o_p1");
 		$examination1->angle = $request->input("angle1");
-		$examination1->reservation_id = $request->input("reservation_id1");;
+		$examination1->reservation_id = $request->input("res_id");;
 
 		$examination1->save();
-
-		return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
-	}
+		return redirect('/patient/'.$request->input("res_id").'/'.$request->input("patient_id"));
+	// 	return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
+	 }
 
 	/**
 	 * Display the specified resource.

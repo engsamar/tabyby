@@ -150,9 +150,9 @@ class ReservationController extends Controller {
 
 				}else{
 					$message="this reservation already exist in this date";
-					echo $message;
-					die();
-					return redirect()->route('reservations.create')->with('message',$message);
+					//echo $message;
+					//die();
+					return redirect('reservations/create')->with('message',$message);
 				}
 
 
@@ -212,7 +212,10 @@ class ReservationController extends Controller {
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$medicalHistoryType=ClinicConstants::$medicalHistoryType;
-		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
+
+		$user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		return view('reservations.show', compact('userRoleType','reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 	}
 
 	public function edit($id)
@@ -328,7 +331,9 @@ class ReservationController extends Controller {
         $status= ClinicConstants::$status;
         $medicalHistoryType=ClinicConstants::$medicalHistoryType;
 
-		return view('reservations.all_reservations', compact('arr','all_reservations','reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
+        $user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		return view('reservations.all_reservations', compact('userRoleType','arr','all_reservations','reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 	}
 
 	public function patient($id)

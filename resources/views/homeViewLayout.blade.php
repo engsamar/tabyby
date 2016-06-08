@@ -81,7 +81,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 @else
                                 @if($userRoleType==0)
                                 <li><a href="/doctorHome" >Home</a></li>
-                                <li><a href="/reservation/{res_id}">Reservations</a></li>
+                                <li><a href="/reservations">Reservations</a></li>
                                 <li><a href="#">secretary</a></li>
 
                                 @elseif ($userRoleType==1) 
@@ -91,8 +91,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <li><a href="#" >MedicalHistory</a></li>
                                 @else 
                                 <li><a href="/patientHome" >Home</a></li>
-                                <li><a href="/reservation/{res_id}" >Reservation</a></li>
-                                <li><a href="#" >MedicalHistory</a></li>
+                                <li><a href="/reservation/{{Auth::user()->id}}" >Medical History</a></li>
+                                <li><a href="{{ route('reservations.create') }}"> New Reservation</a></li>
 
                                 @endif
                                 <li><a href="#">Settings</a></li>
@@ -109,7 +109,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
             <div class="container">
                 @yield('header')
-                @yield('content')
+                <div class="container">
+                    <div id="wrapper">
+                        <div class="row">
+                                @yield('content')
+
+                        </div>
+                    </div>
+                </div>
             </div>
             @yield('scripts')
         </div>

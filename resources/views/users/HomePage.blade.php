@@ -75,8 +75,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li><a href="#services" class="scroll">our services</a></li>
                     <li><a href="#team" class="scroll">our team</a></li>
                     <li><a href="#contact" class="scroll">Contact</a></li>
-                    <li><a href="#" >Register</a></li>
-                    <li><a href="#" >LogIn</a></li>
+                    <li><a href="/register" >Register</a></li>
+                    <li><a href="/login" >LogIn</a></li>
 
                 </ul>
                 <a href="#" id="pull"><img src="images/menu-icon.png" title="menu"/></a>

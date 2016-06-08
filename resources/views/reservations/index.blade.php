@@ -42,7 +42,7 @@
                     <td>{{$reservation->appointment}}</td>
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td>
-                    @if($reservation->reservation_type_id-1 >=0)
+                    @if($reservation->reservation_type_id-1 >=0 )
                     {{$reserveType[$reservation->reservation_type_id-1]}}
                     @else
                     this is first reservation

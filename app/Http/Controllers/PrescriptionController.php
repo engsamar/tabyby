@@ -25,20 +25,9 @@ class PrescriptionController extends Controller {
 
 	public function store(Request $request)
 	{
-		// $prescription = new Prescription();
-		// $prescription->reservation_id = 1;
-		// $prescription->save();
+		$prescription = new Prescription();
+		$prescription->save();
 
-		$prescription_detail = new PrescriptionDetail();
-		$prescription_detail->medicine_name = $request->input("medicine_name");
-		$prescription_detail->no_times = $request->input("no_times");
-		$prescription_detail->quantity = $request->input("quantity");
-		$prescription_detail->duaration = $request->input("duration");
-
-		$prescription_detail->preception_id = 1;
-		$prescription_detail->medicine_id = 1;
-
-		$prescription_detail->save();
 
         return redirect()->route('prescription_details.index')->with('message', 'Item created successfully.');
 	}

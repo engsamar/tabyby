@@ -43,6 +43,7 @@ Route::resource("vacations","VacationController");
 Route::get("user_profiles/{id}","UserProfileController@index");
 
 Route::resource("exam_glasses","ExamGlassController");
+Route::resource("examGlassHome","ExamGlassController@examGlass");
 Route::get("user_profiles/{id}/","UserProfileController@index");
 Route::auth();
 
@@ -61,10 +62,14 @@ Route::get("/latest","ReservationController@latest");
 Route::get("patient/{id}","ReservationController@patient");
 Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 Route::get("/working_hours/{id}","WorkingHourController@update");
+Route::resource("exam_glass_notes","ExamGlassNoteController");
 
 Route::get("newMedicalHistory/{id}","MedicalHistoryController@create");
 Route::get("newComplain/{res_id}","ComplainController@create");
 Route::get("newExamination/{id}","ExaminationController@create");
+
+// Route::get("/patient/getReservations","ReservationController@getReservations");
+Route::get("/Elsayed/{res_id}","ReservationController@getReservations");
 
 
 

@@ -23,8 +23,6 @@
 
         <form action="#">
          <div class="form-group">
-          <p class="form-control-static">Day : {{$reservation->day}}</p>
-          <p class="form-control-static">Time : {{$reservation->time}}</p>
           <p class="form-control-static">Appoinment : {{$reservation->appoinment}}</p>
           <p class="form-control-static">Status : {{$reservation->status}}</p>
           <p class="form-control-static">Patient : {{$reservation->user->username}}</p>
@@ -67,7 +65,11 @@
         </div>
 
         <div id="content-2">
+
             <a class="btn btn-xs btn-primary" href='/newMedicalHistory/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New Medical History</a>
+
+            <a class="btn btn-xs btn-primary" href='/newMedicalHistory/{{$reservation->id}}/{{$reservation->user_id}}'><i class="glyphicon glyphicon-eye-open"></i> New Medical History</a>
+
             <table class="table">
                 @foreach($histories as $history)
                 <tr><td>{{$medicalHistoryType[$history->type]}}</td><td>{{$history->type}}</td></tr>
@@ -75,10 +77,9 @@
                 <tr><td>Description</td><td>{{$history->description}}</td></tr>
                 @endforeach
 
-                </table>
-            </div>
-            <div id="content-3">
-
+            </table>
+        </div>
+        <div id="content-3">
             <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservation->id}}}'><i class="glyphicon glyphicon-eye-open"></i> New Complain</a>
                 <table class="table" border="1px">
                 <tr><th>Complain</th><th>History of Complain</th><th>Diagnose</th><th>Plan</th></tr>
@@ -125,21 +126,36 @@
                     @endforeach
                 </table>
             </div>
-
         </div>
-
-        <div id="content-5">
-            <table class="table">
-                @foreach($medicines as $medicine)
-                <tr><td>Medicine</td><td>{{$medicine->medicine_name}}</td></tr>
-                <tr><td>No. of times</td><td>{{$medicine->no_times}}</td></tr>
-                <tr><td>Quantity</td><td>{{$medicine->quantity}}</td></tr>
-                <tr><td>Duration</td><td>{{$medicine->duaration}}</td></tr>
-                @endforeach
-            </table>
-            <a class="btn btn-link" href="{{ route('prescription_details.create') }}"><i class="glyphicon glyphicon-backward"></i>Add New</a>
-        </div>
-
     </div>
+
     <a class="btn btn-link" href="{{ route('reservations.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
-    @endsection
+
+</div>
+
+
+
+<form id="test" action="{{ route('reservations.store') }}" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <h2>Next Visit</h2>
+                <input type="text" name="res_id" value='{{$reservation->id}}' hidden>
+                <input type="text" name="user_id" value='{{$reservation->user_id}}' hidden>
+                <input type="text" name="clinic_id" value='{{$reservation->clinic_id}}' hidden>
+                <input type="text" name="res_type_id" value='{{$reservation->reservation_type_id}}' hidden>
+                <div class="form-group @if($errors->has('date')) has-error @endif">
+                    <label for="date-field">Visit after </label>
+                    <input type="number" id="date-field" name="date"  class="form-control"
+                    value="{{ old("date") }}"/>
+                    @if($errors->has("date"))
+                    <span class="help-block">{{ $errors->first("date") }}</span>
+                    @endif
+                </div>
+
+                <div >
+                    <button type="submit" class="btn btn-primary">Create</button>
+        
+                    </div>
+            </form>
+<div><a class="btn btn-link" href="{{ route('reservations.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+</div>
+@endsection

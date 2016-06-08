@@ -16,7 +16,6 @@ class CreateprescriptionsTable extends Migration {
             $table->increments('id');
             $table->integer('reservation_id')->unsigned();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
         });
 	}
 

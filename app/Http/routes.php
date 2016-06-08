@@ -10,11 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
+Route::get("/","UserController@homePage");
 Route::resource("medical_histories","MedicalHistoryController");
 Route::resource("medical_history_details","MedicalHistoryDetailController");
 Route::resource("clinics","ClinicController");
@@ -31,10 +27,14 @@ Route::resource("examinations","ExaminationController");
 Route::resource("working_hours","WorkingHourController");
 Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
+
+//Roles Patients
 Route::resource("/doctorHome","UserController@doctorHome");
 Route::resource("/patientHome","UserController@patientHome");
-Route::resource("/insertExamination","ExaminationController@doctorExamination");
 Route::resource("/secretaryHome","UserController@secretaryHome");
+
+Route::resource("/insertExamination","ExaminationController@doctorExamination");
+
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");
@@ -52,7 +52,7 @@ Route::auth();
 Route::get('logout', array('uses' => 'HomeController@logout'));
 Route::group(['middleware' => ['web']], function () {
     // Put all your routes inside here.
-    Route::get('/', 'HomeController@index');
+   // Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
 });
 
@@ -81,7 +81,10 @@ Route::get("/Elsayed/{res_id}","ReservationController@getReservations");
 //    $in = array('one'=>'ON','two'=>'TW','three'=>'TH','four'=>'FO');
 //    return Response::json($in);
 //});
-
-Route::auth();
+Route::post("/users/checkdata/","UserController@valid");
 
 Route::get('/home', 'HomeController@index');
+Route::post('/medicines/find/','MedicineController@find');
+Route::post('/consistitues/find','ConsistitueController@find');
+
+Route::get("reservations/searchKey/{key}","ReservationController@searchKey");

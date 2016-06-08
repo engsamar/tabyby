@@ -10,6 +10,7 @@ use App\Secertary;
 use App\Vacation;
 use App\Reservation;
 use App\Clinic;
+use \App\UserRole;
 use App\User;
 use App\MedicalHistory;
 use App\Examination;
@@ -24,11 +25,11 @@ class ReservationController extends Controller {
 
 		$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
 		$user = Auth::user();
-        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		$userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 
 		$reserveType =ClinicConstants::$reservationType;
-        $status= ClinicConstants::$status;
-		return view('reservations.index', compact('reservations','status','reserveType','userRole'));
+		$status= ClinicConstants::$status;
+		return view('reservations.index', compact('reservations','status','reserveType','userRole'))->with('message',"");
 
 	}
 
@@ -37,8 +38,8 @@ class ReservationController extends Controller {
 		$clinic = Clinic::all();
 		$appointments=WorkingHour::all();
 		$user = Auth::user();
-        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments);
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"");
 	}
 
 	public function store(Request $request)
@@ -47,55 +48,68 @@ class ReservationController extends Controller {
 		$no_of_patient="" ;
 		$no_of_reserve="";
 		$from_time="";
-        $user = Auth::user();
-        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
-        $userRoleID = \App\UserRole::where('user_id', '=', $user->id)->value('id');
-        $dateCheck=$request->input("date");
-        if ($userRole == 0) {
-        	$now=Carbon::today();
-        	$dateCheck= $now->addDays($request->input("date"))->toDateString();
-        	// echo $dateCheck;
-        	// die();
-        }
-        else{
-      
-        $dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
-		$dateCheck = $dateTime->format('Y-m-d');
-	}
+		$message="";
+		$user = Auth::user();
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
+		$userRoleID = UserRole::where('user_id', '=', $user->id)->value('id');
+		$dateCheck=$request->input("date");
+		#to clinic id 
+		if ($userRole == 0){
+			$clinic_id=$request->input("clinic_id");
+		}elseif ($userRole == 1) {
+			# code...
+			$clinic_id=Secertary::where('userRole_id', '=', $userRoleID)->value('clinic_id');
+		}
+		else{
+			
+			$clinic_id = $request->input("address");
+		}
+
+		if ($userRole == 0) {
+			$now=Carbon::today();
+			$dateCheck= $now->addDays($request->input("date"))->toDateString();
+		}
+		else{
+			
+			$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
+			$dateCheck = $dateTime->format('Y-m-d');
+		}
 		$reservation->status = 2;
 		$reservation->date=$dateCheck;
 
 		$vacations=Vacation::where('from_day','<=',$dateCheck)->where('to_day','>=',$dateCheck)->count();
 		if($vacations){
-			echo "not available";
+			$message="this date is not available, it is vacation, try with aother date";
+			echo $message;
 			die();
+			return redirect()->route('reservations.create')->with('message',$message);
+			
 		}else{
 			
-			$working_hours = WorkingHour::where('clinic_id',1)->where('day',date('l',strtotime($dateCheck)))->get();
+			$working_hours = WorkingHour::where('clinic_id',$clinic_id)->where('day',date('l',strtotime($dateCheck)))->get();
 			foreach ($working_hours as $working_hour) {
 				$from_time=$working_hour->fromTime;
 				$no_of_patient=(strtotime($working_hour->toTime)-strtotime($working_hour->fromTime))/(15*60);
 			}
 			
-			$no_of_reserve = Reservation::where('date', $dateCheck)->where('clinic_id',1)->count();
+			$no_of_reserve = Reservation::where('date', $dateCheck)->where('clinic_id',$clinic_id)->count();
 
 			if ($no_of_reserve < $no_of_patient) {
 				
 				$reservation->date = $dateCheck;
-				// echo $dateCheck;
-				//die();
 				//doctor reservation
 				if($userRole==0)
 				{
 					$reservation->user_id=$request->input("user_id");
 					$reservation->clinic_id=$request->input("clinic_id");
 					$reservation->parent_id=$request->input("res_id");
-					////////////////////check////////////////
 					if ($request->input("res_type_id")<4 && $request->input("res_type_id")>=0) {
-						# code...
 						$reservation->reservation_type_id=$request->input("res_type_id")+1;
 					}else{
-						echo "this patient take three Consultation ,, ";
+						$message="this patient take three Consultation, try to reserve new examination ";
+						echo $message;
+			die();
+						return redirect()->route('reservations.create')->with('message',$message);
 					}
 					
 
@@ -105,13 +119,11 @@ class ReservationController extends Controller {
  		// secertary reservation
 				elseif($userRole==1) {
 					$secertary_clinic=Secertary::where('userRole_id', '=', $userRoleID)->value('clinic_id');
-					$reservation->clinic_id=$secertary_clinic;
-					echo $secertary_clinic;
-					die();
+					$reservation->clinic_id=$secertary_clinic;					
 					$reservation->reservation_type_id =$request->input("examination");
 					$reservation->parent_id =null;
 					$user_name  = $request->input("name");
-					$reservation->user_id  = User::where('username',$user_name)->value('id');
+					$reservation->user_id  = User::where('username',$request->input("name"))->value('id');
 					
 
 				}
@@ -127,36 +139,40 @@ class ReservationController extends Controller {
 					$no_of_reserve=$no_of_reserve+1;
 				}
 				$reserveTime = strtotime("+".(($no_of_reserve)*15)." minutes", strtotime($from_time));
-        		$reservation->appointment=date('h:i:s', $reserveTime);
+				$reservation->appointment=date('h:i:s', $reserveTime);
 
-        		$reservationCheck = Reservation::where('date',$dateCheck)->where('user_id',$reservation->user_id)->count();
-        		if (!$reservationCheck){
-				$reservation->save();
-				echo "save";
-			}else{
-				echo "this reservation already exist";
-			}
+				$reservationCheck = Reservation::where('date',$dateCheck)->where('user_id',$reservation->user_id)->count();
+				if (!$reservationCheck){
+					$reservation->save();
+					echo "save";
+
+					$message="The reservation is saved";
+
+				}else{
+					$message="this reservation already exist in this date";
+					echo $message;
+					die();
+					return redirect()->route('reservations.create')->with('message',$message);
+				}
+
 
 			}
 			else{
-				echo "notallow";
-				echo $no_of_reserve;
-			}
+				$message="this date is fully completed , please try with another one ";
+				echo $message;
 			die();
+				return redirect()->route('reservations.create')->with('message',$message);
+			}
 		}
 
-
-
-		return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
+		return redirect()->route('reservations.index')->with('message',$message);
 	}
 
 	public function show($id)
 	{
         $usery = DB::table('users')
             ->join('reservations', 'users.id', '=', $id)
-            ->get();
-
-            
+            ->get(); 
         
         $user_id = $usery->id;
 		$reservation = Reservation::findOrFail($id);
@@ -169,22 +185,21 @@ class ReservationController extends Controller {
             ->where('medical_histories.user_id', $user_id)
             ->get();
 
+		$examinations = DB::table('users')
+		->join('reservations', 'users.id', '=', 'reservations.user_id')
+		->join('examinations', 'reservation_id', '=', 'reservations.id')
+		->select('examinations.*','reservations.*')
+		->where('examinations.reservation_id', $id)
+		->get();
 
-        $examinations = DB::table('users')
-            ->join('reservations', 'users.id', '=', 'reservations.user_id')
-            ->join('examinations', 'reservation_id', '=', 'reservations.id')
-            ->select('examinations.*','reservations.*')
-            ->where('examinations.reservation_id', $id)
-            ->get();
 
-
-        $complains = DB::table('users')
-            ->join('reservations', 'users.id', '=', 'reservations.user_id')
-            ->join('complains', 'reservation_id', '=', 'reservations.id')
-            ->join('complain_details', 'complain_id', '=', 'complains.id')
-            ->select('complains.*','reservations.*','complain_details.*')
-            ->where('complains.reservation_id', $id)
-            ->get();
+		$complains = DB::table('users')
+		->join('reservations', 'users.id', '=', 'reservations.user_id')
+		->join('complains', 'reservation_id', '=', 'reservations.id')
+		->join('complain_details', 'complain_id', '=', 'complains.id')
+		->select('complains.*','reservations.*','complain_details.*')
+		->where('complains.reservation_id', $id)
+		->get();
 
         $medicines = DB::table('users')
             ->join('reservations', 'users.id', '=', 'reservations.user_id')
@@ -194,9 +209,9 @@ class ReservationController extends Controller {
             ->where('prescriptions.reservation_id', $id)
             ->get();
 
-        $reserveType =ClinicConstants::$reservationType;
-        $status= ClinicConstants::$status;
-        $medicalHistoryType=ClinicConstants::$medicalHistoryType;
+		$reserveType =ClinicConstants::$reservationType;
+		$status= ClinicConstants::$status;
+		$medicalHistoryType=ClinicConstants::$medicalHistoryType;
 		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 	}
 
@@ -234,11 +249,12 @@ class ReservationController extends Controller {
 	{
 
 		$user = Auth::user();
-        $userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		$userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 		$reservations = Reservation::where('date', '=',Carbon::today()->toDateString())->paginate(10);
 		$reserveType =ClinicConstants::$reservationType;
-        $status= ClinicConstants::$status;
-		return view('reservations.index', compact('reservations','status','reserveType','userRole'));
+		$status= ClinicConstants::$status;
+		$message="";
+		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'));
 	}
 
 	public function getReservations($res_id){
@@ -375,9 +391,9 @@ class ReservationController extends Controller {
 		->where('users.id',$user_id)
 		->get();
 
-        $reserveType =ClinicConstants::$reservationType;
-        $status= ClinicConstants::$status;
-        $medicalHistoryType=ClinicConstants::$medicalHistoryType;
+		$reserveType =ClinicConstants::$reservationType;
+		$status= ClinicConstants::$status;
+		$medicalHistoryType=ClinicConstants::$medicalHistoryType;
 
 		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 
@@ -386,22 +402,17 @@ class ReservationController extends Controller {
 	public function patientReserv($id)
 	{
 		$reserveType =ClinicConstants::$reservationType;
-        $status= ClinicConstants::$status;
+		$status= ClinicConstants::$status;
 		$reservations = Reservation::where('user_id',$id)->paginate(10);
 		return view('reservations.userReserv', compact('reservations','status','reserveType'));
 	}
 
-
-	public function newRserve($reservation,$request)
+	public function searchKey($key)
 	{
-		// Mautual Data
-		$reservation->status = 3;
-		$clinicID = $request->input("address");
-		$reservation->clinic_id = $request->input("address");
-		//$reservation->date = $dateCheck;
-		$no_of_reserve = Reservation::where('date', $reservation->date)->where('clinic_id',$clinicID)->count();
-        //$reserveTime = strtotime("+".(($no_of_reserve+1)*15)." minutes", strtotime($pieces[2]));
-        //$reservation->appointment=date('h:i:s', $reserveTime);
+		$query= \App\User::where('username', 'like', $key.'%')->get();
+		return $query;
+
+
 	}
 
 }

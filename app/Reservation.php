@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
-    public function reservationType()
+   /* public function reservationType()
     {
         return $this->belongsTo(ReserveType::class);
-    }
+    }*/
 
     public function clinic()
     {

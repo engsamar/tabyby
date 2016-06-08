@@ -17,7 +17,8 @@ class CreateMedicinesTable extends Migration {
             $table->string('name');
             $table->integer('type');
             $table->string('company');
-            $table->timestamps();
+			$table->integer('consistitue_id')->unsigned()->index();
+			$table->foreign('consistitue_id')->references('id')->on('consistitues')->onDelete('cascade')->onUpdate('cascade');
         });
 	}
 

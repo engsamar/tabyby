@@ -13,7 +13,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
+
         @if($reservations->count())
+        {{$message}}
         <table class="table table-condensed table-striped">
             <thead>
                 <tr>
@@ -39,7 +41,7 @@
                     <td>{{$reservation->appointment}}</td>
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td>
-                    @if($reservation->reservation_type_id-1 >=0)
+                    @if($reservation->reservation_type_id-1 >=0 )
                     {{$reserveType[$reservation->reservation_type_id-1]}}
                     @else
                     this is first reservation

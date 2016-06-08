@@ -2,73 +2,131 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\ClinicConstants;
 
+use App\Medicine;
+use App\Prescription;
 use App\PrescriptionDetail;
 use Illuminate\Http\Request;
 
-class PrescriptionDetailController extends Controller {
+class PrescriptionDetailController extends Controller
+{
 
-	public function index()
-	{
-		$prescription_details = PrescriptionDetail::orderBy('id', 'desc')->paginate(10);
+    public function index()
+    {
+        $prescription_details = PrescriptionDetail::orderBy('id', 'desc')->paginate(10);
 
-		return view('prescription_details.index', compact('prescription_details'));
-	}
+        return view('prescription_details.index', compact('prescription_details'));
+    }
 
-	public function create()
-	{
-		return view('prescription_details.create');
-	}
+    public function create($res_id)
+    {
+        $medicineType = ClinicConstants::$medicineType;
+//		$prescription= Prescription::all();
+        echo "<pre>";
+        var_dump($res_id);
+        echo "</pre>";
+        die("end");
+        $exist = Prescription::where('reservation_id', '=', '2')->get();
+        if (count($exist) == 0) {
+//			echo "<pre>";
+//			var_dump($exist);
+//			echo "</pre>";
+//			die("end");
+            $prescription = new Prescription();
+            $prescription->reservation_id = 2;
+            $prescription->save();
+        }
+        return view('prescription_details.create', compact('medicineType'));
+    }
 
-	public function store(Request $request)
-	{
-		$prescription_detail = new PrescriptionDetail();
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'medicine_name' => 'required|string',
+            'no_times' => 'required|numeric|min:1|max:100',
+            'quantity' => 'required|numeric|min:1|max:100',
+            'duaration' => 'required|numeric|min:1|max:100',
+            'no_times' => 'required|numeric|min:1|max:100',
+        ]);
+        $prescription_detail = new PrescriptionDetail();
+        if ($request->input("search_by") == 1) {
+            $prescription_detail->medicine_name = $request->input("medicine_name");
+            $prescription_detail->no_times = $request->input("no_times");
+            $prescription_detail->quantity = $request->input("quantity");
+            $medicine = Medicine::where('name', '=', $request->input("medicine_name"))->first();
+            $prescription_detail->medicine_id = $medicine->id;
+            $prescription_detail->duaration = $request->input("duration");
+            $prescription = Prescription::where('reservation_id', '=', '2')->first();
+            $prescription_detail->preception_id = $prescription->id;
+        } else {
+            $prescription_detail->medicine_id = $request->input("medicines_name");
+            $prescription_detail->no_times = $request->input("no_times");
+            $prescription_detail->quantity = $request->input("quantity");
+            $medicine = Medicine::where('id', '=', $request->input("medicines_name"))->first();
+            $prescription_detail->medicine_name = $medicine->name;
+            $prescription_detail->duaration = $request->input("duration");
+            $prescription = Prescription::where('reservation_id', '=', '2')->first();
+            $prescription_detail->preception_id = $prescription->id;
+        }
+        $prescription_detail->save();
+        return redirect()->route('prescription_details.index')->with('message', 'Item created successfully.');
+    }
 
-		$prescription_detail->medicine_name = $request->input("medicine_name");
-        $prescription_detail->no_times = $request->input("no_times");
-        $prescription_detail->quantity = $request->input("quantity");
-        $prescription_detail->duration = $request->input("duration");
-        $prescription_detail->preception_id = $request->input("preception_id");
+    public function show($id)
+    {
+        $prescription_detail = PrescriptionDetail::findOrFail($id);
 
-		$prescription_detail->save();
+        return view('prescription_details.show', compact('prescription_detail'));
+    }
 
-		return redirect()->route('prescription_details.index')->with('message', 'Item created successfully.');
-	}
+    public function edit($id)
+    {
+        $prescription_detail = PrescriptionDetail::findOrFail($id);
 
-	public function show($id)
-	{
-		$prescription_detail = PrescriptionDetail::findOrFail($id);
+        return view('prescription_details.edit', compact('prescription_detail'));
+    }
 
-		return view('prescription_details.show', compact('prescription_detail'));
-	}
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'medicine_name' => 'required|string',
+            'no_times' => 'required|numeric|min:1|max:100',
+            'quantity' => 'required|numeric|min:1|max:100',
+            'duaration' => 'required|numeric|min:1|max:100',
+            'no_times' => 'required|numeric|min:1|max:100',
+        ]);
+        $prescription_detail = PrescriptionDetail::findOrFail($id);
+        if ($request->input("search_by") == 1) {
+            $prescription_detail->medicine_name = $request->input("medicine_name");
+            $prescription_detail->no_times = $request->input("no_times");
+            $prescription_detail->quantity = $request->input("quantity");
+            $medicine = Medicine::where('name', '=', $request->input("medicine_name"))->first();
+            $prescription_detail->medicine_id = $medicine->id;
+            $prescription_detail->duaration = $request->input("duration");
+            $prescription = Prescription::where('reservation_id', '=', '2')->first();
+            $prescription_detail->preception_id = $prescription->id;
+        } else {
+            $prescription_detail->medicine_id = $request->input("medicines_name");
+            $prescription_detail->no_times = $request->input("no_times");
+            $prescription_detail->quantity = $request->input("quantity");
+            $medicine = Medicine::where('id', '=', $request->input("medicines_name"))->first();
+            $prescription_detail->medicine_name = $medicine->name;
+            $prescription_detail->duaration = $request->input("duration");
+            $prescription = Prescription::where('reservation_id', '=', '2')->first();
+            $prescription_detail->preception_id = $prescription->id;
+        }
+        $prescription_detail->save();
 
-	public function edit($id)
-	{
-		$prescription_detail = PrescriptionDetail::findOrFail($id);
+        return redirect()->route('prescription_details.index')->with('message', 'Item updated successfully.');
+    }
 
-		return view('prescription_details.edit', compact('prescription_detail'));
-	}
+    public function destroy($id)
+    {
+        $prescription_detail = PrescriptionDetail::findOrFail($id);
+        $prescription_detail->delete();
 
-	public function update(Request $request, $id)
-	{
-		$prescription_detail = PrescriptionDetail::findOrFail($id);
-		$prescription_detail->medicine_name = $request->input("medicine_name");
-        $prescription_detail->no_times = $request->input("no_times");
-        $prescription_detail->quantity = $request->input("quantity");
-        $prescription_detail->duration = $request->input("duration");
-        $prescription_detail->preception_id = $request->input("preception_id");
-
-		$prescription_detail->save();
-
-		return redirect()->route('prescription_details.index')->with('message', 'Item updated successfully.');
-	}
-
-	public function destroy($id)
-	{
-		$prescription_detail = PrescriptionDetail::findOrFail($id);
-		$prescription_detail->delete();
-
-		return redirect()->route('prescription_details.index')->with('message', 'Item deleted successfully.');
-	}
+        return redirect()->route('prescription_details.index')->with('message', 'Item deleted successfully.');
+    }
 
 }

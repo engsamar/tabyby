@@ -21,6 +21,7 @@
                 <div class="form-group @if($errors->has('username')) has-error @endif">
                        <label for="username-field">Username</label>
                     <input type="text" id="username-field" name="username" class="form-control" value="{{ $user->username }}"/>
+                    <span id="error" class="help-block"></span>
                        @if($errors->has("username"))
                         <span class="help-block">{{ $errors->first("username") }}</span>
                        @endif
@@ -28,6 +29,7 @@
                     <div class="form-group @if($errors->has('email')) has-error @endif">
                        <label for="email-field">Email</label>
                     <input type="text" id="email-field" name="email" class="form-control" value="{{ $user->email }}"/>
+                        <span id="error" class="help-block"></span>
                        @if($errors->has("email"))
                         <span class="help-block">{{ $errors->first("email") }}</span>
                        @endif
@@ -78,6 +80,7 @@
 @endsection
 @section('scripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="/js/user_validation.js"></script>
   <script>
     $('.date-picker').datepicker({
     });

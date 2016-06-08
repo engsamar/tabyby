@@ -18,6 +18,14 @@ class UserController extends Controller
      *
      * @return Response
      */
+    public function homePage()
+    {
+        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
+        //select all clinics address
+        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
+        return view('users.HomePage',compact('userRole'),['clinics' => $clinics, 'day' => ClinicConstants::$day]);
+    }
+
     public function patientHome()
     {
         $userRole = UserRole::where('type', '=', 0)->firstOrFail();
@@ -27,7 +35,7 @@ class UserController extends Controller
         $user_id = 1;
         $reservation = Reservation::where('user_id', $user_id)->get();
 //        $clinic_name=Clinic::where
-        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics, 'reservation' => $reservation, 'reservationType' => ClinicConstants::$reservationType]);
+        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics, 'reservation' => $reservation, 'reservationType' => ClinicConstants::$reservationType, 'day' => ClinicConstants::$day]);
     }
 
     public function secretaryHome()
@@ -37,7 +45,7 @@ class UserController extends Controller
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
 
-        return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics]);
+        return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
     }
 
     public function doctorHome()
@@ -48,7 +56,7 @@ class UserController extends Controller
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
 
-        return view('users.doctorHome', compact('userRole'), ['clinics' => $clinics]);
+        return view('users.doctorHome', compact('userRole'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
     }
 
     public function index()

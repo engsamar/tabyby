@@ -1,58 +1,73 @@
-@extends('layout')
+@extends('homeViewLayout')
+@section('nav_bar')
+    <li><a href="#">Reservations</a></li>
+    <li><a href="#">secretary</a></li>
+@endsection
 @section('content')
-
-    <div class="row">
-        {{--/////////////////////--}}
-        <table>
-            <tr>
-                <td style="width: 48%;">
-                    <div id="clinicInfo" class="col-sm-4" style="width:48%;height:40%;border-color: black">
-                        <h1>clinicInfo</h1>
+    <div class="container-fluid">
+        <!-- /.row -->
+        <div class="row margin-b-2">
+            <div class="col-sm-3" id="divHome">
+                <div class="caption">
+                    <div>
+                        <h3>clinicInfo</h3>
 
                         <form name="formN" id="formN" method="POST">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <select id="clinic_id-field" name="clinic_id" class="form-control">
+                            <select id="clinic_id_field" name="clinic_id_field" class="form-control">
+                                <option>Select Clinic Name</option>
                                 @foreach($clinics as $clinic)
                                     <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
                                 @endforeach
                             </select>
-                            <label for="from-field">From</label>
-                            <input type="text" id="from-field" name="from" class="form-control"/>
+                            <label for="fromTime">From</label>
+                            <input type="time" id="fromTime" name="fromTime" class="form-control"/>
 
-                            <label for="to-field">To</label>
-                            <input type="text" id="to-field" name="to" class="form-control"/>
+                            <label for="toTime">To</label>
+                            <input type="time" id="toTime" name="toTime" class="form-control"/>
 
-                            <label for="day-field">Day</label>
-
-                            <input type="date" id="day-field" name="day" class="form-control"/>
-                            <input type="hidden" id="clinic_id_field" name="clinic_id_field" class="form-control"/>
+                            <label for="day">Day</label>
+                            <select id="day" name="day" class="form-control">
+                                <option>Select Day</option>
+                                @foreach($day as $type)
+                                    <option value="{{ $type }}">{{ $type }}</option>
+                                @endforeach
+                            </select>
+                            <input type="hidden" id="clinic_id" name="clinic_id" class="form-control"/>
                             <button type="submit" class="btn btn-primary">Save</button>
-                            <a class="btn btn-link pull-right" href="{{ route('working_hours.index') }}"/>
-                            {{--class="glyphicon glyphicon-backward"></i> Back</a>--}}
-                            {{--</div>--}}
                         </form>
 
                     </div>
-                </td>
-                <td style="width: 70%;">
-                    <div id="recentPost" class="col-sm-6">
-                        <h1>recentPost</h1>
+                </div>
+            </div>
+            <div class="col-sm-4" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="recentPost" class="col-sm-4">
+                        <h3>recentPost</h3>
                     </div>
-                </td>
-                <td>
-                    <div id="searchPatient" class="col-sm-4" style="width:100%;height:40%">
-                        <h1>searchPatient</h1>
-
+                </div>
+            </div>
+            <div class="col-sm-3" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="searchPatient" >
+                        <h4>searchPatient</h4>
                         {{--search input--}}
-                        <input type="text" name="country" id="autocomplete" placeholder="EnterName" class="form-control"/>
+                        <input type="text" name="country" id="autocomplete" placeholder="EnterName"
+                               class="form-control"/>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="doctorBio" class="col-sm-4" style="width:22%;height:40%">
-                        <h1>Doctor Bio</h1>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row margin-b-2" >
+            <div class="col-sm-3" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="doctorBio" >
+                        <h4>DoctorBio</h4>
                         <table>
                             <tr>
                                 <td><h4>DoctorName</h4></td>
@@ -73,14 +88,21 @@
                             @endforeach
                         </table>
                     </div>
-                </td>
-                <td>
-                    <div id="writePost" class="col-sm-6">
+                </div>
+            </div>
+            <div class="col-sm-4" id="divHome">
+                <!-- <img class="img-responsive thumbnail" src="http://placehold.it/700x350" alt=""> -->
+                <div class="caption">
+                    <div id="writePost" >
                         <h1>writePost</h1>
                     </div>
-                </td>
-                {{--<td></td>--}}
-            </tr>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+
         </table>
 
     </div>

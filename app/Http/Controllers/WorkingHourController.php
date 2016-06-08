@@ -8,6 +8,8 @@ use App\WorkingHour;
 use Carbon\Carbon;
 //use App\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
 
 class WorkingHourController extends Controller
 {
@@ -95,18 +97,28 @@ class WorkingHourController extends Controller
      */
     public function update(Request $request, $id)
     {
+//
         $working_hour = WorkingHour::findOrFail($id);
 
         $working_hour->fromTime = $request->input("fromTime");
+
         $working_hour->toTime = $request->input("toTime");
+
         $working_hour->day = $request->input("day");
-        $name = $request->input("clinic_id");
-        $clinic = Clinic::where('name', $name)->first();
-        $working_hour->clinic_id = $clinic->id;
+        if (!empty($request->input("clinic_id")))
+        {
+            $working_hour->clinic_id = $request->input("clinic_id");
+            $working_hour->save();
+            return Redirect::back();
+        }else{
+            $name = $request->input("clinic_id");
+            $clinic = Clinic::where('name', $name)->first();
+            $working_hour->clinic_id = $clinic->id;
+            $working_hour->save();
+            return redirect()->route('working_hours.index')->with('message', 'Item updated successfully.');
+        }
 
-        $working_hour->save();
 
-        return redirect()->route('working_hours.index')->with('message', 'Item updated successfully.');
     }
 
     /**

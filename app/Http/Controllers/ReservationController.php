@@ -29,7 +29,7 @@ class ReservationController extends Controller {
 
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
-		return view('reservations.index', compact('reservations','status','reserveType','userRole'))->with('message',"");
+		return view('reservations.index', compact('reservations','status','reserveType','userRole'))->with('message',"")->with('userRoleType',$userRole);
 
 	}
 
@@ -39,7 +39,7 @@ class ReservationController extends Controller {
 		$appointments=WorkingHour::all();
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"");
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"")->with('userRoleType',$userRole);
 	}
 
 	public function store(Request $request)

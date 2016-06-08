@@ -1,9 +1,4 @@
 @extends('homeViewLayout')
-@section('nav_bar')
-    <li><a href="#" >Reservations</a></li>
-    <li><a href="#" >AddClinic</a></li>
-    <li><a href="#" >MedicalHistory</a></li>
-@endsection
 @section('content')
     <div class="container-fluid">
         <!-- /.row -->

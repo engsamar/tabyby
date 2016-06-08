@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+//use Auth;
 use App\User;
 use Validator;
 use App\UserRole;
@@ -29,10 +29,9 @@ class AuthController extends Controller
      *
      * @var string
      */
-    /*Auth::user();
-    $userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-    if()*/
-    protected $redirectTo = '/';
+
+  protected $redirectTo = '/';
+   
 
     /**
      * Create a new authentication controller instance.

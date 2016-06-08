@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -69,7 +68,7 @@ Route::get("newComplain/{res_id}","ComplainController@create");
 Route::get("newExamination/{id}","ExaminationController@create");
 
 // Route::get("/patient/getReservations","ReservationController@getReservations");
-Route::get("/Elsayed/{res_id}","ReservationController@getReservations");
+Route::get("/reservation/{res_id}","ReservationController@getReservations");
 
 
 

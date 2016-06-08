@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('homeViewLayout')
 @section('css')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css"
 rel="stylesheet">
@@ -17,7 +17,6 @@ rel="stylesheet">
     {{$message}}
         <form action="{{ route('reservations.store') }}" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            {{$userRole}}
             @if($userRole == 1 || $userRole == 0)
             <div class="form-group @if($errors->has('name')) has-error @endif">
                 <label for="name-field">Patient Name</label>

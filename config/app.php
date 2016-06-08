@@ -148,6 +148,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Krucas\LaravelUserEmailVerification\UserEmailVerificationServiceProvider::class,
 
         /*
          * Application Service Providers...

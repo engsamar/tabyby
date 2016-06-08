@@ -48,7 +48,7 @@
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password">
-
+                                    <span class="help-block"></span>
                                     @if ($errors->has('password'))
                                         <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -63,7 +63,7 @@
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
                                            name="password_confirmation">
-
+                                    <span class="help-block"></span>
                                     @if ($errors->has('password_confirmation'))
                                         <span class="help-block">
                                     <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -113,6 +113,7 @@
                                 <div class="col-md-6">
                                     <input type="date" id="birthdate-field" name="birthdate" class="form-control"
                                            value="{{ old("birthdate") }}"/>
+                                    <span class="help-block"></span>
                                     @if($errors->has("birthdate"))
                                         <span class="help-block"><strong>{{ $errors->first("birthdate") }}</strong></span>
                                     @endif

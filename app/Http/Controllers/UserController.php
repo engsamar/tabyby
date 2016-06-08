@@ -166,58 +166,24 @@ class UserController extends Controller
 
     public function valid(Request $request)
     {
-//        echo "<pre>";
-//		var_dump($request->input("username"));
-//		var_dump($request->input("action"));
-//		echo "</pre>";
-//		die('end');
         switch ($request->input("action")) {
             case "username":
-//                echo "action";
-//                $name = User::findOrFail($request->input("username"))->first();
                 $name = User::where('username', $request->input("username"))->first();
-//                $name = $request->input("username");
-//                $name1 = "mosatafa";
-//                echo "<pre>";
-//                var_dump($name);
-//                var_dump($name1);
-//                echo "</pre>";
-//                die('end');
                 if ($name) {
-//                    echo "<pre>";
-//                    var_dump($name);
-//                    var_dump($name1);
-//                    echo "</pre>";
-//                    die('end');
-//                    var_dump($request->input("username"));
-//                    var_dump($name);
-//                    var_dump($name1);
                     return "yes";
                 } else {
-//                    var_dump($name);
-//                    var_dump($name1);
-//                    var_dump($request->input("username"));
                     return "no";
                 }
                 break;
             case "email":
-//                echo "email";
                 $email = User::where('email', $request->input("email"))->first();
-//                var_dump($email);
                 if ($email) {
-//                    var_dump($email);
-//                    var_dump($request->input("email"));
                     return "yes";
                 } else {
-//                    var_dump($email);
-//                    var_dump($request->input("email"));
                     return "no";
                 }
                 break;
         }
-//        $user = User::findOrFail($id);
-//        $user->delete();
-//        return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
     }
 
 

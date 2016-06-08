@@ -80,3 +80,21 @@ Route::post('/consistitues/find','ConsistitueController@find');
 
 Route::get("reservations/searchKey/{key}","ReservationController@searchKey");
 Route::get("/newPrescriptionDetails/{res_id}","PrescriptionDetailController@create");
+
+// verification token resend form
+Route::get('verify/resend', [
+    'uses' => 'Auth\VerifyController@showResendForm',
+    'as' => 'verification.resend',
+]);
+
+// verification token resend action
+Route::post('verify/resend', [
+    'uses' => 'Auth\VerifyController@sendVerificationLinkEmail',
+    'as' => 'verification.resend.post',
+]);
+
+// verification message / user verification
+Route::get('verify/{token?}', [
+    'uses' => 'Auth\VerifyController@verify',
+    'as' => 'verification.verify',
+]);

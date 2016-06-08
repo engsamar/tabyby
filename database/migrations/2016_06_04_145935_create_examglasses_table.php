@@ -23,7 +23,6 @@ class CreateExamGlassesTable extends Migration {
             $table->integer('exam_glass_type');
             $table->integer('reservation_id')->unsigned()->index();
 			$table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
         });
 	}
 

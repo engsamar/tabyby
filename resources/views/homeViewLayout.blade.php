@@ -38,7 +38,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!----webfonts--->
     {{--<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>--}}
     {{--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>--}}
-    <!---//webfonts--->
+            <!---//webfonts--->
     <!----start-top-nav-script---->
     <script>
         $(function () {
@@ -87,60 +87,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     @yield('header')
     @yield('content')
 </div>
-<div id="contact" class="contact">
-    <div class="map">
-        {{--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1600186.2619317076!2d-102.69625001610805!3d38.43306521805143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1404490159176"></iframe>--}}
-        <div class="contact-info">
-            <div class="container">
-                <!---- contact-grids ---->
-                <div class="contact-grids">
-                    <h3>contact us</h3>
-                    <div class="col-md-5 contact-grid-left">
-                        <h4>contact information</h4>
-                        <ul>
-                            <select id="clinic_id" name="clinic_id" class="form-control">
-                                <option>Select Clinic Name</option>
-                                @foreach($clinics as $clinic)
-                                    <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
-                                @endforeach
-                            </select>
-                            <li><span class="cal"> </span><label id="day" name="day"></label>
-                                <small id="fromTime" name="fromTime">00:00</small>
-                                to
-                                <small id="toTime" name="toTime">00:00</small>
-                            </li>
-                            </select>
-                            <li><span class="pin"> </span><label>Address :</label>
-                                <small>{{ $userRole->user->address }}</small>
-                            </li>
-                            <li><span class="phone"> </span><label>Phone :</label>
-                                <small>{{ $userRole->user->telephone }}</small>
-                            </li>
-                            <li><span class="mail"> </span><label>Email :</label>
-                                <small>{{ $userRole->user->email }}</small>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-7 contact-grid-right">
-                        <h4>leave us a message</h4>
-                        <form>
-                            <input type="text" value="Name:" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Name:';}">
-                            <input type="text" value="Email:" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Email:';}">
-                            <input type="text" value="Phone No:" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Phone No:';}">
-                            <textarea rows="2" cols="70" onfocus="if(this.value == 'Message:') this.value='';"
-                                      onblur="if(this.value == '') this.value='Message:';">Message:</textarea>
-                            <input type="submit" value="SEND MESSAGE"/>
-                        </form>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <!---- contact-grids ---->
-            </div>
-        </div>
-    </div>
+</div>
 </div>
 </body>
 </html>

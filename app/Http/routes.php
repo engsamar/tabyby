@@ -27,10 +27,14 @@ Route::resource("examinations","ExaminationController");
 Route::resource("working_hours","WorkingHourController");
 Route::resource("reservations","ReservationController");
 Route::resource("role_types","RoleTypeController");
+
+//Roles Patients
 Route::resource("/doctorHome","UserController@doctorHome");
 Route::resource("/patientHome","UserController@patientHome");
-Route::resource("/insertExamination","ExaminationController@doctorExamination");
 Route::resource("/secretaryHome","UserController@secretaryHome");
+
+Route::resource("/insertExamination","ExaminationController@doctorExamination");
+
 Route::resource("user_profiles","UserProfileController");
 Route::resource("prescription_details","PrescriptionDetailController");
 Route::resource("prescriptions","PrescriptionController");

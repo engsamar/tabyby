@@ -17,7 +17,6 @@ class CreateReserveTypesTable extends Migration
             $table->increments('id');
             $table->integer('type');
             $table->integer('dependantOn');
-            $table->timestamps();
         });
     }
 

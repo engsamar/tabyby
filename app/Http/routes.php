@@ -70,6 +70,7 @@ Route::get("newExamination/{id}","ExaminationController@create");
 
 // Route::get("/patient/getReservations","ReservationController@getReservations");
 Route::get("/Elsayed/{res_id}","ReservationController@getReservations");
+Route::get("testing","ReservationController@getting");
 
 
 

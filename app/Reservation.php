@@ -20,4 +20,14 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function complain()
+    {
+        return $this->hasOne('App\Complain');
+    }
+
+    public function examination()
+    {
+        return $this->hasOne('App\Examination');
+    }
 }

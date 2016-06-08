@@ -20,7 +20,6 @@ class CreateSecertariesTable extends Migration {
             $table->foreign('userRole_id')->references('id')->on('user_roles')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('clinic_id')->unsigned()->index();
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
         });
     }
 

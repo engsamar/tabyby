@@ -16,7 +16,6 @@ class CreateVacationsTable extends Migration {
             $table->increments('id');
             $table->date('from_day');
             $table->date('to_day');
-            $table->timestamps();
         });
 	}
 

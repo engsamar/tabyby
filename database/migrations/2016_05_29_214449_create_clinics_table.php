@@ -17,7 +17,6 @@ class CreateClinicsTable extends Migration {
             $table->string('name');
             $table->string('telephone');
             $table->string('address');
-            $table->timestamps();
         });
 	}
 

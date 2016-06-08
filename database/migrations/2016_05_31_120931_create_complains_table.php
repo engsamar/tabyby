@@ -18,7 +18,6 @@ class CreateComplainsTable extends Migration {
             $table->string('h_of_complain');
             $table->integer('reservation_id')->unsigned();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
         });
     }
 

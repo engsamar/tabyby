@@ -17,7 +17,6 @@ class CreateExamGlassNotesTable extends Migration {
             $table->string('note');
             $table->integer('reservations_id')->unsigned()->index();
 			$table->foreign('reservations_id')->references('id')->on('reservations')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
         });
 	}
 

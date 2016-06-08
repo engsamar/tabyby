@@ -15,7 +15,6 @@ class CreateConsistituesTable extends Migration {
 		Schema::create('consistitues', function(Blueprint $table) {
             $table->increments('id');
             $table->string('active_consistitue');
-            $table->timestamps();
         });
 	}
 

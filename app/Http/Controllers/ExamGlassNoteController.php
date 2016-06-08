@@ -40,7 +40,7 @@ class ExamGlassNoteController extends Controller {
 	{
 		$exam_glass_note = new ExamGlassNote();
 
-		$exam_glass_note->"note = $request->input(""note");
+		$exam_glass_note->note = $request->input("note");
         $exam_glass_note->examGlass_id = $request->input("examGlass_id");
 
 		$exam_glass_note->save();
@@ -85,7 +85,7 @@ class ExamGlassNoteController extends Controller {
 	{
 		$exam_glass_note = ExamGlassNote::findOrFail($id);
 
-		$exam_glass_note->"note = $request->input(""note");
+		$exam_glass_note->note = $request->input("note");
         $exam_glass_note->examGlass_id = $request->input("examGlass_id");
 
 		$exam_glass_note->save();

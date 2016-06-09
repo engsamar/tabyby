@@ -266,7 +266,7 @@ class ReservationController extends Controller {
 		// 	echo($reserv->complain->complain_details['plan']);
 		// 	die();
 		// }	
-        return view('reservations.all_reservations', compact('reservations'));
+		
 
         $reserveType =ClinicConstants::$reservationType;
         $status= ClinicConstants::$status;

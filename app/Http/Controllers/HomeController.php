@@ -26,19 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        Mapper::map(50, 0, ['marker' => false]);
-//
-//         Add information window for each address
-//        $collection = Address::all();
-//
-//        $collection->each(function($address)
-//        {
-//            $content = $address->user->fullname;
-//
-//            Mapper::informationWindow($address->latitude, $address->longitude, $content);
-//        });
-//        Mapper::render();
-//        die();
+        
         return view('home');
     }
 

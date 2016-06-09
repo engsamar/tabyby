@@ -16,7 +16,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="/css/style.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="js/map.js"></script>
     <script type="application/x-javascript"> addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 //use Auth;
 use App\User;
+use Krucas\LaravelUserEmailVerification\AuthenticatesAndRegistersUsers as VerificationAuthenticatesAndRegistersUsers;
 use Validator;
 use App\UserRole;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,11 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins, VerificationAuthenticatesAndRegistersUsers {
+        AuthenticatesAndRegistersUsers::redirectPath insteadof VerificationAuthenticatesAndRegistersUsers;
+        AuthenticatesAndRegistersUsers::getGuard insteadof VerificationAuthenticatesAndRegistersUsers;
+        VerificationAuthenticatesAndRegistersUsers::register insteadof AuthenticatesAndRegistersUsers;
+    }
 
     /**
      * Where to redirect users after login / registration.
@@ -58,7 +63,7 @@ class AuthController extends Controller
             'telephone' => 'required|max:100',
             'mobile' => 'required|max:100',
             'address' => 'required|max:255',
-            'birthdate' => 'date'
+            'birthdate' => 'date|before:tomorrow'
         ]);
     }
 

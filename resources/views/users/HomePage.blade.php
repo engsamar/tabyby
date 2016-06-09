@@ -18,15 +18,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript"> addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    } </script>
+            setTimeout(hideURLbar, 0);
+        }, false);
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        } </script>
     <!---- start-smoth-scrolling---->
     <script type="text/javascript" src="/js/move-top.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/easing.js"></script>
+    <script
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD31ckr4GKqf6WcWU8WfIqwTj8zS3BtZZo">
+    </script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -35,13 +38,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
         });
     </script>
-    <!---- start-smoth-scrolling---->
-    <!----webfonts--->
-    {{--<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>--}}
-    {{--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>--}}
-            <!---//webfonts--->
-            <!----start-top-nav-script---->
             <script>
+                var myCenter = new google.maps.LatLng(30.740812, 31.256629);
+        var marker;
+
+        function initialize() {
+            var mapProp = {
+                center: myCenter,
+                zoom: 10,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            var marker = new google.maps.Marker({
+                position: myCenter,
+                animation: google.maps.Animation.BOUNCE
+            });
+
+            marker.setMap(map);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
                 $(function () {
                     var pull = $('#pull');
                     menu = $('nav ul');
@@ -113,11 +131,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="clearfix"></div>
                     </div>
                 </div>
-            </div>
-            <!----- //End-header---->
-            <!----start-slider-script---->
-            <script src="js/responsiveslides.min.js"></script>
-            <script>
+
+</div>
+<!----- //End-header---->
+<!----start-slider-script---->
+<script src="js/responsiveslides.min.js"></script>
+<script>
     // You can also use "$(window).load(function() {"
     $(function () {
         // Slideshow 4
@@ -190,88 +209,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <span class="t-icon1"> </span>
                     <div class="about-grid-info text-center">
                         <h3><a href="#">Children's specialist</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-                        </div>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                            industry. Lorem Ipsum has
+                            been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="about-grid n-about-grid n-about-grid1">
-                        <img src="images/img2.jpg" title="name"/>
-                        <span class="t-icon1"> </span>
-                        <div class="about-grid-info text-center">
-                            <h3><a href="#">Women's specialist</a></h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-                            </div>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="about-grid n-about-grid n-about-grid1">
+                    <img src="images/img2.jpg" title="name"/>
+                    <span class="t-icon1"> </span>
+                    <div class="about-grid-info text-center">
+                        <h3><a href="#">Women's specialist</a></h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                            industry. Lorem Ipsum has
+                            been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer.</p>
                     </div>
-                    <div class="col-md-4">
-                        <div class="about-grid n-about-grid n-about-grid2">
-                            <img src="images/img3.jpg" title="name"/>
-                            <span class="t-icon2"> </span>
-                            <div class="about-grid-info text-center">
-                                <h3><a href="#">men's specialist</a></h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="about-grid n-about-grid n-about-grid2">
+                    <img src="images/img3.jpg" title="name"/>
+                    <span class="t-icon2"> </span>
+                    <div class="about-grid-info text-center">
+                        <h3><a href="#">men's specialist</a></h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                            industry. Lorem Ipsum has
+                            been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer.</p>
                     </div>
-                    <!---- About-grids ---->
-                </div>
-
-            </div>
-            <!---- about ---->
-<!--- services --->
-<div id="services" class="services">
-    <div class="container">
-        <div class="header services-header text-center">
-            <h2>our services</h2>
-            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-        </div>
-        <!---- service-grids--->
-        <div class="service-grids">
-            <div class="col-md-3">
-                <div class="service-grid text-center">
-                    <a href="#"><span class="s1-icon"> </span></a>
-                    <h3><a href="#">Heart problem</a></h3>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-grid text-center">
-                    <a href="#"><span class="s2-icon"> </span></a>
-                    <h3><a href="#">brain problem</a></h3>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-grid text-center">
-                    <a href="#"><span class="s3-icon"> </span></a>
-                    <h3><a href="#">knee problem</a></h3>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-grid text-center">
-                    <a href="#"><span class="s4-icon"> </span></a>
-                    <h3><a href="#">human bones problem</a></h3>
                 </div>
             </div>
             <div class="clearfix"></div>
         </div>
-        <!----//service-grids--->
+        <!---- About-grids ---->
     </div>
 
 </div>
-<!--- services --->
-<!--- team --->
-<div id="team" class="team">
-    <div class="container">
-        <div class="header team-head text-center">
-            <h2>our team</h2>
-            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                took a galley of type and scrambled</p>
-        </div>
         <!--- teammember-grids ---->
         <div class="team-member-grids">
             <div class="team-member-grid">
@@ -279,61 +255,73 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="team-member-info bottom-t-info">
                     <span> </span>
                     <h3><a href="#">Dr. Keith M. Weiner, M.D.</a></h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                        printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
                         dummy text.</p>
-                    </div>
                 </div>
-                <div class="team-member-grid">
-                    <div class="team-member-info bottom-t-info bottom-t-info-b">
-                        <span> </span>
-                        <h3><a href="#">Dr. Danielle, M.D.</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                            printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
-                            dummy text..is simply dummy text.</p>
-                        </div>
-                        <img src="images/t2.jpg" title="name"/>
-                    </div>
-                    <div class="team-member-grid">
-                        <img src="images/t3.jpg" title="name"/>
-                        <div class="team-member-info bottom-t-info">
-                            <span> </span>
-                            <h3><a href="#">Dr. Joseph, M.D.</a></h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                                printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
-                                dummy text.</p>
-                            </div>
-                        </div>
-                        <div class="team-member-grid">
-                            <div class="team-member-info bottom-t-info bottom-t-info-b">
-                                <span> </span>
-                                <h3><a href="#">Dr. Caitlin, M.D.</a></h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                                    printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
-                                    dummy text..is simply dummy text.</p>
-                                </div>
-                                <img src="images/t4.jpg" title="name"/>
-                            </div>
-                            <div class="team-member-grid">
-                                <img src="images/t5.jpg" title="name"/>
-                                <div class="team-member-info bottom-t-info">
-                                    <span> </span>
-                                    <h3><a href="#">Dr. Michael, M.D.</a></h3>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                                        printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
-                                        dummy text.</p>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <!---//teammember-grids ---->
-                        </div>
-                    </div>
+            </div>
+            <div class="team-member-grid">
+                <div class="team-member-info bottom-t-info bottom-t-info-b">
+                    <span> </span>
+                    <h3><a href="#">Dr. Danielle, M.D.</a></h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
+                        dummy text..is simply dummy text.</p>
+                </div>
+                <img src="images/t2.jpg" title="name"/>
+            </div>
+            <div class="team-member-grid">
+                <img src="images/t3.jpg" title="name"/>
+                <div class="team-member-info bottom-t-info">
+                    <span> </span>
+                    <h3><a href="#">Dr. Joseph, M.D.</a></h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
+                        dummy text.</p>
+                </div>
+            </div>
+            <div class="team-member-grid">
+                <div class="team-member-info bottom-t-info bottom-t-info-b">
+                    <span> </span>
+                    <h3><a href="#">Dr. Caitlin, M.D.</a></h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
+                        dummy text..is simply dummy text.</p>
+                </div>
+                <img src="images/t4.jpg" title="name"/>
+            </div>
+            <div class="team-member-grid">
+                <img src="images/t5.jpg" title="name"/>
+                <div class="team-member-info bottom-t-info">
+                    <span> </span>
+                    <h3><a href="#">Dr. Michael, M.D.</a></h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
+                        dummy text.</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!---//teammember-grids ---->
+    </div>
+</div>
 <!--- team --->
+<div class="container ">
+    <div id="googleMap" style="width:700px;height:400px;"></div>
+</div>
 <!---- contact ---->
 <div id="contact" class="contact">
     <div class="map">
-        {{--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1600186.2619317076!2d-102.69625001610805!3d38.43306521805143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1404490159176"></iframe>--}}
         <div class="contact-info">
             <div class="container">
                 <!---- contact-grids ---->
@@ -345,46 +333,47 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <select id="clinic_id" name="clinic_id" class="form-control">
                                 <option>Select Clinic Name</option>
                                 @foreach($clinics as $clinic)
-                                <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
+                                    <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
                                 @endforeach
                             </select>
-                            <li><span class="cal"> </span><label id="day" name="day"></label>
+                            <li><span class="cal"> </span><label id="day"
+                                                                 name="day"></label>
                                 <small id="fromTime" name="fromTime">00:00</small>
                                 to
                                 <small id="toTime" name="toTime">00:00</small>
                             </li>
-                        </select>
-                        <li><span class="pin"> </span><label>Address :</label>
-                            <small>{{ $userRole->user->address }}</small>
-                        </li>
-                        <li><span class="phone"> </span><label>Phone :</label>
-                            <small>{{ $userRole->user->telephone }}</small>
-                        </li>
-                        <li><span class="mail"> </span><label>Email :</label>
-                            <small>{{ $userRole->user->email }}</small>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-7 contact-grid-right">
-                    <h4>leave us a message</h4>
-                    <form>
-                        <input type="text" value="Name:" onfocus="this.value = '';"
-                        onblur="if (this.value == '') {this.value = 'Name:';}">
-                        <input type="text" value="Email:" onfocus="this.value = '';"
-                        onblur="if (this.value == '') {this.value = 'Email:';}">
-                        <input type="text" value="Phone No:" onfocus="this.value = '';"
-                        onblur="if (this.value == '') {this.value = 'Phone No:';}">
+                            </select>
+                            <li><span class="pin"> </span><label>Address :</label>
+                                <small>{{ $userRole->user->address }}</small>
+                            </li>
+                            <li><span class="phone"> </span><label>Phone :</label>
+                                <small>{{ $userRole->user->telephone }}</small>
+                            </li>
+                            <li><span class="mail"> </span><label>Email :</label>
+                                <small>{{ $userRole->user->email }}</small>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-7 contact-grid-right">
+                        <h4>leave us a message</h4>
+                        <form>
+                            <input type="text" value="Name:" onfocus="this.value = '';"
+                                   onblur="if (this.value == '') {this.value = 'Name:';}">
+                            <input type="text" value="Email:" onfocus="this.value = '';"
+                                   onblur="if (this.value == '') {this.value = 'Email:';}">
+                            <input type="text" value="Phone No:" onfocus="this.value = '';"
+                                   onblur="if (this.value == '') {this.value = 'Phone No:';}">
                         <textarea rows="2" cols="70" onfocus="if(this.value == 'Message:') this.value='';"
-                        onblur="if(this.value == '') this.value='Message:';">Message:</textarea>
-                        <input type="submit" value="SEND MESSAGE"/>
-                    </form>
+                                  onblur="if(this.value == '') this.value='Message:';">Message:</textarea>
+                            <input type="submit" value="SEND MESSAGE"/>
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
+                <!---- contact-grids ---->
             </div>
-            <!---- contact-grids ---->
         </div>
     </div>
-</div>
 </div>
 <!---- contact ---->
 <div class="clearfix"></div>
@@ -404,13 +393,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                      };
                      */
 
-                     $().UItoTop({easingType: 'easeOutQuart'});
+                    $().UItoTop({easingType: 'easeOutQuart'});
 
-                 });
-             </script>
-             <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-         </div>
-         <div class="copy-right-right">
+                });
+            </script>
+            <a href="#" id="toTop" style="display: block;"> <span id="toTopHover"
+                                                                  style="opacity: 1;"> </span></a>
+        </div>
+        <div class="copy-right-right">
             <ul>
                 <li><a class="facebook" href="#"><span> </span></a></li>
                 <li><a class="twitter" href="#"><span> </span></a></li>

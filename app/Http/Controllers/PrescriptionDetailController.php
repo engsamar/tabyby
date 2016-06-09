@@ -23,21 +23,21 @@ class PrescriptionDetailController extends Controller
     {
         $medicineType = ClinicConstants::$medicineType;
 //		$prescription= Prescription::all();
-        echo "<pre>";
-        var_dump($res_id);
-        echo "</pre>";
-        die("end");
-        $exist = Prescription::where('reservation_id', '=', '2')->get();
+//        echo "<pre>";
+//        var_dump($res_id);
+//        echo "</pre>";
+//        die("end");
+        $exist = Prescription::where('reservation_id', '=', $res_id)->get();
         if (count($exist) == 0) {
 //			echo "<pre>";
 //			var_dump($exist);
 //			echo "</pre>";
 //			die("end");
             $prescription = new Prescription();
-            $prescription->reservation_id = 2;
+            $prescription->reservation_id = $res_id;
             $prescription->save();
         }
-        return view('prescription_details.create', compact('medicineType'));
+        return view('prescription_details.create', compact('medicineType','res_id'));
     }
 
     public function store(Request $request)
@@ -57,7 +57,7 @@ class PrescriptionDetailController extends Controller
             $medicine = Medicine::where('name', '=', $request->input("medicine_name"))->first();
             $prescription_detail->medicine_id = $medicine->id;
             $prescription_detail->duaration = $request->input("duration");
-            $prescription = Prescription::where('reservation_id', '=', '2')->first();
+            $prescription = Prescription::where('reservation_id', '=', $request->input("res_id"))->first();
             $prescription_detail->preception_id = $prescription->id;
         } else {
             $prescription_detail->medicine_id = $request->input("medicines_name");
@@ -66,7 +66,7 @@ class PrescriptionDetailController extends Controller
             $medicine = Medicine::where('id', '=', $request->input("medicines_name"))->first();
             $prescription_detail->medicine_name = $medicine->name;
             $prescription_detail->duaration = $request->input("duration");
-            $prescription = Prescription::where('reservation_id', '=', '2')->first();
+            $prescription = Prescription::where('reservation_id', '=', $request->input("res_id"))->first();
             $prescription_detail->preception_id = $prescription->id;
         }
         $prescription_detail->save();

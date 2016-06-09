@@ -27,10 +27,10 @@
         </div>
     </div>
     <div id="date-search" hidden>
-        
+        date
     </div>
     <div id="duration-search" hidden>
-        
+        duration
     </div>
     
 </div>

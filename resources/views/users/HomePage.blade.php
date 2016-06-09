@@ -16,6 +16,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="css/style.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/map.js"></script>
     <script type="application/x-javascript"> addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
@@ -26,6 +27,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script type="text/javascript" src="js/move-top.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/easing.js"></script>
+    <script
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD31ckr4GKqf6WcWU8WfIqwTj8zS3BtZZo">
+    </script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -41,6 +45,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <!---//webfonts--->
     <!----start-top-nav-script---->
     <script>
+        var myCenter=new google.maps.LatLng(30.740812, 31.256629);
+        var marker;
+
+        function initialize()
+        {
+            var mapProp = {
+                center:myCenter,
+                zoom:10,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            var marker=new google.maps.Marker({
+                position:myCenter,
+                animation:google.maps.Animation.BOUNCE
+            });
+
+            marker.setMap(map);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
         $(function () {
             var pull = $('#pull');
             menu = $('nav ul');
@@ -75,8 +101,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li><a href="#services" class="scroll">our services</a></li>
                     <li><a href="#team" class="scroll">our team</a></li>
                     <li><a href="#contact" class="scroll">Contact</a></li>
-                    <li><a href="#" >Register</a></li>
-                    <li><a href="#" >LogIn</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">LogIn</a></li>
 
                 </ul>
                 <a href="#" id="pull"><img src="images/menu-icon.png" title="menu"/></a>
@@ -236,6 +262,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <!--- services --->
 <!--- team --->
+
 <div id="team" class="team">
     <div class="container">
         <div class="header team-head text-center">
@@ -275,6 +302,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         dummy text.</p>
                 </div>
             </div>
+
             <div class="team-member-grid">
                 <div class="team-member-info bottom-t-info bottom-t-info-b">
                     <span> </span>
@@ -301,6 +329,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 <!--- team --->
+<div class="container ">
+<div id="googleMap" style="width:700px;height:400px;"></div>
+</div>
 <!---- contact ---->
 <div id="contact" class="contact">
     <div class="map">
@@ -357,7 +388,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
     </div>
 </div>
+
 <!---- contact ---->
+
 <div class="clearfix"></div>
 <!--- copy-right ---->
 <div class="copy-right">

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "205e9cd87e6f8fac43099c0bfd42c2d1",
-    "content-hash": "6a9c617f524fb83f15edee38a6c25802",
+    "hash": "8ae38c6002826041befa520f35428dac",
+    "content-hash": "4f9c10582ef807d9b3d2d54c0f380072",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -60,6 +60,54 @@
                 "preload"
             ],
             "time": "2015-11-09 22:51:51"
+        },
+        {
+            "name": "cornford/googlmapper",
+            "version": "v2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bradcornford/Googlmapper.git",
+                "reference": "d821a1f1e1413f50015c8fad625b8117022992b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bradcornford/Googlmapper/zipball/d821a1f1e1413f50015c8fad625b8117022992b4",
+                "reference": "d821a1f1e1413f50015c8fad625b8117022992b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.1",
+                "phpspec/phpspec": "2.0.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cornford\\Googlmapper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bradley Cornford",
+                    "email": "me@bradleycornford.co.uk"
+                }
+            ],
+            "description": "An easy way to integrate Google Maps with Laravel.",
+            "keywords": [
+                "google",
+                "laravel",
+                "map",
+                "mapping",
+                "maps",
+                "streetview"
+            ],
+            "time": "2016-02-23 16:05:40"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

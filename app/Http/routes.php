@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get("user_profiles/{id}/","UserProfileController@index");
 	Route::get("patient/{id}","ReservationController@patientReserv");
 	Route::get("/latest","ReservationController@latest");
-	Route::get("patients/{id}","ReservationController@patient");
+	Route::get("patients/{id}","ReservationController@patientInfo");
 	Route::get("/working_hours/date/{id}","WorkingHourController@retreve");
 	Route::get("/working_hours/{id}","WorkingHourController@update");
 	Route::resource("exam_glass_notes","ExamGlassNoteController");
@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get("newMedicalHistory/{id}","MedicalHistoryController@create");
 	Route::get("newComplain/{res_id}","ComplainController@create");
 	Route::get("newExamination/{id}","ExaminationController@create");
+	Route::get("info/{id}","ReservationController@info");
 
 	// Route::get("/reservation/{res_id}","ReservationController@getReservations");
 

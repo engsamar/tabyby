@@ -267,7 +267,7 @@ class ReservationController extends Controller {
 		// 	echo($reserv->complain->complain_details['plan']);
 		// 	die();
 		// }	
-        return view('reservations.all_reservations', compact('reservations'));
+        // return view('reservations.all_reservations', compact('reservations'));
 
         $reserveType =ClinicConstants::$reservationType;
         $status= ClinicConstants::$status;
@@ -278,8 +278,24 @@ class ReservationController extends Controller {
 		return view('reservations.all_reservations', compact('userRoleType','reservations','status','reserveType','medicalHistoryType'));
 	}
 
-	public function patient($id)
+	public function info($id)
 	{
+		$reservations = Reservation::where('user_id', $id)->get();
+		$personal_info = [];
+		foreach ($reservations as $reservation) {
+			$personal_info = $reservation->user;
+		}
+		
+		return view('users.profile', compact('userRoleType','reservations', 'personal_info','status','reserveType','medicalHistoryType'));	
+
+	}
+
+	public function patientInfo($id)
+	{
+
+		$reservations = Reservation::where('user_id', $id)->get();	
+		print_r($reservations->user);
+		die();
 
 		$usery = DB::table('users')
             ->join('reservations', 'users.id', '=','reservations.user_id')
@@ -334,8 +350,6 @@ class ReservationController extends Controller {
 		$medicalHistoryType=ClinicConstants::$medicalHistoryType;
 
 		return view('reservations.show', compact('reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
-
-
 	}
 
 	public function patientReserv($id)

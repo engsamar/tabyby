@@ -1,7 +1,6 @@
 @extends('homeViewLayout')
 @section('nav_bar')
-    <li><a href="#">Reservations</a></li>
-    <li><a href="#">secretary</a></li>
+    
 @endsection
 @section('content')
     <div class="container-fluid">

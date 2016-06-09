@@ -17,7 +17,6 @@ class CreateMedicalHistoryDetailsTable extends Migration {
             $table->string('description');
             $table->integer('medical_history_id')->unsigned();
             $table->foreign('medical_history_id')->references('id')->on('medical_histories')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
         });
 	}
 

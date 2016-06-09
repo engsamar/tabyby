@@ -45,7 +45,7 @@ class HomeController extends Controller
     public function logout()
     {
         Auth::logout(); // log the user out of our application
-        return Redirect::to('/login'); // redirect the user to the login screen
+        return Redirect::to('/'); // redirect the user to the login screen
     }
 }
 

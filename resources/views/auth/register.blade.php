@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('homeViewLayout')
 @section('scripts')
 
     <script src="/js/user_validation.js"></script>

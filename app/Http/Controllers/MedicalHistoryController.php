@@ -52,8 +52,6 @@ class MedicalHistoryController extends Controller
         $medical_history_detail->medical_history_id=$medical_history->id;
         $medical_history_detail->save();
         return redirect('/patient/'.$request->input("res_id").'/'.$request->input("patient_id"));
-        //return redirect()->route('medical_histories.index')->with('message', 'Item created successfully.');
-        // return redirect()->action('ReservationController@patient', array('id' => 2,'patient_id'=>1));
     }
 
     /**

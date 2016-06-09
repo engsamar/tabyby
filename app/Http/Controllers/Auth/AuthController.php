@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+//use Auth;
 use App\User;
 use Krucas\LaravelUserEmailVerification\AuthenticatesAndRegistersUsers as VerificationAuthenticatesAndRegistersUsers;
 use Validator;
@@ -34,7 +34,9 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+
+  protected $redirectTo = '/';
+   
 
     /**
      * Create a new authentication controller instance.

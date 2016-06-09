@@ -25,7 +25,6 @@ class CreateReservationsTable extends Migration {
 			$table->date('date');
 			$table->time('appointment');
 			$table->integer('status');
-            $table->timestamps();
         });
 	}
 

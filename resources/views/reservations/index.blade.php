@@ -1,21 +1,45 @@
 @extends('homeViewLayout')
-
 @section('header')
 <div class="page-header clearfix">
     <h2>
-        <i class="glyphicon glyphicon-align-justify"></i> All Reservations
-        <a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
+    <i class="glyphicon glyphicon-align-justify"></i>Reservations
+    <a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
     </h2>
-
+</div>
+<div class="form-group @if($errors->has('search_by')) has-error @endif">
+    <label for="search_by-field">Search_by</label>
+    <select id="search_by-field" name="search_by" class="form-control">
+        <option selected value="0">Name</option>
+        <option value="1">Date</option>
+        <option value="2">Duration</option>
+    </select>
+    <div id="name-search" hidden>
+        <div class="form-group @if($errors->has('name')) has-error @endif">
+            <label for="name-field">Patient Name</label>
+            <input list="searchResult" type="text" id="name-field" name="name" class="form-control" value="{{ old("name") }}"/>
+            <datalist id="searchResult">
+            
+            </datalist>
+            
+            @if($errors->has("name"))
+            <span class="help-block">{{ $errors->first("name") }}</span>
+            @endif
+        </div>
+    </div>
+    <div id="date-search" hidden>
+        
+    </div>
+    <div id="duration-search" hidden>
+        
+    </div>
+    
 </div>
 @endsection
-
 @section('content')
 <div class="row">
     <div class="col-md-12">
-
         @if($reservations->count())
-       <div><p> message ::{{$message}} </p></div>
+        <div><p> message ::{{$message}} </p></div>
         <table class="table table-condensed table-striped">
             <thead>
                 <tr>
@@ -29,21 +53,19 @@
                     <th>CLINIC_Name</th>
                     <th>Appointment</th>
                     <th>RESERVATION_TYPE</th>
-                     <th>Previous RESERVATION</th>
+                    <th>Previous RESERVATION</th>
                     <th>STATUS</th>
                     @endif
                 </tr>
             </thead>
-
             <tbody>
                 @foreach($reservations as $reservation)
                 <tr>
-                @if($userRole == 0)
-                     <td><a href='#'>{{$reservation->user->username}}</a></td>
-                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
+                    @if($userRole == 0)
+                    <td><a href='#'>{{$reservation->user->username}}</a></td>
+                    <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td class="text-right">
                         <a class="btn btn-xs btn-primary" href='/reservation/{{$reservation->user_id}}'><i class="glyphicon glyphicon-eye-open"></i> View History</a>
-
                     </td>
                     @else
                     
@@ -52,25 +74,52 @@
                     <td>{{$reservation->appointment}}</td>
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td>
-                    @if($reservation->reservation_type_id-1 >=0 )
-                    {{$reserveType[$reservation->reservation_type_id-1]}}
-                    @else
-                    this is first reservation
-                    @endif
-                    
+                        @if($reservation->reservation_type_id-1 >=0 )
+                        {{$reserveType[$reservation->reservation_type_id-1]}}
+                        @else
+                        this is first reservation
+                        @endif
+                        
                     </td>
                     <td>{{$status[$reservation->status]}}</td>
                     @endif
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            {!! $reservations->render() !!}
-            @else
-            <h3 class="text-center alert alert-info">Empty!</h3>
-            @endif
-
-        </div>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {!! $reservations->render() !!}
+        @else
+        <h3 class="text-center alert alert-info">Empty!</h3>
+        @endif
     </div>
+</div>
+@endsection
+@section('scripts')
+<script>
 
-    @endsection
+$(document).ready()
+{
+    var selected = 0;
+    $("#name-search").hide();
+    $("#date-search").hide();
+    $("#duration-search").hide();
+    $("select[name='search_by']").change(function () {
+    if (this.value == 1) {
+    $("#name-search").show();
+    $("#date-search").hide();
+    $("#duration-search").hide();
+    } 
+    if(this.value == 2) {
+    selected = 2;
+    $("#date-search").show();
+    $("#name-search").hide();
+    $("#duration-search").hide();
+    }
+    if(this.value == 3){
+    $("#date-search").hide();
+    $("#name-search").hide();
+    $("#duration-search").show();
+    }
+});
+</script>
+@endsection

@@ -8,7 +8,9 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laralib/l5scaffold": "dev-master",
-        "nesbot/carbon": "^1.21"
+        "nesbot/carbon": "^1.21",
+        "caouecs/laravel-lang": "~3.0",
+        "ablunier/laravel-lang-installer": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

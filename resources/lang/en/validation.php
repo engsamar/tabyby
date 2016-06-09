@@ -12,6 +12,36 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
+     'login' => 'login',
+     'Add Secretary' => 'Add Secretary',
+     'View Secretary' => 'View Secretary',
+     'View Reservation' => 'View Reservation',
+     'Add Reservation' => 'Add Reservation',
+     'arabic' => 'arabic',
+     'logout' => 'logout',
+     'latest' => 'latest',
+     'register' => 'register',
+     'home' => 'home',
+     'reservations' => 'reservations',
+     'Reservation' => 'Reservation',
+     'clinic' => 'clinic',
+     'clinics' => 'clinics',
+     'Secretary' => 'Secretary',
+     'doctor' => 'doctor',
+     'patient' => 'patient',
+     'about' => 'about',
+     'services' => 'services',
+     'our team' => 'our team',
+     'contact' => 'contact',
+     'our services' => 'our services',
+     'About us' => 'About us',
+     'AddClinic' => 'AddClinic',
+     'Medical History' => 'Medical History',
+      'MedicalHistory' => 'MedicalHistory',
+     'Your Information' => 'Your Information',
+     'Add Reservation' => 'Add Reservation',
+     'Edit Profile' => 'Edit Profile',
+     'Settings' => 'Settings',
 
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
@@ -108,6 +138,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+
+        'login' => 'login',
+    ],
 
 ];

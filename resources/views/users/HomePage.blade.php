@@ -12,6 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
+    <script type="text/javascript"  src="/js/bootstrap.min.js"></script>
     <link href="/css/homes.css" rel='stylesheet' type='text/css'/>
     <link href="/css/style.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
@@ -70,25 +71,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <!----start-top-nav---->
                         <nav class="top-nav">
                             <ul class="top-nav">
-                                <li><a href="#about" class="scroll">About us</a></li>
-                                <li><a href="#services" class="scroll">our services</a></li>
-                                <li><a href="#team" class="scroll">our team</a></li>
-                                <li><a href="#contact" class="scroll">Contact</a></li>
+                                <li><a href="#about" class="scroll"> @lang('validation.About us')</a></li>
+                                <li><a href="#services" class="scroll">@lang('validation.our services')</a></li>
+                                <li><a href="#team" class="scroll">@lang('validation.our team')</a></li>
+                                <li><a href="#contact" class="scroll">@lang('validation.contact')</a></li>
                                 @if(!Auth::user())
-                                <li><a href="/register" >Register</a></li>
-                                <li><a href="/login" >LogIn</a></li>
+                                <li><a href="/register" >@lang('validation.register')</a></li>
+                                <li><a href="/login" >@lang('validation.login')</a></li>
                                 @else
-                                    @if($userRoleType==0)
-                                    <li><a href="/doctorHome" >Home</a></li>
+                                @if($userRoleType==0)
+                                <li><a href="/doctorHome" >@lang('validation.home')</a></li>
 
-                                    @elseif ($userRoleType==1) 
-                                    <li><a href="/secretaryHome" >Home</a></li>
-                                    @else  
-                                    <li><a href="/patientHome" >Home</a></li>
+                                @elseif ($userRoleType==1) 
+                                <li><a href="/secretaryHome" >@lang('validation.home')</a></li>
+                                @else  
+                                <li><a href="/patientHome" >@lang('validation.home')</a></li>
 
-                                    @endif
-                                <li><a href="/logout" >Logout</a></li>
                                 @endif
+                                <li><a href="/logout" >@lang('validation.logout')</a></li>
+                                @endif
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        {{ Config::get('languages')[App::getLocale()] }}
+                                    
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        @foreach (Config::get('languages') as $lang => $language)
+                                        @if ($lang != App::getLocale())
+                                        <li>
+                                            <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
+                                        </li>
+                                        @endif
+                                        @endforeach
+                                    </ul>
+                                </li>
+
                             </ul>
                             <a href="#" id="pull"><img src="/images/menu-icon.png" title="menu"/></a>
                         </nav>

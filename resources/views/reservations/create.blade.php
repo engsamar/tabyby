@@ -12,7 +12,6 @@ rel="stylesheet">
 
 <div class="row">
     <div class="col-md-12">
-    <div><p> message ::{{$message}} </p></div>
         <form action="{{ route('reservations.store') }}" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @if($userRole == 1 || $userRole == 0)

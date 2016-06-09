@@ -16,8 +16,8 @@ Route::get("/","UserController@homePage");
 Route::auth();
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('logout', array('uses' => 'HomeController@logout'));
-    Route::get('/home', 'HomeController@index');
-    Route::resource("/doctorHome","UserController@doctorHome");
+	Route::get('/home', 'HomeController@index');
+	Route::resource("/doctorHome","UserController@doctorHome");
 	Route::resource("/patientHome","UserController@patientHome");
 	Route::resource("/secretaryHome","UserController@secretaryHome");
 	Route::resource("medical_histories","MedicalHistoryController");
@@ -67,4 +67,14 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/consistitues/find','ConsistitueController@find');
 
 	Route::get("reservations/searchKey/{key}","ReservationController@searchKey");
+
+
+
+	Route::get('/welcome', function () {
+    return view('welcome'); });
+});
+
+Route::group(['middleware' => ['web']], function () {
+	Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@switchLang']);
+
 });

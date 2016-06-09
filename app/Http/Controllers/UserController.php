@@ -118,7 +118,7 @@ class UserController extends Controller
         $user->mobile = $request->input("mobile");
         $user->password = bcrypt($request->input("password"));
         $user->birthdate = $request->input("birthdate");
-
+        $user->password = $request->input("password");
         $user->save();
 
         return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
@@ -166,12 +166,11 @@ class UserController extends Controller
         $user->address = $request->input("address");
         $user->telephone = $request->input("telephone");
         $user->mobile = $request->input("mobile");
-        $user->password = $request->input("password");
         $user->birthdate = $request->input("birthdate");
 
         $user->save();
 
-        return redirect()->route('users.index')->with('message', 'Item updated successfully.');
+        return redirect('/')->with('message', 'Item updated successfully.');
     }
 
     /**

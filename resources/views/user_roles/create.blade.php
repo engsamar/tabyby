@@ -15,9 +15,20 @@
     <div class="row">
         <div class="col-md-12">
 
+
             <form action="{{ route('user_roles.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                <div class="form-group @if($errors->has('name')) has-error @endif">
+                <label for="name-field">Patient Name</label>
+                <input list="searchResult" type="text" id="name-field" name="name" class="form-control" value="{{ old("name") }}"/>
+                <datalist id="searchResult">
+                    
+                </datalist>
+               
+                @if($errors->has("name"))
+                <span class="help-block">{{ $errors->first("name") }}</span>
+                @endif
+            </div>
                 <div class="form-group @if($errors->has('type')) has-error @endif">
                     <label for="type-field">Type</label>
                     {{--<input type="text" id="type-field" name="type" class="form-control" value="{{ old("type") }}"/>--}}

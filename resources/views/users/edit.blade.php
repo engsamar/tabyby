@@ -34,6 +34,16 @@
                         <span class="help-block">{{ $errors->first("email") }}</span>
                        @endif
                     </div>
+
+                    <div hidden class="form-group @if($errors->has('password')) has-error @endif">
+                       <label for="password-field">Password</label>
+                    <input type="text" id="password-field" name="password" class="form-control" value="{{ $user->password }}"/>
+                       @if($errors->has("password"))
+                        <span class="help-block">{{ $errors->first("password") }}</span>
+                       @endif
+                    </div>
+
+
                     <div class="form-group @if($errors->has('address')) has-error @endif">
                        <label for="address-field">Address</label>
                     <input type="text" id="address-field" name="address" class="form-control" value="{{ $user->address }}"/>
@@ -53,13 +63,6 @@
                     <input type="text" id="mobile-field" name="mobile" class="form-control" value="{{ $user->mobile }}"/>
                        @if($errors->has("mobile"))
                         <span class="help-block">{{ $errors->first("mobile") }}</span>
-                       @endif
-                    </div>
-                    <div class="form-group @if($errors->has('password')) has-error @endif">
-                       <label for="password-field">Password</label>
-                    <input type="text" id="password-field" name="password" class="form-control" value="{{ $user->password }}"/>
-                       @if($errors->has("password"))
-                        <span class="help-block">{{ $errors->first("password") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('birthdate')) has-error @endif">

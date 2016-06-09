@@ -1,10 +1,13 @@
 <?php namespace App\Http\Controllers;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use App\Secertary;
 use Illuminate\Http\Request;
+use App\ClinicConstants;
+use App\Http\Requests;
+use App\Secertary;
+use \App\UserRole;
+use App\Clinic;
+use App\User;
+use Auth;
 
 class SecertaryController extends Controller {
 
@@ -27,7 +30,10 @@ class SecertaryController extends Controller {
 	 */
 	public function create()
 	{
-		return view('secertaries.create');
+		$clinic = Clinic::all();
+		$user = Auth::user();
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
+		return view('secertaries.create')->with('address', $clinic)->with('userRoleType',$userRole);
 	}
 
 	/**
@@ -38,11 +44,17 @@ class SecertaryController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$secertary = new Secertary();
+		$user_role = new UserRole();
+		$user_role->type = 1;
+		$user_name  = $request->input("name");
+		$user_role->user_id=User::where('username',$request->input("name"))->value('id');;
+		$user_role->save();
 
+		$secertary = new Secertary();
 		$secertary->degree = $request->input("degree");
+		$secertary->userRole_id=$user_role->id;
         $secertary->national_id = $request->input("national_id");
-		$secertary->clinic_id=1;
+		$secertary->clinic_id= $request->input("address");
 		$secertary->save();
 
 		return redirect()->route('secertaries.index')->with('message', 'Item created successfully.');

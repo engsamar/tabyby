@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use Cornford\Googlmapper\Mapper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
@@ -25,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         return view('home');
     }
 

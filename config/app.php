@@ -65,8 +65,10 @@ return [
     |
     */
 
-    'locale' => 'en',
-
+    
+    'locale' => array('en','ar'),
+    
+    
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -78,7 +80,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ar',
 
     /*
     |--------------------------------------------------------------------------
@@ -148,6 +150,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Krucas\LaravelUserEmailVerification\UserEmailVerificationServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -156,6 +160,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+       // Ablunier\Laravel\Translation\LanguageInstallerServiceProvider::class,
 
     ],
 

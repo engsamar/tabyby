@@ -5,10 +5,10 @@
 
 @section('header')
 
-{{complain->complain}}
 
 <div class="page-header">
     <h4>Reservation No.{{$reservation->complain->user_id}}</h4>
+    {{die()}}
     <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">

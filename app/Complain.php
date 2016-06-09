@@ -10,4 +10,16 @@ class Complain extends Model
     {
         return $this->belongsTo('App\Reservation');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function complainDetail()
+    {
+        return $this->hasMany(complainDetail::class);
+    }
+
+  
 }

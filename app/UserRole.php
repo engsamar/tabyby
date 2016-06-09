@@ -14,4 +14,9 @@ class UserRole extends Model
     {
         return $this->hasMany(DoctorDegree::class);
     }
+
+    public function secertary()
+    {
+        return $this->hasOne('App\Secertary');
+    }
 }

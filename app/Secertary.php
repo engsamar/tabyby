@@ -10,4 +10,9 @@ class Secertary extends Model
     {
         return $this->belongsTo(Clinic::class);
     }
+
+    public function userRole()
+    {
+        return $this->belongsTo('App\UserRole');
+    }
 }

@@ -150,7 +150,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+     //   Illuminate\Html\HtmlServiceProvider, 
         Krucas\LaravelUserEmailVerification\UserEmailVerificationServiceProvider::class,
+        Cornford\Googlmapper\MapperServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
 
 
         /*
@@ -162,6 +165,7 @@ return [
         App\Providers\RouteServiceProvider::class,
        // Ablunier\Laravel\Translation\LanguageInstallerServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -207,6 +211,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Mapper'=> Cornford\Googlmapper\Facades\MapperFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

@@ -18,8 +18,10 @@ class CreateDoctorDegreesTable extends Migration {
             $table->string('university');
             $table->string('description');
             $table->date('graduate_date');
-            $table->integer('user_role_id')->unsigned()->index();
-			$table->foreign('user_role_id')->references('id')->on('user_roles')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('userrole_id')->unsigned()->index();
+			$table->foreign('userrole_id')->references('id')->on('user_roles')->onDelete('cascade')->onUpdate('cascade');
+
+			$table->timestamps();
         });
 	}
 

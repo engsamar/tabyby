@@ -201,17 +201,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div id="about" class="about">
     <div class="container">
         <div class="header about-header text-center">
-            <h2>about us</h2>
+            <h2>Clinics</h2>
             <p></p>
         </div>
         <!---- About-grids ---->
         <div class="about-grids">
+            @foreach($clinics as $clinic)
             <div class="col-md-4">
                 <div class="about-grid">
                     <img src="images/img1.jpg" title="name"/>
-                    <span class="t-icon1"> </span>
+                    <span class="t-icon1"></span>
                     <div class="about-grid-info text-center">
-                        <h3><a href="#">Children's specialist</a></h3>
+                        <h3><a href="#">{{ $clinic->name }}</a></h3>
+                        <h3>{{ $clinic->telephone }}</h3>
+                        <h3>{{ $clinic->address }}</h3>
+                        <?php
+//                        die($clinic->workingHours[0]->id);
+                        ?>
+
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting
                             industry. Lorem Ipsum has
                             been the industry's standard dummy text ever since the 1500s,
@@ -219,32 +226,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="about-grid n-about-grid n-about-grid1">
-                    <img src="images/img2.jpg" title="name"/>
-                    <span class="t-icon1"> </span>
-                    <div class="about-grid-info text-center">
-                        <h3><a href="#">Women's specialist</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="about-grid n-about-grid n-about-grid2">
-                    <img src="images/img3.jpg" title="name"/>
-                    <span class="t-icon2"> </span>
-                    <div class="about-grid-info text-center">
-                        <h3><a href="#">men's specialist</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer.</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
             <div class="clearfix"></div>
         </div>
         <!---- About-grids ---->
@@ -333,19 +316,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-5 contact-grid-left">
                         <h4>contact information</h4>
                         <ul>
-                            <select id="clinic_id" name="clinic_id" class="form-control">
-                                <option>Select Clinic Name</option>
-                                @foreach($clinics as $clinic)
-                                    <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
-                                @endforeach
-                            </select>
-                            <li><span class="cal"> </span><label id="day"
-                                                                 name="day"></label>
-                                <small id="fromTime" name="fromTime">00:00</small>
-                                to
-                                <small id="toTime" name="toTime">00:00</small>
-                            </li>
-                            </select>
+
+                            {{--</select>--}}
                             <li><span class="pin"> </span><label>Address :</label>
                                 <small>{{ $userRole->user->address }}</small>
                             </li>

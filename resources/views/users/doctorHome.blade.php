@@ -1,6 +1,6 @@
 @extends('homeViewLayout')
 @section('nav_bar')
-    
+
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -67,25 +67,25 @@
                 <div class="caption">
                     <div id="doctorBio" >
                         <h4>DoctorBio</h4>
-                        <table>
-                            <tr>
-                                <td><h4>DoctorName</h4></td>
-                                <td><h4>:</h4></td>
-                                <td><b>{{ $userRole->user->username }}</b></td>
-                            </tr>
-                            @foreach($userRole->degrees as $data)
-                                <tr>
-                                    <td>Degree</td>
-                                    <td>:</td>
-                                    <td>{{$data->degree}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Description</td>
-                                    <td>:</td>
-                                    <td>{{$data->description}}</td>
-                                </tr>
-                            @endforeach
-                        </table>
+                        {{--<table>--}}
+                            {{--<tr>--}}
+                                {{--<td><h4>DoctorName</h4></td>--}}
+                                {{--<td><h4>:</h4></td>--}}
+                                {{--<td><b>{{ $userRole->user->username }}</b></td>--}}
+                            {{--</tr>--}}
+                            {{--@foreach($userRole->degrees as $data)--}}
+                                {{--<tr>--}}
+                                    {{--<td>Degree</td>--}}
+                                    {{--<td>:</td>--}}
+                                    {{--<td>{{$data->degree}}</td>--}}
+                                {{--</tr>--}}
+                                {{--<tr>--}}
+                                    {{--<td>Description</td>--}}
+                                    {{--<td>:</td>--}}
+                                    {{--<td>{{$data->description}}</td>--}}
+                                {{--</tr>--}}
+                            {{--@endforeach--}}
+                        {{--</table>--}}
                     </div>
                 </div>
             </div>

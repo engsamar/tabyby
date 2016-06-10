@@ -38,17 +38,17 @@
                 </div>
                 <div class="form-group @if($errors->has('day')) has-error @endif">
                     <label for="day-field">Day</label>
-                    <input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>
-                    {{--<select multiple id="type-field" name="type" class="form-control">--}}
-                    {{--@foreach($day as $key=>$types)--}}
-                    {{--@if($working_hour->day==$key)--}}
-                    {{--<option selected value={{ $types[$working_hour->day] }}>{{ $types }}</option>--}}
-                    {{--@else--}}
-                    {{--<option value={{ $key }}>{{ $types }}</option>--}}
-                    {{--@endif--}}
+                    {{--<input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>--}}
+                    <select id="type-field" name="type" class="form-control">
+                    @foreach($day as $key=>$types)
+                    @if($working_hour->day==$key)
+                    <option selected value={{ $types[$working_hour->day] }}>{{ $types }}</option>
+                    @else
+                    <option value={{ $key }}>{{ $types }}</option>
+                    @endif
 
-                    {{--@endforeach--}}
-                    {{--</select>--}}
+                    @endforeach
+                    </select>
                     @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
                     @endif

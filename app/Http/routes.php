@@ -74,6 +74,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("reservations/testing/{key}", "ReservationController@getting");
 
     Route::get("/all_reservation/{id}", "ReservationController@getReservations");
+    Route::post("/reserv/searchByName","ReservationController@getReservationByName");
+    Route::post("/reserv/searchByDate","ReservationController@getReservationByDate");
+    Route::post("/reserv/searchByDuration","ReservationController@getReservationByDuration");
 
 });
 Route::group(['middleware' => ['web']], function () {

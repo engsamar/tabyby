@@ -151,7 +151,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Krucas\LaravelUserEmailVerification\UserEmailVerificationServiceProvider::class,
-        'Cornford\Googlmapper\MapperServiceProvider',
+        Cornford\Googlmapper\MapperServiceProvider::class,
 
 
         /*

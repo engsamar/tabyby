@@ -42,6 +42,7 @@ class ReservationController extends Controller {
 		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"")->with('userRoleType',$userRole);
 	}
 
+
 	public function store(Request $request)
 	{
 		$reservation = new Reservation();
@@ -378,11 +379,11 @@ class ReservationController extends Controller {
 	public function getReservationByDuration()
 	{
 
-		$dateCheckFrom = $request->input("date_from");
+		$dateCheckFrom = $request->input("fromTime");
 		$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheckFrom);
 		$dateCheckFrom = $dateTime->format('Y-m-d');
 
-		$dateCheckTo = $request->input("date_to");
+		$dateCheckTo = $request->input("toTime");
 		$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheckTo);
 		$dateCheckTo = $dateTime->format('Y-m-d');
 

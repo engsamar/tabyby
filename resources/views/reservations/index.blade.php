@@ -6,9 +6,9 @@
     <a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
     </h2>
 </div>
-<div class="form-group @if($errors->has('search_by')) has-error @endif">
-    <label for="search_by-field">Search_by</label>
-    <select id="search_by-field" name="search_by" class="form-control">
+<div class="form-group @if($errors->has('searchRes')) has-error @endif">
+    <select id="searchRes-field" name="searchRes" class="form-control">
+    <option selected value="0">Search By</option>
         <option selected value="0">Name</option>
         <option value="1">Date</option>
         <option value="2">Duration</option>
@@ -30,7 +30,21 @@
         date
     </div>
     <div id="duration-search" hidden>
-        duration
+        <div class="form-group @if($errors->has('fromTime')) has-error @endif">
+       <label for="fromTime-field">From</label>
+       <input type="text" id="fromTime-field" name="fromTime" class="form-control date-picker" value="{{ $fromTime}}"/>
+       @if($errors->has("fromTime"))
+       <span  class="help-block">{{ $errors->first("fromTime") }}</span>
+       @endif
+     </div>
+     <div class="form-group @if($errors->has('toTime')) has-error @endif">
+       <label for="toTime-field">To</label>
+       <input type="text" id="toTime-field" name="toTime" class="form-control date-picker" value="{{ $toTime }}"/>
+       <span id="error" class="help-block"></span>
+       @if($errors->has("toTime"))
+       <span class="help-block">{{ $errors->first("toTime") }}</span>
+       @endif
+     </div>
     </div>
     
 </div>
@@ -99,18 +113,16 @@
 
 $(document).ready()
 {
-    var selected = 0;
     $("#name-search").hide();
     $("#date-search").hide();
     $("#duration-search").hide();
-    $("select[name='search_by']").change(function () {
+    $("select[name='searchRes']").change(function () {
     if (this.value == 1) {
     $("#name-search").show();
     $("#date-search").hide();
     $("#duration-search").hide();
     } 
     if(this.value == 2) {
-    selected = 2;
     $("#date-search").show();
     $("#name-search").hide();
     $("#duration-search").hide();
@@ -121,5 +133,6 @@ $(document).ready()
     $("#duration-search").show();
     }
 });
+};
 </script>
 @endsection

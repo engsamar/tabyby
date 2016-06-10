@@ -12,7 +12,7 @@
         "caouecs/laravel-lang": "~3.0",
         "ablunier/laravel-lang-installer": "^1.0",
         "edvinaskrucas/laravel-user-email-verification": "^1.0",
-        "cornford/googlmapper": "2.*",
+        "cornford/googlmapper": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

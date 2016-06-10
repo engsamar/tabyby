@@ -76,6 +76,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <li><a href="/register" >@lang('validation.register')</a></li>
                             <li><a href="/login" >@lang('validation.login')</a></li>
                             @else
+                             <li><a href="{{ route('messages') }}">Messages @include('messenger.unread-count')</a></li>
+                             <li><a href="{{ route('messages.create') }}">+New Message</a></li>
                             @if($userRoleType==0)
                             <li><a href="/doctorHome" >@lang('validation.home')</a></li>
                             <li class="dropdown">

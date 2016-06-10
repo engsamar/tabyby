@@ -5,7 +5,8 @@
 
 @section('header')
 <div class="page-header">
-    <h4>Reservation No.{{$reservation->id}}</h4>
+    <h4>Reservation No.{{$reservation->complain->user_id}}</h4>
+    {{die()}}
     <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -84,7 +85,7 @@
                 <table class="table" border="1px">
                 <tr><th>Complain</th><th>History of Complain</th><th>Diagnose</th><th>Plan</th></tr>
                     @foreach($complains as $complain)
-                        
+
                         <tr>
                             <td>{{$complain->complain}}</td>
                             <td>{{$complain->h_of_complain}}</td>
@@ -100,8 +101,8 @@
             <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New Examination</a>
                 <table class="table" >
                 <tr><th>Eye</th><th>vision</th><th>Lid</th><th>Conjunctiva</th><th>Pupil</th><th>A/C</th><th>Lens</th><th>Fundus</th><th>I.O.P</th>
-                    <tr>    
-                    @foreach($examinations as $exam) 
+                    <tr>
+                    @foreach($examinations as $exam)
                         <td>{{$exam->eye_type}}  </td>
                         <td>{{$exam->vision}}</td>
                         <td>{{$exam->lid}}</td>
@@ -116,16 +117,16 @@
                 </table>
             </div>
 
-            <div id="content-5">
-                <table class="table">
-                    @foreach($medicines as $medicine)
-                    <tr><td>Medicine</td><td>{{$medicine->medicine_name}}</td></tr>
-                    <tr><td>No. of times</td><td>{{$medicine->no_times}}</td></tr>
-                    <tr><td>Quantity</td><td>{{$medicine->quantity}}</td></tr>
-                    <tr><td>Duration</td><td>{{$medicine->duaration}}</td></tr>
-                    @endforeach
-                </table>
-            </div>
+        <div id="content-5">
+            <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
+            <table class="table">
+                @foreach($medicines as $medicine)
+                <tr><td>Medicine</td><td>{{$medicine->medicine_name}}</td></tr>
+                <tr><td>No. of times</td><td>{{$medicine->no_times}}</td></tr>
+                <tr><td>Quantity</td><td>{{$medicine->quantity}}</td></tr>
+                <tr><td>Duration</td><td>{{$medicine->duaration}}</td></tr>
+                @endforeach
+            </table>
         </div>
     </div>
 

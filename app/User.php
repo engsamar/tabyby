@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Krucas\LaravelUserEmailVerification\Contracts\RequiresEmailVerification as RequiresEmailVerificationContract;
+use Krucas\LaravelUserEmailVerification\RequiresEmailVerification;
 
-class User extends Authenticatable
+class User extends Authenticatable implements RequiresEmailVerificationContract
 {
+    use RequiresEmailVerification;
     public function medicalHistories()
     {
         return $this->hasMany(MedicalHistory::class);
@@ -20,6 +23,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserRole::class);
     }
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

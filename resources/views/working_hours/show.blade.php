@@ -26,7 +26,7 @@
                         <tr>
                             <td>{{$data->fromTime}}</td>
                             <td>{{$data->toTime}}</td>
-                            <td>{{$day[$data->day]}}</td>
+                            <td>{{$data->day}}</td>
                             <td class="text-right">
                                 <form action="{{ route('working_hours.destroy', $data->id) }}" method="POST"
                                       style="display: inline;"

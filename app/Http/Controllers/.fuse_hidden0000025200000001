@@ -247,13 +247,14 @@ class ReservationController extends Controller {
 
 	public function latest()
 	{
+
 		$user = Auth::user();
 		$userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 		$reservations = Reservation::where('date', '=',Carbon::today()->toDateString())->paginate(10);
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'));
 	}
 
 
@@ -283,8 +284,6 @@ class ReservationController extends Controller {
 		$personal_info = [];
 		foreach ($reservations as $reservation) {
 			$personal_info = $reservation->user;
-			print_r($personal_info);
-			die();
 		}
 		
 		return view('users.profile', compact('userRoleType','reservations', 'personal_info','status','reserveType','medicalHistoryType'));	
@@ -367,46 +366,6 @@ class ReservationController extends Controller {
 		return $query;
 
 
-	}
-
-	public function getReservationByName()
-	{
-		$name = $request->input("name");
-		$userId = User::where('username', '=', $name)->value('id');
-		$reservations = Reservation::where('user_id', '=',$userId)->paginate(10);
-		$reserveType =ClinicConstants::$reservationType;
-		$status= ClinicConstants::$status;
-		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
-	}
-	public function getReservationByDate()
-	{
-
-		$dateCheck = $request->input("date");
-		$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
-		$dateCheck = $dateTime->format('Y-m-d');
-		$reservations = Reservation::where('date', '=',$dateCheck)->paginate(10);
-		$reserveType =ClinicConstants::$reservationType;
-		$status= ClinicConstants::$status;
-		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
-	}
-	public function getReservationByDuration()
-	{
-
-		$dateCheckFrom = $request->input("date_from");
-		$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheckFrom);
-		$dateCheckFrom = $dateTime->format('Y-m-d');
-
-		$dateCheckTo = $request->input("date_to");
-		$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheckTo);
-		$dateCheckTo = $dateTime->format('Y-m-d');
-
-		$reservations = Reservation::where('date', '>=',$dateCheckFrom)->where('date', '<=',$dateCheckTo)->paginate(10);
-		$reserveType =ClinicConstants::$reservationType;
-		$status= ClinicConstants::$status;
-		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 	}
 
 }

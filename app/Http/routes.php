@@ -59,15 +59,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("newComplain/{res_id}", "ComplainController@create");
     Route::get("newExamination/{id}", "ExaminationController@create");
 
-    // Route::get("/reservation/{res_id}","ReservationController@getReservations");
-
+    Route::get("/reservation/{res_id}", "ReservationController@getReservations");
     Route::post("/users/checkdata/", "UserController@valid");
-
     Route::get('/home', 'HomeController@index');
-
     Route::post('/medicines/find/', 'MedicineController@find');
     Route::post('/consistitues/find', 'ConsistitueController@find');
+    Route::get("reservations/searchKey/{key}", "ReservationController@searchKey");
 
+//    Route::get('/welcome', function () {
+//        return view('welcome');
+//    });
+//});
+////////////
     Route::get("reservations/searchKey/{key}", "ReservationController@searchKey");
     Route::get("/newPrescriptionDetails/{res_id}", "PrescriptionDetailController@create");
 
@@ -79,9 +82,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post("/reserv/searchByDuration","ReservationController@getReservationByDuration");
     Route::resource("posts","PostController");
 
+
 });
 Route::group(['middleware' => ['web']], function () {
-	Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@switchLang']);
+    Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
 });
 

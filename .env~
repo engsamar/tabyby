@@ -1,12 +1,13 @@
+
 APP_ENV=local
 APP_DEBUG=true
-APP_KEY=SomeRandomString
+APP_KEY=base64:H+ghUXmnhQgCCp6leWTZxUpM+3hRVOdGqcu0UObkZro=
 APP_URL=http://localhost
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=tabyby
+DB_DATABASE=tabybyG
 DB_USERNAME=root
 DB_PASSWORD=iti
 
@@ -24,3 +25,5 @@ MAIL_PORT=2525
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
+
+APP_LOCALE=ar

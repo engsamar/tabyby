@@ -33,7 +33,7 @@
 {{--                            <td>{{$working_hour->id}}</td>--}}
                             <td>{{$working_hour->fromTime}}</td>
                             <td>{{$working_hour->toTime}}</td>
-                            <td>{{$working_hour->day}}</td>
+                            <td>{{$day[$working_hour->day]}}</td>
                             <td>{{$working_hour->clinic->name}}
 
                             </td>

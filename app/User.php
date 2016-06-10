@@ -23,6 +23,7 @@ class User extends Authenticatable implements RequiresEmailVerificationContract
     {
         return $this->hasMany(UserRole::class);
     }
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

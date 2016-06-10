@@ -260,12 +260,19 @@ class ReservationController extends Controller {
 	public function getReservations($id)
 	{
 
-		$reservations = Reservation::where('user_id', $id)->get();	
+		$reservations = Reservation::where('user_id', $id)->get();
+		echo "<pre>";
+		var_dump($reservations);
+		echo "</pre>";
+		die();
+		 foreach ($reservations as $reserv) {
+		 	echo "<pre>";
+		 	var_dump($reserv->id);
+			 echo "</pre>";
 
-		// foreach ($reservations as $reserv) {
-		// 	echo($reserv->complain->complain_details['plan']);
-		// 	die();
-		// }	
+//			 echo($reserv->complain->complain_details['plan']);
+		 	die();
+		 }
         // return view('reservations.all_reservations', compact('reservations'));
 
         $reserveType =ClinicConstants::$reservationType;

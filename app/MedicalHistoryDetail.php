@@ -10,5 +10,5 @@ class MedicalHistoryDetail extends Model
     {
         return $this->belongsTo(MedicalHistory::class);
     }
-   
+    public $timestamps = false;
 }

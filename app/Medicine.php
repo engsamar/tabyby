@@ -15,4 +15,5 @@ class Medicine extends Model
     {
         return $this->hasMany(Consistitue::class);
     }
+    public $timestamps = false;
 }

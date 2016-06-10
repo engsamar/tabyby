@@ -10,4 +10,5 @@ class Consistitue extends Model
     {
         return $this->belongsTo(Medicine::class);
     }
+    public $timestamps = false;
 }

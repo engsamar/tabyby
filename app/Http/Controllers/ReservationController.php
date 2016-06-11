@@ -277,6 +277,7 @@ class ReservationController extends Controller {
 //		}
 //		echo "<pre>";
 //			var_dump($reservations[0]->prescription->PrescriptionDetails[0]["id"]);
+//			var_dump($reservations[0]->id);
 //			echo "</pre>";
 //			die();
         $reserveType =ClinicConstants::$reservationType;

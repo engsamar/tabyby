@@ -20,6 +20,6 @@ class Complain extends Model
     {
         return $this->hasMany(complainDetail::class);
     }
-
+    public $timestamps = false;
   
 }

@@ -15,4 +15,5 @@ class Secertary extends Model
     {
         return $this->belongsTo('App\UserRole');
     }
+    public $timestamps = false;
 }

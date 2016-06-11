@@ -1,19 +1,19 @@
 @extends('homeViewLayout')
 @section('css')
-	<link rel="stylesheet" href="/css/tab.css">
+    <link rel="stylesheet" href="/css/tab.css">
 @endsection
 @section('header')
-	  <meta charset="utf-8">
-	  <title>jQuery UI Accordion - Default functionality</title>
-	  <link rel="stylesheet" href="/css/jquery-ui.css">
-	  <script src="/js/jquery-1.11.2.min.js"></script>
-	  <script src="/js/jquery-ui.min.js"></script>
-	  <link rel="stylesheet" href="/resources/demos/style.css">
-	  <script>
-	  $(function() {
-	    $( "#accordion" ).accordion();
-	  });
-	  </script>
+    <meta charset="utf-8">
+    <title>jQuery UI Accordion - Default functionality</title>
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <script src="/js/jquery-1.11.2.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+        $(function () {
+            $("#accordion").accordion();
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -38,7 +38,7 @@
                     <label for="tab-5">Prescriptions</label>
                     <div id="content">
 
-                        @if(++$i === $numItems)
+                        @if($i++ === $numItems)
                             <div id="content-3">
                                 <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservation->id}}'><i
                                             class="glyphicon glyphicon-eye-open"></i> New Complain</a>
@@ -51,6 +51,11 @@
                             <div id="content-6">
                                 <a class="btn btn-xs btn-primary" href='/examGlassHome/{{$reservation->id}}'><i
                                             class="glyphicon glyphicon-eye-open"></i>ExamGlass</a>
+                            </div>
+
+                            <div id="content-5">
+                                <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservation->id}}'><i
+                                            class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
                             </div>
 
                         @else
@@ -97,31 +102,29 @@
                                 </table>
                             </div>
                             <div id="content-5">
-                                <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservation->id}}'><i
-                                            class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
-                                <table class="table">
-                                    <tr>
-                                        <th>Eye</th>
-                                        <th>vision</th>
-                                        <th>Lid</th>
-                                        <th>Conjunctiva</th>
-                                        <th>Pupil</th>
-                                        <th>A/C</th>
-                                        <th>Lens</th>
-                                        <th>Fundus</th>
-                                        <th>I.O.P</th>
-                                    <tr>
-                                        <td>{{$reservation->examination['eye_type']}}  </td>
-                                        <td>{{$reservation->examination['vision']}}</td>
-                                        <td>{{$reservation->examination['lid']}}</td>
-                                        <td>{{$reservation->examination['conjunctiva']}}</td>
-                                        <td>{{$reservation->examination['pupil']}}</td>
-                                        <td>{{$reservation->examination['a_c']}}</td>
-                                        <td>{{$reservation->examination['lens']}}</td>
-                                        <td>{{$reservation->examination['fundus']}}</td>
-                                        <td>{{$reservation->examination['i_o_p']}}</td>
-                                    </tr>
-                                </table>
+
+                                @foreach($reservation->prescription->PrescriptionDetails as $prescriptionDetail)
+                                    <table class="table">
+                                        <tr>
+                                            <th>id</th>
+                                            <th>medicine_name</th>
+                                            <th>no_times</th>
+                                            <th>quantity</th>
+                                            <th>duaration</th>
+                                            <th>EDIT</th>
+                                        <tr>
+                                            <td>{{$prescriptionDetail["id"]}}  </td>
+                                            <td>{{$prescriptionDetail['medicine_name']}}</td>
+                                            <td>{{$prescriptionDetail['no_times']}}</td>
+                                            <td>{{$prescriptionDetail['quantity']}}</td>
+                                            <td>{{$prescriptionDetail['duaration']}}</td>
+                                            <td><a class="btn btn-xs btn-warning"
+                                                   href="{{ route('prescription_details.edit', $prescriptionDetail["id"]) }}"><i
+                                                            class="glyphicon glyphicon-edit"></i> Edit</a></td>
+                                        </tr>
+                                    </table>
+                                @endforeach
+
                             </div>
                         @endif
                     </div>
@@ -130,14 +133,16 @@
         @endforeach
     </div>
 
-    <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservation->id}}'><i
+    <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservations->id}}'><i
                 class="glyphicon glyphicon-eye-open"></i> New Complain</a>
 
-    <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservation->id}}'><i
+    <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservations->id}}'><i
                 class="glyphicon glyphicon-eye-open"></i> New Examination</a>
     <a class="btn btn-xs btn-primary" href='/createExamGlassHome/{{$reservation->id}}'><i
                 class="glyphicon glyphicon-eye-open"></i> New Exam Glass</a>
 
+    <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservations->id}}'><i
+                class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
     @endsection
     </body>
     </html>

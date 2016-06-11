@@ -11,4 +11,5 @@ class ExamGlass extends Model
     {
         return $this->belongsTo('App\Reservation');
     }
+    public $timestamps = false;
 }

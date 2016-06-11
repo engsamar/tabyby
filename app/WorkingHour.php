@@ -10,6 +10,7 @@ class WorkingHour extends Model
     {
         return $this->belongsTo(Clinic::class);
     }
+    public $timestamps = false;
 }
 
 

@@ -10,4 +10,5 @@ class ReserveType extends Model
     {
         return $this->hasMany(Reservation::class);
     }*/
+    public $timestamps = false;
 }

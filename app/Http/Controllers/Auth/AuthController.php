@@ -23,12 +23,13 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins, VerificationAuthenticatesAndRegistersUsers {
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins; 
+    /*use VerificationAuthenticatesAndRegistersUsers {
         AuthenticatesAndRegistersUsers::redirectPath insteadof VerificationAuthenticatesAndRegistersUsers;
         AuthenticatesAndRegistersUsers::getGuard insteadof VerificationAuthenticatesAndRegistersUsers;
         VerificationAuthenticatesAndRegistersUsers::register insteadof AuthenticatesAndRegistersUsers;
     }
-
+*/
     /**
      * Where to redirect users after login / registration.
      *
@@ -83,6 +84,7 @@ class AuthController extends Controller
             'mobile' => $data['mobile'],
             'address' => $data['address'],
             'birthdate' => $data['birthdate'],
+            'gender' => $data['gender'],
         ]);
         $user_role = new UserRole();
 

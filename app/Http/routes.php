@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource("exam_glasses", "ExamGlassController");
     Route::resource("examGlassHome", "ExamGlassController@examGlass");
+    Route::get("createExamGlassHome/{id}", "ExamGlassController@examGlass");
     Route::get("user_profiles/{id}/", "UserProfileController@index");
     Route::get("patient/{id}", "ReservationController@patientReserv");
     Route::get("/latest", "ReservationController@latest");
@@ -59,7 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get("newMedicalHistory/{id}", "MedicalHistoryController@create");
     Route::get("newComplain/{res_id}", "ComplainController@create");
-    Route::get("newExamination/{id}", "ExaminationController@create");
+    Route::get("insertExamination/{id}", "ExaminationController@doctorExamination");
 
     Route::get("/reservation/{res_id}", "ReservationController@getReservations");
     Route::post("/users/checkdata/", "UserController@valid");

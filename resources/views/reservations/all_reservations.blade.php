@@ -29,7 +29,10 @@
                     <label for="tab-3">Complains</label>
 
                     <input id="tab-4" type="radio" name="tab-group"/>
-                    <label for="tab-4">Examinatoins</label>
+                    <label for="tab-4">Examinations</label>
+
+                    <input id="tab-6" type="radio" name="tab-group"/>
+                    <label for="tab-6">ExamGlass</label>
 
                     <input id="tab-5" type="radio" name="tab-group"/>
                     <label for="tab-5">Prescriptions</label>
@@ -42,8 +45,12 @@
                             </div>
 
                             <div id="content-4">
-                                <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservation->id}}'><i
+                                <a class="btn btn-xs btn-primary" href='/insertExamination/{{$reservation->id}}'><i
                                             class="glyphicon glyphicon-eye-open"></i> New Examination</a>
+                            </div>
+                            <div id="content-6">
+                                <a class="btn btn-xs btn-primary" href='/examGlassHome/{{$reservation->id}}'><i
+                                            class="glyphicon glyphicon-eye-open"></i>ExamGlass</a>
                             </div>
 
                         @else
@@ -128,6 +135,9 @@
 
     <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservation->id}}'><i
                 class="glyphicon glyphicon-eye-open"></i> New Examination</a>
+    <a class="btn btn-xs btn-primary" href='/createExamGlassHome/{{$reservation->id}}'><i
+                class="glyphicon glyphicon-eye-open"></i> New Exam Glass</a>
+
     @endsection
     </body>
     </html>

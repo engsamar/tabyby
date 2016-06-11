@@ -15,9 +15,9 @@ class ExamGlassController extends Controller
      *
      * @return Response
      */
-    public function examGlass()
+    public function examGlass($id)
     {
-        return view('exam_glasses.examGlassHome', ['examGlassType' => ClinicConstants::$examGlassType]);
+        return view('exam_glasses.examGlassHome', ['examGlassType' => ClinicConstants::$examGlassType,'res_id'=>$id]);
     }
 
     public function index()
@@ -32,9 +32,9 @@ class ExamGlassController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('exam_glasses.create', ['examGlassType' => ClinicConstants::$examGlassType]);
+        return view('exam_glasses.create', ['examGlassType' => ClinicConstants::$examGlassType,'res_id'=>$id]);
     }
 
     /**

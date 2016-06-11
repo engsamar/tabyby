@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile');
             $table->string('password');
             $table->date('birthdate');
+            $table->boolean('gender');
             $table->rememberToken();
         });
     }

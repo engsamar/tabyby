@@ -88,46 +88,141 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </div>
                         <!----start-top-nav---->
                         <nav class="top-nav">
-                            <ul class="top-nav">
-                                <li><a href="#about" class="scroll"> @lang('validation.About us')</a></li>
-                                <li><a href="#services" class="scroll">@lang('validation.our services')</a></li>
-                                <li><a href="#team" class="scroll">@lang('validation.our team')</a></li>
-                                <li><a href="#contact" class="scroll">@lang('validation.contact')</a></li>
-                                @if(!Auth::user())
-                                <li><a href="/register" >@lang('validation.register')</a></li>
-                                <li><a href="/login" >@lang('validation.login')</a></li>
-                                @else
-                                @if($userRoleType==0)
-                                <li><a href="/doctorHome" >@lang('validation.home')</a></li>
+        <ul class="top-nav">
+        <li class="dropdown">
+        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Details')
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="#about" class="scroll" >@lang('validation.About us')
+            </a></li>
+            <li><a href="#team" class="scroll" >@lang('validation.our team')
+            </a></li>
+            <li><a href="#services" class="scroll" >@lang('validation.our services')
+            </a></li>
+            <li><a href="#contact" class="scroll" >
+                @lang('validation.contact')
+            </a></li>
+        </ul>
+    </li>
+            @if(!Auth::user())
+    
+    <li class="dropdown">
+    <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.register')
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="/register">
+                @lang('validation.register')
+            </a></li>
+            <li><a href="/login">
+                @lang('validation.login')
+            </a></li>
+        </ul>
+    </li>
+    @else
+    <li class="dropdown">
+        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Messages')
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('messages') }}">
+                    @lang('validation.Messages')
+                </a></li>
+                <li><a href="{{ route('messages.create') }}">
+                    + @lang('validation.New Message')
+                </a></li>
+            </ul>
+        </li>
+        @if($userRoleType==0)
+        <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/reservations/create">
+                        @lang('validation.Add Reservation')
+                    </a></li>
+                    <li><a href="/reservations">
+                        @lang('validation.View Reservation')
+                    </a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Control Panel')
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/secertaries/create">@lang('validation.Add Secretary')</a></li>
+                        <li><a href="/secertaries">@lang('validation.View Secretary')</a></li>
+                        <li><a href="/clinics/create" >@lang('validation.Add Clinic')</a></li>
+                        <li><a href="/clinics" >@lang('validation.View Clinic')</a></li>
+                        <li><a href="/vacations" >@lang('validation.Add Vacation')</a></li>
+                        <li><a href="/vacations" >@lang('validation.View Vacations')</a></li>
+                        <li><a href="/posts" >@lang('validation.Posts')</a></li>
+                        <li><a href="/posts/create" >@lang('validation.Add Posts')</a></li>
+                    </ul>
+                </li>
+                @elseif ($userRoleType==1)
+                <li class="dropdown">
+                    <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
+                            <li><a href="/reservations">@lang('validation.View Reservation')</a></li>
+                        </ul>
+                    </li>
+                    
+                    @else
+                    <li class="dropdown">
+                        <a class="dropdown-toggle"  data-toggle="dropdown">
+                            @lang('validation.Medical History')
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/reservation/{{Auth::user()->id}}" >
+                                    @lang('validation.Medical History')
+                                </a></li>
+                            </ul>
+                        </li>
 
-                                @elseif ($userRoleType==1) 
-                                <li><a href="/secretaryHome" >@lang('validation.home')</a></li>
-                                @else  
-                                <li><a href="/patientHome" >@lang('validation.home')</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
+                                    <li><a href="/patient/{{Auth::user()->id}}">@lang('validation.View Reservation')</a></li>
+                                </ul>
+                            </li>
+                            @endif
+                            <li class="dropdown">
+                                <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Profile')
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                    <li><a href="/users/{{Auth::user()->id}}" >
+                                            @lang('validation.Profile')
+                                        </a></li>
+                                        <li><a href="/users/{{Auth::user()->id}}/edit" >
+                                            @lang('validation.Edit Profile')
+                                        </a></li>
 
+                                        <li><a href="/logout" >
+                                        @lang('validation.logout')</a></li>
+                                    </ul>
+                                </li>
                                 @endif
-                                <li><a href="/logout" >@lang('validation.logout')</a></li>
-                                @endif
-
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         {{ Config::get('languages')[App::getLocale()] }}
-                                    
-                                    <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        @foreach (Config::get('languages') as $lang => $language)
-                                        @if ($lang != App::getLocale())
-                                        <li>
-                                            <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
-                                        </li>
-                                        @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
 
-                            </ul>
-                            <a href="#" id="pull"><img src="/images/menu-icon.png" title="menu"/></a>
-                        </nav>
+                                        <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            @foreach (Config::get('languages') as $lang => $language)
+                                            @if ($lang != App::getLocale())
+                                            <li>
+                                                <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
+                                            </li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <a href="#" id="pull"><img src="/images/menu-icon.png" title="menu"/></a>
+                            </nav>
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -198,17 +293,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div id="about" class="about">
     <div class="container">
         <div class="header about-header text-center">
-            <h2>about us</h2>
+            <h2>Clinics</h2>
             <p></p>
         </div>
         <!---- About-grids ---->
         <div class="about-grids">
+            @foreach($clinics as $clinic)
             <div class="col-md-4">
                 <div class="about-grid">
                     <img src="images/img1.jpg" title="name"/>
-                    <span class="t-icon1"> </span>
+                    <span class="t-icon1"></span>
                     <div class="about-grid-info text-center">
-                        <h3><a href="#">Children's specialist</a></h3>
+                        <h3><a href="#">{{ $clinic->name }}</a></h3>
+                        <h3>{{ $clinic->telephone }}</h3>
+                        <h3>{{ $clinic->address }}</h3>
+                        <?php
+//                        die($clinic->workingHours[0]->id);
+                        ?>
+
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting
                             industry. Lorem Ipsum has
                             been the industry's standard dummy text ever since the 1500s,
@@ -216,32 +318,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="about-grid n-about-grid n-about-grid1">
-                    <img src="images/img2.jpg" title="name"/>
-                    <span class="t-icon1"> </span>
-                    <div class="about-grid-info text-center">
-                        <h3><a href="#">Women's specialist</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="about-grid n-about-grid n-about-grid2">
-                    <img src="images/img3.jpg" title="name"/>
-                    <span class="t-icon2"> </span>
-                    <div class="about-grid-info text-center">
-                        <h3><a href="#">men's specialist</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer.</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
             <div class="clearfix"></div>
         </div>
         <!---- About-grids ---->
@@ -330,19 +408,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-5 contact-grid-left">
                         <h4>contact information</h4>
                         <ul>
-                            <select id="clinic_id" name="clinic_id" class="form-control">
-                                <option>Select Clinic Name</option>
-                                @foreach($clinics as $clinic)
-                                    <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
-                                @endforeach
-                            </select>
-                            <li><span class="cal"> </span><label id="day"
-                                                                 name="day"></label>
-                                <small id="fromTime" name="fromTime">00:00</small>
-                                to
-                                <small id="toTime" name="toTime">00:00</small>
-                            </li>
-                            </select>
+
+                            {{--</select>--}}
                             <li><span class="pin"> </span><label>Address :</label>
                                 <small>{{ $userRole->user->address }}</small>
                             </li>
@@ -412,6 +479,58 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 <!--- copy-right ---->
+
+
+
+
+
+ <script src="{{ asset('/js/all.js') }}" type="text/javascript"></script>
+    @if(Auth::check())
+        <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var pusher = new Pusher('{{Config::get('pusher.appKey')}}');
+            var channel = pusher.subscribe('for_user_{{Auth::id()}}');
+            channel.bind('new_message', function(data) {
+                var thread = $('#' + data.div_id);
+                var thread_id = data.thread_id;
+                var thread_plain_text = data.text;
+
+                if (thread.length) {
+                    // add new message to thread
+                    thread.append(data.html);
+
+                    // make sure the thread is set to read
+                    $.ajax({
+                        url: "/messages/" + thread_id + "/read"
+                    });
+                } else {
+                    var message = '<p>' + data.sender_name + ' said: ' + data.text + '</p><p><a href="' + data.thread_url + '">View Message</a></p>';
+
+                    // notify the user
+                    $.growl.notice({ title: data.thread_subject, message: message });
+
+                    // set unread count
+                    $.ajax({
+                        url: "{{route('messages.unread')}}"
+                    }).success(function( data ) {
+                        var div = $('#unread_messages');
+
+                        var count = data.msg_count;
+                        if (count == 0) {
+                            $(div).addClass('hidden');
+                        } else {
+                            $(div).text(count).removeClass('hidden');
+
+                            // if on messages.index - add alert class and update latest message
+                            $('#thread_list_' + thread_id).addClass('alert-info');
+                            $('#thread_list_' + thread_id + '_text').html(thread_plain_text);
+                        }
+                    });
+                }
+            });
+        </script>
+    @endif
+    
 </body>
 </html>
 

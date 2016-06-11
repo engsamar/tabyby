@@ -39,12 +39,12 @@
                 <div class="form-group @if($errors->has('day')) has-error @endif">
                     <label for="day-field">Day</label>
                     {{--<input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>--}}
-                    <select id="type-field" name="type" class="form-control">
+                    <select id="day-field" name="day" class="form-control">
                     @foreach($day as $key=>$types)
-                    @if($working_hour->day==$key)
-                    <option selected value={{ $types[$working_hour->day] }}>{{ $types }}</option>
+                    @if($working_hour->day==$types)
+                    <option selected value={{ $types }}>{{ $types }}</option>
                     @else
-                    <option value={{ $key }}>{{ $types }}</option>
+                    <option value={{ $types }}>{{ $types }}</option>
                     @endif
 
                     @endforeach
@@ -56,7 +56,7 @@
                 <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
                     <label for="clinic_id-field">Clinic_name</label>
                     <input type="text" id="clinic_id-field" name="clinic_id" class="form-control"
-                           value="{{ $working_hour->clinic->name}}"/>
+                           value="{{ $working_hour->clinic->id}}"/>
                     @if($errors->has("clinic_id"))
                         <span class="help-block">{{ $errors->first("clinic_id") }}</span>
                     @endif

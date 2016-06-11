@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("patients/{id}", "ReservationController@patient");
     Route::get("/working_hours/date/{id}", "WorkingHourController@retreve");
     Route::get("/working_hours/{id}", "WorkingHourController@update");
+    Route::get("/working_hours/create/{id}", "WorkingHourController@create");
+
     Route::resource("exam_glass_notes", "ExamGlassNoteController");
 
     Route::get("newMedicalHistory/{id}", "MedicalHistoryController@create");
@@ -77,9 +79,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("reservations/testing/{key}", "ReservationController@getting");
 
     Route::get("/all_reservation/{id}", "ReservationController@getReservations");
-    Route::post("/reserv/searchByName", "ReservationController@getReservationByName");
-    Route::post("/reserv/searchByDate", "ReservationController@getReservationByDate");
-    Route::post("/reserv/searchByDuration", "ReservationController@getReservationByDuration");
+    Route::post("/reserv/searchByName","ReservationController@getReservationByName");
+    Route::post("/reserv/searchByDate","ReservationController@getReservationByDate");
+    Route::post("/reserv/searchByDuration","ReservationController@getReservationByDuration");
+    Route::resource("posts","PostController");
+
 
 });
 Route::group(['middleware' => ['web']], function () {
@@ -104,3 +108,16 @@ Route::get('verify/{token?}', [
     'uses' => 'Auth\VerifyController@verify',
     'as' => 'verification.verify',
 ]);
+Route::group(['prefix' => 'messages', 'before' => 'auth'], function () {
+    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+    Route::get('{id}/read', ['as' => 'messages.read', 'uses' => 'MessagesController@read']);
+    Route::get('unread', ['as' => 'messages.unread', 'uses' => 'MessagesController@unread']);
+    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+});
+Route::get('/welcome', function()
+{
+   return view('welcome');
+});

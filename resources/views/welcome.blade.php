@@ -17,6 +17,7 @@
                      </br>
                     @lang('validation.register')
                      </br>
+                     <div class="quote">{{ Inspiring::quote() }}</div>
                 </div>
             </div>
         </div>

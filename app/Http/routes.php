@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("patients/{id}", "ReservationController@patient");
     Route::get("/working_hours/date/{id}", "WorkingHourController@retreve");
     Route::get("/working_hours/{id}", "WorkingHourController@update");
+    Route::get("/working_hours/create/{id}", "WorkingHourController@create");
+
     Route::resource("exam_glass_notes", "ExamGlassNoteController");
 
     Route::get("newMedicalHistory/{id}", "MedicalHistoryController@create");

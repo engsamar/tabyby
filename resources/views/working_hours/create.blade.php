@@ -38,7 +38,7 @@
        {{--<input type="text" id="day-field" name="day" class="form-control" value="{{ old("day") }}"/>--}}
        <select id="day-field" name="day" class="form-control">
        @foreach($day as $key=>$value)
-       <option value={{ $key }}>{{ $value }}</option>
+       <option value={{ $value }}>{{ $value }}</option>
        @endforeach
        </select>
        <span id="error" class="help-block"></span>

@@ -105,6 +105,7 @@ class WorkingHourController extends Controller
     public function update(Request $request, $id)
     {
 //
+//        die($request);
         $working_hour = WorkingHour::findOrFail($id);
 
         $working_hour->fromTime = $request->input("fromTime");
@@ -115,7 +116,7 @@ class WorkingHourController extends Controller
         if (!empty($request->input("clinic_id"))) {
             $working_hour->clinic_id = $request->input("clinic_id");
             $working_hour->save();
-            return Redirect::back();
+            return Redirect('working_hours/'.$request->input("clinic_id").'');
         } else {
             $name = $request->input("clinic_id");
             $clinic = Clinic::where('name', $name)->first();

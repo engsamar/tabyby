@@ -35,7 +35,7 @@
                     <label for="tab-5">Prescriptions</label>
                     <div id="content">
 
-                        @if(++$i === $numItems)
+                        @if($i++ === $numItems)
                             <div id="content-3">
                                 <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservation->id}}'><i
                                             class="glyphicon glyphicon-eye-open"></i> New Complain</a>
@@ -44,6 +44,11 @@
                             <div id="content-4">
                                 <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservation->id}}'><i
                                             class="glyphicon glyphicon-eye-open"></i> New Examination</a>
+                            </div>
+
+                            <div id="content-5">
+                                <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservation->id}}'><i
+                                            class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
                             </div>
 
                         @else
@@ -90,31 +95,27 @@
                                 </table>
                             </div>
                             <div id="content-5">
-                                <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservation->id}}'><i
-                                            class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
+
+                                @foreach($reservation->prescription->PrescriptionDetails as $prescriptionDetail)
                                 <table class="table">
                                     <tr>
-                                        <th>Eye</th>
-                                        <th>vision</th>
-                                        <th>Lid</th>
-                                        <th>Conjunctiva</th>
-                                        <th>Pupil</th>
-                                        <th>A/C</th>
-                                        <th>Lens</th>
-                                        <th>Fundus</th>
-                                        <th>I.O.P</th>
+                                        <th>id</th>
+                                        <th>medicine_name</th>
+                                        <th>no_times</th>
+                                        <th>quantity</th>
+                                        <th>duaration</th>
+                                    <th>EDIT</th>
                                     <tr>
-                                        <td>{{$reservation->examination['eye_type']}}  </td>
-                                        <td>{{$reservation->examination['vision']}}</td>
-                                        <td>{{$reservation->examination['lid']}}</td>
-                                        <td>{{$reservation->examination['conjunctiva']}}</td>
-                                        <td>{{$reservation->examination['pupil']}}</td>
-                                        <td>{{$reservation->examination['a_c']}}</td>
-                                        <td>{{$reservation->examination['lens']}}</td>
-                                        <td>{{$reservation->examination['fundus']}}</td>
-                                        <td>{{$reservation->examination['i_o_p']}}</td>
+                                        <td>{{$prescriptionDetail["id"]}}  </td>
+                                        <td>{{$prescriptionDetail['medicine_name']}}</td>
+                                        <td>{{$prescriptionDetail['no_times']}}</td>
+                                        <td>{{$prescriptionDetail['quantity']}}</td>
+                                        <td>{{$prescriptionDetail['duaration']}}</td>
+                                        <td><a class="btn btn-xs btn-warning" href="{{ route('prescription_details.edit', $prescriptionDetail["id"]) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
                                     </tr>
                                 </table>
+                                @endforeach
+
                             </div>
                         @endif
                     </div>
@@ -128,6 +129,8 @@
 
     <a class="btn btn-xs btn-primary" href='/newExamination/{{$reservation->id}}'><i
                 class="glyphicon glyphicon-eye-open"></i> New Examination</a>
+    <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservation->id}}'><i
+                class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
     @endsection
     </body>
     </html>

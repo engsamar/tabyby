@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Complain;
 use Illuminate\Http\Request;
 use App\ComplainDetail;
+use Auth;
 
 use Illuminate\Support\Facades\Redirect;
 class ComplainController extends Controller {
@@ -24,7 +25,11 @@ class ComplainController extends Controller {
 
 	public function create($res_id)
 	{
-		return view('complains.create',['res_id'=>$res_id]);
+
+	 	$user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
+		return view('complains.create',['res_id'=>$res_id, 'userRoleType'=>$userRoleType]);
 	}
 
 	// href="{!!route('route', ['key'=>'value'])!!}"

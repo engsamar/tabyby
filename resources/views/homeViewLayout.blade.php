@@ -172,7 +172,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </li>
         @endif
         <li class="dropdown">
-            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Profile')
+            <a class="dropdown-toggle"  data-toggle="dropdown">{{ Auth::user()->username }}
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                 <li><a href="/users/{{Auth::user()->id}}" >

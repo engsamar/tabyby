@@ -68,9 +68,12 @@ rel="stylesheet">
             </div>
 
             <div class="well well-sm">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Reserve</button>
+                @if($userRole == 1)
                 <button type="button" class="btn btn-primary"><a href="{{ route('users.create') }}"
+
                  style="color:white">New User</a></button>
+                 @endif
                  <a class="btn btn-link pull-right" href="{{ route('reservations.index') }}"><i
                     class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>

@@ -16,6 +16,6 @@ class ClinicConstants{
     public static $reservationType=array('examination','firstConsultation','secondConsultation','thirdConsultation','glassesPrescription');
     public static $medicineType=array('eye_drops','eye_ointment','capsule','tablet','syurp','suspension','Anti_glucoma','Lubricant');
     public static $day=array('saturday', 'sunday','monday','tuesday','wednesday','thursday','friday'); //multiple value not done
-    public static $status=array('cancelled','postponed','onTime'); //not done yet
+    public static $status=array('cancelled','postponed','onTime','waiting'); //not done yet
     public static $examGlassType=array('withCyclo','C.L','Far','Near','UCVA','BCVA');
 }

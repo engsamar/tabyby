@@ -38,7 +38,7 @@ class User extends Authenticatable implements RequiresEmailVerificationContract
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password','address', 'telephone', 'mobile', 'birthdate',
+        'username', 'email', 'password','address', 'telephone', 'mobile', 'birthdate','gender'
     ];
 
     /**

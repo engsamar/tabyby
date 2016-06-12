@@ -124,6 +124,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->input("password"));
         $user->birthdate = $request->input("birthdate");
         $user->password = $request->input("password");
+        $user->gender=$request->input("gender");
         $user->save();
 
         return redirect()->route('reservations.index')->with('message', 'Item created successfully.');

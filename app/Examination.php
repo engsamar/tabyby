@@ -10,4 +10,5 @@ class Examination extends Model
     {
         return $this->belongsTo('App\Reservation');
     }
+    public $timestamps = false;
 }

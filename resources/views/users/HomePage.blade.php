@@ -88,49 +88,141 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </div>
                         <!----start-top-nav---->
                         <nav class="top-nav">
-                            <ul class="top-nav">
-                                <li><a href="#about" class="scroll"> @lang('validation.About us')</a></li>
-                                <li><a href="#services" class="scroll">@lang('validation.our services')</a></li>
-                                <li><a href="#team" class="scroll">@lang('validation.our team')</a></li>
-                                <li><a href="#contact" class="scroll">@lang('validation.contact')</a></li>
-                                @if(!Auth::user())
-                                <li><a href="/register" >@lang('validation.register')</a></li>
-                                <li><a href="/login" >@lang('validation.login')</a></li>
-                                @else
-                                     <li><a href="{{ route('messages') }}">Messages @include('messenger.unread-count')</a></li>
-                             <li><a href="{{ route('messages.create') }}">+New Message</a></li>
+        <ul class="top-nav">
+        <li class="dropdown">
+        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Details')
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="#about" class="scroll" >@lang('validation.About us')
+            </a></li>
+            <li><a href="#team" class="scroll" >@lang('validation.our team')
+            </a></li>
+            <li><a href="#services" class="scroll" >@lang('validation.our services')
+            </a></li>
+            <li><a href="#contact" class="scroll" >
+                @lang('validation.contact')
+            </a></li>
+        </ul>
+    </li>
+            @if(!Auth::user())
+    
+    <li class="dropdown">
+    <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.register')
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="/register">
+                @lang('validation.register')
+            </a></li>
+            <li><a href="/login">
+                @lang('validation.login')
+            </a></li>
+        </ul>
+    </li>
+    @else
+    <li class="dropdown">
+        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Messages')
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('messages') }}">
+                    @lang('validation.Messages')
+                </a></li>
+                <li><a href="{{ route('messages.create') }}">
+                    + @lang('validation.New Message')
+                </a></li>
+            </ul>
+        </li>
+        @if($userRoleType==0)
+        <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/reservations/create">
+                        @lang('validation.Add Reservation')
+                    </a></li>
+                    <li><a href="/reservations">
+                        @lang('validation.View Reservation')
+                    </a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Control Panel')
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/secertaries/create">@lang('validation.Add Secretary')</a></li>
+                        <li><a href="/secertaries">@lang('validation.View Secretary')</a></li>
+                        <li><a href="/clinics/create" >@lang('validation.Add Clinic')</a></li>
+                        <li><a href="/clinics" >@lang('validation.View Clinic')</a></li>
+                        <li><a href="/vacations" >@lang('validation.Add Vacation')</a></li>
+                        <li><a href="/vacations" >@lang('validation.View Vacations')</a></li>
+                        <li><a href="/posts" >@lang('validation.Posts')</a></li>
+                        <li><a href="/posts/create" >@lang('validation.Add Posts')</a></li>
+                    </ul>
+                </li>
+                @elseif ($userRoleType==1)
+                <li class="dropdown">
+                    <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
+                            <li><a href="/reservations">@lang('validation.View Reservation')</a></li>
+                        </ul>
+                    </li>
+                    
+                    @else
+                    <li class="dropdown">
+                        <a class="dropdown-toggle"  data-toggle="dropdown">
+                            @lang('validation.Medical History')
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/reservation/{{Auth::user()->id}}" >
+                                    @lang('validation.Medical History')
+                                </a></li>
+                            </ul>
+                        </li>
 
-                                @if($userRoleType==0)
-                                <li><a href="/doctorHome" >@lang('validation.home')</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
+                                    <li><a href="/patient/{{Auth::user()->id}}">@lang('validation.View Reservation')</a></li>
+                                </ul>
+                            </li>
+                            @endif
+                            <li class="dropdown">
+                                <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Profile')
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                    <li><a href="/users/{{Auth::user()->id}}" >
+                                            @lang('validation.Profile')
+                                        </a></li>
+                                        <li><a href="/users/{{Auth::user()->id}}/edit" >
+                                            @lang('validation.Edit Profile')
+                                        </a></li>
 
-                                @elseif ($userRoleType==1) 
-                                <li><a href="/secretaryHome" >@lang('validation.home')</a></li>
-                                @else  
-                                <li><a href="/patientHome" >@lang('validation.home')</a></li>
-
+                                        <li><a href="/logout" >
+                                        @lang('validation.logout')</a></li>
+                                    </ul>
+                                </li>
                                 @endif
-                                <li><a href="/logout" >@lang('validation.logout')</a></li>
-                                @endif
-
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         {{ Config::get('languages')[App::getLocale()] }}
-                                    
-                                    <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        @foreach (Config::get('languages') as $lang => $language)
-                                        @if ($lang != App::getLocale())
-                                        <li>
-                                            <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
-                                        </li>
-                                        @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
 
-                            </ul>
-                            <a href="#" id="pull"><img src="/images/menu-icon.png" title="menu"/></a>
-                        </nav>
+                                        <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            @foreach (Config::get('languages') as $lang => $language)
+                                            @if ($lang != App::getLocale())
+                                            <li>
+                                                <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
+                                            </li>
+                                            @endif
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <a href="#" id="pull"><img src="/images/menu-icon.png" title="menu"/></a>
+                            </nav>
                         <div class="clearfix"></div>
                     </div>
                 </div>

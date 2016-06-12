@@ -29,7 +29,7 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        return view('medicines.create', ['medicineType' => ClinicConstants::$medicineType]);
+        return view('medicines.create', ['medicineType' => ClinicConstants::$medicineType],['constituent'=>Consistitue::all()]);
     }
 
     /**
@@ -45,6 +45,7 @@ class MedicineController extends Controller
         $medicine->name = $request->input("name");
         $medicine->type = $request->input("type");
         $medicine->company = $request->input("company");
+        $medicine->consistitue_id=$request->input("constituent");
 
         $medicine->save();
 
@@ -73,8 +74,9 @@ class MedicineController extends Controller
     public function edit($id)
     {
         $medicine = Medicine::findOrFail($id);
+        $constituent=Consistitue::all();
 
-        return view('medicines.edit', compact('medicine'), ['medicineType' => ClinicConstants::$medicineType]);
+        return view('medicines.edit', compact('medicine','constituent'), ['medicineType' => ClinicConstants::$medicineType]);
     }
 
     /**
@@ -91,6 +93,7 @@ class MedicineController extends Controller
         $medicine->name = $request->input("name");
         $medicine->type = $request->input("type");
         $medicine->company = $request->input("company");
+        $medicine->consistitue_id=$request->input("constituent");
 
         $medicine->save();
 

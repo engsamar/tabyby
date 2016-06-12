@@ -10,4 +10,5 @@ class ComplainDetail extends Model
     {
         return $this->belongsTo('App\Complain');
     }
+    public $timestamps = false;
 }

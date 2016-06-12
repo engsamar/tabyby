@@ -81,8 +81,8 @@
                     {{--</div>--}}
                     {{--<div class="form-group @if($errors->has('reservation_id')) has-error @endif">--}}
                     <label for="reservation_id-field">Reservation_id</label>
-                    <input type="text" id="reservation_id-field" name="reservation_id" class="form-control"
-                           value="{{ old("reservation_id") }}"/>
+                    <input type="hidden" id="reservation_id-field" name="reservation_id" class="form-control"
+                           value="{{ $res_id }}"/>
                     @if($errors->has("reservation_id"))
                         <span class="help-block">{{ $errors->first("reservation_id") }}</span>
                     @endif

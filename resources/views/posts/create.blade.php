@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form action="{{ route('posts.store') }}" method="POST">
+            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group @if($errors->has('title')) has-error @endif">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group @if($errors->has('content')) has-error @endif">
                        <label for="content-field">Content</label>
-                    <input type="text" id="content-field" name="content" class="form-control" value="{{ old("content") }}"/>
+                    <textarea rows="7" id="content-field" name="content" class="form-control" value="{{ old("content") }}"></textarea>
                        @if($errors->has("content"))
                         <span class="help-block">{{ $errors->first("content") }}</span>
                        @endif

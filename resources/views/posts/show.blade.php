@@ -35,8 +35,7 @@
                      <p class="form-control-static">{{$post->user_id}}</p>
                 </div>
                     <div class="form-group">
-                     <label for="picture_path">PICTURE_PATH</label>
-                     <p class="form-control-static">{{$post->picture_path}}</p>
+                    <img class="img-rounded" width="300" height="200" src="{{URL::asset('/images/posts/'.$post->picture_path )}}">
                 </div>
             </form>
 

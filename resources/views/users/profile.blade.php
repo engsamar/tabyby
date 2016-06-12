@@ -29,6 +29,7 @@
                         <td>{{$personal_info->mobile}}</td>
                         <td>{{$personal_info->password}}</td>
                         <td>{{$personal_info->birthdate}}</td>
+                        <td>{{$personal_info->gender}}</td>
                         <td class="text-right">
                             <a class="btn btn-xs btn-warning" href="{{ route('users.edit', $personal_info->id) }}"><i
                                         class="glyphicon glyphicon-edit"></i> Edit</a>

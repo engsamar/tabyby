@@ -42,6 +42,11 @@
                      <label for="birthdate">BIRTHDATE</label>
                      <p class="form-control-static">{{$user->birthdate}}</p>
                 </div>
+                </div>
+                    <div class="form-group">
+                     <label for="gender">GENDER</label>
+                     <p class="form-control-static">{{$user->gender}}</p>
+                </div>
             </form>
 
             <a class="btn btn-link" href="{{ route('users.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>

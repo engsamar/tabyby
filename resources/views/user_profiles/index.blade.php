@@ -8,6 +8,7 @@
 		echo "adress: ".($user->address)."<br />";
 		echo "tel: ".($user->telephone)."<br />";
 		echo "mobile".($user->mobile)."<br />";
+		echo "gender".($user->gender)."<br />";
 		echo "\n";
 	}
 
@@ -31,7 +32,8 @@
 
 	echo "<br /><b>Examinatoins: </b><br />";
 	foreach ($examinations as $exam) {
-		echo "Time of reservation: ".($exam->time)."<br />";
+		echo "Date of reservation: ".($exam->date)."<br />";
+		echo "Appointment of reservation: ".($exam->appointment)."<br />";
 		echo "Eye: ";
 		if(($exam->eye_type) == 0) echo 'left'; else echo 'right'; echo "<br />";
 		echo "vision: ".($exam->vision)."<br />";

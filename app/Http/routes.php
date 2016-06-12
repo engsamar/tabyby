@@ -28,12 +28,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("role_types", "RoleTypeController");
     Route::resource("/insertExamination", "ExaminationController@doctorExamination");
 
-    Route::resource("user_profiles", "UserProfileController");
     Route::resource("prescription_details", "PrescriptionDetailController");
     Route::resource("prescriptions", "PrescriptionController");
     Route::resource("vacations", "VacationController");
-
-    Route::get("user_profiles/{id}", "UserProfileController@index");
 
     Route::resource("exam_glasses", "ExamGlassController");
     Route::resource("examGlassHome", "ExamGlassController@examGlass");
@@ -53,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("insertExamination/{id}", "ExaminationController@doctorExamination");
 
     Route::get("/reservation/{res_id}", "ReservationController@getReservations");
+    Route::get("/patientReservation", "ReservationController@patientReservations");
+
     Route::post("/users/checkdata/", "UserController@valid");
     Route::get('/home', 'HomeController@index');
     Route::post('/medicines/find/', 'MedicineController@find');

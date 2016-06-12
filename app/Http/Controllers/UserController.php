@@ -126,6 +126,10 @@ class UserController extends Controller
         $user->password = $request->input("password");
         $user->gender=$request->input("gender");
         $user->save();
+        $user_role = new UserRole();
+        $user_role->type = 2;
+        $user_role->user_id=$user->id;
+        $user_role->save();
 
         return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
     }

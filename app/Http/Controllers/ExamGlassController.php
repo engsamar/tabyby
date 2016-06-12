@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\ClinicConstants;
 use App\ExamGlass;
 use Illuminate\Http\Request;
-
+use Auth;
 class ExamGlassController extends Controller
 {
 
@@ -17,7 +17,9 @@ class ExamGlassController extends Controller
      */
     public function examGlass($id)
     {
-        return view('exam_glasses.examGlassHome', ['examGlassType' => ClinicConstants::$examGlassType,'res_id'=>$id]);
+        $user = Auth::user();
+        $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+        return view('exam_glasses.examGlassHome', ['examGlassType' => ClinicConstants::$examGlassType,'res_id'=>$id, 'userRoleType'=>$userRoleType]);
     }
 
     public function index()

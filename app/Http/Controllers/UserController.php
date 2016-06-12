@@ -143,8 +143,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user', 'userRoleType'));
     }
 
     /**

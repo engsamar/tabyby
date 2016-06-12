@@ -8,6 +8,7 @@ use App\Medicine;
 use App\Prescription;
 use App\PrescriptionDetail;
 use Illuminate\Http\Request;
+use Auth;
 
 class PrescriptionDetailController extends Controller
 {
@@ -21,6 +22,8 @@ class PrescriptionDetailController extends Controller
 
     public function create($res_id)
     {
+        $user = Auth::user();
+        $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
         $medicineType = ClinicConstants::$medicineType;
 //		$prescription= Prescription::all();
 //        echo "<pre>";
@@ -37,7 +40,7 @@ class PrescriptionDetailController extends Controller
             $prescription->reservation_id = $res_id;
             $prescription->save();
         }
-        return view('prescription_details.create', compact('medicineType', 'res_id'));
+        return view('prescription_details.create', compact('medicineType', 'res_id', 'userRoleType'));
     }
 
     public function store(Request $request)

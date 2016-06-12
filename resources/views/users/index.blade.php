@@ -1,4 +1,4 @@
-{{--@extends('homeViewLayout')--}}
+@extends('homeViewLayout')
 
 @section('header')
     <div class="page-header clearfix">

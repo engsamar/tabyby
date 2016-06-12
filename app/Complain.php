@@ -18,7 +18,7 @@ class Complain extends Model
 
     public function complainDetail()
     {
-        return $this->hasMany(complainDetail::class);
+        return $this->hasMany(ComplainDetail::class);
     }
     public $timestamps = false;
   

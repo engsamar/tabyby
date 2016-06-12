@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\ClinicConstants;
 use App\Examination;
 use Illuminate\Http\Request;
+use Auth;
 
 class ExaminationController extends Controller {
 
@@ -15,7 +16,9 @@ class ExaminationController extends Controller {
 	 */
 	public function doctorExamination($id)
 	{
-		return view('examinations.insertExam',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision,'res_id'=>$id]);
+	 	$user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		return view('examinations.insertExam',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision,'res_id'=>$id, 'userRoleType'=>$userRoleType]);
 	}
 
 	public function index()
@@ -32,8 +35,12 @@ class ExaminationController extends Controller {
 	 */
 	public function create($res_id)
 	{
+        $user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
 		return view('examinations.create',['res_id'=>$res_id,
-			'eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
+			'eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision,
+			'userRoleType'=>$userRoleType]);
 	}
 
 	/**

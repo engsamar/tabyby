@@ -44,7 +44,6 @@ class UserController extends Controller
         //select all clinics address
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
-
         return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
     }
 

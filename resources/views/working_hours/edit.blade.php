@@ -36,23 +36,19 @@
                         <span class="help-block">{{ $errors->first("toTime") }}</span>
                     @endif
                 </div>
-                <div class="form-group @if($errors->has('day')) has-error @endif">
-                    <label for="day-field">Day</label>
-                    <input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>
-                    {{--<select multiple id="type-field" name="type" class="form-control">--}}
-                    {{--@foreach($day as $key=>$types)--}}
-                    {{--@if($working_hour->day==$key)--}}
-                    {{--<option selected value={{ $types[$working_hour->day] }}>{{ $types }}</option>--}}
-                    {{--@else--}}
-                    {{--<option value={{ $key }}>{{ $types }}</option>--}}
-                    {{--@endif--}}
-
-                    {{--@endforeach--}}
-                    {{--</select>--}}
-                    @if($errors->has("day"))
-                        <span class="help-block">{{ $errors->first("day") }}</span>
-                    @endif
-                </div>
+                 <div class="form-group @if($errors->has('day')) has-error @endif">
+                   <label for="day-field">Day</label>
+                   <input type="text" id="day-field" name="day" class="form-control" value="{{ old("day") }}"/>
+                   {{--<select multiple id="type-field" name="type" class="form-control">--}}
+                   {{--@foreach($day as $key=>$value)--}}
+                   {{--<option value={{ $key }}>{{ $value }}</option>--}}
+                   {{--@endforeach--}}
+                   {{--</select>--}}
+                   <span id="error" class="help-block"></span>
+                   @if($errors->has("day"))
+                   <span class="help-block">{{ $errors->first("day") }}</span>
+                   @endif
+                 </div>
                 <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
                     <label for="clinic_id-field">Clinic_name</label>
                     <input type="text" id="clinic_id-field" name="clinic_id" class="form-control"

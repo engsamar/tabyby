@@ -36,7 +36,7 @@
                                 @endforeach
                             </select>
                             <input type="hidden" id="clinic_id" name="clinic_id" class="form-control"/>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </form>
 
                     </div>

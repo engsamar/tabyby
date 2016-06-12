@@ -4,6 +4,7 @@
     <h2>
     <i class="glyphicon glyphicon-align-justify"></i>Reservations
     <a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
+     <a class="btn btn-primary pull-right" href="/latest"><i class="glyphicon glyphicon-eye-open"></i>Reservations</a>
     </h2>
 </div>
 <div class="form-group @if($errors->has('searchRes')) has-error @endif">

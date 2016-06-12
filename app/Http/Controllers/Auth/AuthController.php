@@ -86,6 +86,8 @@ class AuthController extends Controller
             'birthdate' => $data['birthdate'],
             'gender' => $data['gender'],
         ]);
+
+        
         $user_role = new UserRole();
 
         $user_role->type = 2;

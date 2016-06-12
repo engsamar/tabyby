@@ -87,8 +87,11 @@ rel="stylesheet">
     @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script>
+        var nowDate = new Date();
+        var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
         $('.date-picker').datepicker({
             dateFormate:'yyyy/mm/dd ',
+            startDate: today,
         });
     </script>
     @endsection

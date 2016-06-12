@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ClinicConstants;
-
+use Illuminate\Support\Facades\Redirect;
 use App\Medicine;
 use App\Prescription;
 use App\PrescriptionDetail;
@@ -23,21 +23,21 @@ class PrescriptionDetailController extends Controller
     {
         $medicineType = ClinicConstants::$medicineType;
 //		$prescription= Prescription::all();
-        echo "<pre>";
-        var_dump($res_id);
-        echo "</pre>";
-        die("end");
-        $exist = Prescription::where('reservation_id', '=', '2')->get();
+//        echo "<pre>";
+//        var_dump($res_id);
+//        echo "</pre>";
+//        die("end");
+        $exist = Prescription::where('reservation_id', '=', $res_id)->get();
         if (count($exist) == 0) {
 //			echo "<pre>";
 //			var_dump($exist);
 //			echo "</pre>";
 //			die("end");
             $prescription = new Prescription();
-            $prescription->reservation_id = 2;
+            $prescription->reservation_id = $res_id;
             $prescription->save();
         }
-        return view('prescription_details.create', compact('medicineType'));
+        return view('prescription_details.create', compact('medicineType', 'res_id'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class PrescriptionDetailController extends Controller
             'medicine_name' => 'required|string',
             'no_times' => 'required|numeric|min:1|max:100',
             'quantity' => 'required|numeric|min:1|max:100',
-            'duaration' => 'required|numeric|min:1|max:100',
+            'duration' => 'required|numeric|min:1|max:100',
             'no_times' => 'required|numeric|min:1|max:100',
         ]);
         $prescription_detail = new PrescriptionDetail();
@@ -57,7 +57,7 @@ class PrescriptionDetailController extends Controller
             $medicine = Medicine::where('name', '=', $request->input("medicine_name"))->first();
             $prescription_detail->medicine_id = $medicine->id;
             $prescription_detail->duaration = $request->input("duration");
-            $prescription = Prescription::where('reservation_id', '=', '2')->first();
+            $prescription = Prescription::where('reservation_id', '=', $request->input("res_id"))->first();
             $prescription_detail->preception_id = $prescription->id;
         } else {
             $prescription_detail->medicine_id = $request->input("medicines_name");
@@ -66,11 +66,11 @@ class PrescriptionDetailController extends Controller
             $medicine = Medicine::where('id', '=', $request->input("medicines_name"))->first();
             $prescription_detail->medicine_name = $medicine->name;
             $prescription_detail->duaration = $request->input("duration");
-            $prescription = Prescription::where('reservation_id', '=', '2')->first();
-            $prescription_detail->preception_id = $prescription->id;
+            $prescription = Prescription::where('reservation_id', '=', $request->input("res_id"))->first();
+            $prescription_detail->prescription_id = $prescription->id;
         }
         $prescription_detail->save();
-        return redirect()->route('prescription_details.index')->with('message', 'Item created successfully.');
+        return redirect()->action('ReservationController@getReservations',[$prescription->reservation->user["id"]]);
     }
 
     public function show($id)
@@ -105,7 +105,7 @@ class PrescriptionDetailController extends Controller
             $prescription_detail->medicine_id = $medicine->id;
             $prescription_detail->duaration = $request->input("duration");
             $prescription = Prescription::where('reservation_id', '=', '2')->first();
-            $prescription_detail->preception_id = $prescription->id;
+            $prescription_detail->prescription_id = $prescription->id;
         } else {
             $prescription_detail->medicine_id = $request->input("medicines_name");
             $prescription_detail->no_times = $request->input("no_times");
@@ -114,7 +114,7 @@ class PrescriptionDetailController extends Controller
             $prescription_detail->medicine_name = $medicine->name;
             $prescription_detail->duaration = $request->input("duration");
             $prescription = Prescription::where('reservation_id', '=', '2')->first();
-            $prescription_detail->preception_id = $prescription->id;
+            $prescription_detail->prescription_id = $prescription->id;
         }
         $prescription_detail->save();
 

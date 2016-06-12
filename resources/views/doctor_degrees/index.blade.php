@@ -13,7 +13,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            @if($doc_info->count())
+            @if($doctor_degrees->count())
                 <table class="table table-condensed table-striped">
                     <thead>
                         <tr>
@@ -22,24 +22,18 @@
                         <th>UNIVERSITY</th>
                         <th>DESCRIPTION</th>
                         <th>GRADUATE_DATE</th>
-                        <th>USER_ROLE_ID</th>
                             <th class="text-right">OPTIONS</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach($doc_info as $info)
+                        @foreach($doctor_degrees as $doctor_degree)
                             <tr>
-                                <td>{{$info->username}}</td>
-                                <td>{{$info->user_role_id}}</td>
-                                <td>{{$info->user_role_id}}</td>
-                                <td>{{$info->user_role_id}}</td>
-                                <td>{{$info->id}}</td>
-                                <td>{{$info->degree}}</td>
-                                <td>{{$info->university}}</td>
-                                <td>{{$info->description}}</td>
-                                <td>{{$info->graduate_date}}</td>
-                                
+                                <td>{{$doctor_degree->id}}</td>
+                                <td>{{$doctor_degree->degree}}</td>
+                    <td>{{$doctor_degree->university}}</td>
+                    <td>{{$doctor_degree->description}}</td>
+                    <td>{{$doctor_degree->graduate_date}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('doctor_degrees.show', $doctor_degree->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('doctor_degrees.edit', $doctor_degree->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
@@ -53,7 +47,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {!! $doc_info->render() !!}
+                {!! $doctor_degrees->render() !!}
             @else
                 <h3 class="text-center alert alert-info">Empty!</h3>
             @endif

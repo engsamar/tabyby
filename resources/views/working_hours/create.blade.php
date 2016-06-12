@@ -35,26 +35,19 @@
      </div>
      <div class="form-group @if($errors->has('day')) has-error @endif">
        <label for="day-field">Day</label>
-       <input type="text" id="day-field" name="day" class="form-control" value="{{ old("day") }}"/>
-       {{--<select multiple id="type-field" name="type" class="form-control">--}}
-       {{--@foreach($day as $key=>$value)--}}
-       {{--<option value={{ $key }}>{{ $value }}</option>--}}
-       {{--@endforeach--}}
-       {{--</select>--}}
+       {{--<input type="text" id="day-field" name="day" class="form-control" value="{{ old("day") }}"/>--}}
+       <select id="day-field" name="day" class="form-control">
+       @foreach($day as $key=>$value)
+       <option value={{ $value }}>{{ $value }}</option>
+       @endforeach
+       </select>
        <span id="error" class="help-block"></span>
        @if($errors->has("day"))
        <span class="help-block">{{ $errors->first("day") }}</span>
        @endif
      </div>
      <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
-       <label for="clinic_id-field">Clinic_address</label>
-       {{--<input type="text" id="clinic_id-field" name="clinic_id" class="form-control" value="{{ old("clinic_id") }}"/>--}}
-       <select id="type-field" name="clinic_id" class="form-control">
-        @foreach($name as $key=>$value)
-
-        <option value={{ $value->id }}>{{ $value->name }}</option>
-        @endforeach
-      </select>
+       <input type="hidden" id="clinic_id-field" name="clinic_id" class="form-control" value="{{ $clinic_id }}"/>
       @if($errors->has("clinic_id"))
       <span class="help-block">{{ $errors->first("clinic_id") }}</span>
       @endif

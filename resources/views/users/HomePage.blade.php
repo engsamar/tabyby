@@ -8,12 +8,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
     <title>Eyes' Clinic</title>
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
-    <link href="css/homes.css" rel='stylesheet' type='text/css'/>
-    <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <script type="text/javascript"  src="/js/bootstrap.min.js"></script>
+    <link href="/css/homes.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/style.css" rel='stylesheet' type='text/css'/>
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript"> addEventListener("load", function () {
@@ -23,9 +24,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             window.scrollTo(0, 1);
         } </script>
     <!---- start-smoth-scrolling---->
-    <script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
+    <script type="text/javascript" src="/js/move-top.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/easing.js"></script>
+    <script
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD31ckr4GKqf6WcWU8WfIqwTj8zS3BtZZo">
+    </script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -34,59 +38,200 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
         });
     </script>
-    <!---- start-smoth-scrolling---->
-    <!----webfonts--->
-    {{--<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>--}}
-    {{--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>--}}
-            <!---//webfonts--->
-    <!----start-top-nav-script---->
-    <script>
-        $(function () {
-            var pull = $('#pull');
-            menu = $('nav ul');
-            menuHeight = menu.height();
-            $(pull).on('click', function (e) {
-                e.preventDefault();
-                menu.slideToggle();
+            <script>
+                var myCenter = new google.maps.LatLng(30.740812, 31.256629);
+        var marker;
+
+        function initialize() {
+            var mapProp = {
+                center: myCenter,
+                zoom: 10,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            var marker = new google.maps.Marker({
+                position: myCenter,
+                animation: google.maps.Animation.BOUNCE
             });
-            $(window).resize(function () {
-                var w = $(window).width();
-                if (w > 320 && menu.is(':hidden')) {
-                    menu.removeAttr('style');
-                }
-            });
-        });
-    </script>
-    <!----//End-top-nav-script---->
-</head>
-<body>
-<!----- start-header---->
-<div id="home" class="header">
-    <div class="top-header">
-        <div class="container">
-            <div class="logo">
-                <a href="#"><img src="images/logo.png" title="doctor"/></a>
-            </div>
-            <!----start-top-nav---->
-            <nav class="top-nav">
-                <ul class="top-nav">
-                    <li class="active"><a href="#home" class="scroll">Home </a></li>
-                    <li><a href="#about" class="scroll">About us</a></li>
-                    <li><a href="#services" class="scroll">our services</a></li>
-                    <li><a href="#team" class="scroll">our team</a></li>
-                    <li><a href="#contact" class="scroll">Contact</a></li>
-                    @if(! Auth::user())
-                    <li><a href="/register" >Register</a></li>
-                    <li><a href="/login" >LogIn</a></li>
-                    @else
-                        <li><a href="/logout" >Logout</a></li>
-                    @endif
+
+            marker.setMap(map);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+                $(function () {
+                    var pull = $('#pull');
+                    menu = $('nav ul');
+                    menuHeight = menu.height();
+                    $(pull).on('click', function (e) {
+                        e.preventDefault();
+                        menu.slideToggle();
+                    });
+                    $(window).resize(function () {
+                        var w = $(window).width();
+                        if (w > 320 && menu.is(':hidden')) {
+                            menu.removeAttr('style');
+                        }
+                    });
+                });
+            </script>
+            <!----//End-top-nav-script---->
+        </head>
+        <body>
+            <!----- start-header---->
+            <div id="home" class="header">
+                <div class="top-header">
+                    <div class="container">
+                        <div class="logo">
+                            <a href="#"><img src="/images/logo.png" title="doctor"/></a>
+                        </div>
+                        <!----start-top-nav---->
+                        <nav class="top-nav">
+        <ul class="top-nav">
+        <li class="dropdown">
+        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Details')
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="#about" class="scroll" >@lang('validation.About us')
+            </a></li>
+            <li><a href="#team" class="scroll" >@lang('validation.our team')
+            </a></li>
+            <li><a href="#services" class="scroll" >@lang('validation.our services')
+            </a></li>
+            <li><a href="#contact" class="scroll" >
+                @lang('validation.contact')
+            </a></li>
+        </ul>
+    </li>
+    @if(!Auth::user())
+    
+    <li class="dropdown">
+    <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.register')
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="/register">
+                @lang('validation.register')
+            </a></li>
+            <li><a href="/login">
+                @lang('validation.login')
+            </a></li>
+        </ul>
+    </li>
+    @else
+    <li class="dropdown">
+        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Messages')
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('messages') }}">
+                    @lang('validation.Messages')
+                </a></li>
+                <li><a href="{{ route('messages.create') }}">
+                    + @lang('validation.New Message')
+                </a></li>
+            </ul>
+        </li>
+        @if($userRoleType==0)
+        <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Control Panel')
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/secertaries">@lang('validation.Secretary')</a></li>
+                <li><a href="/clinics" >@lang('validation.Clinic')</a></li>
+                <li><a href="/vacations" >@lang('validation.Vacations')</a></li>
+                <li><a href="/posts" >@lang('validation.Posts')</a></li>
+                <li><a href="/reservations">@lang('validation.Reservation')</a></li>
+
+            </ul>
+        </li>
+        @elseif ($userRoleType==1)
+        <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
+                    <li><a href="/reservations">@lang('validation.View Reservation')</a></li>
                 </ul>
-                <a href="#" id="pull"><img src="images/menu-icon.png" title="menu"/></a>
-            </nav>
-            <div class="clearfix"></div>
-        </div>
+            </li>
+
+            <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Control Panel')
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/clinics" >@lang('validation.Clinic')</a></li>
+                <li><a href="/vacations" >@lang('validation.Vacations')</a></li>
+                <li><a href="/reservations">@lang('validation.Reservation')</a></li>
+
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown">
+                @lang('validation.Medical History')
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/user_profiles/{{Auth::user()->id}}" >
+                        @lang('validation.Medical History')
+                    </a></li>
+                </ul>
+        </li>        
+        @else
+        <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown">
+                hhh@lang('validation.Medical History')
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/user_profiles/{{Auth::user()->id}}" >
+                        @lang('validation.Medical History')
+                    </a></li>
+                </ul>
+        </li>      
+        <li class="dropdown">
+        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
+                <li><a href="/patientReservation">@lang('validation.View Reservation')</a></li>
+            </ul>
+        </li>
+        @endif
+        <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Profile')
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                <li><a href="/users/{{Auth::user()->id}}" >
+                    @lang('validation.Profile')
+                </a></li>
+                <li><a href="/users/{{Auth::user()->id}}/edit" >
+                    @lang('validation.Edit Profile')
+                </a></li>
+
+                <li><a href="/logout" >
+                @lang('validation.logout')</a></li>
+            </ul>
+        </li>
+    @endif
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            @lang('validation.'. Config::get('languages')[App::getLocale()]) 
+
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                @foreach (Config::get('languages') as $lang => $language)
+                @if ($lang != App::getLocale())
+                <li>
+                    <a href="{{ route('lang.switch', $lang) }}">@lang('validation.'.$language)</a>
+                </li>
+                @endif
+                @endforeach
+            </ul>
+        </li>
+    </ul>
+        <a href="#" id="pull"><img src="/images/menu-icon.png" title="menu"/></a>
+    </nav>
+    <div class="clearfix"></div>
     </div>
+</div>
+
 </div>
 <!----- //End-header---->
 <!----start-slider-script---->
@@ -153,99 +298,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div id="about" class="about">
     <div class="container">
         <div class="header about-header text-center">
-            <h2>about us</h2>
+            <h2>Clinics</h2>
             <p></p>
         </div>
         <!---- About-grids ---->
         <div class="about-grids">
+            @foreach($clinics as $clinic)
             <div class="col-md-4">
                 <div class="about-grid">
                     <img src="images/img1.jpg" title="name"/>
-                    <span class="t-icon1"> </span>
+                    <span class="t-icon1"></span>
                     <div class="about-grid-info text-center">
-                        <h3><a href="#">Children's specialist</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+                        <h3><a href="#">{{ $clinic->name }}</a></h3>
+                        <h3>{{ $clinic->telephone }}</h3>
+                        <h3>{{ $clinic->address }}</h3>
+                        <?php
+//                        die($clinic->workingHours[0]->id);
+                        ?>
+
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                            industry. Lorem Ipsum has
+                            been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="about-grid n-about-grid n-about-grid1">
-                    <img src="images/img2.jpg" title="name"/>
-                    <span class="t-icon1"> </span>
-                    <div class="about-grid-info text-center">
-                        <h3><a href="#">Women's specialist</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="about-grid n-about-grid n-about-grid2">
-                    <img src="images/img3.jpg" title="name"/>
-                    <span class="t-icon2"> </span>
-                    <div class="about-grid-info text-center">
-                        <h3><a href="#">men's specialist</a></h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
             <div class="clearfix"></div>
         </div>
         <!---- About-grids ---->
     </div>
 
 </div>
-<!---- about ---->
-<!--- services --->
-<div id="services" class="services">
-    <div class="container">
-        <div class="header services-header text-center">
-            <h2>our services</h2>
-            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-        </div>
-        <!---- service-grids--->
-        <div class="service-grids">
-            <div class="col-md-3">
-                <div class="service-grid text-center">
-                    <a href="#"><span class="s1-icon"> </span></a>
-                    <h3><a href="#">Heart problem</a></h3>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-grid text-center">
-                    <a href="#"><span class="s2-icon"> </span></a>
-                    <h3><a href="#">brain problem</a></h3>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-grid text-center">
-                    <a href="#"><span class="s3-icon"> </span></a>
-                    <h3><a href="#">knee problem</a></h3>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-grid text-center">
-                    <a href="#"><span class="s4-icon"> </span></a>
-                    <h3><a href="#">human bones problem</a></h3>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <!----//service-grids--->
-    </div>
-
-</div>
-<!--- services --->
-<!--- team --->
-<div id="team" class="team">
-    <div class="container">
-        <div class="header team-head text-center">
-            <h2>our team</h2>
-            <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                took a galley of type and scrambled</p>
-        </div>
         <!--- teammember-grids ---->
         <div class="team-member-grids">
             <div class="team-member-grid">
@@ -253,8 +338,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="team-member-info bottom-t-info">
                     <span> </span>
                     <h3><a href="#">Dr. Keith M. Weiner, M.D.</a></h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                        printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
                         dummy text.</p>
                 </div>
             </div>
@@ -262,8 +349,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="team-member-info bottom-t-info bottom-t-info-b">
                     <span> </span>
                     <h3><a href="#">Dr. Danielle, M.D.</a></h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                        printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
                         dummy text..is simply dummy text.</p>
                 </div>
                 <img src="images/t2.jpg" title="name"/>
@@ -273,8 +362,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="team-member-info bottom-t-info">
                     <span> </span>
                     <h3><a href="#">Dr. Joseph, M.D.</a></h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                        printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
                         dummy text.</p>
                 </div>
             </div>
@@ -282,8 +373,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="team-member-info bottom-t-info bottom-t-info-b">
                     <span> </span>
                     <h3><a href="#">Dr. Caitlin, M.D.</a></h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                        printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
                         dummy text..is simply dummy text.</p>
                 </div>
                 <img src="images/t4.jpg" title="name"/>
@@ -293,8 +386,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="team-member-info bottom-t-info">
                     <span> </span>
                     <h3><a href="#">Dr. Michael, M.D.</a></h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. when an unknown
-                        printer took a galley of type Lorem Ipsum is simply dummy text.is simply dummy text..is simply
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. when an unknown
+                        printer took a galley of type Lorem Ipsum is simply dummy text.is
+                        simply dummy text..is simply
                         dummy text.</p>
                 </div>
             </div>
@@ -304,10 +399,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 <!--- team --->
+<div class="container ">
+    <div id="googleMap" style="width:700px;height:400px;"></div>
+</div>
 <!---- contact ---->
 <div id="contact" class="contact">
     <div class="map">
-        {{--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1600186.2619317076!2d-102.69625001610805!3d38.43306521805143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1404490159176"></iframe>--}}
         <div class="contact-info">
             <div class="container">
                 <!---- contact-grids ---->
@@ -316,18 +413,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-5 contact-grid-left">
                         <h4>contact information</h4>
                         <ul>
-                            <select id="clinic_id" name="clinic_id" class="form-control">
-                                <option>Select Clinic Name</option>
-                                @foreach($clinics as $clinic)
-                                    <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
-                                @endforeach
-                            </select>
-                            <li><span class="cal"> </span><label id="day" name="day"></label>
-                                <small id="fromTime" name="fromTime">00:00</small>
-                                to
-                                <small id="toTime" name="toTime">00:00</small>
-                            </li>
-                            </select>
+
+                            {{--</select>--}}
                             <li><span class="pin"> </span><label>Address :</label>
                                 <small>{{ $userRole->user->address }}</small>
                             </li>
@@ -348,8 +435,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                    onblur="if (this.value == '') {this.value = 'Email:';}">
                             <input type="text" value="Phone No:" onfocus="this.value = '';"
                                    onblur="if (this.value == '') {this.value = 'Phone No:';}">
-                            <textarea rows="2" cols="70" onfocus="if(this.value == 'Message:') this.value='';"
-                                      onblur="if(this.value == '') this.value='Message:';">Message:</textarea>
+                        <textarea rows="2" cols="70" onfocus="if(this.value == 'Message:') this.value='';"
+                                  onblur="if(this.value == '') this.value='Message:';">Message:</textarea>
                             <input type="submit" value="SEND MESSAGE"/>
                         </form>
                     </div>
@@ -382,7 +469,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                 });
             </script>
-            <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+            <a href="#" id="toTop" style="display: block;"> <span id="toTopHover"
+                                                                  style="opacity: 1;"> </span></a>
         </div>
         <div class="copy-right-right">
             <ul>
@@ -396,6 +484,58 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 <!--- copy-right ---->
+
+
+
+
+
+ <script src="{{ asset('/js/all.js') }}" type="text/javascript"></script>
+    @if(Auth::check())
+        <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var pusher = new Pusher('{{Config::get('pusher.appKey')}}');
+            var channel = pusher.subscribe('for_user_{{Auth::id()}}');
+            channel.bind('new_message', function(data) {
+                var thread = $('#' + data.div_id);
+                var thread_id = data.thread_id;
+                var thread_plain_text = data.text;
+
+                if (thread.length) {
+                    // add new message to thread
+                    thread.append(data.html);
+
+                    // make sure the thread is set to read
+                    $.ajax({
+                        url: "/messages/" + thread_id + "/read"
+                    });
+                } else {
+                    var message = '<p>' + data.sender_name + ' said: ' + data.text + '</p><p><a href="' + data.thread_url + '">View Message</a></p>';
+
+                    // notify the user
+                    $.growl.notice({ title: data.thread_subject, message: message });
+
+                    // set unread count
+                    $.ajax({
+                        url: "{{route('messages.unread')}}"
+                    }).success(function( data ) {
+                        var div = $('#unread_messages');
+
+                        var count = data.msg_count;
+                        if (count == 0) {
+                            $(div).addClass('hidden');
+                        } else {
+                            $(div).text(count).removeClass('hidden');
+
+                            // if on messages.index - add alert class and update latest message
+                            $('#thread_list_' + thread_id).addClass('alert-info');
+                            $('#thread_list_' + thread_id + '_text').html(thread_plain_text);
+                        }
+                    });
+                }
+            });
+        </script>
+    @endif
+    
 </body>
 </html>
 

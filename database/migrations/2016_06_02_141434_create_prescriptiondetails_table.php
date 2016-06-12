@@ -18,8 +18,8 @@ class CreatePrescriptionDetailsTable extends Migration {
 			$table->tinyInteger('no_times');
 			$table->tinyInteger('quantity');
 			$table->string('duaration');
-			$table->integer('preception_id')->unsigned()->index();
-			$table->foreign('preception_id')->references('id')->on('prescriptions')->onDelete('cascade')->onUpdate('cascade');
+			$table->integer('prescription_id')->unsigned()->index();
+			$table->foreign('prescription_id')->references('id')->on('prescriptions')->onDelete('cascade')->onUpdate('cascade');
 			$table->integer('medicine_id')->unsigned()->index();
 			$table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade')->onUpdate('cascade');
         });

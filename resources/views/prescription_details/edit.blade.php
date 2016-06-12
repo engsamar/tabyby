@@ -22,7 +22,7 @@
                 <div class="form-group @if($errors->has('search_by')) has-error @endif">
                     <label for="search_by-field">Search_by</label>
                     <select id="search_by-field" name="search_by" class="form-control">
-                        <option selected value="1">NAME</option>
+                        <option value="1">NAME</option>
                         <option value="2">ACTIVE CONSTITUENT</option>
                     </select>
                     @if($errors->has("search_by"))
@@ -35,7 +35,11 @@
                     <select id="type-field" name="type" class="form-control">
                         <option value="-1">ALL TYPES</option>
                         @foreach($medicineType as $key=>$value)
-                            <option value={{ $key }}>{{ $value }}</option>
+                            @if($medicine->type==$key)
+                                <option selected value={{ $value[$medicine->type] }}>{{ $value }}</option>
+                            @else
+                                <option value={{ $key }}>{{ $value }}</option>
+                            @endif
                         @endforeach
                     </select>
                     @if($errors->has("type"))
@@ -59,7 +63,7 @@
                     <label for="medicines_name-field">Medicine_name</label>
                     <select id="medicines_name-field" name="medicines_name" class="form-control"
                     >
-                        <option value="{{'medicine_id'}}">{{ old("medicines_name") }}</option>
+                        <option value="{{$prescription_detail->medicine_id}}">{{ $prescription_detail->medicine_name }}</option>
                     </select>
 
                     @if($errors->has("medicines_name"))

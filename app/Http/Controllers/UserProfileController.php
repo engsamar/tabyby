@@ -52,7 +52,7 @@ class UserProfileController extends Controller
          $glassExams = DB::table('users')
             ->join('reservations', 'users.id', '=', 'reservations.user_id')
             ->join('exam_glasses', 'reservation_id', '=', 'reservations.id')
-            ->select('exam_glasses.*','reservations.time')
+            ->select('exam_glasses.*','reservations.date')
             ->where('users.id', $id)
             ->get();
 

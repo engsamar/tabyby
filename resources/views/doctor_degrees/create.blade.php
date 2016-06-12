@@ -45,12 +45,12 @@
                         <span class="help-block">{{ $errors->first("graduate_date") }}</span>
                        @endif
                     </div>
-                    <div class="form-group @if($errors->has('user_role_id')) has-error @endif">
-                       <label for="user_role_id-field">User_role_id</label>
-                    <input type="text" id="user_role_id-field" name="user_role_id" class="form-control" value="{{ old("user_role_id") }}"/>
-                       @if($errors->has("user_role_id"))
-                        <span class="help-block">{{ $errors->first("user_role_id") }}</span>
-                       @endif
+                    <div class="form-group @if($errors->has('userrole_id')) has-error @endif">
+                       {{--<label for="userrole_id-field">Userrole_id</label>--}}
+                    <input type="hidden" id="userrole_id-field" name="userrole_id" class="form-control" value="{{ $userRole[0]->id }}"/>
+{{--                       @if($errors->has("userrole_id"))--}}
+                        {{--<span class="help-block">{{ $errors->first("userrole_id") }}</span>--}}
+                       {{--@endif--}}
                     </div>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>

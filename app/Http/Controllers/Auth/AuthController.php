@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+//use Auth;
 use App\User;
+use Krucas\LaravelUserEmailVerification\AuthenticatesAndRegistersUsers as VerificationAuthenticatesAndRegistersUsers;
 use Validator;
 use App\UserRole;
 use App\Http\Controllers\Controller;
@@ -22,17 +23,21 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins; 
+    /*use VerificationAuthenticatesAndRegistersUsers {
+        AuthenticatesAndRegistersUsers::redirectPath insteadof VerificationAuthenticatesAndRegistersUsers;
+        AuthenticatesAndRegistersUsers::getGuard insteadof VerificationAuthenticatesAndRegistersUsers;
+        VerificationAuthenticatesAndRegistersUsers::register insteadof AuthenticatesAndRegistersUsers;
+    }
+*/
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
-    /*Auth::user();
-    $userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-    if()*/
-    protected $redirectTo = '/';
+
+  protected $redirectTo = '/';
+   
 
     /**
      * Create a new authentication controller instance.
@@ -59,7 +64,7 @@ class AuthController extends Controller
             'telephone' => 'required|max:100',
             'mobile' => 'required|max:100',
             'address' => 'required|max:255',
-            'birthdate' => 'date'
+            'birthdate' => 'date|before:tomorrow'
         ]);
     }
 
@@ -79,7 +84,10 @@ class AuthController extends Controller
             'mobile' => $data['mobile'],
             'address' => $data['address'],
             'birthdate' => $data['birthdate'],
+            'gender' => $data['gender'],
         ]);
+
+        
         $user_role = new UserRole();
 
         $user_role->type = 2;

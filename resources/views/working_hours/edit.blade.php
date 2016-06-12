@@ -36,6 +36,7 @@
                         <span class="help-block">{{ $errors->first("toTime") }}</span>
                     @endif
                 </div>
+<<<<<<< HEAD
                  <div class="form-group @if($errors->has('day')) has-error @endif">
                    <label for="day-field">Day</label>
                    <input type="text" id="day-field" name="day" class="form-control" value="{{ old("day") }}"/>
@@ -49,10 +50,29 @@
                    <span class="help-block">{{ $errors->first("day") }}</span>
                    @endif
                  </div>
+=======
+                <div class="form-group @if($errors->has('day')) has-error @endif">
+                    <label for="day-field">Day</label>
+                    {{--<input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>--}}
+                    <select id="day-field" name="day" class="form-control">
+                    @foreach($day as $key=>$types)
+                    @if($working_hour->day==$types)
+                    <option selected value={{ $types }}>{{ $types }}</option>
+                    @else
+                    <option value={{ $types }}>{{ $types }}</option>
+                    @endif
+
+                    @endforeach
+                    </select>
+                    @if($errors->has("day"))
+                        <span class="help-block">{{ $errors->first("day") }}</span>
+                    @endif
+                </div>
+>>>>>>> f5d279df864f1e7c3ca17d6b7932fbd6cdb87bc9
                 <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
                     <label for="clinic_id-field">Clinic_name</label>
                     <input type="text" id="clinic_id-field" name="clinic_id" class="form-control"
-                           value="{{ $working_hour->clinic->name}}"/>
+                           value="{{ $working_hour->clinic->id}}"/>
                     @if($errors->has("clinic_id"))
                         <span class="help-block">{{ $errors->first("clinic_id") }}</span>
                     @endif

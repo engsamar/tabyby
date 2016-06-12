@@ -19,4 +19,5 @@ class UserRole extends Model
     {
         return $this->hasOne('App\Secertary');
     }
+    public $timestamps = false;
 }

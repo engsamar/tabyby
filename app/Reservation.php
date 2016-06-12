@@ -38,4 +38,5 @@ class Reservation extends Model
     {
         return $this->hasOne('App\ExamGlass');
     }
+    public $timestamps = false;
 }

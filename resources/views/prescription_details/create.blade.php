@@ -24,7 +24,7 @@
                     {{--value="{{ old("search_by") }}"/>--}}
                     <select id="search_by-field" name="search_by" class="form-control">
                         {{--@foreach($day as $key=>$value)--}}
-                        <option selected value="1">NAME</option>
+                        <option  value="1">NAME</option>
                         <option value="2">ACTIVE CONSTITUENT</option>
                         {{--@endforeach--}}
                     </select>
@@ -60,7 +60,7 @@
                     {{--<input type="text" id="active_constituent-field" name="active_constituent" class="form-control"--}}
                     {{--value="{{ old("active_constituent") }}"/>--}}
                     <input list="active" id="active_constituent-field" name="active_constituent" class="form-control"
-                           required/>
+                           />
                     <datalist id="active">
                         <option value="{{old("active_constituent")}}"></option>
                     </datalist>

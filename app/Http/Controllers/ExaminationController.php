@@ -13,9 +13,9 @@ class ExaminationController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function doctorExamination()
+	public function doctorExamination($id)
 	{
-		return view('examinations.insertExam',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
+		return view('examinations.insertExam',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision,'res_id'=>$id]);
 	}
 
 	public function index()

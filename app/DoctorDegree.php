@@ -10,4 +10,5 @@ class DoctorDegree extends Model
     {
         return $this->belongsTo(UserRole::class);
     }
+    public $timestamps = false;
 }

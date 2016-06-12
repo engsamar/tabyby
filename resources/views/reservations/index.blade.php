@@ -4,7 +4,12 @@
     <h2>
     <i class="glyphicon glyphicon-align-justify"></i>Reservations
     <a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
-     <a class="btn btn-primary pull-right" href="/latest"><i class="glyphicon glyphicon-eye-open"></i>Reservations</a>
+     <a class="btn btn-primary pull-right" href="/latest"></i>Day Reservations</a>
+     @if($userRole == 1)
+    <button type="button" class="btn btn-info pull-right"><a href="{{ route('users.create') }}"
+
+     style="color:white">New Patient</a></button>
+     @endif
     </h2>
 </div>
 <div class="form-group @if($errors->has('searchRes')) has-error @endif">
@@ -85,9 +90,12 @@
                     <th>Patient_Name</th>
                     <th>CLINIC_Name</th>
                     <th>Appointment</th>
+                    <th>Date</th>
                     <th>RESERVATION_TYPE</th>
                     <th>Previous RESERVATION</th>
                     <th>STATUS</th>
+                    <th class="text-right">OPTIONS</th>
+
                     @endif
                 </tr>
             </thead>
@@ -105,6 +113,7 @@
                     <td><a href='#'>{{$reservation->user->username}}</a></td>
                     <td>{{$reservation->clinic->name}}</td>
                     <td>{{$reservation->appointment}}</td>
+                    <td>{{$reservation->date}}</td>
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td>
                         @if($reservation->reservation_type_id-1 >=0 )
@@ -115,6 +124,14 @@
                         
                     </td>
                     <td>{{$status[$reservation->status]}}</td>
+                    <td class="text-right">
+                      <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Cancel Reservation ? Are you sure?')) { return true } else {return false };">
+                      <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                         <a class="btn btn-xs btn-warning btn-group" role="group" href="{{ route('reservations.edit', $reservation->id) }}"><i class="glyphicon glyphicon-edit"></i> Postpone</a>
+                     <button type="submit" class="btn btn-xs btn-danger">Cancel Reservation <i class="glyphicon glyphicon-trash"></i></button>
+                     </form>
+                     </td>
                     @endif
                 </tr>
                 @endforeach

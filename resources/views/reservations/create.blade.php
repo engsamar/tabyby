@@ -68,9 +68,12 @@ rel="stylesheet">
             </div>
 
             <div class="well well-sm">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Reserve</button>
+                @if($userRole == 1)
                 <button type="button" class="btn btn-primary"><a href="{{ route('users.create') }}"
+
                  style="color:white">New User</a></button>
+                 @endif
                  <a class="btn btn-link pull-right" href="{{ route('reservations.index') }}"><i
                     class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>
@@ -83,8 +86,11 @@ rel="stylesheet">
     @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script>
+        var nowDate = new Date();
+        var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
         $('.date-picker').datepicker({
             dateFormate:'yyyy/mm/dd ',
+            startDate: today,
         });
     </script>
     @endsection

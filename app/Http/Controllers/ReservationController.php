@@ -61,8 +61,8 @@ class ReservationController extends Controller {
 	public function store(Request $request)
 	{
 		$reservation = new Reservation();
-		$no_of_patient="" ;
-		$no_of_reserve="";
+		$no_of_patient=0 ;
+		$no_of_reserve=0;
 		$from_time="";
 		$message="";
 		$user = Auth::user();
@@ -90,7 +90,8 @@ class ReservationController extends Controller {
 			$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
 			$dateCheck = $dateTime->format('Y-m-d');
 		}
-		$reservation->status = 2;
+		#status waiting
+		$reservation->status = 3;
 		$reservation->date=$dateCheck;
 
 		$vacations=Vacation::where('from_day','<=',$dateCheck)->where('to_day','>=',$dateCheck)->count();
@@ -108,7 +109,7 @@ class ReservationController extends Controller {
 				$no_of_patient=(strtotime($working_hour->toTime)-strtotime($working_hour->fromTime))/(15*60);
 			}
 			
-			$no_of_reserve = Reservation::where('date', $dateCheck)->where('clinic_id',$clinic_id)->count();
+			$no_of_reserve = Reservation::where('date', $dateCheck)->where('clinic_id',$clinic_id)->where('status','>',0)->count();
 
 			if ($no_of_reserve < $no_of_patient) {
 				
@@ -149,18 +150,42 @@ class ReservationController extends Controller {
 					$reservation->parent_id =null;
 					$reservation->user_id =$user->id;
 				}
-				if ($no_of_reserve != 0) {
-					$no_of_reserve=$no_of_reserve+1;
-				}
-				$reserveTime = strtotime("+".(($no_of_reserve)*15)." minutes", strtotime($from_time));
+					$reserveTime = strtotime("+".(($no_of_reserve)*15)." minutes", strtotime($from_time));
+
+				/*if ($no_of_reserve != 0) {
+					//$no_of_reserve=$no_of_reserve+1;
+					$reserveTime = strtotime("+".(($no_of_reserve)*15)." minutes", strtotime($from_time));
+				}else{
+					$reserveTime = strtotime($from_time);
+
+				}*/
+				
 				$reservation->appointment=date('h:i:s', $reserveTime);
 
 				$reservationCheck = Reservation::where('date',$dateCheck)->where('user_id',$reservation->user_id)->count();
 				if (!$reservationCheck){
-					$reservation->save();
-					echo "save";
+					$reservationCh = Reservation::where('user_id',$reservation->user_id)->orderBy('user_id','desc')->first();
+					if ($reservationCh!=NULL){
+					$status= $reservationCh->status;
 
-					$message="The reservation is saved";
+					if($status==3){
+						echo "you have another reservation that doesn't attend.  </br>";
+						echo " your appointment at ".$reservationCheck->appointment;
+						echo  "  ".$reservationCheck->date;
+						die();
+
+					}else{
+						$reservation->save();
+						echo "save";
+
+						$message="The reservation is saved";
+					}
+					}else{
+						$reservation->save();
+						echo "save";
+
+						$message="The reservation is saved";
+					}
 
 				}else{
 					$message="this reservation already exist in this date";
@@ -240,31 +265,100 @@ class ReservationController extends Controller {
 
 	public function update(Request $request, $id)
 	{
+
 		$reservation = Reservation::findOrFail($id);
 
-		$reservation->time = $request->input("time");
-		$reservation->status = $request->input("status");
-		$reservation->user_id = $request->input("user_id");
-		$reservation->clinic_id = $request->input("clinic_id");
-		$reservation->reservation_type_id = $request->input("reservation_type_id");
-		$reservation->parent_id = $request->input("parent_id");
-		$reservation->save();
+		$reservations = Reservation::where('date','=',$reservation->date)->where('id','>',$id)->get();
 
-		return redirect()->route('reservations.index')->with('message', 'Item updated successfully.');
+		$no_of_patient=0 ;
+		$no_of_reserve=0;
+		$from_time="";
+		$message="";
+		$user = Auth::user();
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
+		$userRoleID = UserRole::where('user_id', '=', $user->id)->value('id');
+		$dateCheck=$request->input("date");
+		#to clinic id foreach
+		$clinic_id=$request->input("clinic_id");
+			
+		$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
+		$dateCheck = $dateTime->format('Y-m-d');
+		#status waiting
+		$reservation->status = 3;
+		$reservation->date=$dateCheck;
+
+		$vacations=Vacation::where('from_day','<=',$dateCheck)->where('to_day','>=',$dateCheck)->count();
+		if($vacations){
+			$message="this date is not available, it is vacation, try with aother date";
+			echo $message;
+			die();
+			return redirect()->route('reservations.create')->with('message',$message);
+			
+		}else{
+			
+			$working_hours = WorkingHour::where('clinic_id',$clinic_id)->where('day',date('l',strtotime($dateCheck)))->get();
+			foreach ($working_hours as $working_hour) {
+				$from_time=$working_hour->fromTime;
+				$no_of_patient=(strtotime($working_hour->toTime)-strtotime($working_hour->fromTime))/(15*60);
+			}
+			
+			$no_of_reserve = Reservation::where('date', $dateCheck)->where('clinic_id',$clinic_id)->where('status','>',0)->count();
+
+			if ($no_of_reserve < $no_of_patient) {
+				
+				$reservation->date = $dateCheck;
+				$reserveTime = strtotime("+".(($no_of_reserve)*15)." minutes", strtotime($from_time));
+
+				$reservation->appointment=date('h:i:s', $reserveTime);
+				$reservation->date = $dateCheck;
+				$reservation->status = $request->input("status");
+				$reservation->user_id = $request->input("user_id");
+				$reservation->clinic_id = $request->input("clinic_id");
+				$reservation->reservation_type_id = $request->input("reservation_type_id");
+				$reservation->parent_id = $request->input("parent_id");
+				$reservation->save();
+				foreach ($reservations as $value) {
+					$value->appointment=date('h:i:s', strtotime("- 15 minutes", strtotime($value->appointment)));
+					 $value->save();
+				}
+
+				//$reservations->update(array('appointment' => 'asdasd'));
+				echo "save";
+
+				$message="The reservation is saved";
+
+
+			}
+			else{
+				$message="this date is fully completed , please try with another one ";
+				echo $message;
+			die();
+				return redirect()->route('reservations.create')->with('message',$message);
+			}
+		}
+		return redirect()->route('reservations.index')->with('message',$message);
 	}
 
 	public function destroy($id)
 	{
 		$reservation = Reservation::findOrFail($id);
-		$reservation->delete();
+		$reservations = Reservation::where('date','=',$reservation->date)->where('status','>',0)->where('id','>',$id)->get();
 
-		return redirect()->route('reservations.index')->with('message', 'Item deleted successfully.');
+		//$reservation->delete();
+		$reservation->status=0;
+
+		$reservation->save();
+		foreach ($reservations as $value) {
+			$value->appointment=date('h:i:s', strtotime("- 15 minutes", strtotime($value->appointment)));
+			 $value->save();
+		}
+		return redirect()->route('reservations.index')->with('message', 'Item cancelled successfully.');
 	}
 
 	public function latest()
 	{
 		$user = Auth::user();
-		$userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
 		$reservations = Reservation::where('date', '=',Carbon::today()->toDateString())->paginate(10);
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;

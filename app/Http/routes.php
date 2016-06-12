@@ -67,13 +67,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/medicines/find/', 'MedicineController@find');
     Route::post('/consistitues/find', 'ConsistitueController@find');
     Route::get("reservations/searchKey/{key}", "ReservationController@searchKey");
+    Route::patch("reservcancel", "ReservationController@destroy");
 
 //    Route::get('/welcome', function () {
 //        return view('welcome');
 //    });
 //});
 ////////////
-    Route::get("reservations/searchKey/{key}", "ReservationController@searchKey");
     Route::get("/newPrescriptionDetails/{res_id}", "PrescriptionDetailController@create");
 
     Route::get("reservations/testing/{key}", "ReservationController@getting");

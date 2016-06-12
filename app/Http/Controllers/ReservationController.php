@@ -17,9 +17,8 @@ use App\Examination;
 use DB;
 use Auth;
 use Illuminate\Http\Request;
+use App\ComplainDetail;
 class ReservationController extends Controller {
-
-
 	public function index()
 	{
 
@@ -263,14 +262,7 @@ class ReservationController extends Controller {
 
 		$reservations = Reservation::where('user_id', $id)->get();
 
-//		 foreach ($reservations as $reserv) {
-//		 	echo "<pre>";
-//		 	var_dump($reserv->id);
-//			 echo "</pre>";
-//			 echo($reserv->complain->complain_details['plan']);
-//			 echo($reserv->prescription['id']);
-//		 	die();
-//		 }
+	
         // return view('reservations.all_reservations', compact('reservations'));
 //		if(count($reservations)==0){
 //			$reservation_id=$reservations[0]->id;

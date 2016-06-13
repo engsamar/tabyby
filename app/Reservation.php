@@ -28,7 +28,7 @@ class Reservation extends Model
 
     public function examination()
     {
-        return $this->hasOne('App\Examination');
+        return $this->hasMany('App\Examination');
     }
     public function prescription()
     {
@@ -36,7 +36,7 @@ class Reservation extends Model
     }
     public function examGlass()
     {
-        return $this->hasOne('App\ExamGlass');
+        return $this->hasMany('App\ExamGlass');
     }
     public $timestamps = false;
 }

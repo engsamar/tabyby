@@ -15,9 +15,7 @@
         <div class="col-md-12">
 
             <form action="{{ route('complains.store') }}" method="POST">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="res_id" value="{{ $res_id }}">
-
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">                               <input type="hidden" name="res_id" value="{{ $res_id }}">
 
                 <div class="form-group @if($errors->has('complain')) has-error @endif">
                        <label for="complain-field">Complain</label>

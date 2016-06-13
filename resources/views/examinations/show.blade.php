@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('layout')
 @section('header')
 <div class="page-header">
         <h1>Examinations / Show #{{$examination->id}}</h1>

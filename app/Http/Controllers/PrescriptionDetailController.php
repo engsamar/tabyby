@@ -25,17 +25,9 @@ class PrescriptionDetailController extends Controller
         $user = Auth::user();
         $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
         $medicineType = ClinicConstants::$medicineType;
-//		$prescription= Prescription::all();
-//        echo "<pre>";
-//        var_dump($res_id);
-//        echo "</pre>";
-//        die("end");
+
         $exist = Prescription::where('reservation_id', '=', $res_id)->get();
         if (count($exist) == 0) {
-//			echo "<pre>";
-//			var_dump($exist);
-//			echo "</pre>";
-//			die("end");
             $prescription = new Prescription();
             $prescription->reservation_id = $res_id;
             $prescription->save();
@@ -61,7 +53,7 @@ class PrescriptionDetailController extends Controller
             $prescription_detail->medicine_id = $medicine->id;
             $prescription_detail->duaration = $request->input("duration");
             $prescription = Prescription::where('reservation_id', '=', $request->input("res_id"))->first();
-            $prescription_detail->preception_id = $prescription->id;
+            $prescription_detail->prescription_id = $prescription->id;
         } else {
             $prescription_detail->medicine_id = $request->input("medicines_name");
             $prescription_detail->no_times = $request->input("no_times");

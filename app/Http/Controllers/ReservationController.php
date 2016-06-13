@@ -109,7 +109,10 @@ class ReservationController extends Controller {
 			}
 			
 			$no_of_reserve = Reservation::where('date', $dateCheck)->where('clinic_id',$clinic_id)->where('status','>',0)->count();
-
+				// echo $no_of_reserve."<br>";
+				// echo $no_of_patient."<br>";
+				// echo $dateCheck."<br>";
+				// die();
 			if ($no_of_reserve < $no_of_patient) {
 				
 				$reservation->date = $dateCheck;
@@ -197,7 +200,9 @@ class ReservationController extends Controller {
 			}
 			else{
 				$message="this date is fully completed , please try with another one ";
-				echo $message;
+				echo $message."<br>";
+				echo $no_of_reserve."<br>";
+				echo $no_of_patient."<br>";
 			die();
 				return redirect()->route('reservations.create')->with('message',$message);
 			}

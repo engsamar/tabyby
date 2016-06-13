@@ -114,7 +114,7 @@ class WorkingHourController extends Controller
         $working_hour->toTime = $request->input("toTime");
 
         $working_hour->day = $request->input("day");
-<<<<<<< HEAD
+
         $diff="";
         $selected_day=WorkingHour::where('day',$request->input("day"))->get();
         foreach ($selected_day as $key => $value) {
@@ -125,11 +125,9 @@ class WorkingHourController extends Controller
         // var_dump($diff);
         // die();
 
-        if (!empty($request->input("clinic_id")))
-        {
-=======
+
         if (!empty($request->input("clinic_id"))) {
->>>>>>> f5d279df864f1e7c3ca17d6b7932fbd6cdb87bc9
+
             $working_hour->clinic_id = $request->input("clinic_id");
             $working_hour->save();
             return Redirect('working_hours/'.$request->input("clinic_id").'');

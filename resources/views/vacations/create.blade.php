@@ -19,14 +19,14 @@
 
                 <div class="form-group @if($errors->has('from_day')) has-error @endif">
                        <label for="from_day-field">From_day</label>
-                    <input type="text" id="from_day-field" name="from_day" class="form-control date-picker" value="{{ old("from_day") }}"/>
+                    <input type="text" id="from" name="from" class="form-control date-picker" value="{{ old("from_day") }}"/>
                        @if($errors->has("from_day"))
                         <span class="help-block">{{ $errors->first("from_day") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('to_day')) has-error @endif">
                        <label for="to_day-field">To_day</label>
-                    <input type="text" id="to_day-field" name="to_day" class="form-control date-picker" value="{{ old("to_day") }}"/>
+                    <input type="text" id="to" name="to" class="form-control date-picker" value="{{ old("to_day") }}"/>
                        @if($errors->has("to_day"))
                         <span class="help-block">{{ $errors->first("to_day") }}</span>
                        @endif
@@ -43,7 +43,20 @@
 @section('scripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
   <script>
-    $('.date-picker').datepicker({
+    var dateToday = new Date();
+    var dates = $("#from , #to").datepicker({
+      // defaultDate: "+1w",
+      // changeMonth: true,
+      // numberOfMonths: 3,
+      startDate: dateToday,
+      // onSelect: function(selectedDate) {
+      //   var option = this.id == "from" ? "minDate" : "maxDate",
+      //       instance = $(this).data("datepicker"),
+      //       date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+      //   dates.not(this).datepicker("option", option, date);
+      // }
+
     });
+
   </script>
 @endsection

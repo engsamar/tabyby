@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('css')
     <link rel="stylesheet" href="/css/tab.css">
 @endsection

@@ -21,15 +21,13 @@ use App\ComplainDetail;
 class ReservationController extends Controller {
 	public function index()
 	{
-
-		$reservations = Reservation::orderBy('id', 'desc')->paginate(10);
+		$reservations = Reservation::orderBy('id', 'asc')->paginate(10);
 		$user = Auth::user();
 		$userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		return view('reservations.index', compact('reservations','status','reserveType','userRole'))->with('message',"")->with('userRoleType',$userRole);
-
 	}
 
 	public function patientReservations()

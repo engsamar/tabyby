@@ -11,13 +11,13 @@
 
 @section('content')
     @include('error')
-
+{{"hjhjhjh"}}
     <div class="row">
         <div class="col-md-12">
 
             <form action="{{ route('examinations.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="res_id" value="{{ $res_id }}">
+                <input type="text" name="res_id" value="{{ $res_id }}">
                 <div class="form-group @if($errors->has('eye_type')) has-error @endif">
                     <label for="eye_type-field">Eye_type</label>
                     <select id="eye_type-field" name="eye_type" class="form-control">

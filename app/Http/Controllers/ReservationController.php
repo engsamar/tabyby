@@ -370,8 +370,6 @@ class ReservationController extends Controller {
 	{
 
 		$reservations = Reservation::where('user_id', $id)->get();
-
-	
         // return view('reservations.all_reservations', compact('reservations'));
 //		if(count($reservations)==0){
 //			$reservation_id=$reservations[0]->id;
@@ -384,10 +382,9 @@ class ReservationController extends Controller {
         $reserveType =ClinicConstants::$reservationType;
         $status= ClinicConstants::$status;
         $medicalHistoryType=ClinicConstants::$medicalHistoryType;
-
         $user = Auth::user();
 		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.all_reservations', compact('userRoleType','reservations','status','reserveType','medicalHistoryType'));
+		return view('reservations.all_reservations', compact('userRoleType','reservations','status','reserveType','medicalHistoryType'),['examGlassType' => ClinicConstants::$examGlassType]);
 	}
 
 	public function info($id)

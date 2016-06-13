@@ -44,7 +44,7 @@
                 </div>
                     <div class="form-group">
                      <label for="gender">GENDER</label>
-                     <p class="form-control-static">{{$user->gender}}</p>
+                     <p class="form-control-static">@if($user->gender == 0){{"Male"}}@else {{"Male"}} @endif</p>
                 </div>
             </form>
 

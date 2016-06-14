@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\ClinicConstants;
 use App\Examination;
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
 
 class ExaminationController extends Controller {
 
@@ -13,16 +15,23 @@ class ExaminationController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function doctorExamination()
+	public function doctorExamination($id)
 	{
-		return view('examinations.insertExam',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
+
+	 	$user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
+		return view('examinations.insertExam',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision,'res_id'=>$id, 'userRoleType'=>$userRoleType]);
 	}
 
 	public function index()
 	{
+		$user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
 		$examinations = Examination::orderBy('id', 'asc')->paginate(10);
 
-		return view('examinations.index', compact('examinations'),['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
+		return view('examinations.index', compact('examinations'),['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision, 'userRoleType'=>$userRoleType]);
 	}
 
 	/**
@@ -30,9 +39,15 @@ class ExaminationController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($res_id)
 	{
-		return view('examinations.create',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
+
+        $user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
+		return view('examinations.insertExam',['res_id'=>$res_id,
+			'eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision,
+			'userRoleType'=>$userRoleType]);
 	}
 
 	/**
@@ -56,8 +71,7 @@ class ExaminationController extends Controller {
         $examination->fundus = $request->input("fundus");
         $examination->i_o_p = $request->input("i_o_p");
         $examination->angle = $request->input("angle");
-        $examination->reservation_id = $request->input("reservation_id");;
-
+        $examination->reservation_id = $request->input("res_id");;
 		$examination->save();
 
 		$examination1->eye_type = 0;
@@ -71,12 +85,15 @@ class ExaminationController extends Controller {
 		$examination1->fundus = $request->input("fundus1");
 		$examination1->i_o_p = $request->input("i_o_p1");
 		$examination1->angle = $request->input("angle1");
-		$examination1->reservation_id = $request->input("reservation_id1");;
+		$examination1->reservation_id = $request->input("res_id");;
 
 		$examination1->save();
+		$user_id = User::where('users.id', '=', $request->input("res_id"))->value('id');
+		
 
-		return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
-	}
+		return redirect('/all_reservation/'.$user_id);
+	// 	return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
+	 }
 
 	/**
 	 * Display the specified resource.

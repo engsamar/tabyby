@@ -1,10 +1,10 @@
-@extends('layout')
-
+@extends('adminLayout')
 @section('header')
     <div class="page-header clearfix">
         <h1>
             <i class="glyphicon glyphicon-align-justify"></i> Secertaries
-            <a class="btn btn-success pull-right" href="{{ route('secertaries.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
+            <a class="btn btn-success pull-right" href="{{ route('secertaries.create') }}"><i
+                        class="glyphicon glyphicon-plus"></i> Create</a>
         </h1>
 
     </div>
@@ -16,31 +16,59 @@
             @if($secertaries->count())
                 <table class="table table-condensed table-striped">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>DEGREE</th>
+                    <tr>
+                        <th>USERNAME</th>
+                        <th>EMAIL</th>
+                        <th>ADDRESS</th>
+                        <th>TELEPHONE</th>
+                        <th>MOBILE</th>
+                        <th>BIRTHDATE</th>
+                        <th>DEGREE</th>
                         <th>NATIONAL_ID</th>
-                            <th class="text-right">OPTIONS</th>
-                        </tr>
+                        <th class="text-right">OPTIONS</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        @foreach($secertaries as $secertary)
-                            <tr>
-                                <td>{{$secertary->id}}</td>
-                                <td>{{$secertary->degree}}</td>
-                    <td>{{$secertary->national_id}}</td>
-                                <td class="text-right">
-                                    <a class="btn btn-xs btn-primary" href="{{ route('secertaries.show', $secertary->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>
-                                    <a class="btn btn-xs btn-warning" href="{{ route('secertaries.edit', $secertary->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                                    <form action="{{ route('secertaries.destroy', $secertary->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach($secertaries as $secertary)
+                        {{--                        {{ $userRole[0]['id'] }}--}}
+                        {{--                        {{ $secertary->userRole_id }}--}}
+                        <tr>
+                            @foreach($userRole as $role)
+
+                                @if($role['id']==$secertary->userRole_id)
+
+                                    <td>{{$users[$role['user_id']-1]['username']}}</td>
+                                    <td>{{$users[$role['user_id']-1]['email']}}</td>
+                                    <td>{{$users[$role['user_id']-1]['address']}}</td>
+                                    <td>{{$users[$role['user_id']-1]['telephone']}}</td>
+                                    <td>{{$users[$role['user_id']-1]['mobile']}}</td>
+                                    <td>{{$users[$role['user_id']-1]['birthdate']}}</td>
+                                    <td>{{$secertary->degree}}</td>
+                                    <td>{{$secertary->national_id}}</td>
+                                    <td class="text-right">
+                                        {{--<a class="btn btn-xs btn-primary"--}}
+                                           {{--href="{{ route('secertaries.show', $secertary->id) }}"><i--}}
+                                                    {{--class="glyphicon glyphicon-eye-open"></i> View</a>--}}
+                                        <a class="btn btn-xs btn-warning"
+                                           href="{{ route('secertaries.edit', $secertary->id) }}"><i
+                                                    class="glyphicon glyphicon-edit"></i> Edit</a>
+                                        <form action="{{ route('secertaries.destroy', $secertary->id) }}" method="POST"
+                                              style="display: inline;"
+                                              onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="btn btn-xs btn-danger"><i
+                                                        class="glyphicon glyphicon-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                        @endif
+
+                                        @endforeach
+
+                                    </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
                 {!! $secertaries->render() !!}

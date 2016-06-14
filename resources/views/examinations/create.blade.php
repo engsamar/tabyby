@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('homeViewLayout')
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css"
           rel="stylesheet">
@@ -11,13 +11,13 @@
 
 @section('content')
     @include('error')
-
+{{"hjhjhjh"}}
     <div class="row">
         <div class="col-md-12">
 
             <form action="{{ route('examinations.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                <input type="text" name="res_id" value="{{ $res_id }}">
                 <div class="form-group @if($errors->has('eye_type')) has-error @endif">
                     <label for="eye_type-field">Eye_type</label>
                     <select id="eye_type-field" name="eye_type" class="form-control">
@@ -104,14 +104,6 @@
                     <input type="text" id="angle-field" name="angle" class="form-control" value="{{ old("angle") }}"/>
                     @if($errors->has("angle"))
                         <span class="help-block">{{ $errors->first("angle") }}</span>
-                    @endif
-                </div>
-                <div class="form-group @if($errors->has('reservation_id')) has-error @endif">
-                    <label for="reservation_id-field">Reservation_id</label>
-                    <input type="text" id="reservation_id-field" name="reservation_id" class="form-control"
-                           value="{{ old("reservation_id") }}"/>
-                    @if($errors->has("reservation_id"))
-                        <span class="help-block">{{ $errors->first("reservation_id") }}</span>
                     @endif
                 </div>
                 <div class="well well-sm">

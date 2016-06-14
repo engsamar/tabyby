@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+//use Auth;
 use App\User;
+use Krucas\LaravelUserEmailVerification\AuthenticatesAndRegistersUsers as VerificationAuthenticatesAndRegistersUsers;
 use Validator;
+use App\UserRole;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -21,14 +23,21 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins; 
+    /*use VerificationAuthenticatesAndRegistersUsers {
+        AuthenticatesAndRegistersUsers::redirectPath insteadof VerificationAuthenticatesAndRegistersUsers;
+        AuthenticatesAndRegistersUsers::getGuard insteadof VerificationAuthenticatesAndRegistersUsers;
+        VerificationAuthenticatesAndRegistersUsers::register insteadof AuthenticatesAndRegistersUsers;
+    }
+*/
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+
+  protected $redirectTo = '/';
+   
 
     /**
      * Create a new authentication controller instance.
@@ -55,7 +64,7 @@ class AuthController extends Controller
             'telephone' => 'required|max:100',
             'mobile' => 'required|max:100',
             'address' => 'required|max:255',
-            'birthdate' => 'date'
+            'birthdate' => 'date|before:tomorrow'
         ]);
     }
 
@@ -67,7 +76,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user= User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -75,6 +84,15 @@ class AuthController extends Controller
             'mobile' => $data['mobile'],
             'address' => $data['address'],
             'birthdate' => $data['birthdate'],
+            'gender' => $data['gender'],
         ]);
+
+        
+        $user_role = new UserRole();
+
+        $user_role->type = 2;
+        $user_role->user_id=$user->id;
+        $user_role->save();
+        return $user;
     }
 }

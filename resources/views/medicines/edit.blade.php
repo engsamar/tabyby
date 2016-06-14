@@ -42,6 +42,23 @@
                         <span class="help-block">{{ $errors->first("type") }}</span>
                        @endif
                     </div>
+                <div class="form-group @if($errors->has('constituent')) has-error @endif">
+                    <label for="constituent-field">Active_constituent</label>
+                    {{--<input type="text" id="constituent-field" name="constituent" class="form-control" value="{{ old("constituent") }}"/>--}}
+                    <select id="constituent-field" name="constituent" class="form-control">
+                        @foreach($constituent as $value)
+
+                            @if($medicine->consistitue_id==$value->id)
+                                <option selected value={{ $value[$medicine->consistitue_id] }}>{{ $value->active_consistitue }}</option>
+                            @else
+                                <option value={{ $value->id }}>{{ $value->active_consistitue }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    @if($errors->has("constituent"))
+                        <span class="help-block">{{ $errors->first("constituent") }}</span>
+                    @endif
+                </div>
                     <div class="form-group @if($errors->has('company')) has-error @endif">
                        <label for="company-field">Company</label>
                     <input type="text" id="company-field" name="company" class="form-control" value="{{ $medicine->company }}"/>

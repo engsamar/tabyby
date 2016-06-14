@@ -741,7 +741,7 @@ pre code {
 }
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    width:90%;
   }
 }
 @media (min-width: 992px) {
@@ -3479,7 +3479,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: none;
+  /*background-color: none;*/
   border-color: #1B242F;
 }
 .nav .nav-divider {

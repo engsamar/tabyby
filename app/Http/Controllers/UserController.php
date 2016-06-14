@@ -6,6 +6,9 @@ use App\ClinicConstants;
 use App\User;
 use App\UserRole;
 use App\Clinic;
+use App\WorkingHour;
+//use App\Working
+use Auth;
 use App\Reservation;
 use Illuminate\Http\Request;
 use League\Flysystem\Adapter\NullAdapter;
@@ -18,16 +21,38 @@ class UserController extends Controller
      *
      * @return Response
      */
+    public function homePage()
+    {
+        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
+        //select all clinics address
+//        $w =WorkingHour::class
+        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
+//        die($clinics[0]->workingHours);
+
+        $user=Auth::user();
+        if($user){
+        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
+        }else{
+            $userRoleType=null;
+        }
+        return view('users.HomePage',compact('userRole','userRoleType'),['clinics' => $clinics, 'day' => ClinicConstants::$day]);
+    }
+
     public function patientHome()
     {
         $userRole = UserRole::where('type', '=', 0)->firstOrFail();
         //select all clinics address
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
-        $user_id = 1;
-        $reservation = Reservation::where('user_id', $user_id)->get();
+        $user=Auth::user();
+        if($user){
+        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
+        }else{
+            $userRoleType=null;
+        }
+        $reservation = Reservation::where('user_id', $user->id)->get();
 //        $clinic_name=Clinic::where
-        return view('users.patientHome', compact('userRole'), ['clinics' => $clinics, 'reservation' => $reservation, 'reservationType' => ClinicConstants::$reservationType]);
+        return view('users.patientHome', compact('userRole','userRoleType'), ['clinics' => $clinics, 'reservation' => $reservation, 'reservationType' => ClinicConstants::$reservationType, 'day' => ClinicConstants::$day]);
     }
 
     public function secretaryHome()
@@ -37,7 +62,17 @@ class UserController extends Controller
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
 
-        return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics]);
+        // return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
+
+        $user=Auth::user();
+        if($user){
+        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
+        }else{
+            $userRoleType=null;
+        }
+
+        return view('users.secretaryHome', compact('userRole','userRoleType'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
+
     }
 
     public function doctorHome()
@@ -47,8 +82,14 @@ class UserController extends Controller
         //select all clinics address
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
+        $user=Auth::user();
+        if($user){
+        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
+        }else{
+            $userRoleType=null;
+        }
 
-        return view('users.doctorHome', compact('userRole'), ['clinics' => $clinics]);
+        return view('users.doctorHome', compact('userRole','userRoleType'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
     }
 
     public function index()
@@ -86,8 +127,13 @@ class UserController extends Controller
         $user->mobile = $request->input("mobile");
         $user->password = bcrypt($request->input("password"));
         $user->birthdate = $request->input("birthdate");
-
+        $user->password = $request->input("password");
+        $user->gender=$request->input("gender");
         $user->save();
+        $user_role = new UserRole();
+        $user_role->type = 2;
+        $user_role->user_id=$user->id;
+        $user_role->save();
 
         return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
     }
@@ -101,8 +147,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user', 'userRoleType'));
     }
 
     /**
@@ -134,12 +181,11 @@ class UserController extends Controller
         $user->address = $request->input("address");
         $user->telephone = $request->input("telephone");
         $user->mobile = $request->input("mobile");
-        $user->password = $request->input("password");
         $user->birthdate = $request->input("birthdate");
 
         $user->save();
 
-        return redirect()->route('users.index')->with('message', 'Item updated successfully.');
+        return redirect('/')->with('message', 'Item updated successfully.');
     }
 
     /**
@@ -158,58 +204,24 @@ class UserController extends Controller
 
     public function valid(Request $request)
     {
-//        echo "<pre>";
-//		var_dump($request->input("username"));
-//		var_dump($request->input("action"));
-//		echo "</pre>";
-//		die('end');
         switch ($request->input("action")) {
             case "username":
-//                echo "action";
-//                $name = User::findOrFail($request->input("username"))->first();
                 $name = User::where('username', $request->input("username"))->first();
-//                $name = $request->input("username");
-//                $name1 = "mosatafa";
-//                echo "<pre>";
-//                var_dump($name);
-//                var_dump($name1);
-//                echo "</pre>";
-//                die('end');
                 if ($name) {
-//                    echo "<pre>";
-//                    var_dump($name);
-//                    var_dump($name1);
-//                    echo "</pre>";
-//                    die('end');
-//                    var_dump($request->input("username"));
-//                    var_dump($name);
-//                    var_dump($name1);
                     return "yes";
                 } else {
-//                    var_dump($name);
-//                    var_dump($name1);
-//                    var_dump($request->input("username"));
                     return "no";
                 }
                 break;
             case "email":
-//                echo "email";
                 $email = User::where('email', $request->input("email"))->first();
-//                var_dump($email);
                 if ($email) {
-//                    var_dump($email);
-//                    var_dump($request->input("email"));
                     return "yes";
                 } else {
-//                    var_dump($email);
-//                    var_dump($request->input("email"));
                     return "no";
                 }
                 break;
         }
-//        $user = User::findOrFail($id);
-//        $user->delete();
-//        return redirect()->route('users.index')->with('message', 'Item deleted successfully.');
     }
 
 

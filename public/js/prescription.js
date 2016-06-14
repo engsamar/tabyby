@@ -4,77 +4,167 @@
 $(document).ready()
 {
     var selected = 1;
+    $("#active_div1").hide();
+    $("#active_div2").hide();
     $("select[name='search_by']").change(function () {
-        // console.log($(":input[name='type']").val());
         if (this.value == 1) {
             console.log("name");
-            $("#name").text("medicine_name");
+            $("#medicine_name").show();
         } else {
-            console.log("active constituent");
-            $("#name").text("active_constituent");
             selected = 2;
+            $("#active_div1").show();
+            $("#active_div2").show();
+            $("#medicine_name").hide();
         }
     });
     $("input[name='medicine_name']").on("keyup", function () {
-        // console.log(selected);
-        // $("select[name='search_by'] option[value='1']").attr("selected",true);
-        // if ($("select[name='search_by']").value==0){
-        //     $("select[name='search_by']").value=1;
-        // }
-        if (selected == 1) {
-            // console.log("name");
-            // console.log($(":input[name='type']").val());
-            // console.log($(":input[name='medicine_name']").val());
+        if ($("input[name='medicine_name']").val().trim() != "") {
+            if ($(":input[name='type']").val() != -1) {
+                $.ajax({
+                    url: "/medicines/find/?with=name&&has=id",
+                    type: "post",
+                    data: {
+                        'name': $(":input[name='medicine_name']").val(),
+                        'id': $(":input[name='type']").val(),
+                        '_token': $('input[name=_token]').val()
+                    },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var datalist = $("#results");
+                            datalist.empty();
+                            $.each(data, function (i, content) {
+                                datalist.append("<option value='" + content.name + "'>");
+                            });
+                        }
+                        else {
+                            $("#results").text("there is no data");
+                        }
+                    },
+                });
+            } else {
+                $.ajax({
+                    url: "/medicines/find/?with=name",
+                    type: "post",
+                    data: {'name': $(":input[name='medicine_name']").val(), '_token': $('input[name=_token]').val()},
+                    success: function (data) {
+                        if (data.length > 0) {
+                            var datalist = $("#results");
+                            datalist.empty();
+                            $.each(data, function (i, content) {
+                                datalist.append("<option value='" + content.name + "'>");
+                            });
+                        }
+                        else {
+                            $("#results").text("there is no data");
+                        }
+                    },
+                });
+            }
+        }
+    });
+    $("input[name='medicine_name']").on("blur", function () {
+        console.log(this.value);
+    });
+    $("input[name='active_constituent']").on("keyup", function () {
+        if (this.value.trim() != "") {
             $.ajax({
-                url: "/medicines/find/",
+                url: "/consistitues/find",
                 type: "post",
-                data: {'name': $(":input[name='medicine_name']").val(),'id': $(":input[name='type']").val(), '_token': $('input[name=_token]').val()},
+                data: {'name': $(":input[name='active_constituent']").val(), '_token': $('input[name=_token]').val()},
                 success: function (data) {
-                    // console.log(data[0]);
-                    // console.log(data[1]);
                     if (data.length > 0) {
-                        var datalist = $("#results");
-                        // console.log(data.length);
+                        var datalist = $("#active");
                         datalist.empty();
                         $.each(data, function (i, content) {
+                            datalist.append("<option value='" + content.active_consistitue + "'>");
+                        });
+                    }
+                    else {
+                        $("#active").text("there is no data");
+                    }
 
-                            datalist.append("<option value='" + content.name + "'>");
+                },
+            });
+        }
+    });
+    $("input[name='active_constituent']").on("blur", function () {
+        if ($(":input[name='type']").val() != -1) {
+            $.ajax({
+                url: "/medicines/find/?with=active&&has=id",
+                type: "post",
+                data: {
+                    'name': $("input[name='active_constituent']").val(),
+                    'id': $(":input[name='type']").val(),
+                    '_token': $('input[name=_token]').val()
+                },
+                success: function (data) {
+
+                    if (data.length > 0) {
+                        var select = $("#medicines_name-field");
+                        console.log(data.length);
+                        select.empty();
+                        select.append("<option value='-1'>select name</option>")
+                        $.each(data, function (i, content) {
+                            select.append("<option value='" + content.id + "'>" + content.name + "</option>");
                         });
                     }
                     else {
                         $("#results").text("there is no data");
                     }
-
                 },
             });
         } else {
-            console.log("active constituent");
-            $("#type").hide();
             $.ajax({
-                url: "/consistitues/find",
+                url: "/medicines/find/?with=active",
                 type: "post",
-                data: {'name': $(":input[name='medicine_name']").val(), '_token': $('input[name=_token]').val()},
+                data: {
+                    'name': $("input[name='active_constituent']").val(),
+                    '_token': $('input[name=_token]').val()
+                },
                 success: function (data) {
-                    console.log(data);
-                    if (data.length > 0) {
-                        var datalist = $("#results");
-                        datalist.empty();
-                        $.each(data, function (i, content) {
 
-                            datalist.append("<option value='" + content.name + "'>");
+                    if (data.length > 0) {
+                        var select = $("#medicines_name-field");
+                        console.log(data.length);
+                        select.empty();
+                        select.append("<option value='-1'>select name</option>")
+                        $.each(data, function (i, content) {
+                            select.append("<option value='" + content.id + "'>" + content.name + "</option>");
                         });
                     }
                     else {
-                        $("#contain").text("there is no data");
+                        $("#results").text("there is no data");
                     }
-
                 },
             });
         }
+    })
+    $("input[name='duration']").on("blur", function () {
+        if (this.value.trim() > 0 && this.value.trim() < 10) {
+            $("input[name='duration']").next().hide();
 
+        } else {
+            $("input[name='duration']").next().text("enter valid amount").show();
+
+        }
     });
-    // $("input[name='medicine_name']").on("blur",function () {
-    //     console.log(this.value);
-    // });
-    
+    $("input[name='quantity']").on("blur", function () {
+        if (this.value.trim() > 0 && this.value.trim() < 10) {
+            $("input[name='quantity']").next().hide();
+
+        } else {
+            $("input[name='quantity']").next().text("enter valid amount").show();
+
+        }
+    });
+    $("input[name='no_times']").on("blur", function () {
+        if (this.value.trim() > 0 && this.value.trim() < 10) {
+            $("input[name='no_times']").next().hide();
+
+        } else {
+            $("input[name='no_times']").next().text("enter valid amount").show();
+
+        }
+    });
+
 }

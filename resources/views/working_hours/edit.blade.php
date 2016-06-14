@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('adminLayout')
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css"
           rel="stylesheet">
@@ -36,27 +36,29 @@
                         <span class="help-block">{{ $errors->first("toTime") }}</span>
                     @endif
                 </div>
+
                 <div class="form-group @if($errors->has('day')) has-error @endif">
                     <label for="day-field">Day</label>
-                    <input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>
-                    {{--<select multiple id="type-field" name="type" class="form-control">--}}
-                    {{--@foreach($day as $key=>$types)--}}
-                    {{--@if($working_hour->day==$key)--}}
-                    {{--<option selected value={{ $types[$working_hour->day] }}>{{ $types }}</option>--}}
-                    {{--@else--}}
-                    {{--<option value={{ $key }}>{{ $types }}</option>--}}
-                    {{--@endif--}}
+                    {{--<input type="date" id="day-field" name="day" class="form-control" value="{{ $working_hour->day }}"/>--}}
+                    <select id="day-field" name="day" class="form-control">
+                    @foreach($day as $key=>$types)
+                    @if($working_hour->day==$types)
+                    <option selected value={{ $types }}>{{ $types }}</option>
+                    @else
+                    <option value={{ $types }}>{{ $types }}</option>
+                    @endif
 
-                    {{--@endforeach--}}
-                    {{--</select>--}}
+                    @endforeach
+                    </select>
                     @if($errors->has("day"))
                         <span class="help-block">{{ $errors->first("day") }}</span>
                     @endif
                 </div>
+
                 <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
-                    <label for="clinic_id-field">Clinic_name</label>
-                    <input type="text" id="clinic_id-field" name="clinic_id" class="form-control"
-                           value="{{ $working_hour->clinic->name}}"/>
+                    {{--<label for="clinic_id-field">Clinic_name</label>--}}
+                    <input type="hidden" id="clinic_id-field" name="clinic_id" class="form-control"
+                           value="{{ $working_hour->clinic->id}}"/>
                     @if($errors->has("clinic_id"))
                         <span class="help-block">{{ $errors->first("clinic_id") }}</span>
                     @endif

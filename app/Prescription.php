@@ -10,4 +10,12 @@ class Prescription extends Model
     {
         return $this->hasMany(PrescriptionDetail::class);
     }
+
+    public function reservation()
+    {
+        return $this->belongsTo('App\Reservation');
+    }
+    public $timestamps = false;
 }
+
+

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\ClinicConstants;
 use App\ExamGlass;
 use Illuminate\Http\Request;
-
+use Auth;
+use App\User;
 class ExamGlassController extends Controller
 {
 
@@ -15,16 +16,19 @@ class ExamGlassController extends Controller
      *
      * @return Response
      */
-    public function examGlass()
+    public function examGlass($id)
     {
-        return view('exam_glasses.examGlassHome', ['examGlassType' => ClinicConstants::$examGlassType]);
+        $user = Auth::user();
+        $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
+        return view('exam_glasses.examGlassHome', ['examGlassType' => ClinicConstants::$examGlassType,'res_id'=>$id, 'userRoleType'=>$userRoleType]);
     }
 
     public function index()
     {
         $exam_glasses = ExamGlass::orderBy('id', 'asc')->paginate(5);
 
-        return view('exam_glasses.index', compact('exam_glasses'), ['examGlassType' => ClinicConstants::$examGlassType]);
+        // return view('exam_glasses.index', compact('exam_glasses'), ['examGlassType' => ClinicConstants::$examGlassType]);
     }
 
     /**
@@ -32,9 +36,13 @@ class ExamGlassController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('exam_glasses.create', ['examGlassType' => ClinicConstants::$examGlassType]);
+        $user = Auth::user();
+        $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
+        return view('exam_glasses.create', ['examGlassType' => ClinicConstants::$examGlassType,
+            'res_id'=>$id, 'userRoleType'=>$userRoleType]);
     }
 
     /**
@@ -45,6 +53,7 @@ class ExamGlassController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         ///save notes in notes table
         $exam_glass_note = new ExamGlassNote();
         $exam_glass_note->reservations_id = $request->input("reservation_id");
@@ -65,8 +74,9 @@ class ExamGlassController extends Controller
             $exam_glass->save();
         }
 
+        $user_id = User::where('users.id', '=', $request->input("res_id"))->value('id');
 
-        return redirect()->route('exam_glasses.index')->with('message', 'Item created successfully.');
+        return redirect('/all_reservation/',$user_id);
     }
 
     /**
@@ -105,7 +115,6 @@ class ExamGlassController extends Controller
     public function update(Request $request, $id)
     {
         $exam_glass = ExamGlass::findOrFail($id);
-
         $exam_glass->sphr = $request->input("sphr");
         $exam_glass->cylr = $request->input("cylr");
         $exam_glass->axisr = $request->input("axisr");
@@ -117,7 +126,7 @@ class ExamGlassController extends Controller
 
         $exam_glass->save();
 
-        return redirect()->route('exam_glasses.index')->with('message', 'Item updated successfully.');
+        // return redirect()->route('exam_glasses.index')->with('message', 'Item updated successfully.');
     }
 
     /**
@@ -131,7 +140,7 @@ class ExamGlassController extends Controller
         $exam_glass = ExamGlass::findOrFail($id);
         $exam_glass->delete();
 
-        return redirect()->route('exam_glasses.index')->with('message', 'Item deleted successfully.');
+        // return redirect()->route('exam_glasses.index')->with('message', 'Item deleted successfully.');
     }
 
 }

@@ -1,5 +1,4 @@
-@extends('layout')
-
+@extends('adminLayout')
 @section('header')
     <div class="page-header clearfix">
         <h1>
@@ -33,7 +32,7 @@
                     <td>{{$clinic->telephone}}</td>
                     <td>{{$clinic->address}}</td>
                                 <td class="text-right">
-                                    <a class="btn btn-xs btn-primary" href="{{ route('clinics.show', $clinic->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>
+                                    <a class="btn btn-xs btn-primary" href="{{ route('working_hours.show',$clinic->id) }}"><i class="glyphicon glyphicon-eye-open"></i>WorkingHours</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('clinics.edit', $clinic->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                                     <form action="{{ route('clinics.destroy', $clinic->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
                                         <input type="hidden" name="_method" value="DELETE">

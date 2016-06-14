@@ -67,8 +67,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <nav class="top-nav">
         <ul class="top-nav">
         <li class="dropdown">
-        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Details')
-        <span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="#about" class="scroll" >@lang('validation.About us')
             </a></li>
@@ -154,7 +152,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         @else
         <li class="dropdown">
             <a class="dropdown-toggle"  data-toggle="dropdown">
-                hhh@lang('validation.Medical History')
+                @lang('validation.Medical History')
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/user_profiles/{{Auth::user()->id}}" >
@@ -167,7 +165,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
-                <li><a href="/reservation/patient">@lang('validation.View Reservation')</a></li>
+                <li><a href="/patientReservation">@lang('validation.View Reservation')</a></li>
             </ul>
         </li>
         @endif

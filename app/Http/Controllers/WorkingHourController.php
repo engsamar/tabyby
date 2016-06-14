@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Clinic;
 use App\ClinicConstants;
 use App\WorkingHour;
+use App\Reservation;
 use Carbon\Carbon;
 //use App\DB;
 use Illuminate\Http\Request;
@@ -113,7 +114,20 @@ class WorkingHourController extends Controller
         $working_hour->toTime = $request->input("toTime");
 
         $working_hour->day = $request->input("day");
+
+        $diff="";
+        $selected_day=WorkingHour::where('day',$request->input("day"))->get();
+        foreach ($selected_day as $key => $value) {
+            $diff=date('h:i:s',strtotime($request->input("fromTime"))-strtotime($value->fromTime));
+        }
+        // $reservations = Reservation::;
+
+        // var_dump($diff);
+        // die();
+
+
         if (!empty($request->input("clinic_id"))) {
+
             $working_hour->clinic_id = $request->input("clinic_id");
             $working_hour->save();
             return Redirect('working_hours/'.$request->input("clinic_id").'');

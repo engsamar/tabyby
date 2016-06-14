@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("examinations", "ExaminationController");
     Route::resource("working_hours", "WorkingHourController");
     Route::get("reservations/today", "ReservationController@latest");
+    Route::get("reservations/cancelled", "ReservationController@cancel");
     Route::resource("reservations", "ReservationController");
     Route::resource("role_types", "RoleTypeController");
     Route::resource("/insertExamination", "ExaminationController@doctorExamination");
@@ -32,6 +33,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("prescription_details", "PrescriptionDetailController");
     Route::resource("prescriptions", "PrescriptionController");
     Route::resource("vacations", "VacationController");
+
+    // Route::get("movePatients", "VacationController@movePatients");
 
     Route::resource("exam_glasses", "ExamGlassController");
     Route::resource("examGlassHome", "ExamGlassController@examGlass");
@@ -109,7 +112,7 @@ Route::get('/welcome', function()
    return view('welcome');
 });
 
-
-Route::get('/play', function(){
-    return view('testValidation');
+Route::get('movePatients', function()
+{
+   return view('vacations.movePatients');
 });

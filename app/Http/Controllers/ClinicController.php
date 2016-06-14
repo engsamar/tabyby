@@ -14,6 +14,11 @@ class ClinicController extends Controller
      *
      * @return Response
      */
+    public function chooseClinic()
+    {
+        $clinics = Clinic::all();
+        return view('clinics.chooseClinic',['clinics'=>$clinics]);
+    }
     public function index()
     {
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);

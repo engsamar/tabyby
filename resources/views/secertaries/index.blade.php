@@ -1,5 +1,4 @@
-@extends('layout')
-
+@extends('adminLayout')
 @section('header')
     <div class="page-header clearfix">
         <h1>
@@ -31,7 +30,9 @@
                     </thead>
 
                     <tbody>
+
                     @foreach($secertaries as $secertary)
+
                         {{--                        {{ $userRole[0]['id'] }}--}}
                         {{--                        {{ $secertary->userRole_id }}--}}
                         <tr>
@@ -48,9 +49,9 @@
                                     <td>{{$secertary->degree}}</td>
                                     <td>{{$secertary->national_id}}</td>
                                     <td class="text-right">
-                                        <a class="btn btn-xs btn-primary"
-                                           href="{{ route('secertaries.show', $secertary->id) }}"><i
-                                                    class="glyphicon glyphicon-eye-open"></i> View</a>
+                                        {{--<a class="btn btn-xs btn-primary"--}}
+                                           {{--href="{{ route('secertaries.show', $secertary->id) }}"><i--}}
+                                                    {{--class="glyphicon glyphicon-eye-open"></i> View</a>--}}
                                         <a class="btn btn-xs btn-warning"
                                            href="{{ route('secertaries.edit', $secertary->id) }}"><i
                                                     class="glyphicon glyphicon-edit"></i> Edit</a>
@@ -72,7 +73,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {!! $secertaries->render() !!}
+{{--                {!! $secertaries->render() !!}--}}
             @else
                 <h3 class="text-center alert alert-info">Empty!</h3>
             @endif

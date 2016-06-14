@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('css')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css"
 rel="stylesheet">
@@ -12,6 +12,9 @@ rel="stylesheet">
 
 <div class="row">
     <div class="col-md-12">
+    @if($errors->has('msg'))
+<h4>@lang('validation.$errors->first()'){{$errors->first()}}</h4>
+@endif
         <form action="{{ route('reservations.store') }}" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @if($userRole == 1 || $userRole == 0)
@@ -32,8 +35,7 @@ rel="stylesheet">
             <div  class="form-group @if($errors->has('address')) has-error @endif">
                 <label for="address-field">Address</label>
                 <select id="type-field" name="address" class="form-control">
-                    <option value="0">Choose Clinic</option>}
-                    option
+                    <option value="0">Choose Clinic</option>
                     @foreach($address as $key=>$value)
 
                     <option value={{ $value->id }}>{{ $value->name }} :: {{ $value->address }}</option>

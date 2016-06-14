@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('nav_bar')
 
 @endsection

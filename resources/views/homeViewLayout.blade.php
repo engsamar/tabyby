@@ -61,14 +61,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="top-header">
 <div class="container">
     <div class="logo">
-        <a href="/"><img src="/images/logo.png" title="doctor"/></a>
+        <a href="/"><img src="/images/logooo.png" title="doctor"/></a>
     </div>
     <!----start-top-nav---->
                         <nav class="top-nav">
         <ul class="top-nav">
         <li class="dropdown">
-        <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Details')
-        <span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="#about" class="scroll" >@lang('validation.About us')
             </a></li>
@@ -108,20 +106,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </a></li>
             </ul>
         </li>
-        @if($userRoleType==0)
+        @if(Auth::user()->userRoles[0]->type==0)
         <li class="dropdown">
-            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Control Panel')
+            <a href="#" class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Control Panel')
             <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a href="/secertaries">@lang('validation.Secretary')</a></li>
                 <li><a href="/clinics" >@lang('validation.Clinic')</a></li>
                 <li><a href="/vacations" >@lang('validation.Vacations')</a></li>
                 <li><a href="/posts" >@lang('validation.Posts')</a></li>
-                <li><a href="/reservations">@lang('validation.Reservation')</a></li>
+                <li><a href="reservations/today">@lang('validation.Reservation')</a></li>
 
             </ul>
         </li>
-        @elseif ($userRoleType==1)
+        @elseif (Auth::user()->userRoles[0]->type==1)
         <li class="dropdown">
             <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
                 <span class="caret"></span></a>
@@ -154,7 +152,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         @else
         <li class="dropdown">
             <a class="dropdown-toggle"  data-toggle="dropdown">
-                hhh@lang('validation.Medical History')
+                @lang('validation.Medical History')
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/user_profiles/{{Auth::user()->id}}" >
@@ -167,7 +165,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
-                <li><a href="/reservation/patient">@lang('validation.View Reservation')</a></li>
+                <li><a href="/patientReservation">@lang('validation.View Reservation')</a></li>
             </ul>
         </li>
         @endif

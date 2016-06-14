@@ -61,6 +61,9 @@ class UserController extends Controller
         //select all clinics address
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
         //clinic appointments
+
+        // return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
+
         $user=Auth::user();
         if($user){
         $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
@@ -69,6 +72,7 @@ class UserController extends Controller
         }
 
         return view('users.secretaryHome', compact('userRole','userRoleType'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
+
     }
 
     public function doctorHome()

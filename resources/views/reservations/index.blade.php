@@ -1,10 +1,10 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('header')
 <div class="page-header clearfix">
     <h2>
     <i class="glyphicon glyphicon-align-justify"></i>Reservations
-    <a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
-     <a class="btn btn-primary pull-right" href="/latest"></i>Day Reservations</a>
+    {{--<a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>--}}
+     <a class="btn btn-primary pull-right" href="/allReservations"></i>All Reservations</a>
      @if($userRole == 1)
     <button type="button" class="btn btn-info pull-right"><a href="{{ route('users.create') }}"
 
@@ -12,6 +12,7 @@
      @endif
     </h2>
 </div>
+
 <div class="form-group @if($errors->has('searchRes')) has-error @endif">
     <select id="searchRes-field" name="searchRes" class="form-control">
         <option  selected value="0">Search By</option>
@@ -125,12 +126,14 @@
                     </td>
                     <td>{{$status[$reservation->status]}}</td>
                     <td class="text-right">
+                        @if($reservation->status != 0)
                       <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Cancel Reservation ? Are you sure?')) { return true } else {return false };">
                       <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                          <a class="btn btn-xs btn-warning btn-group" role="group" href="{{ route('reservations.edit', $reservation->id) }}"><i class="glyphicon glyphicon-edit"></i> Postpone</a>
                      <button type="submit" class="btn btn-xs btn-danger">Cancel Reservation <i class="glyphicon glyphicon-trash"></i></button>
                      </form>
+                     @endif
                      </td>
                     @endif
                 </tr>

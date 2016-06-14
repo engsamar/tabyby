@@ -1,5 +1,14 @@
-@extends('homeViewLayout')
+@extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0 ) or (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )) ? 'adminLayout' : 'homeViewLayout')
+@section('header')
+    <div class="page-header clearfix">
+        <h1>
+            <i class="glyphicon glyphicon-align-justify"></i> Messages
+            <a class="btn btn-success pull-right" href="{{ route('messages.create') }}"><i
+                        class="glyphicon glyphicon-plus"></i> Create</a>
+        </h1>
 
+    </div>
+@endsection
 @section('content')
     <div class="container">
         @if (Session::has('error_message'))

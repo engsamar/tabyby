@@ -20,8 +20,9 @@ class SecertaryController extends Controller
      */
     public function index()
     {
-        $secertaries = Secertary::orderBy('id', 'asc')->paginate(10);
-        $userRole = UserRole::where('type', '=', 1)->get();
+        $secertaries = Secertary::all();
+
+        $userRole = UserRole::where('type', '=',1)->get();
         $users = User::all();
         return view('secertaries.index', compact('secertaries'), ['userRole' => $userRole, 'users' => $users]);
     }

@@ -12,6 +12,10 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
+     'this patient take three Consultation, try to reserve new examination' => 'this patient take three Consultation, try to reserve new examination',
+     'this date is not available, it is vacation, try with aother date' => 'this date is not available, it is vacation, try with aother date',
+     'this reservation already exist in this date' => 'this reservation already exist in this date',
+     'this date is fully completed , please try with another one' => 'this date is fully completed , please try with another one',
      'Posts' => 'Posts',
      'Add Post' => 'Add Post',
      'Control Panel' => 'Control Panel',

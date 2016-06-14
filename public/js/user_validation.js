@@ -9,9 +9,7 @@ $(document).ready(function () {
         maxDate:"-1d"
     });
     $(":input[name='username']").on("blur", function () {
-        console.log($(":input[name='username']").val());
         if ($(":input[name='username']").val().trim() != "") {
-            console.log($(":input[name='username']").val());
             $.ajax({
                 url: '/users/checkdata/?action=username',
                 type: "post",
@@ -20,9 +18,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data == "no") {
                         $(":input[name='username']").next().text("username used").hide();
-                        console.log(data);
                     } else {
-                        console.log(data);
                         $(":input[name='username']").next().text("username used").show();
                         $(":input[name='username']").focus();
                     }
@@ -42,7 +38,6 @@ $(document).ready(function () {
                 data: {'email': $(":input[name='email']").val(), '_token': $('input[name=_token]').val()},
 
                 success: function (data) {
-                    console.log(data);
                     if (data == "no") {
                         $(":input[name='email']").next().text("email used").hide();
                     } else {
@@ -69,7 +64,6 @@ $(document).ready(function () {
     });
 
     // $("input[name='telephone']").on("keyup",function () {
-    //     console.log();
     //     if(this.value.substr(0,4)<2010){
     //         $("input[name='telephone']").next().hide();
     //     }else {
@@ -77,7 +71,6 @@ $(document).ready(function () {
     //     }
     // });
     // $("input[name='mobile']").on("blur",function () {
-    //     console.log();
     //     if(this.value.substr(0,4)<2010){
     //         $("input[name='mobile']").next().hide();
     //     }else {
@@ -85,7 +78,6 @@ $(document).ready(function () {
     //     }
     // });
     $("input[name='password']").on("blur", function () {
-        console.log($("input[name='password']").val().trim().length);
         if ($("input[name='password']").val().trim().length >= 6) {
             $("input[name='password']").next().hide();
         } else {

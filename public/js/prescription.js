@@ -8,7 +8,6 @@ $(document).ready()
     $("#active_div2").hide();
     $("select[name='search_by']").change(function () {
         if (this.value == 1) {
-            console.log("name");
             $("#medicine_name").show();
         } else {
             selected = 2;
@@ -63,7 +62,6 @@ $(document).ready()
         }
     });
     $("input[name='medicine_name']").on("blur", function () {
-        console.log(this.value);
     });
     $("input[name='active_constituent']").on("keyup", function () {
         if (this.value.trim() != "") {
@@ -101,7 +99,6 @@ $(document).ready()
 
                     if (data.length > 0) {
                         var select = $("#medicines_name-field");
-                        console.log(data.length);
                         select.empty();
                         select.append("<option value='-1'>select name</option>")
                         $.each(data, function (i, content) {
@@ -125,7 +122,6 @@ $(document).ready()
 
                     if (data.length > 0) {
                         var select = $("#medicines_name-field");
-                        console.log(data.length);
                         select.empty();
                         select.append("<option value='-1'>select name</option>")
                         $.each(data, function (i, content) {

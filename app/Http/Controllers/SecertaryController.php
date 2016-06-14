@@ -135,4 +135,26 @@ class SecertaryController extends Controller
         return redirect()->route('secertaries.index')->with('message', 'Item deleted successfully.');
     }
 
+    public function find($name)
+    {
+        $user=User::where("username","=",$name)->get();
+        foreach ($user as $value){
+            foreach ($value->userRoles as $role){
+                if($role["type"]==1){
+                    $user_role=$role["id"];
+                    break;
+                }
+
+            }
+        }
+
+//        var_dump($user_role);
+        $secretary=Secertary::where("userRole_id","=",$user_role)->get();
+        var_dump($secretary);
+        if(count($secretary)==0){
+            return "yes";
+        }else{
+            return "no";
+        }
+    }
 }

@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/medicines/find/', 'MedicineController@find');
     Route::post('/consistitues/find', 'ConsistitueController@find');
     Route::get("reservations/searchKey/{key}", "ReservationController@searchKey");
+    Route::get("/secretaries/find/{name}", "SecertaryController@find");
     Route::patch("reservcancel", "ReservationController@destroy");
     Route::get("/newPrescriptionDetails/{res_id}", "PrescriptionDetailController@create");
 

@@ -66,44 +66,44 @@
                             @if(count($reservation->complain) == 0)
                              <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New Complain</a>
                             @endif
-                        </div>
+                        </div> 
+                        <!-- ******************************* -->
                         <div id="tabs-{{$i}}2">                           
                             @if(count($reservation->examination) != 0)
                                 <table class="table table-bordered">
-                                    <tr>
-                                        <th>Eye</th>
-                                        <th>vision</th>
-                                        <th>Lid</th>
-                                        <th>Conjunctiva</th>
-                                        <th>Pupil</th>
-                                        <th>A/C</th>
-                                        <th>Lens</th>
-                                        <th>Fundus</th>
-                                        <th>I.O.P</th>
-                              
-                                    </tr>
-                                     @foreach($reservation->examination as $exam)
-                                    <tr> 
-                                        <td>
-                                            @if($exam['eye_type'] == 0) {{"Right Eye"}}@else {{"Left Eye"}} @endif  </td>
-                                        <td>{{$exam['vision']}}</td>
-                                        <td>{{$exam['lid']}}</td>
-                                        <td>{{$exam['conjunctiva']}}</td>
-                                        <td>{{$exam['pupil']}}</td>
-                                        <td>{{$exam['a_c']}}</td>
-                                        <td>{{$exam['lens']}}</td>
-                                        <td>{{$exam['fundus']}}</td>
-                                        <td>{{$exam['i_o_p']}}</td>
-                                    </tr>
-                                    @endforeach
-                                </table>
-                            @endif
+                                        <tr>
+                                            <th>Eye</th>
+                                            <th>vision</th>
+                                            <th>Lid</th>
+                                            <th>Conjunctiva</th>
+                                            <th>Pupil</th>
+                                            <th>A/C</th>
+                                            <th>Lens</th>
+                                            <th>Fundus</th>
+                                            <th>I.O.P</th>
 
-                            @if(count($reservation->examination) == 0)
-                                <a class="btn btn-xs btn-primary" href='/insertExamination/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New Examination</a>
-                            @endif
-                             
+                                        </tr>
+                                        @foreach($reservation->examination as $exam)
+                                            <tr>
+                                                <td>
+                                                    @if($exam['eye_type'] == 0) {{"Right Eye"}}@else {{"Left Eye"}} @endif  </td>
+                                                <td>{{$exam['vision']}}</td>
+                                                <td>{{$exam['lid']}}</td>
+                                                <td>{{$exam['conjunctiva']}}</td>
+                                                <td>{{$exam['pupil']}}</td>
+                                                <td>{{$exam['a_c']}}</td>
+                                                <td>{{$exam['lens']}}</td>
+                                                <td>{{$exam['fundus']}}</td>
+                                                <td>{{$exam['i_o_p']}}</td>
+                                            </tr>
+                                        @endforeach
+                                </table>
+                                @endif
+                                @if(count($reservation->examination) == 0)
+                                    <a class="btn btn-xs btn-primary" href='/insertExamination/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New Examination</a>
+                                @endif
                         </div>
+                        <!-- ************************************************* -->
                         <div id="tabs-{{$i}}3">                           
                             @if(count($reservation->examGlass) != 0)
 
@@ -136,14 +136,49 @@
                                <a class="btn btn-xs btn-primary" href='/createExamGlassHome/{{$reservation->id}}'><i
                             class="glyphicon glyphicon-eye-open"></i> New Glass Examination</a>
                             @endif
-
                         </div>
-
-                        
-                        <div id="tabs-{{$i}}4">                           
-                            <a class="btn btn-xs btn-primary" href='/newPrescriptionDetails/{{$reservation->id}}'><i
-                            class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION</a>
+                        <!-- *********************************************** -->
+                        <div id="tabs-{{$i}}4">
+                            @if(count($reservation->prescription) != 0)
+                                @if(count($reservation->prescription->PrescriptionDetails) != 0)
+                                    @foreach($reservation->prescription->PrescriptionDetails as $prescriptionDetail)
+                                        <table class="table">
+                                            <tr>
+                                                <th>id</th>
+                                                <th>medicine_name</th>
+                                                <th>no_times</th>
+                                                <th>quantity</th>
+                                                <th>duaration</th>
+                                                <th>EDIT</th>
+                                            <tr>
+                                                <td>{{$prescriptionDetail["id"]}}  </td>
+                                                <td>{{$prescriptionDetail['medicine_name']}}</td>
+                                                <td>{{$prescriptionDetail['no_times']}}</td>
+                                                <td>{{$prescriptionDetail['quantity']}}</td>
+                                                <td>{{$prescriptionDetail['duaration']}}</td>
+                                                <td><a class="btn btn-xs btn-warning"
+                                                       href="{{ route('prescription_details.edit', $prescriptionDetail["id"]) }}"><i
+                                                                class="glyphicon glyphicon-edit"></i> Edit</a></td>
+                                            </tr>
+                                        </table>
+                                    @endforeach
+                                    <a class="btn btn-xs btn-primary"
+                                       href='/newPrescriptionDetails/{{$reservation->id}}'><i
+                                                class="glyphicon glyphicon-eye-open"></i> New
+                                        PRESCRIPTION_DETAIL</a>
+                                @else
+                                    <a class="btn btn-xs btn-primary"
+                                       href='/newPrescriptionDetails/{{$reservation->id}}'><i
+                                                class="glyphicon glyphicon-eye-open"></i> New
+                                        PRESCRIPTION_DETAIL</a>
+                                @endif
+                            @else
+                                <a class="btn btn-xs btn-primary"
+                                   href='/newPrescriptionDetails/{{$reservation->id}}'><i
+                                            class="glyphicon glyphicon-eye-open"></i> New PRESCRIPTION_DETAIL</a>
+                            @endif
                         </div>
+                        <!-- ******************************************************** -->
                     @else
                         <div id="tabs-{{$i}}1">                           
                             <table class="table table-bordered" border="1px">
@@ -230,10 +265,11 @@
                             
                         </div>
                     @endif
+                    </div>
                 </div>
             @endforeach
         @endif
     </div>
-@endsection
+    @endsection
 </body>
 </html>

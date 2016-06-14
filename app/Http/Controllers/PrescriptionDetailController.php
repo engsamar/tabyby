@@ -53,7 +53,7 @@ class PrescriptionDetailController extends Controller
             $prescription_detail->medicine_id = $medicine->id;
             $prescription_detail->duaration = $request->input("duration");
             $prescription = Prescription::where('reservation_id', '=', $request->input("res_id"))->first();
-            $prescription_detail->preception_id = $prescription->id;
+            $prescription_detail->prescription_id = $prescription->id;
         } else {
             $prescription_detail->medicine_id = $request->input("medicines_name");
             $prescription_detail->no_times = $request->input("no_times");

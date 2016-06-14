@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('header')
 <div class="page-header">
         <h1>Complains / Show #{{$complain->id}}</h1>

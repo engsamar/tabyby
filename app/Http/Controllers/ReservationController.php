@@ -20,6 +20,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\ComplainDetail;
 class ReservationController extends Controller {
+
 	public function index()
 	{
 		$reservations = Reservation::where('status','>',0)->orderBy('id', 'asc')->paginate(10);

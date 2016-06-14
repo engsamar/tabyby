@@ -20,7 +20,6 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="/plugins/morris/morris.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Date Picker -->
@@ -622,9 +621,8 @@
 <script src="/js/bootstrap.min-3.3.1.js"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="/plugins/morris/morris.min.js"></script>
-{{--<script src="/js/jquery-1.11.3.min.js"></script>--}}
-
+<!-- <script src="/js/jquery-1.11.3.min.js"></script>
+ -->
 <!-- Sparkline -->
 <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->

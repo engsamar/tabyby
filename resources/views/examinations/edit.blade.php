@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('adminLayout')
 @section('css')
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group @if($errors->has('vision')) has-error @endif">
                        <label for="vision-field">Vision</label>
-                    {{--<input type="text" id="vision-field" name="vision" class="form-control" value="{{ $examination->vision }}"/>--}}
+                    <input type="text" id="vision-field" name="vision" class="form-control" value="{{ $examination->vision }}"/>
                         <select id="vision-field" name="vision" class="form-control">
                             @foreach($vision as $key=>$types)
                                 @if($examination->vision==$key)

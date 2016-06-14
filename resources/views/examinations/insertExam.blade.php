@@ -1,13 +1,11 @@
-@extends('layout')
+@extends('adminLayout')
 @section('content')
     @include('error')
-
     <div class="row">
         <div class="col-md-4">
-
             <form action="{{ route('examinations.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="text" name="res_id" value="{{ $res_id }}">
+                <input type="hidden" name="res_id" value="{{ $res_id }}">
                 <h3>Left Eye</h3>
                 <div class="form-group @if($errors->has('eye_type')) has-error @endif">
 
@@ -209,3 +207,12 @@
     </div>
 @endsection
 
+@section('scripts')
+    <script src="/js/examination_validation.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            console.log("dfsfsd");
+        });
+    </script>
+@endsection

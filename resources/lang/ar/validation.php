@@ -12,6 +12,7 @@ return [
     | such as the size rules. Feel free to tweak each of these messages.
     |
     */ 
+    'this reservation already exist in this date'=>'لديك حجز في نفس اليوم',
       'arabic' => 'العربية',
      'Arabic' => 'العربية',
      'english' => 'الإنجليزية',

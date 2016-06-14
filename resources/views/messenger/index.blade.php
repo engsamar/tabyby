@@ -1,5 +1,14 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
+@section('header')
+    <div class="page-header clearfix">
+        <h1>
+            <i class="glyphicon glyphicon-align-justify"></i> Messages
+            <a class="btn btn-success pull-right" href="{{ route('messages.create') }}"><i
+                        class="glyphicon glyphicon-plus"></i> Create</a>
+        </h1>
 
+    </div>
+@endsection
 @section('content')
     <div class="container">
         @if (Session::has('error_message'))

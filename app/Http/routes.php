@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("users", "UserController");
     Route::resource("examinations", "ExaminationController");
     Route::resource("working_hours", "WorkingHourController");
+    Route::get("reservations/today", "ReservationController@latest");
     Route::resource("reservations", "ReservationController");
     Route::resource("role_types", "RoleTypeController");
     Route::resource("/insertExamination", "ExaminationController@doctorExamination");
@@ -37,7 +38,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("createExamGlassHome/{id}", "ExamGlassController@examGlass");
     Route::get("user_profiles/{id}/", "UserProfileController@index");
     Route::get("patient/{id}", "ReservationController@patientReserv");
-    Route::get("/latest", "ReservationController@latest");
+    ///
+    Route::get("/chooseClinic", "ClinicController@chooseClinic");
+    Route::get("/allReservations", "ReservationController@index");
     Route::get("patients/{id}", "ReservationController@patient");
     Route::get("/working_hours/date/{id}", "WorkingHourController@retreve");
     Route::get("/working_hours/{id}", "WorkingHourController@update");
@@ -61,7 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("/newPrescriptionDetails/{res_id}", "PrescriptionDetailController@create");
 
     Route::get("reservations/testing/{key}", "ReservationController@getting");
-
+//    Route::get("/create", "ReservationController@create");
     Route::get("/all_reservation/{id}", "ReservationController@getReservations");
     Route::post("/reserv/searchByName","ReservationController@getReservationByName");
     Route::post("/reserv/searchByDate","ReservationController@getReservationByDate");
@@ -104,4 +107,9 @@ Route::group(['prefix' => 'messages', 'before' => 'auth'], function () {
 Route::get('/welcome', function()
 {
    return view('welcome');
+});
+
+
+Route::get('/play', function(){
+    return view('testValidation');
 });

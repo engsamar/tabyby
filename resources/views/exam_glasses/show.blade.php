@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('adminLayout')
 @section('header')
 <div class="page-header">
         <h1>ExamGlasses / Show #{{$exam_glass->id}}</h1>

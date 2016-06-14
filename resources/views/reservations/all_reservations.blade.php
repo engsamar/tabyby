@@ -1,9 +1,9 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('css')
     <link rel="stylesheet" href="/css/tab.css">
 @endsection
 @section('header')
-     <meta charset="utf-8">
+    <meta charset="utf-8">
   <title>jQuery UI Accordion - Default functionality</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -27,10 +27,10 @@
 
 @section('content')
     <div id="accordion">
-        {{$i = 0}}
+        <?php $i = 0 ?>
         @if(count($reservations) != 0)
             @foreach ($reservations as $reservation)
-            {{$i++}}
+            <?php $i++ ?>
             <h3>{{$reservation->date}}</h3>
 
                 <div class="tabs">
@@ -56,11 +56,12 @@
                                     @if(count($reservation->complain->complainDetail) != 0)
                                         @foreach ($reservation->complain->complainDetail as $detail)
                                             <td>{{$detail['plan']}}</td>
-                                            <td>{{$detail['diagnose']}}</td>      
+                                            <td>{{$detail['diagnose']}}</td>    
                                         @endforeach
                                     @endif
                                 </tr>
                             </table>
+
                             @endif
 
                             @if(count($reservation->complain) == 0)
@@ -126,6 +127,9 @@
                                             <td>{{ $exam['sphl'] }}</td>
                                             <td>{{ $exam['cyll'] }}</td>
                                             <td>{{ $exam['axisl'] }}</td>
+                                            <td>
+
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </table>
@@ -196,7 +200,8 @@
                                         @if(count($reservation->complain->complainDetail) != 0)
                                             @foreach ($reservation->complain->complainDetail as $detail)
                                                 <td>{{$detail['plan']}}</td>
-                                                <td>{{$detail['diagnose']}}</td>      
+                                                <td>{{$detail['diagnose']}}</td>  
+                                                 <td> <a class="btn btn-xs btn-warning" href="{{ route('complains.edit', $complain->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>      
                                             @endforeach
                                         @endif
                                     </tr>
@@ -257,8 +262,7 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                            @endif
-                            
+                            @endif                           
                         </div>
 
                         <div id="tabs-{{$i}}4">                           
@@ -266,10 +270,9 @@
                         </div>
                     @endif
                     </div>
-                </div>
             @endforeach
+        @else
+            <p align="center">There are no Reservations till now</p>
         @endif
     </div>
     @endsection
-</body>
-</html>

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('adminLayout')
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css"
           rel="stylesheet">
@@ -54,8 +54,8 @@
                     @endif
                 </div>
                 <div class="form-group @if($errors->has('clinic_id')) has-error @endif">
-                    <label for="clinic_id-field">Clinic_name</label>
-                    <input type="text" id="clinic_id-field" name="clinic_id" class="form-control"
+                    {{--<label for="clinic_id-field">Clinic_name</label>--}}
+                    <input type="hidden" id="clinic_id-field" name="clinic_id" class="form-control"
                            value="{{ $working_hour->clinic->id}}"/>
                     @if($errors->has("clinic_id"))
                         <span class="help-block">{{ $errors->first("clinic_id") }}</span>

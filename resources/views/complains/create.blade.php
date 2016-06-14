@@ -1,11 +1,13 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('css')
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
 @section('header')
     <div class="page-header">
-        <h1><i class="glyphicon glyphicon-plus"></i> Complains / Create </h1>
+        <h1><i class="glyphicon glyphicon-plus"></i> Enter Today's Complain </h1>
     </div>
+    <script src="/js/complain_validation.js"></script>
+
 @endsection
 
 @section('content')
@@ -13,7 +15,6 @@
 
     <div class="row">
         <div class="col-md-12">
-
             <form action="{{ route('complains.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">                               <input type="hidden" name="res_id" value="{{ $res_id }}">
 
@@ -31,7 +32,6 @@
                         <span class="help-block">{{ $errors->first("h_of_complain") }}</span>
                        @endif
                   </div>
-
                    <div class="form-group @if($errors->has('diagnose')) has-error @endif">
                        <label for="diagnose-field">Diagnose</label>
                     <input type="text" id="diagnose-field" name="diagnose" class="form-control" value="{{ old("diagnose") }}"/>
@@ -50,7 +50,7 @@
 
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
-                    <a class="btn btn-link pull-right" href="{{ route('complains.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
+                    <a class="btn btn-link pull-right" href="{{ route('complains.index') }}" id="add"><i class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>
             </form>
 
@@ -63,4 +63,6 @@
     $('.date-picker').datepicker({
     });
   </script>
+  <script src="/js/jquery-1.11.3.min.js"></script>
+
 @endsection

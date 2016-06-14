@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('content')
 <div class="container">
     <h1>Create a new message</h1>

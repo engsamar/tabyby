@@ -1,10 +1,10 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('header')
 <div class="page-header clearfix">
     <h2>
     <i class="glyphicon glyphicon-align-justify"></i>Reservations
-    <a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
-     <a class="btn btn-primary pull-right" href="/latest"></i>Day Reservations</a>
+    {{--<a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>--}}
+     <a class="btn btn-primary pull-right" href="/allReservations"></i>All Reservations</a>
      @if($userRole == 1)
     <button type="button" class="btn btn-info pull-right"><a href="{{ route('users.create') }}"
 

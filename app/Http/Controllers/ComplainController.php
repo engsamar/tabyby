@@ -7,6 +7,7 @@ use App\Complain;
 use Illuminate\Http\Request;
 use App\ComplainDetail;
 use Auth;
+use App\User;
 
 use Illuminate\Support\Facades\Redirect;
 class ComplainController extends Controller {
@@ -19,7 +20,6 @@ class ComplainController extends Controller {
 	public function index()
 	{
 		$complains = Complain::orderBy('id', 'desc')->paginate(10);
-
 		return view('complains.index', compact('complains'));
 	}
 
@@ -35,20 +35,23 @@ class ComplainController extends Controller {
 	// href="{!!route('route', ['key'=>'value'])!!}"
 	public function store(Request $request)
 	{
+		
 		$complain = new Complain();
 		$complain->complain = $request->input("complain");
         $complain->h_of_complain = $request->input("h_of_complain");
         $complain->reservation_id = $request->input("res_id");
 
         $complain->save();
-
 		$complain_details = new ComplainDetail();
         $complain_details->diagnose = $request->input("diagnose");
         $complain_details->plan = $request->input("plan");
         $complain_details->complain_id=$complain->id;
         $complain_details->save();
 
-        return redirect('/patient/'.$request->input("res_id"));
+        $user = User::where('users.id', '=', $request->input("res_id"));
+		$user_id = User::where('users.id', '=', $request->input("res_id"))->value('id');
+
+        return redirect('/all_reservation/'.$user_id);
     }
 
 	/**

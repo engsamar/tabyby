@@ -6,6 +6,7 @@ use App\ClinicConstants;
 use App\Examination;
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 
 class ExaminationController extends Controller {
 
@@ -16,16 +17,21 @@ class ExaminationController extends Controller {
 	 */
 	public function doctorExamination($id)
 	{
+
 	 	$user = Auth::user();
 		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
 		return view('examinations.insertExam',['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision,'res_id'=>$id, 'userRoleType'=>$userRoleType]);
 	}
 
 	public function index()
 	{
+		$user = Auth::user();
+		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+
 		$examinations = Examination::orderBy('id', 'asc')->paginate(10);
 
-		return view('examinations.index', compact('examinations'),['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision]);
+		return view('examinations.index', compact('examinations'),['eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision, 'userRoleType'=>$userRoleType]);
 	}
 
 	/**
@@ -35,10 +41,11 @@ class ExaminationController extends Controller {
 	 */
 	public function create($res_id)
 	{
+
         $user = Auth::user();
 		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 
-		return view('examinations.create',['res_id'=>$res_id,
+		return view('examinations.insertExam',['res_id'=>$res_id,
 			'eyeType' => ClinicConstants::$eyeType,'vision' => ClinicConstants::$vision,
 			'userRoleType'=>$userRoleType]);
 	}
@@ -81,7 +88,10 @@ class ExaminationController extends Controller {
 		$examination1->reservation_id = $request->input("res_id");;
 
 		$examination1->save();
-		return redirect('/patient/'.$request->input("res_id").'/'.$request->input("patient_id"));
+		$user_id = User::where('users.id', '=', $request->input("res_id"))->value('id');
+		
+
+		return redirect('/all_reservation/'.$user_id);
 	// 	return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
 	 }
 

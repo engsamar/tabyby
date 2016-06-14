@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('adminLayout')
 @section('header')
 <div class="page-header">
         <h1>Clinics / Show #{{$clinic->id}}</h1>
@@ -6,8 +6,8 @@
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="btn-group pull-right" role="group" aria-label="...">
-                <a class="btn btn-warning btn-group" role="group" href="{{ route('clinics.edit', $clinic->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                <button type="submit" class="btn btn-danger">Delete <i class="glyphicon glyphicon-trash"></i></button>
+                {{--<a class="btn btn-warning btn-group" role="group" href="{{ route('clinics.edit', $clinic->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>--}}
+                {{--<button type="submit" class="btn btn-danger">Delete <i class="glyphicon glyphicon-trash"></i></button>--}}
             </div>
         </form>
     </div>

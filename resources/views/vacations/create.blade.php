@@ -35,6 +35,10 @@
                     <button type="submit" class="btn btn-primary">Create</button>
                     <a class="btn btn-link pull-right" href="{{ route('vacations.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>
+          
+                <div id="movePatients" class="form-group">
+                  
+                </div>
             </form>
 
         </div>
@@ -45,16 +49,7 @@
   <script>
     var dateToday = new Date();
     var dates = $("#from , #to").datepicker({
-      // defaultDate: "+1w",
-      // changeMonth: true,
-      // numberOfMonths: 3,
       startDate: dateToday,
-      // onSelect: function(selectedDate) {
-      //   var option = this.id == "from" ? "minDate" : "maxDate",
-      //       instance = $(this).data("datepicker"),
-      //       date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
-      //   dates.not(this).datepicker("option", option, date);
-      // }
 
     });
 

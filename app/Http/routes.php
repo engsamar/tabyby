@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("prescriptions", "PrescriptionController");
     Route::resource("vacations", "VacationController");
 
+    // Route::get("movePatients", "VacationController@movePatients");
+
     Route::resource("exam_glasses", "ExamGlassController");
     Route::resource("examGlassHome", "ExamGlassController@examGlass");
     Route::get("createExamGlassHome/{id}", "ExamGlassController@examGlass");
@@ -104,4 +106,10 @@ Route::group(['prefix' => 'messages', 'before' => 'auth'], function () {
 Route::get('/welcome', function()
 {
    return view('welcome');
+});
+
+
+Route::get('movePatients', function()
+{
+   return view('vacations.movePatients');
 });

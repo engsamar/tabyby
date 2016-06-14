@@ -68,24 +68,19 @@ class VacationController extends Controller {
 			$dateAdd = strtotime("+".$i."days", $date);
 			array_push($date_array,date('Y-m-d', $dateAdd));
 			array_push($reserve_array,Reservation::where('date', $date_array[$i])->where('status','>',0)->count());
-				if($reserve_array[$i]!=0)
-				{
-					echo '<html><body><table class="table table-bordered"><thead><tr>
-        					<th>no of patients </th><th> day date</th><th>Move all</th>
-        					<th>Move some</th></tr></thead>';
-					echo "<tbody><tr><td>".$reserve_array[$i]."</td><td>".$date_array[$i]."</td><td>
-						<a href='#'>Move all</a></td><td><a href='#'>Move some</a></td>";
-					echo "</tr></tbody></table></body></html>";					
-				}
+		}
+		if($reserve_array)
+		{
+			// return $this->pateint_reserved($date_array,$reserve_array);
+			return redirect('movePatients')->with('date_array',$date_array)->with('reserve_array',$reserve_array);				
 
 		}
-		die();
-		$vacation->from_day = $from;
-        $vacation->to_day = $to;
-
-		$vacation->save();
-
-		return redirect()->route('vacations.index')->with('message', 'Item created successfully.');
+		else{
+			$vacation->from_day = $from;
+	        $vacation->to_day = $to;
+			$vacation->save();
+			return redirect()->route('vacations.index')->with('message', 'Item created successfully.');
+		}
 	}
 
 	/**
@@ -146,5 +141,10 @@ class VacationController extends Controller {
 
 		return redirect()->route('vacations.index')->with('message', 'Item deleted successfully.');
 	}
+
+	// public function movePatients($date_array,$reserve_array)
+	// {
+	// 	return redirect('/movePatients')->with('date_array',$date_array)->with('reserve_array',$reserve_array);				
+	// }
 
 }

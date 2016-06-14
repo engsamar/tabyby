@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("/reservation/{res_id}", "ReservationController@getReservations");
     Route::get("/patientReservation", "ReservationController@patientReservations");
 
-    Route::post("/users/checkdata/", "UserController@valid");
+
     Route::get('/home', 'HomeController@index');
     Route::post('/medicines/find/', 'MedicineController@find');
     Route::post('/consistitues/find', 'ConsistitueController@find');
@@ -105,3 +105,6 @@ Route::get('/welcome', function()
 {
    return view('welcome');
 });
+
+//ajax validation
+Route::post("/users/checkdata/", "UserController@valid");

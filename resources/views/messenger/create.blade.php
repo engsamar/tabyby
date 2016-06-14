@@ -1,4 +1,4 @@
-@extends('adminLayout')
+@extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0 ) or (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )) ? 'adminLayout' : 'homeViewLayout')
 @section('content')
 <div class="container">
     <h1>Create a new message</h1>

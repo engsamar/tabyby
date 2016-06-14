@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('homeViewLayout')
 @section('content')
 <?php
 	echo "<b>UserInfo: </b><br />";

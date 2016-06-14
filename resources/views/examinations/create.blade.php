@@ -1,17 +1,14 @@
-@extends('homeViewLayout')
+@extends('layout')
 @section('css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css"
-          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
 @section('header')
     <div class="page-header">
         <h1><i class="glyphicon glyphicon-plus"></i> Examinations / Create </h1>
     </div>
 @endsection
-
 @section('content')
     @include('error')
-{{"hjhjhjh"}}
     <div class="row">
         <div class="col-md-12">
 
@@ -119,6 +116,10 @@
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script>
+        <script src="/js/jquery.min.js"></script>
+
         $('.date-picker').datepicker({});
+        console.log('5656560');
     </script>
+    
 @endsection

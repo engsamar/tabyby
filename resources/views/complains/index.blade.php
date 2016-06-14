@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 
 @section('header')
     <div class="page-header clearfix">

@@ -169,7 +169,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         @else
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown">
-                                    hhh@lang('validation.Medical History')
+                                    @lang('validation.Medical History')
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/user_profiles/{{Auth::user()->id}}">

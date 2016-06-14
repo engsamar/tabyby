@@ -20,7 +20,6 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="/plugins/morris/morris.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Date Picker -->
@@ -284,7 +283,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="/user_profiles" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="/user_profiles/{{Auth::user()->id}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -328,11 +327,13 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
+                @if(Auth::user()->userRoles[0]->type==0)
                 <li>
                     <a href="/chooseClinic">
                         <i class="fa fa-th"></i> <span>Dashboard</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="/clinics">
                         <i class="fa fa-th"></i> <span>Clinic</span>
@@ -345,21 +346,30 @@
                     </a>
                 </li>
                 <li class="treeview">
+                    <a href="/posts">
+                        <i class="fa fa-edit"></i> <span>Posts</span>
+                    </a>
+
+                </li>
+                @endif
+                <li class="treeview">
                     <a href="/vacations">
                         <i class="fa fa-laptop"></i>
                         <span>Vacations</span>
                     </a>
 
                 </li>
-                <li class="treeview">
-                    <a href="/posts">
-                        <i class="fa fa-edit"></i> <span>Posts</span>
+                 <li class="treeview">
+                    <a href="/reservations/cancelled">
+                        <i class="fa fa-laptop"></i>
+                        <span>Cancelled Reservation</span>
                     </a>
 
                 </li>
+
                 <li class="treeview">
                     <a href="/reservations/today">
-                        <i class="fa fa-table"></i> <span>Reservations</span>
+                        <i class="fa fa-table"></i> <span>Today Reservations</span>
                     </a>
 
                 </li>
@@ -387,7 +397,9 @@
             @yield('header')
         </div>
         <div class="content">
-            @yield('content')
+  <div id="page-wrapper">
+             @yield('content')
+        </div>
         </div>
 
 
@@ -609,9 +621,8 @@
 <script src="/js/bootstrap.min-3.3.1.js"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="/plugins/morris/morris.min.js"></script>
-{{--<script src="/js/jquery-1.11.3.min.js"></script>--}}
-
+<!-- <script src="/js/jquery-1.11.3.min.js"></script>
+ -->
 <!-- Sparkline -->
 <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->

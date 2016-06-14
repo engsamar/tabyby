@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("examinations", "ExaminationController");
     Route::resource("working_hours", "WorkingHourController");
     Route::get("reservations/today", "ReservationController@latest");
+    Route::get("reservations/cancelled", "ReservationController@cancel");
     Route::resource("reservations", "ReservationController");
     Route::resource("role_types", "RoleTypeController");
     Route::resource("/insertExamination", "ExaminationController@doctorExamination");
@@ -110,7 +111,6 @@ Route::get('/welcome', function()
 {
    return view('welcome');
 });
-
 
 Route::get('movePatients', function()
 {

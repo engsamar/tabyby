@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('adminLayout')
 @section('css')
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
@@ -32,6 +32,7 @@
                         <span class="help-block">{{ $errors->first("h_of_complain") }}</span>
                        @endif
                     </div>
+
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Save</button>
                     <a class="btn btn-link pull-right" href="{{ route('complains.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>

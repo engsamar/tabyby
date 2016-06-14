@@ -30,7 +30,9 @@
                     </thead>
 
                     <tbody>
+
                     @foreach($secertaries as $secertary)
+
                         {{--                        {{ $userRole[0]['id'] }}--}}
                         {{--                        {{ $secertary->userRole_id }}--}}
                         <tr>
@@ -71,7 +73,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {!! $secertaries->render() !!}
+{{--                {!! $secertaries->render() !!}--}}
             @else
                 <h3 class="text-center alert alert-info">Empty!</h3>
             @endif

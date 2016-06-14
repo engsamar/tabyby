@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use \DateTime;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use App\ClinicConstants;
 use App\Secertary;
 use App\Vacation;
@@ -19,11 +20,12 @@ use Auth;
 use Illuminate\Http\Request;
 use App\ComplainDetail;
 class ReservationController extends Controller {
+
 	public function index()
 	{
-		$reservations = Reservation::orderBy('id', 'asc')->paginate(10);
+		$reservations = Reservation::where('status','>',0)->orderBy('id', 'asc')->paginate(10);
 		$user = Auth::user();
-		$userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
 
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
@@ -34,10 +36,8 @@ class ReservationController extends Controller {
 	{
 
 		$reservations = Reservation::where('user_id', '=',Auth::user()->id)->paginate(10);
-		echo Auth::user()->id;
-		die();
 		$user = Auth::user();
-		$userRole = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
 
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
@@ -51,7 +51,7 @@ class ReservationController extends Controller {
 		$appointments=WorkingHour::all();
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"")->with('userRoleType',$userRole);
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"error")->with('userRoleType',$userRole);
 	}
 
 
@@ -93,10 +93,9 @@ class ReservationController extends Controller {
 
 		$vacations=Vacation::where('from_day','<=',$dateCheck)->where('to_day','>=',$dateCheck)->count();
 		if($vacations){
-			$message="this date is not available, it is vacation, try with aother date";
-			echo $message;
-			die();
-			return redirect()->route('reservations.create')->with('message',$message);
+			return Redirect::back()->withErrors(['msg', 'this date is not available, it is vacation, try with aother date']);
+
+			//return redirect()->route('reservations.create')->with('message',$message);
 			
 		}else{
 			
@@ -123,10 +122,8 @@ class ReservationController extends Controller {
 					if ($request->input("res_type_id")<4 && $request->input("res_type_id")>=0) {
 						$reservation->reservation_type_id=$request->input("res_type_id")+1;
 					}else{
-						$message="this patient take three Consultation, try to reserve new examination ";
-						echo $message;
-			die();
-						return redirect()->route('reservations.create')->with('message',$message);
+
+						return Redirect::back()->withErrors(['msg', 'this patient take three Consultation, try to reserve new examination']);
 					}
 					
 
@@ -169,15 +166,14 @@ class ReservationController extends Controller {
 					$status= $reservationCh->status;
 
 					if($status==3){
-						echo "you have another reservation that doesn't attend.  </br>";
-						echo " your appointment at ".$reservationCheck->appointment;
-						echo  "  ".$reservationCheck->date;
-						die();
+						//echo "you have another reservation that doesn't attend.  </br>";
+						//echo " your appointment at ".$reservationCheck->appointment;
+						//echo  "  ".$reservationCheck->date;
+						return Redirect::back()->withErrors(['msg', 'you have another reservation that doesn\'t attendyour appointment at '.$reservationCheck->appointment.'  '.$reservationCheck->date]);
+						
 
 					}else{
 						$reservation->save();
-						echo "save";
-
 						$message="The reservation is saved";
 					}
 					}else{
@@ -189,20 +185,15 @@ class ReservationController extends Controller {
 
 				}else{
 					$message="this reservation already exist in this date";
-					//echo $message;
-					//die();
-					return redirect('reservations/create')->with('message',$message);
+						return Redirect::back()->withErrors(['msg', 'this reservation already exist in this date']);
+					//return redirect('reservations/create')->with('message',$message);
 				}
 
 
 			}
 			else{
 				$message="this date is fully completed , please try with another one ";
-				echo $message."<br>";
-				echo $no_of_reserve."<br>";
-				echo $no_of_patient."<br>";
-			die();
-				return redirect()->route('reservations.create')->with('message',$message);
+				return Redirect::back()->withErrors(['msg', 'this date is fully completed , please try with another one']);
 			}
 		}
 		return redirect()->route('reservations.index')->with('message',$message);
@@ -338,7 +329,15 @@ class ReservationController extends Controller {
 				return redirect()->route('reservations.create')->with('message',$message);
 			}
 		}
-		return redirect()->route('reservations.index')->with('message',$message);
+
+		$user = Auth::user();
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
+		$reservations = Reservation::where('id', '=',Auth::user()->id)->paginate(10);
+		$reserveType =ClinicConstants::$reservationType;
+		$status= ClinicConstants::$status;
+		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+
+		//return redirect()->route('reservations.index')->with('message',$message);
 	}
 
 	public function destroy($id)
@@ -361,7 +360,19 @@ class ReservationController extends Controller {
 	{
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		$reservations = Reservation::where('date', '=',Carbon::today()->toDateString())->paginate(10);
+		$reservations = Reservation::where('status','>',0)->where('date', '=',Carbon::today()->toDateString())->paginate(10);
+		$reserveType =ClinicConstants::$reservationType;
+		$status= ClinicConstants::$status;
+		$message="";
+		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+	}
+
+	public function cancel()
+	{
+		$user = Auth::user();
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
+		//$reservations = Reservation::where('status','=',0)->where('date', '=',Carbon::today()->toDateString())->paginate(10);
+		$reservations = Reservation::where('status','=',0)->paginate(10);
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$message="";

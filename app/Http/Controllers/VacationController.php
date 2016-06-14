@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use \DateTime;
 use App\Vacation;
 use Illuminate\Http\Request;
+use App\Reservation;
+
 
 class VacationController extends Controller {
 
@@ -51,16 +53,34 @@ class VacationController extends Controller {
 	public function store(Request $request)
 	{
 		$vacation = new Vacation();
-		$dateTime1 = DateTime::createFromFormat('m/d/Y', $request->input("from_day"));
+		$reservation = new Reservation();
+		$dateTime1 = DateTime::createFromFormat('m/d/Y', $request->input("from"));
 		$from = $dateTime1->format('Y-m-d');
-		$dateTime2 = DateTime::createFromFormat('m/d/Y', $request->input("to_day"));
+		$dateTime2 = DateTime::createFromFormat('m/d/Y', $request->input("to"));
 		$to = $dateTime2->format('Y-m-d');
-		$vacation->from_day = $from;
-        $vacation->to_day = $to;
+		$no_of_days=date_diff(date_create($from),date_create($to))->format('%a');
+		$date = strtotime($from);
+		// vacation days array
+		$date_array=[];
+		// count number of reservations array
+		$reserve_array=[];
+		for($i=0;$i<=$no_of_days;$i++){
+			$dateAdd = strtotime("+".$i."days", $date);
+			array_push($date_array,date('Y-m-d', $dateAdd));
+			array_push($reserve_array,Reservation::where('date', $date_array[$i])->where('status','>',0)->count());
+		}
+		if($reserve_array)
+		{
+			// return $this->pateint_reserved($date_array,$reserve_array);
+			return redirect('movePatients')->with('date_array',$date_array)->with('reserve_array',$reserve_array);				
 
-		$vacation->save();
-
-		return redirect()->route('vacations.index')->with('message', 'Item created successfully.');
+		}
+		else{
+			$vacation->from_day = $from;
+	        $vacation->to_day = $to;
+			$vacation->save();
+			return redirect()->route('vacations.index')->with('message', 'Item created successfully.');
+		}
 	}
 
 	/**
@@ -121,5 +141,10 @@ class VacationController extends Controller {
 
 		return redirect()->route('vacations.index')->with('message', 'Item deleted successfully.');
 	}
+
+	// public function movePatients($date_array,$reserve_array)
+	// {
+	// 	return redirect('/movePatients')->with('date_array',$date_array)->with('reserve_array',$reserve_array);				
+	// }
 
 }

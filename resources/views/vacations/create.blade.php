@@ -6,6 +6,7 @@
     <div class="page-header">
         <h1><i class="glyphicon glyphicon-plus"></i> Vacations / Create </h1>
     </div>
+
 @endsection
 
 @section('content')
@@ -31,14 +32,17 @@
                         <span class="help-block">{{ $errors->first("to_day") }}</span>
                        @endif
                     </div>
+
+                  <div id="movePatients" class="form-group"></div>
+                  <div id="moveAll" class="form-group"></div>
+                  <div id="moveSome" class="form-group"></div>
+
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
                     <a class="btn btn-link pull-right" href="{{ route('vacations.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
                 </div>
           
-                <div id="movePatients" class="form-group">
-                  
-                </div>
+
             </form>
 
         </div>
@@ -54,4 +58,6 @@
     });
 
   </script>
+    <script type="text/javascript"  src="/js/vacations.js"></script>
+
 @endsection

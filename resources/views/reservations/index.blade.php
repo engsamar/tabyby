@@ -1,4 +1,4 @@
-@extends('adminLayout')
+@extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )or ( isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0)) ? 'adminLayout' : 'homeViewLayout')
 @section('header')
 <div class="page-header clearfix">
     <h2>

@@ -9,6 +9,7 @@
 @section('scripts')
     <script src='js/loginRegisteration/jquery-1.11.2.min.js'></script>
     <script src="js/loginRegisteration/index.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
     <script src="/js/user_validation.js"></script>
 @endsection
 @section('content')
@@ -22,7 +23,7 @@
 
                 <div class="input-container{{ $errors->has('name') ? ' has-error' : '' }}">
                     <input type="text" name="username" id="name" value="{{ old('username') }}" required="required"/>
-                    <label for="name">@lang('validation.Full Name')</label>
+                    <label for="name" class="help-block">@lang('validation.Full Name')</label>
 
                     <div class="bar"></div>
                     <span id="error" class="help-block"></span>
@@ -119,10 +120,10 @@
                     @endif
                 </div>
 
-                <div class="input-container @if($errors->has('birthdate')) has-error @endif">
-                    {{--<label for="birthdate-field">@lang('validation.Birthdate')</label>--}}
-                    <input type="date" id="birthdate-field" required="required" name="birthdate"
-                           value="{{ old("birthdate") }}"/>
+                <div class="input-container @if($errors->has('birthdate')) has-error @endif" >
+                    <input type="text" id="birthdate-field" required="required" name="birthdate"
+                           value="{{ old("birthdate") }}" />
+                    <label for="birthdate-field">@lang('validation.Birthdate')</label>
 
 
                     <div class="bar"></div>

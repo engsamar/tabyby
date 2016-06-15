@@ -650,4 +650,5 @@
 <script src="/dist/js/demo.js"></script>
 @yield('scripts')
 </body>
+@yield('modals')
 </html>

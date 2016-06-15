@@ -96,7 +96,7 @@ Route::post('verify/resend', [
 // verification message / user verification
 Route::get('verify/{token?}', [
     'uses' => 'Auth\VerifyController@verify',
-    'as' => 'verification.verify',
+    'as' => 'verification.verusersify',
 ]);
 Route::group(['prefix' => 'messages', 'before' => 'auth'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
@@ -115,4 +115,10 @@ Route::get('/welcome', function()
 Route::get('movePatients', function()
 {
    return view('vacations.movePatients');
+});
+
+
+Route::get('profile', function()
+{
+   return view('users.profile');
 });

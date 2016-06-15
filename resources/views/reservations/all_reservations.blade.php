@@ -21,6 +21,7 @@
 
   $(function() {
     $( "#accordion" ).accordion();
+
   });
   </script>
 @endsection
@@ -160,7 +161,8 @@
                                                 <td>{{$prescriptionDetail['no_times']}}</td>
                                                 <td>{{$prescriptionDetail['quantity']}}</td>
                                                 <td>{{$prescriptionDetail['duaration']}}</td>
-                                                <td><a class="btn btn-xs btn-warning"
+                                                <td>
+                                                    <a class="btn btn-xs btn-warning"
                                                        href="{{ route('prescription_details.edit', $prescriptionDetail["id"]) }}"><i
                                                                 class="glyphicon glyphicon-edit"></i> Edit</a></td>
                                             </tr>
@@ -201,7 +203,7 @@
                                             @foreach ($reservation->complain->complainDetail as $detail)
                                                 <td>{{$detail['plan']}}</td>
                                                 <td>{{$detail['diagnose']}}</td>  
-                                                 <td> <a class="btn btn-xs btn-warning" href="{{ route('complains.edit', $complain->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>      
+                                                 <td> <a class="btn btn-xs btn-warning" href="{{ route('complains.edit', $reservation->complain['id']) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>      
                                             @endforeach
                                         @endif
                                     </tr>
@@ -274,5 +276,5 @@
         @else
             <p align="center">There are no Reservations till now</p>
         @endif
-    </div>
-    @endsection
+
+@endsection

@@ -76,7 +76,7 @@ class ExamGlassController extends Controller
 
         $user_id = User::where('users.id', '=', $request->input("res_id"))->value('id');
 
-        return redirect("/all_reservation/".$user_id);
+        return redirect()->action('ReservationController@getReservations',[$exam_glass->reservation->user["id"]]);    
     }
 
     /**

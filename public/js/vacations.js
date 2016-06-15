@@ -10,13 +10,8 @@ $(document).ready()
         	toTime.setDate(toTime.getDate() + 1);
         	var totim= toTime.toISOString().substring(0, 10);
 
-        	console.log(fromtim);
-			console.log(totim);
-
 			var myDiv=document.getElementById('movePatients');
-			var myDiv1=document.getElementById('moveAll');
 			var myDiv2=document.getElementById('moveSome');
-
 			$.ajax
                 ({
                     url: "/movePatients/"+fromtim+"/"+totim,
@@ -37,9 +32,9 @@ $(document).ready()
 							HTMLtxt+='<tr>';
 							HTMLtxt+='<td> '+ el+' </td>';
 							HTMLtxt+='<td> '+ result.date_array[index] +'</td>';
-							HTMLtxt+='<td><button id="allPat" class="btn btn-primary">Move All</button>';
-							HTMLtxt+='<button  id="somePat" class="btn btn-danger ">Move Some</button></td>';
-							HTMLtxt+='</tr>';
+							HTMLtxt+='<td><a id="allPat" class="btn btn-primary" value="'+result.date_array[index]+'">Move All</a>';
+							// HTMLtxt+='<a id="somePat" class="btn btn-danger" value="'+result.date_array[index]+'">Move Some</a></td>';
+							HTMLtxt+='</td></tr>';
 						});
 
 						HTMLtxt += '</table>';
@@ -51,19 +46,23 @@ $(document).ready()
                     }
                 });
 		
-	});
-	});
+		});
+		});
 
+	var mmmm=document.getElementById('allPat');
 
-
-
-
-
-
-
-
-
-
+mmmm.onclick=function (argument) {
+	 // body...  
+	 console.log('dicvvv');
+}
+		// mmmm.onClick(function(event) {
+		// 	var myDiv1=document.getElementById('moveAll');
+		// 	console.log('dicvvv');
+		// 	myDiv1.show();
+		// 	// HTMLtxt += '';
+		// 	// HTMLtxt += '<button>Move</button>';
+		//  // 	myDiv1.innerHTML = HTMLtxt;
+		// });
 
 
 

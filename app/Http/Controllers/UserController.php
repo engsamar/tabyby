@@ -146,10 +146,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $reservations = Reservation::where('user_id', $id)->get();
+
+        $reserveType =ClinicConstants::$reservationType;
         $user = User::findOrFail($id);
         $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 
-        return view('users.show', compact('user', 'userRoleType'));
+
+        return view('users.show', compact('user', 'userRoleType', 'reservations'));
     }
 
     /**

@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post("/reserv/searchByDuration","ReservationController@getReservationByDuration");
     Route::resource("posts","PostController");
 
+    Route::get("/reservations/existed/{id}", "ReservationController@existed");
 
 });
 Route::group(['middleware' => ['web']], function () {

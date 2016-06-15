@@ -67,7 +67,7 @@
                     </div>
                     <div class="form-group @if($errors->has('birthdate')) has-error @endif">
                        <label for="birthdate-field">Birthdate</label>
-                    <input type="date" id="birthdate-field" name="birthdate" class="form-control" value="{{ $user->birthdate }}"/>
+                    <input type="text" id="birthdate-field" name="birthdate" class="form-control " value="{{ $user->birthdate }}"/>
                        @if($errors->has("birthdate"))
                         <span class="help-block">{{ $errors->first("birthdate") }}</span>
                        @endif

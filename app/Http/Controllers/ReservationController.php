@@ -196,11 +196,11 @@ class ReservationController extends Controller {
 				return Redirect::back()->withErrors(['msg', 'this date is fully completed , please try with another one']);
 			}
 		}
-		/*if (Auth::user()->userRoles[0]->type==2) {
+		if (Auth::user()->userRoles[0]->type==2) {
 			# code...
-		return redirect()->route('reservations.patientReservations')->with('message',$message);
+		return redirect('reservations.patientReservations')->with('message',$message);
 
-		}*/
+		}
 		
 		return redirect()->route('reservations.index')->with('message',$message);
 	}
@@ -362,6 +362,15 @@ class ReservationController extends Controller {
 		return redirect()->route('reservations.index')->with('message', 'Item cancelled successfully.');
 	}
 
+	public function existed($id)
+	{
+		$reservation = Reservation::findOrFail($id);
+		$reservation->status=2;
+
+		$reservation->save();
+		return redirect()->route('reservations.index')->with('message', 'Item cancelled successfully.');
+	}
+
 	public function latest()
 	{
 		$user = Auth::user();
@@ -384,7 +393,6 @@ class ReservationController extends Controller {
 		$message="";
 		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 	}
-
 
 	public function getReservations($id)
 	{

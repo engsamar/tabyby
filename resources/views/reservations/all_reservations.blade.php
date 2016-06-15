@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="/css/tab.css">
 @endsection
 @section('header')
+
+
     <meta charset="utf-8">
     <title>jQuery UI Accordion - Default functionality</title>
     <link rel="stylesheet" href="/css/jquery-ui.css">
@@ -21,11 +23,19 @@
 
         });
     </script>
+
 @endsection
 
 @section('content')
+    <div>
+        <h1>
+            <i class="glyphicon glyphicon-align-justify"></i> PatientName : {{$reservations[0]->user['username']}}
+        </h1>
+
+    </div>
     <div id="accordion">
-        <?php $i = 0 ?>
+        <?php $i = 0?>
+
         @if(count($reservations) != 0)
             @foreach ($reservations as $reservation)
             <?php $i++ ?>

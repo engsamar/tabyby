@@ -4,8 +4,9 @@
           rel="stylesheet">
 @endsection
 @section('header')
+
     <div class="page-header">
-        <h1><i class="glyphicon glyphicon-edit"></i> WorkingHours / Edit #{{$working_hour->id}}</h1>
+        <h1><i class="glyphicon glyphicon-edit"></i>{{$working_hour->clinic['name']}} : WorkingHours : Edit : {{$working_hour->id}}</h1>
     </div>
 @endsection
 

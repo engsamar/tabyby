@@ -114,25 +114,24 @@ class VacationController extends Controller {
 			$new_reservation = Reservation::where('date',$new_date)->where('status','>',0)->count();
 			$working_hours = WorkingHour::where('day',date('l',strtotime($new_date)))->value('fromTime');
 			$minutes = ($working_hours *60);
-			$apntmnt=strtotime("+".$minutes." minutes", strtotime($from_time));
-			return $apntmnt;
-			if($new_reservation==0)
+			if($new_reservation==0) 
 			{
-				foreach ($old_reservation as $key => $value) {
-					$value->date=$new_date;
-					if($working_hours!=0)
+				if($working_hours!=0)
 					{
-
-						$value->appointment=date('h:i:s',$apntmnt) ;
-						$value->save();
-						return "true";
+						foreach ($old_reservation as $key => $value) {
+							$value->date=$new_date;
+							$apntmnt=strtotime($value->appointment)+strtotime($working_hours);
+							$value->appointment=date('h:i:s',$apntmnt);
+							$value->save();
+							return "true";
+					}
 					}
 					else
 					{
 						return "0";
 					}
 
-				}
+				
 			}
 			else 
 			{

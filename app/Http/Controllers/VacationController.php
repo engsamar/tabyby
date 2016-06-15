@@ -118,7 +118,7 @@ class VacationController extends Controller {
 			{
 				if($working_hours!=0)
 					{
-						foreach ($old_reservation as $key => $value) {
+						foreach ($old_reservation as $value) {
 							$value->date=$new_date;
 							$apntmnt=strtotime($value->appointment)+strtotime($working_hours);
 							$value->appointment=date('h:i:s',$apntmnt);

@@ -27,9 +27,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script type="text/javascript" src="/js/move-top.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/easing.js"></script>
-    <script
-            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD31ckr4GKqf6WcWU8WfIqwTj8zS3BtZZo">
-    </script>
+    {{--<script--}}
+            {{--src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD31ckr4GKqf6WcWU8WfIqwTj8zS3BtZZo">--}}
+    {{--</script>--}}
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {

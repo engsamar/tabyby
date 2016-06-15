@@ -14,12 +14,12 @@
     <form action="{{ route('secertaries.store') }}" method="POST">
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
       <div class="form-group @if($errors->has('name')) has-error @endif">
-        <label for="name-field">Secertary Name</label>
+        <label for="name-field">Secretary Name</label>
         <input list="searchResult" type="text" id="name-field" name="name" class="form-control" value="{{ old("name") }}"/>
         <datalist id="searchResult">
         
         </datalist>
-        
+        <span class="help-block"></span>
         @if($errors->has("name"))
         <span class="help-block">{{ $errors->first("name") }}</span>
         @endif
@@ -64,6 +64,8 @@
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="/js/secretary.js"></script>
 <script>
 $('.date-picker').datepicker({
 });

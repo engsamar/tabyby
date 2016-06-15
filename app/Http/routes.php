@@ -5,24 +5,30 @@ Route::get("/", "UserController@homePage");
 
 //Roles Patients
 Route::auth();
+
+Route::group(['middleware' => ['auth','roles']], function () {
+    Route::resource("clinics", "ClinicController");
+    Route::resource("medical_histories", "MedicalHistoryController");
+    Route::resource("medical_history_details", "MedicalHistoryDetailController");
+    Route::resource("secertaries", "SecertaryController");
+    Route::resource("doctor_degrees", "DoctorDegreeController");
+    Route::resource("medicines", "MedicineController");
+    Route::resource("complain_details", "ComplainDetailController");
+    Route::resource("complains", "ComplainController");
+    Route::resource("user_roles", "UserRoleController");
+    Route::resource("examinations", "ExaminationController");
+});
 Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', array('uses' => 'HomeController@logout'));
     Route::get('/home', 'HomeController@index');
     Route::resource("/doctorHome", "UserController@doctorHome");
     Route::resource("/patientHome", "UserController@patientHome");
     Route::resource("/secretaryHome", "UserController@secretaryHome");
-    Route::resource("medical_histories", "MedicalHistoryController");
-    Route::resource("medical_history_details", "MedicalHistoryDetailController");
-    Route::resource("clinics", "ClinicController");
-    Route::resource("secertaries", "SecertaryController");
-    Route::resource("doctor_degrees", "DoctorDegreeController");
-    Route::resource("medicines", "MedicineController");
+
     Route::resource("consistitues", "ConsistitueController");
-    Route::resource("complain_details", "ComplainDetailController");
-    Route::resource("complains", "ComplainController");
-    Route::resource("user_roles", "UserRoleController");
+    
     Route::resource("users", "UserController");
-    Route::resource("examinations", "ExaminationController");
+   
     Route::resource("working_hours", "WorkingHourController");
     Route::get("reservations/today", "ReservationController@latest");
     Route::get("reservations/cancelled", "ReservationController@cancel");
@@ -34,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("prescriptions", "PrescriptionController");
     Route::resource("vacations", "VacationController");
 
-    // Route::get("movePatients", "VacationController@movePatients");
+    Route::get("movePatients/{fromtim}/{totim}", "VacationController@movePatients");
 
     Route::resource("exam_glasses", "ExamGlassController");
     Route::resource("examGlassHome", "ExamGlassController@examGlass");
@@ -58,11 +64,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("/reservation/{res_id}", "ReservationController@getReservations");
     Route::get("/patientReservation", "ReservationController@patientReservations");
 
-    Route::post("/users/checkdata/", "UserController@valid");
+
     Route::get('/home', 'HomeController@index');
     Route::post('/medicines/find/', 'MedicineController@find');
     Route::post('/consistitues/find', 'ConsistitueController@find');
     Route::get("reservations/searchKey/{key}", "ReservationController@searchKey");
+    Route::get("/secretaries/find/{name}", "SecertaryController@find");
     Route::patch("reservcancel", "ReservationController@destroy");
     Route::get("/newPrescriptionDetails/{res_id}", "PrescriptionDetailController@create");
 
@@ -111,6 +118,9 @@ Route::get('/welcome', function()
 {
    return view('welcome');
 });
+
+//ajax validation
+Route::post("/users/checkdata/", "UserController@valid");
 
 Route::get('movePatients', function()
 {

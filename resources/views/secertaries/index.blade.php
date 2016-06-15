@@ -33,47 +33,47 @@
 
                     @foreach($secertaries as $secertary)
 
-                        {{--                        {{ $userRole[0]['id'] }}--}}
-                        {{--                        {{ $secertary->userRole_id }}--}}
                         <tr>
                             @foreach($userRole as $role)
 
                                 @if($role['id']==$secertary->userRole_id)
-
-                                    <td>{{$users[$role['user_id']-1]['username']}}</td>
-                                    <td>{{$users[$role['user_id']-1]['email']}}</td>
-                                    <td>{{$users[$role['user_id']-1]['address']}}</td>
-                                    <td>{{$users[$role['user_id']-1]['telephone']}}</td>
-                                    <td>{{$users[$role['user_id']-1]['mobile']}}</td>
-                                    <td>{{$users[$role['user_id']-1]['birthdate']}}</td>
-                                    <td>{{$secertary->degree}}</td>
-                                    <td>{{$secertary->national_id}}</td>
-                                    <td class="text-right">
-                                        {{--<a class="btn btn-xs btn-primary"--}}
-                                           {{--href="{{ route('secertaries.show', $secertary->id) }}"><i--}}
-                                                    {{--class="glyphicon glyphicon-eye-open"></i> View</a>--}}
-                                        <a class="btn btn-xs btn-warning"
-                                           href="{{ route('secertaries.edit', $secertary->id) }}"><i
-                                                    class="glyphicon glyphicon-edit"></i> Edit</a>
-                                        <form action="{{ route('secertaries.destroy', $secertary->id) }}" method="POST"
-                                              style="display: inline;"
-                                              onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <button type="submit" class="btn btn-xs btn-danger"><i
-                                                        class="glyphicon glyphicon-trash"></i> Delete
-                                            </button>
-                                        </form>
-                                        @endif
-
-                                        @endforeach
-
-                                    </td>
+                                    @foreach($users as $user)
+                                        @if($user['id']==$role['user_id'])
+                                            <td>{{$user['username']}}</td>
+                                            <td>{{$user['email']}}</td>
+                                            <td>{{$user['address']}}</td>
+                                            <td>{{$user['telephone']}}</td>
+                                            <td>{{$user['mobile']}}</td>
+                                            <td>{{$user['birthdate']}}</td>
+                                            <td>{{$secertary->degree}}</td>
+                                            <td>{{$secertary->national_id}}</td>
+                                            <td class="text-right">
+                                                {{--<a class="btn btn-xs btn-primary"--}}
+                                                {{--href="{{ route('secertaries.show', $secertary->id) }}"><i--}}
+                                                {{--class="glyphicon glyphicon-eye-open"></i> View</a>--}}
+                                                <a class="btn btn-xs btn-warning"
+                                                   href="{{ route('secertaries.edit', $secertary->id) }}"><i
+                                                            class="glyphicon glyphicon-edit"></i> Edit</a>
+                                                <form action="{{ route('secertaries.destroy', $secertary->id) }}"
+                                                      method="POST"
+                                                      style="display: inline;"
+                                                      onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-xs btn-danger"><i
+                                                                class="glyphicon glyphicon-trash"></i> Delete
+                                                    </button>
+                                                </form>
+                                                @endif
+                                                @endforeach
+                                                @endif
+                                                @endforeach
+                                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-{{--                {!! $secertaries->render() !!}--}}
+                {{--                {!! $secertaries->render() !!}--}}
             @else
                 <h3 class="text-center alert alert-info">Empty!</h3>
             @endif

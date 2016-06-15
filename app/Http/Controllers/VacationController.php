@@ -53,13 +53,24 @@ class VacationController extends Controller {
 	public function store(Request $request)
 	{
 		$vacation = new Vacation();
-		$reservation = new Reservation();
 		$dateTime1 = DateTime::createFromFormat('m/d/Y', $request->input("from"));
 		$from = $dateTime1->format('Y-m-d');
 		$dateTime2 = DateTime::createFromFormat('m/d/Y', $request->input("to"));
 		$to = $dateTime2->format('Y-m-d');
-		$no_of_days=date_diff(date_create($from),date_create($to))->format('%a');
-		$date = strtotime($from);
+			$vacation->from_day = $from;
+	        $vacation->to_day = $to;
+			$vacation->save();
+			return redirect()->route('vacations.index')->with('message', 'Item created successfully.');
+		
+	}
+
+	public function movePatients($fromtim,$totim)
+	{
+		$reservation = new Reservation();
+		// $fromTime=strtotime("+1 days",$fromtim);
+		// $toTime=strtotime("+1 days",$totim);
+		$no_of_days=date_diff(date_create($fromtim),date_create($totim))->format('%a');
+		$date = strtotime($fromtim);
 		// vacation days array
 		$date_array=[];
 		// count number of reservations array
@@ -71,16 +82,15 @@ class VacationController extends Controller {
 		}
 		if($reserve_array)
 		{
-			// return $this->pateint_reserved($date_array,$reserve_array);
-			return redirect('movePatients')->with('date_array',$date_array)->with('reserve_array',$reserve_array);				
+			$data = json_encode(array(
+		    'date_array' => $date_array,
+		    'reserve_array' => $reserve_array
+			));
+			return $data;			
 
 		}
-		else{
-			$vacation->from_day = $from;
-	        $vacation->to_day = $to;
-			$vacation->save();
-			return redirect()->route('vacations.index')->with('message', 'Item created successfully.');
-		}
+
+
 	}
 
 	/**
@@ -142,9 +152,6 @@ class VacationController extends Controller {
 		return redirect()->route('vacations.index')->with('message', 'Item deleted successfully.');
 	}
 
-	// public function movePatients($date_array,$reserve_array)
-	// {
-	// 	return redirect('/movePatients')->with('date_array',$date_array)->with('reserve_array',$reserve_array);				
-	// }
+
 
 }

@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
 
     <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript"  src="/js/app.js"></script>
-    <script type="text/javascript"  src="/js/site.js"></script>
-    <script type="text/javascript"  src="/js/vacations.js"></script>
     <script type="text/javascript"  src="/js/bootstrap.min.js"></script>
     <script type="text/javascript"  src="/js/jquery-ui.min.js"></script>
     <script type="text/javascript"  src="/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript"  src="/js/app.js"></script>
+    <script type="text/javascript"  src="/js/site.js"></script>
     <script>
       $(function() {
         $( ".datepicker" ).datepicker();

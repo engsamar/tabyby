@@ -4,7 +4,7 @@ $(function () {
         e.preventDefault();
     
         var serchKy = $('#name-field').val();
-        console.log(serchKy);
+
         $.ajax
                 ({
                     url: "/reservations/searchKey/" + serchKy,
@@ -12,7 +12,6 @@ $(function () {
                     data: {},
                     success: function (data)
                     {
-                        console.log(data);
                         
                         var datalist = $("#searchResult");
                         datalist.empty();

@@ -5,24 +5,30 @@ Route::get("/", "UserController@homePage");
 
 //Roles Patients
 Route::auth();
+
+Route::group(['middleware' => ['auth','roles']], function () {
+    Route::resource("clinics", "ClinicController");
+    Route::resource("medical_histories", "MedicalHistoryController");
+    Route::resource("medical_history_details", "MedicalHistoryDetailController");
+    Route::resource("secertaries", "SecertaryController");
+    Route::resource("doctor_degrees", "DoctorDegreeController");
+    Route::resource("medicines", "MedicineController");
+    Route::resource("complain_details", "ComplainDetailController");
+    Route::resource("complains", "ComplainController");
+    Route::resource("user_roles", "UserRoleController");
+    Route::resource("examinations", "ExaminationController");
+});
 Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', array('uses' => 'HomeController@logout'));
     Route::get('/home', 'HomeController@index');
     Route::resource("/doctorHome", "UserController@doctorHome");
     Route::resource("/patientHome", "UserController@patientHome");
     Route::resource("/secretaryHome", "UserController@secretaryHome");
-    Route::resource("medical_histories", "MedicalHistoryController");
-    Route::resource("medical_history_details", "MedicalHistoryDetailController");
-    Route::resource("clinics", "ClinicController");
-    Route::resource("secertaries", "SecertaryController");
-    Route::resource("doctor_degrees", "DoctorDegreeController");
-    Route::resource("medicines", "MedicineController");
+
     Route::resource("consistitues", "ConsistitueController");
-    Route::resource("complain_details", "ComplainDetailController");
-    Route::resource("complains", "ComplainController");
-    Route::resource("user_roles", "UserRoleController");
+    
     Route::resource("users", "UserController");
-    Route::resource("examinations", "ExaminationController");
+   
     Route::resource("working_hours", "WorkingHourController");
     Route::get("reservations/today", "ReservationController@latest");
     Route::get("reservations/cancelled", "ReservationController@cancel");

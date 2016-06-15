@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="input-container @if($errors->has('address')) has-error @endif">
-                    <input type="text" id="address-field" required="required" name="address"
+                    <input type="text" id="address-field"  name="address"
                            value="{{ old("address") }}"/>
                     <label for="address-field">@lang('validation.Address')</label>
 
@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="input-container @if($errors->has('telephone')) has-error @endif">
-                    <input type="text" id="telephone-field" required="required" name="telephone"
+                    <input type="text" id="telephone-field"  name="telephone"
                            value="{{ old("telephone") }}"/>
                     <label for="telephone-field">@lang('validation.Telephone')</label>
 
@@ -110,7 +110,7 @@
 
 
                 <div class="input-container @if($errors->has('mobile')) has-error @endif">
-                    <input type="text" id="mobile-field" required="required" name="mobile" value="{{ old("mobile") }}"/>
+                    <input type="text" id="mobile-field"  name="mobile" value="{{ old("mobile") }}"/>
                     <label for="mobile-field">@lang('validation.Mobile')</label>
 
                     <div class="bar"></div>

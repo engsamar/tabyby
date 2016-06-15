@@ -82,7 +82,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     @if(!Auth::user())
     
     <li class="dropdown">
-    <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.register')
+    <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.login')
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="/register">
@@ -106,60 +106,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </a></li>
             </ul>
         </li>
-        @if(Auth::user()->userRoles[0]->type==0)
+        @if(Auth::user()->userRoles[0]->type==0 || Auth::user()->userRoles[0]->type==1)
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Control Panel')
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="/secertaries">@lang('validation.Secretary')</a></li>
-                <li><a href="/clinics" >@lang('validation.Clinic')</a></li>
-                <li><a href="/vacations" >@lang('validation.Vacations')</a></li>
-                <li><a href="/posts" >@lang('validation.Posts')</a></li>
-                <li><a href="reservations/today">@lang('validation.Reservation')</a></li>
-
-            </ul>
-        </li>
-        @elseif (Auth::user()->userRoles[0]->type==1)
-        <li class="dropdown">
-            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
-                <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
-                    <li><a href="/reservations">@lang('validation.View Reservation')</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown">
-            <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Control Panel')
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="/clinics" >@lang('validation.Clinic')</a></li>
-                <li><a href="/vacations" >@lang('validation.Vacations')</a></li>
-                <li><a href="/reservations">@lang('validation.Reservation')</a></li>
-
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle"  data-toggle="dropdown">
-                @lang('validation.Medical History')
-                <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="/user_profiles/{{Auth::user()->id}}" >
-                        @lang('validation.Medical History')
-                    </a></li>
-                </ul>
-        </li>        
-        @else
-        <li class="dropdown">
-            <a class="dropdown-toggle"  data-toggle="dropdown">
-                @lang('validation.Medical History')
-                <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="/user_profiles/{{Auth::user()->id}}" >
-                        @lang('validation.Medical History')
-                    </a></li>
-                </ul>
-        </li>      
+            <a href="/reservations">@lang('validation.Control Panel')
+          </a>
+        </li> 
+        @else     
         <li class="dropdown">
         <a class="dropdown-toggle"  data-toggle="dropdown">@lang('validation.Reservation')
             <span class="caret"></span></a>

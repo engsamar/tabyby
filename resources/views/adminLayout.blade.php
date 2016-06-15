@@ -352,6 +352,14 @@
 
                 </li>
                 @endif
+
+                @if(Auth::user()->userRoles[0]->type==1)
+                <li>
+                    <a href="/reservations/create">
+                        <i class="fa fa-th"></i> <span>Add Reservation</span>
+                    </a>
+                </li>
+                @endif
                 <li class="treeview">
                     <a href="/vacations">
                         <i class="fa fa-laptop"></i>

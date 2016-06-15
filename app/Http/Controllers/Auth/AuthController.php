@@ -61,10 +61,11 @@ class AuthController extends Controller
             'username' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'telephone' => 'required|max:100',
-            'mobile' => 'required|max:100',
-            'address' => 'required|max:255',
-            'birthdate' => 'date|before:tomorrow'
+            'telephone' => 'max:10',
+            'mobile' => 'max:11',
+            'address' => 'max:255',
+            'birthdate' => 'date|before:today',
+            'gender'=>'required'
         ]);
     }
 

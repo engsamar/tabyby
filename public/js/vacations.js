@@ -19,9 +19,7 @@ $(document).ready()
                     data: {},
                     success: function (data)
                     {
-                        console.log(data);
                         result=JSON.parse(data);
-                        console.log(result.reserve_array);
                         var HTMLtxt='<table class="table table-responsive table-bordered ">';
 						HTMLtxt+='<thead><tr>';
 						HTMLtxt+='<th>no of patients</th>';
@@ -32,8 +30,7 @@ $(document).ready()
 							HTMLtxt+='<tr>';
 							HTMLtxt+='<td> '+ el+' </td>';
 							HTMLtxt+='<td> '+ result.date_array[index] +'</td>';
-							HTMLtxt+='<td><a id="allPat" class="btn btn-primary" value="'+result.date_array[index]+'">Move All</a>';
-							// HTMLtxt+='<a id="somePat" class="btn btn-danger" value="'+result.date_array[index]+'">Move Some</a></td>';
+							HTMLtxt+='<td><input type="button" id="allPat" data-rowdate="'+result.date_array[index]+'" class="btn btn-primary move2 " onclick="moreFields();" value="Move"/>';
 							HTMLtxt+='</td></tr>';
 						});
 
@@ -49,20 +46,68 @@ $(document).ready()
 		});
 		});
 
-	var mmmm=document.getElementById('allPat');
+	// $(function() {
+	// 				  $("#move").datepicker({
+	// 				    beforeShowDay: data
+	// 				  });
 
-mmmm.onclick=function (argument) {
-	 // body...  
-	 console.log('dicvvv');
+function preventDate (argument) 
+{
+	console.log(argument); 
+  	// $("#move").datepicker({
+   //  	beforeShowDay: data
+   //  )};
 }
-		// mmmm.onClick(function(event) {
-		// 	var myDiv1=document.getElementById('moveAll');
-		// 	console.log('dicvvv');
-		// 	myDiv1.show();
-		// 	// HTMLtxt += '';
-		// 	// HTMLtxt += '<button>Move</button>';
-		//  // 	myDiv1.innerHTML = HTMLtxt;
-		// });
+
+$('body').on('click', '.move2', function(event) 
+{
+		var newDiv=document.getElementById('moveAll');
+		$("#moveAll").show();
+		var old_date=$(this).data('rowdate');
+		console.log('********************************');
+		// $.ajax
+  //           ({
+  //               url: "/specificDate",
+  //               type: 'GET',
+  //               data: {},
+  //               success: function (data)
+  //               {
+  //               	// console.log(data);
+  //               	// preventDate(data);
+  //               },
+  //               error: function (data) {
+  //                   console.log('Error:', data);
+  //               }
+  //           });
+
+        $("#move").change(function (e) {
+        var moveTime = new Date($('#move').val());
+        moveTime.setDate(moveTime.getDate() + 1);
+        var new_date= moveTime.toISOString().substring(0, 10);
+        // console.log(old_date);
+        // console.log(new_date);   	
+        $.ajax
+            ({
+                url: "/MoveAllPatients/"+old_date+"/"+new_date+"/",
+                type: 'GET',
+                data: {},
+                success: function (data)
+                {
+                	console.log(data);
+                	$("#moveAll").hide();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+	});
+});
+
+
+
+
+	
+
 
 
 

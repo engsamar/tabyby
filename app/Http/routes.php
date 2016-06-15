@@ -35,6 +35,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource("vacations", "VacationController");
 
     Route::get("movePatients/{fromtim}/{totim}", "VacationController@movePatients");
+    Route::get("specificDate", "VacationController@specificDate");
+
+
+    Route::get("/MoveAllPatients/{old_date}/{new_date}", "VacationController@MoveAllPatients");
+
 
     Route::resource("exam_glasses", "ExamGlassController");
     Route::resource("examGlassHome", "ExamGlassController@examGlass");

@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post("/reserv/searchByDate","ReservationController@getReservationByDate");
     Route::post("/reserv/searchByDuration","ReservationController@getReservationByDuration");
     Route::resource("posts","PostController");
-
+    Route::get("/medicine/find","MedicineController@find");
 
 });
 Route::group(['middleware' => ['web']], function () {

@@ -29,7 +29,7 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        return view('medicines.create', ['medicineType' => ClinicConstants::$medicineType],['constituent'=>Consistitue::all()]);
+        return view('medicines.create', ['medicineType' => ClinicConstants::$medicineType], ['constituent' => Consistitue::all()]);
     }
 
     /**
@@ -40,12 +40,18 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|string|unique:medicines',
+            'type' => 'required|number',
+            'company' => 'required|string',
+            'consistitue_id' => 'required|number',
+        ]);
         $medicine = new Medicine();
 
         $medicine->name = $request->input("name");
         $medicine->type = $request->input("type");
         $medicine->company = $request->input("company");
-        $medicine->consistitue_id=$request->input("constituent");
+        $medicine->consistitue_id = $request->input("constituent");
 
         $medicine->save();
 
@@ -74,9 +80,9 @@ class MedicineController extends Controller
     public function edit($id)
     {
         $medicine = Medicine::findOrFail($id);
-        $constituent=Consistitue::all();
+        $constituent = Consistitue::all();
 
-        return view('medicines.edit', compact('medicine','constituent'), ['medicineType' => ClinicConstants::$medicineType]);
+        return view('medicines.edit', compact('medicine', 'constituent'), ['medicineType' => ClinicConstants::$medicineType]);
     }
 
     /**
@@ -88,12 +94,18 @@ class MedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required|string|unique:medicines',
+            'type' => 'required|number',
+            'company' => 'required|string',
+            'consistitue_id' => 'required|number',
+        ]);
         $medicine = Medicine::findOrFail($id);
 
         $medicine->name = $request->input("name");
         $medicine->type = $request->input("type");
         $medicine->company = $request->input("company");
-        $medicine->consistitue_id=$request->input("constituent");
+        $medicine->consistitue_id = $request->input("constituent");
 
         $medicine->save();
 
@@ -116,56 +128,45 @@ class MedicineController extends Controller
 
     public function find(Request $request)
     {
-//		echo "<pre>";
-//		var_dump($request->input("name"));
-//		var_dump($request->input("action"));
-//		echo "</pre>";
-//		die('end');
-        switch ($request->input("with")) {
-            case "name":
-                if ($request->input("has")) {
+        if ($request->method() == "POST") {
+            switch ($request->input("with")) {
+                case "name":
+                    if ($request->input("has")) {
 
-                    $name = $request->input("name");
-                    $type = $request->input("id");
-                    $medicine = Medicine::where('type', '=', "$type")->where('name', 'LIKE', "%$name%")->get();
-//		echo "<pre>";
-//		var_dump($request->input("has"));
-//		echo "</pre>";
-//		die('end');
-                    return $medicine;
-                } else {
-                    $name = $request->input("name");
-                    $medicine = Medicine::where('name', 'LIKE', "%$name%")->get();
-//		echo "<pre>";
-//		var_dump($medicine);
-//		echo "</pre>";
-//		die('end');
-                    return $medicine;
-                }
+                        $name = $request->input("name");
+                        $type = $request->input("id");
+                        $medicine = Medicine::where('type', '=', "$type")->where('name', 'LIKE', "%$name%")->get();
+                        return $medicine;
+                    } else {
+                        $name = $request->input("name");
+                        $medicine = Medicine::where('name', 'LIKE', "%$name%")->get();
+                        return $medicine;
+                    }
 
-                break;
-            case "active":
-                if ($request->input("has")) {
-                    $name = $request->input("name");
-                    $type = $request->input("id");
-                    $active = Consistitue::where("active_consistitue", '=', "$name")->first();
-                    $medicine = Medicine::where('type', '=', "$type")->where('consistitue_id', '=', "$active->id")->get();
-//		echo "<pre>";
-//		var_dump($medicine);
-//		echo "</pre>";
-//		die('end');
-                    return $medicine;
-                } else {
-                    $name = $request->input("name");
-                    $active = Consistitue::where("active_consistitue", '=', "$name")->first();
-                    $medicine = Medicine::where('consistitue_id', '=', "$active->id")->get();
-//		echo "<pre>";
-//		var_dump($medicine);
-//		echo "</pre>";
-//		die('end');
-                    return $medicine;
-                }
-                break;
+                    break;
+                case "active":
+                    if ($request->input("has")) {
+                        $name = $request->input("name");
+                        $type = $request->input("id");
+                        $active = Consistitue::where("active_consistitue", '=', "$name")->first();
+                        $medicine = Medicine::where('type', '=', "$type")->where('consistitue_id', '=', "$active->id")->get();
+                        return $medicine;
+                    } else {
+                        $name = $request->input("name");
+                        $active = Consistitue::where("active_consistitue", '=', "$name")->first();
+                        $medicine = Medicine::where('consistitue_id', '=', "$active->id")->get();
+                        return $medicine;
+                    }
+                    break;
+            }
+        } else {
+            $name = $request->input("name");
+            $medicine = Medicine::where('name', '=', $name)->get();
+            if (count($medicine)!=0){
+                return "no";
+            }else{
+                return "yes";
+            }
         }
 
     }

@@ -29,7 +29,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     @yield('css')
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="/js/html5shiv.min.js"></script>
@@ -44,7 +44,7 @@
         <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             {{--<span class="logo-mini"><b>A</b>LT</span>--}}
-            <!-- logo for regular state and mobile devices -->
+                    <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>Control Panel</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
@@ -70,7 +70,8 @@
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user2-160x160.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Support Team
@@ -83,7 +84,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user3-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 AdminLTE Design Team
@@ -95,7 +97,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user4-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Developers
@@ -107,7 +110,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user3-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Sales Department
@@ -119,7 +123,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user4-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Reviewers
@@ -151,7 +156,8 @@
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                            <i class="fa fa-warning text-yellow"></i> Very long description here that
+                                            may not fit into the
                                             page and may cause design problems
                                         </a>
                                     </li>
@@ -193,7 +199,9 @@
                                                 <small class="pull-right">20%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">20% Complete</span>
                                                 </div>
                                             </div>
@@ -207,7 +215,9 @@
                                                 <small class="pull-right">40%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-green" style="width: 40%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">40% Complete</span>
                                                 </div>
                                             </div>
@@ -221,7 +231,9 @@
                                                 <small class="pull-right">60%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-red" style="width: 60%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">60% Complete</span>
                                                 </div>
                                             </div>
@@ -235,7 +247,9 @@
                                                 <small class="pull-right">80%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-yellow" style="width: 80%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">80% Complete</span>
                                                 </div>
                                             </div>
@@ -328,37 +342,43 @@
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 @if(Auth::user()->userRoles[0]->type==0)
-                <li>
-                    <a href="/chooseClinic">
-                        <i class="fa fa-th"></i> <span>Dashboard</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="/chooseClinic">
+                            <i class="fa fa-th"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="/clinics">
-                        <i class="fa fa-th"></i> <span>Clinic</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="/secertaries">
-                        <i class="fa fa-pie-chart"></i>
-                        <span>Secretary</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="/posts">
-                        <i class="fa fa-edit"></i> <span>Posts</span>
-                    </a>
+                    <li>
+                        <a href="/clinics">
+                            <i class="fa fa-th"></i> <span>Clinic</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="/secertaries">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Secretary</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="/posts">
+                            <i class="fa fa-edit"></i> <span>Posts</span>
+                        </a>
 
-                </li>
+                    </li>
+                    <li >
+                        <a href="medicines">
+                            <i class="fa fa-edit"></i> <span>Medicines</span>
+                        </a>
+
+                    </li>
                 @endif
 
                 @if(Auth::user()->userRoles[0]->type==1)
-                <li>
-                    <a href="/reservations/create">
-                        <i class="fa fa-th"></i> <span>Add Reservation</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="/reservations/create">
+                            <i class="fa fa-th"></i> <span>Add Reservation</span>
+                        </a>
+                    </li>
                 @endif
                 <li class="treeview">
                     <a href="/vacations">
@@ -367,7 +387,7 @@
                     </a>
 
                 </li>
-                 <li class="treeview">
+                <li class="treeview">
                     <a href="/reservations/cancelled">
                         <i class="fa fa-laptop"></i>
                         <span>Cancelled Reservation</span>
@@ -405,20 +425,21 @@
             @yield('header')
         </div>
         <div class="content">
-  <div id="page-wrapper">
-             @yield('content')
-        </div>
+            <div id="page-wrapper">
+                @yield('content')
+            </div>
         </div>
 
 
-                <!-- /.content -->
+        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.3.3
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="#">ITI</a>.</strong> All rights reserved.</footer>
+        <strong>Copyright &copy; 2014-2015 <a href="#">ITI</a>.</strong> All rights reserved.
+    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

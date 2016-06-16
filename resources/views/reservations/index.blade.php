@@ -5,7 +5,7 @@
     <i class="glyphicon glyphicon-align-justify"></i>Reservations
     {{--<a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>--}}
      <a class="btn btn-primary pull-right" href="/allReservations"></i>All Reservations</a>
-     @if($userRole == 1)
+     @if(Auth::user()->userRoles[0]->type==1)
     <button type="button" class="btn btn-info pull-right"><a href="{{ route('users.create') }}"
 
      style="color:white">New Patient</a></button>
@@ -82,7 +82,7 @@
         <table class="table table-condensed table-striped">
             <thead>
                 <tr>
-                    @if($userRole == 0)
+                    @if(Auth::user()->userRoles[0]->type==0)
                     <th>Patient_Name</th>
                     <th>RESERVATION_TYPE</th>
                     <th class="text-right">OPTIONS</th>
@@ -103,7 +103,7 @@
             <tbody>
                 @foreach($reservations as $reservation)
                 <tr>
-                    @if($userRole == 0)
+                    @if(Auth::user()->userRoles[0]->type==0)
                     <td><a href='#'>{{$reservation->user->username}}</a></td>
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td class="text-right">

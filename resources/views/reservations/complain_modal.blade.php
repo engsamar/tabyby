@@ -1,25 +1,20 @@
-@extends('adminLayout')
-@section('css')
-  <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
-@endsection
-@section('header')
-    <div class="page-header">
-        <h1><i class="glyphicon glyphicon-plus"></i> Enter Today's Complain </h1>
-    </div>
-    <script src="/js/complain_validation.js"></script>
-
-@endsection
-
-@section('content')
-    @include('error')
-
-    <div class="row">
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
         <div class="col-md-12">
             <form action="{{ route('complains.store') }}" method="POST">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">                               <input type="hidden" name="res_id" value="{{ $res_id }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">                              
+                <input type="hidden" name="res_id" value="{{ $res_id }}">
 
                 <div class="form-group @if($errors->has('complain')) has-error @endif">
-                       <label for="complain-field">Complain</label>
+                    <label for="complain-field">Complain</label>
                     <input type="text" id="complain-field" name="complain" class="form-control" value="{{ old("complain") }}"/>
                        @if($errors->has("complain"))
                         <span class="help-block">{{ $errors->first("complain") }}</span>
@@ -56,13 +51,14 @@
 
         </div>
     </div>
-@endsection
-@section('scripts')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
-  <script>
-    $('.date-picker').datepicker({
-    });
-  </script>
-  <script src="/js/jquery-1.11.3.min.js"></script>
+      
 
-@endsection
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

@@ -73,7 +73,7 @@ class WorkingHourController extends Controller
     public function show($id)
     {
         $working_hour = WorkingHour::where('clinic_id', $id)->get();
-        return view('working_hours.show', compact('working_hour'), ['day' => ClinicConstants::$day,'clinic_id'=>$id]);
+        return view('working_hours.show', compact('working_hour'), ['day' => ClinicConstants::$day,'clinic_id'=>$id ]);
     }
 
     /**

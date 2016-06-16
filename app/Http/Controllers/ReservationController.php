@@ -196,6 +196,12 @@ class ReservationController extends Controller {
 				return Redirect::back()->withErrors(['msg', 'this date is fully completed , please try with another one']);
 			}
 		}
+		/*if (Auth::user()->userRoles[0]->type==2) {
+			# code...
+		return redirect()->route('reservations.patientReservations')->with('message',$message);
+
+		}*/
+		
 		return redirect()->route('reservations.index')->with('message',$message);
 	}
 

@@ -1,6 +1,6 @@
 @extends('adminLayout')
 @section('css')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
+<link href="/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
 @section('header')
 <div class="page-header">
@@ -64,6 +64,7 @@
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/site.js"></script>
 <script src="/js/secretary.js"></script>
 <script>
 $('.date-picker').datepicker({

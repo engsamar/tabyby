@@ -3,31 +3,39 @@
     <link rel="stylesheet" href="/css/tab.css">
 @endsection
 @section('header')
-    <meta charset="utf-8">
-  <title>jQuery UI Accordion - Default functionality</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-  
-  $(function() {
-    $( ".tabs" ).tabs();
-  });
 
-  $(function() {
-    $( "#accordion" ).accordion();
-  });
-  </script>
+
+    <meta charset="utf-8">
+    <title>jQuery UI Accordion - Default functionality</title>
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    {{--<link rel="stylesheet" href="/resources/demos/style.css">--}}
+    {{--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">--}}
+    <script>
+
+        $(function() {
+            $( ".tabs" ).tabs();
+        });
+
+        $(function() {
+            $( "#accordion" ).accordion();
+
+        });
+    </script>
+
 @endsection
 
 @section('content')
+    <div>
+        <h1>
+            <i class="glyphicon glyphicon-align-justify"></i> PatientName : {{$reservations[0]->user['username']}}
+        </h1>
+
+    </div>
     <div id="accordion">
-        <?php $i = 0 ?>
+        <?php $i = 0?>
+
         @if(count($reservations) != 0)
             @foreach ($reservations as $reservation)
             <?php $i++ ?>
@@ -41,7 +49,7 @@
                         <li><a href="#tabs-{{$i}}4">Prescription</a></li>
                     </ul>
                     @if($i== count($reservations))
-                        <div id="tabs-{{$i}}1">                            
+                        <div id="tabs-{{$i}}1">
                             @if(count($reservation->complain) != 0)
                             <table class="table table-bordered" border="1px">
                                 <tr>
@@ -56,7 +64,7 @@
                                     @if(count($reservation->complain->complainDetail) != 0)
                                         @foreach ($reservation->complain->complainDetail as $detail)
                                             <td>{{$detail['plan']}}</td>
-                                            <td>{{$detail['diagnose']}}</td>    
+                                            <td>{{$detail['diagnose']}}</td>
                                         @endforeach
                                     @endif
                                 </tr>
@@ -67,9 +75,9 @@
                             @if(count($reservation->complain) == 0)
                              <a class="btn btn-xs btn-primary" href='/newComplain/{{$reservation->id}}'><i class="glyphicon glyphicon-eye-open"></i> New Complain</a>
                             @endif
-                        </div> 
+                        </div>
                         <!-- ******************************* -->
-                        <div id="tabs-{{$i}}2">                           
+                        <div id="tabs-{{$i}}2">
                             @if(count($reservation->examination) != 0)
                                 <table class="table table-bordered">
                                         <tr>
@@ -105,12 +113,12 @@
                                 @endif
                         </div>
                         <!-- ************************************************* -->
-                        <div id="tabs-{{$i}}3">                           
+                        <div id="tabs-{{$i}}3">
                             @if(count($reservation->examGlass) != 0)
 
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>Examination Type</th>                             
+                                        <th>Examination Type</th>
                                         <th>sphr</th>
                                         <th>cylr</th>
                                         <th>axisr</th>
@@ -119,7 +127,7 @@
                                         <th>axisl</th>
                                     </tr>
                                     @foreach ($reservation->examGlass as $exam)
-                                        <tr>   
+                                        <tr>
                                             <td>{{ $examGlassType[$exam['exam_glass_type']] }}</td>
                                             <td>{{ $exam['sphr'] }}</td>
                                             <td>{{ $exam['cylr'] }}</td>
@@ -136,7 +144,7 @@
                             @endif
 
                             @if(count($reservation->examGlass) == 0)
-                              
+
                                <a class="btn btn-xs btn-primary" href='/createExamGlassHome/{{$reservation->id}}'><i
                             class="glyphicon glyphicon-eye-open"></i> New Glass Examination</a>
                             @endif
@@ -160,7 +168,8 @@
                                                 <td>{{$prescriptionDetail['no_times']}}</td>
                                                 <td>{{$prescriptionDetail['quantity']}}</td>
                                                 <td>{{$prescriptionDetail['duaration']}}</td>
-                                                <td><a class="btn btn-xs btn-warning"
+                                                <td>
+                                                    <a class="btn btn-xs btn-warning"
                                                        href="{{ route('prescription_details.edit', $prescriptionDetail["id"]) }}"><i
                                                                 class="glyphicon glyphicon-edit"></i> Edit</a></td>
                                             </tr>
@@ -184,7 +193,7 @@
                         </div>
                         <!-- ******************************************************** -->
                     @else
-                        <div id="tabs-{{$i}}1">                           
+                        <div id="tabs-{{$i}}1">
                             <table class="table table-bordered" border="1px">
                                 <tr>
                                     <th>Complain</th>
@@ -192,7 +201,7 @@
                                     <th>Diagnose</th>
                                     <th>Plan</th>
                                 </tr>
-                              
+
                                     @if(count($reservation->complain) != 0)
                                     <tr>
                                         <td>{{$reservation->complain['complain']}}</td>
@@ -200,15 +209,15 @@
                                         @if(count($reservation->complain->complainDetail) != 0)
                                             @foreach ($reservation->complain->complainDetail as $detail)
                                                 <td>{{$detail['plan']}}</td>
-                                                <td>{{$detail['diagnose']}}</td>  
-                                                 <td> <a class="btn btn-xs btn-warning" href="{{ route('complains.edit', $complain->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>      
+                                                <td>{{$detail['diagnose']}}</td>
+                                                 <td> <a class="btn btn-xs btn-warning" href="{{ route('complains.edit', $reservation->complain['id']) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
                                             @endforeach
                                         @endif
                                     </tr>
                                     @endif
                             </table>
                         </div>
-                        <div id="tabs-{{$i}}2">                           
+                        <div id="tabs-{{$i}}2">
                             <table class="table table-bordered">
                                 <tr>
                                     <th>Eye</th>
@@ -222,7 +231,7 @@
                                     <th>I.O.P</th>
                                 @if(count($reservation->examination) != 0)
                                     @foreach($reservation->examination as $exam)
-                                    <tr> 
+                                    <tr>
                                         <td>
                                             @if($exam['eye_type'] == 0) {{"Right Eye"}}@else {{"Left Eye"}} @endif  </td>
                                         <td>{{$exam['vision']}}</td>
@@ -237,12 +246,12 @@
                                     @endforeach
                                 @endif
                             </table>
-                        </div>  
-                        <div id="tabs-{{$i}}3">                           
-                            @if(count($reservation->examGlass) != 0)                           
+                        </div>
+                        <div id="tabs-{{$i}}3">
+                            @if(count($reservation->examGlass) != 0)
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>Examination Type</th>                             
+                                        <th>Examination Type</th>
                                         <th>sphr</th>
                                         <th>cylr</th>
                                         <th>axisr</th>
@@ -251,7 +260,7 @@
                                         <th>axisl</th>
                                     </tr>
                                     @foreach ($reservation->examGlass as $exam)
-                                        <tr>   
+                                        <tr>
                                             <td>{{ $examGlassType[$exam['exam_glass_type']] }}</td>
                                             <td>{{ $exam['sphr'] }}</td>
                                             <td>{{ $exam['cylr'] }}</td>
@@ -262,11 +271,11 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                            @endif                           
+                            @endif
                         </div>
 
-                        <div id="tabs-{{$i}}4">                           
-                            
+                        <div id="tabs-{{$i}}4">
+
                         </div>
                     @endif
                     </div>
@@ -274,5 +283,5 @@
         @else
             <p align="center">There are no Reservations till now</p>
         @endif
-    </div>
-    @endsection
+
+@endsection

@@ -9,9 +9,9 @@
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -32,8 +32,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
     <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -283,7 +283,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="/user_profiles/{{Auth::user()->id}}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="/users/{{Auth::user()->id}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -352,6 +352,14 @@
 
                 </li>
                 @endif
+
+                @if(Auth::user()->userRoles[0]->type==1)
+                <li>
+                    <a href="/reservations/create">
+                        <i class="fa fa-th"></i> <span>Add Reservation</span>
+                    </a>
+                </li>
+                @endif
                 <li class="treeview">
                     <a href="/vacations">
                         <i class="fa fa-laptop"></i>
@@ -410,9 +418,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.3.3
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-        reserved.
-    </footer>
+        <strong>Copyright &copy; 2014-2015 <a href="#">ITI</a>.</strong> All rights reserved.</footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -612,7 +618,7 @@
 <!-- jQuery 2.2.0 -->
 <script src="/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button);
@@ -620,7 +626,7 @@
 <!-- Bootstrap 3.3.6 -->
 <script src="/js/bootstrap.min-3.3.1.js"></script>
 <!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="/js/raphael-min.js"></script>
 <!-- <script src="/js/jquery-1.11.3.min.js"></script>
  -->
 <!-- Sparkline -->
@@ -631,7 +637,7 @@
 <!-- jQuery Knob Chart -->
 <script src="/plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="/js/moment.min.js"></script>
 <script src="/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -650,4 +656,5 @@
 <script src="/dist/js/demo.js"></script>
 @yield('scripts')
 </body>
+@yield('modals')
 </html>

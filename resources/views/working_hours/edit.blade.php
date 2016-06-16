@@ -1,11 +1,12 @@
 @extends('adminLayout')
 @section('css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css"
+    <link href="/css/bootstrap-datepicker.css"
           rel="stylesheet">
 @endsection
 @section('header')
+
     <div class="page-header">
-        <h1><i class="glyphicon glyphicon-edit"></i> WorkingHours / Edit #{{$working_hour->id}}</h1>
+        <h1><i class="glyphicon glyphicon-edit"></i>{{$working_hour->clinic['name']}} : WorkingHours : Edit : {{$working_hour->id}}</h1>
     </div>
 @endsection
 

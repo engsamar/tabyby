@@ -5,9 +5,8 @@ use App\Http\Controllers\Controller;
 use App\ClinicConstants;
 use App\User;
 use App\UserRole;
-use App\Clinic;
 use App\WorkingHour;
-//use App\Working
+use App\Clinic;
 use Auth;
 use App\Reservation;
 use Illuminate\Http\Request;
@@ -24,11 +23,10 @@ class UserController extends Controller
     public function homePage()
     {
         $userRole = UserRole::where('type', '=', 0)->firstOrFail();
-        //select all clinics address
-//        $w =WorkingHour::class
-        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
+        $clinics = Clinic::all();
+        $workHours=WorkingHour::all();
+//        die($clinics->workingHours['clinic_id']);
 //        die($clinics[0]->workingHours);
-
         $user=Auth::user();
         if($user){
         $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');

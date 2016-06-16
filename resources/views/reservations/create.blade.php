@@ -1,4 +1,4 @@
-@extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )or ( isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0)) ? 'adminLayout' : 'homeViewLayout')
+@extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )or ( isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0)) ? 'adminLayout' : 'layout')
 @section('css')
 <link href="/css/bootstrap-datepicker.css"
 rel="stylesheet">
@@ -88,7 +88,6 @@ rel="stylesheet">
     </div>
     @endsection
     @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script>
         var nowDate = new Date();
         var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
@@ -100,9 +99,9 @@ rel="stylesheet">
     <script>
         $("#date-field").change(function (e) {
         var date = new Date($('#date-field').val());
-        var date = ('#address-field').val();
+        var clinic_id = $('#address-field').val();
         date.setDate(date.getDate() + 1);
-        var fromtim= date.toISOString().substring(0, 10);
+        var date= date.toISOString().substring(0, 10);
         var myDiv=document.getElementById('reservTime');
         $.ajax
         ({
@@ -111,23 +110,31 @@ rel="stylesheet">
             data: {},
             success: function (data)
             {
-                console.log(data);
-                result=JSON.parse(data);
-                console.log(result.working_hours);
-                var HTMLtxt='<select class="form-group">';
+                if(data=='vacation'){
+                    var HTMLtxt='<p style="font-weight:bold;color:blue">This date is vacation , please try other one</p>';
+                }else if(data=='complete'){
+                     var HTMLtxt='<p style="font-weight:bold;color:blue">this date is fully completed , please try another one</p>';
+                    
+                }else if(data=='noTime'){
+                     var HTMLtxt='<p style="font-weight:bold;color:blue">we do\'nt have any working hour in this dat, please try another one</p>';
+                    
+                }
+                else{
+                     var HTMLtxt='<select name="workingHour" class="form-control">';
                 HTMLtxt+='<option>choose suitable time</option>';
-                $.each(result.working_hours,function(index, el) {
-                    HTMLtxt+='<option value='.el['id'].'> From'+ el['fromTime']+' To '+el['fromTime']+ '</option>';
+                $.each(data,function(index, el) {
+                    HTMLtxt+='<option value='+el['id']+'> From : '+ el['fromTime']+' To : '+el['toTime']+ '</option>';
                 });
 
                 HTMLtxt += '</select>';
+                }
+              
                 myDiv.innerHTML = HTMLtxt;
-
             },
-                    error: function (data) {
-                        console.log('Error:', data);
-                    }
-                });
+            error: function (data) {
+                console.log(data);
+            }
+        });
     });
     </script>
     @endsection

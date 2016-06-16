@@ -91,8 +91,7 @@ class ExaminationController extends Controller {
 		$user_id = User::where('users.id', '=', $request->input("res_id"))->value('id');
 		
 
-		return redirect("/all_reservation/".$user_id);
-	// 	return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
+ 		return redirect()->action('ReservationController@getReservations',[$examination->reservation->user["id"]]);   	// 	return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
 	 }
 
 	/**

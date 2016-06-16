@@ -3,9 +3,11 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use \DateTime;
+use Carbon\Carbon;
 use App\Vacation;
 use Illuminate\Http\Request;
 use App\Reservation;
+use App\WorkingHour;
 
 
 class VacationController extends Controller {
@@ -52,6 +54,7 @@ class VacationController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+
 		$vacation = new Vacation();
 		$dateTime1 = DateTime::createFromFormat('m/d/Y', $request->input("from"));
 		$from = $dateTime1->format('Y-m-d');
@@ -89,9 +92,54 @@ class VacationController extends Controller {
 			return $data;			
 
 		}
-
-
 	}
+		public function specificDate()
+		{
+			$dt = new DateTime();
+			$todayDate =$dt->format('Y-m-d');
+			$date_array=[];
+			$reservation = Reservation::select('date')->where('date','>', $todayDate)->where('status','>',0)->get();
+			foreach ($reservation as $key => $value) {
+				# code...
+				array_push($date_array,$value->date);
+			}
+			return $date_array;
+
+		}
+
+
+		public function MoveAllPatients($old_date,$new_date)
+		{
+			$old_reservation = Reservation::where('date',$old_date)->where('status','>',0)->get();
+			$new_reservation = Reservation::where('date',$new_date)->where('status','>',0)->count();
+			$working_hours = WorkingHour::where('day',date('l',strtotime($new_date)))->value('fromTime');
+			$minutes = ($working_hours *60);
+			if($new_reservation==0) 
+			{
+				if($working_hours!=0)
+					{
+						foreach ($old_reservation as $value) {
+							$value->date=$new_date;
+							$apntmnt=strtotime($value->appointment)+strtotime($working_hours);
+							$value->appointment=date('h:i:s',$apntmnt);
+							$value->save();
+							return "true";
+					}
+					}
+					else
+					{
+						return "0";
+					}
+
+				
+			}
+			else 
+			{
+				return "false";
+			}
+
+		}
+
 
 	/**
 	 * Display the specified resource.

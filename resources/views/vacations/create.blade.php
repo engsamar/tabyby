@@ -1,6 +1,6 @@
 @extends('adminLayout')
 @section('css')
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css" rel="stylesheet">
+  <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
 @section('header')
     <div class="page-header">
@@ -34,7 +34,10 @@
                     </div>
 
                   <div id="movePatients" class="form-group"></div>
-                  <div id="moveAll" class="form-group"></div>
+                  <div id="moveAll" class="form-group" hidden>
+                    <label>enter date</label>
+                    <input type="text" id="move" class="form-control date-picker">
+                  </div>
                   <div id="moveSome" class="form-group"></div>
 
                 <div class="well well-sm">
@@ -52,9 +55,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
   <script>
     var dateToday = new Date();
-    var dates = $("#from , #to").datepicker({
+    $("#from , #to , #move").datepicker({
       startDate: dateToday,
-
     });
 
   </script>

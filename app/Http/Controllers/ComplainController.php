@@ -48,9 +48,17 @@ class ComplainController extends Controller {
         $complain_details->complain_id=$complain->id;
         $complain_details->save();
 
-		$user_id = User::where('users.id', $request->input("res_id"))->value('id');
-
-        return redirect("/all_reservation/".$user_id);
+		$user= User::where('users.id',"=", $complain->reservation_id);
+		
+		$user_id = null;
+		foreach ($user as $key=>$value) {
+			if($key == 'id'){
+				$user_id = $value;
+				
+			}
+		}
+		return redirect()->action('ReservationController@getReservations',[$complain->reservation->user["id"]]);
+        
     }
 
 	/**

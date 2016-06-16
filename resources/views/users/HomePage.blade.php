@@ -27,9 +27,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script type="text/javascript" src="/js/move-top.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/easing.js"></script>
-    <script
-            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD31ckr4GKqf6WcWU8WfIqwTj8zS3BtZZo">
-    </script>
+    {{--<script--}}
+    {{--src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD31ckr4GKqf6WcWU8WfIqwTj8zS3BtZZo">--}}
+    {{--</script>--}}
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -107,7 +107,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     @if(!Auth::user())
 
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.register')
+                            <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.login')
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/register">
@@ -131,52 +131,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     </a></li>
                             </ul>
                         </li>
-                        @if($userRoleType==0)
+                        @if(Auth::user()->userRoles[0]->type==0 || Auth::user()->userRoles[0]->type==1)
                             <li class="dropdown">
                                 <a href="/chooseClinic">@lang('validation.Control Panel')
-                                    </a>
-                            </li>
-                        @elseif ($userRoleType==1)
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Reservation')
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
-                                    <li><a href="/reservations">@lang('validation.View Reservation')</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Control Panel')
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/clinics">@lang('validation.Clinic')</a></li>
-                                    <li><a href="/vacations">@lang('validation.Vacations')</a></li>
-                                    <li><a href="/reservations">@lang('validation.Reservation')</a></li>
-
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown">
-                                    @lang('validation.Medical History')
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/user_profiles/{{Auth::user()->id}}">
-                                            @lang('validation.Medical History')
-                                        </a></li>
-                                </ul>
+                                </a>
                             </li>
                         @else
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown">
-                                    @lang('validation.Medical History')
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/user_profiles/{{Auth::user()->id}}">
-                                            @lang('validation.Medical History')
-                                        </a></li>
-                                </ul>
-                            </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Reservation')
                                     <span class="caret"></span></a>
@@ -278,6 +238,40 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="clearfix"></div>
 <!----- //End-slider---->
 <!---- about ---->
+
+{{--about doctor--}}
+<div id="about" class="about">
+    <div class="container">
+        <div class="header about-header text-center">
+            <h2>Doctor</h2>
+            <br>
+            <p></p>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <img class="img-responsive" src="/images/doctor.jpg" alt="">
+            </div>
+            <div class="col-md-7" id="bio">
+                <strong><p class="listyle">Iam Dr. Galal Agina graduated in 1995 from faculty of medicine , Zagazig
+                        university</p></strong>
+                <ul>
+                    <li class="listyle">Got my fellowship in memorial institute of ophthalmology from 2000 to 2004</li>
+                    <li class="listyle">Graduated in opthalmology in 2007 diploma from Al-Azhar university</li>
+                    <li class="listyle">Graduated in 2009 from ministry of health for Egyptian board in ophthalmology
+                    </li>
+                    <li class="listyle">Appear in 1st and 2nd part in FRCS 2010</li>
+                    <li class="listyle">Worked in memorial institute of opthalmology and Mansoura eye spatiality
+                        hospital in Egypt and many hospitals in KSA
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{--clinics Information--}}
 <div id="about" class="about">
     <div class="container">
         <div class="header about-header text-center">
@@ -285,9 +279,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <p></p>
         </div>
         <!---- About-grids ---->
-        <div class="about-grids">
+        <div class="row">
             @foreach($clinics as $clinic)
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="about-grid">
                         <img src="images/img1.jpg" title="name"/>
                         <span class="t-icon1"></span>
@@ -298,18 +292,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <?php
                             //                        die($clinic->workingHours[0]->id);
                             ?>
-
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry. Lorem Ipsum has
-                                been the industry's standard dummy text ever since the 1500s,
-                                when an unknown printer.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    {{--<div class="container ">--}}
-                        <div id="googleMap" style="width:700px;height:400px;"></div>
-                    {{--</div>--}}
+                <div class="col-md-7">
+                    <div class="container ">
+                    <div id="googleMap" style="width:700px;height:400px;"></div>
+                    </div>
                 </div>
             @endforeach
 
@@ -318,72 +307,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!---- About-grids ---->
     </div>
 
-</div>
-<!--- teammember-grids ---->
-<div class="team-member-grids">
-    <div class="team-member-grid">
-        <img src="images/t1.jpg" title="name"/>
-        <div class="team-member-info bottom-t-info">
-            <span> </span>
-            <h3><a href="#">Dr. Keith M. Weiner, M.D.</a></h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. when an unknown
-                printer took a galley of type Lorem Ipsum is simply dummy text.is
-                simply dummy text..is simply
-                dummy text.</p>
-        </div>
-    </div>
-    <div class="team-member-grid">
-        <div class="team-member-info bottom-t-info bottom-t-info-b">
-            <span> </span>
-            <h3><a href="#">Dr. Danielle, M.D.</a></h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. when an unknown
-                printer took a galley of type Lorem Ipsum is simply dummy text.is
-                simply dummy text..is simply
-                dummy text..is simply dummy text.</p>
-        </div>
-        <img src="images/t2.jpg" title="name"/>
-    </div>
-    <div class="team-member-grid">
-        <img src="images/t3.jpg" title="name"/>
-        <div class="team-member-info bottom-t-info">
-            <span> </span>
-            <h3><a href="#">Dr. Joseph, M.D.</a></h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. when an unknown
-                printer took a galley of type Lorem Ipsum is simply dummy text.is
-                simply dummy text..is simply
-                dummy text.</p>
-        </div>
-    </div>
-    <div class="team-member-grid">
-        <div class="team-member-info bottom-t-info bottom-t-info-b">
-            <span> </span>
-            <h3><a href="#">Dr. Caitlin, M.D.</a></h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. when an unknown
-                printer took a galley of type Lorem Ipsum is simply dummy text.is
-                simply dummy text..is simply
-                dummy text..is simply dummy text.</p>
-        </div>
-        <img src="images/t4.jpg" title="name"/>
-    </div>
-    <div class="team-member-grid">
-        <img src="images/t5.jpg" title="name"/>
-        <div class="team-member-info bottom-t-info">
-            <span> </span>
-            <h3><a href="#">Dr. Michael, M.D.</a></h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. when an unknown
-                printer took a galley of type Lorem Ipsum is simply dummy text.is
-                simply dummy text..is simply
-                dummy text.</p>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-</div>
-<!---//teammember-grids ---->
 </div>
 </div>
 <!--- team --->

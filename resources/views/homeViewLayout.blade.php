@@ -59,9 +59,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!----- start-header---->
 <div id="home" class="header">
 <div class="top-header">
+
 <div class="container">
     <div class="logo">
-        <a href="/"><img src="/images/logooo.png" title="doctor"/></a>
+        <a href="/"><img src="/images/logooo.png" style="height:10%;" title="doctor"/></a>
     </div>
     <!----start-top-nav---->
                         <nav class="top-nav">

@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth','roles']], function () {
     Route::resource("examGlassHome", "ExamGlassController@examGlass");
     Route::get("createExamGlassHome/{id}", "ExamGlassController@examGlass");
     Route::resource("posts","PostController");
+    Route::get("/medicine/find","MedicineController@find");
 
 
 });

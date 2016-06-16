@@ -58,7 +58,10 @@
     $("#from , #to , #move").datepicker({
       startDate: dateToday,
     });
-
+    $("input[name='from'],input[name='to']").keypress(function (event) {
+        event.preventDefault();
+        $("input[name='birthdate']").datepicker();
+    });
   </script>
     <script type="text/javascript"  src="/js/vacations.js"></script>
 

@@ -33,7 +33,7 @@
                        @endif
                     </div>
 
-                  <div id="movePatients" class="form-group"></div>
+                  <div id="movePatients" class="form-group" hidden></div>
                   <div id="moveAll" class="form-group" hidden>
                     <label>enter date</label>
                     <input type="text" id="move" class="form-control date-picker">

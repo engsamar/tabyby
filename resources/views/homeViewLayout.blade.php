@@ -59,12 +59,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!----- start-header---->
 <div id="home" class="header">
 <div class="top-header">
+
 <div class="container">
     <div class="logo">
-        <a href="/"><img src="/images/logooo.png" title="doctor"/></a>
+        <a href="/"><img src="/images/logooo.png" style="height:10%;" title="doctor"/></a>
     </div>
     <!----start-top-nav---->
-                        <nav class="top-nav">
+    <nav class="top-nav">
         <ul class="top-nav">
         <li class="dropdown">
         <ul class="dropdown-menu">
@@ -78,7 +79,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 @lang('validation.contact')
             </a></li>
         </ul>
-    </li>
+        </li>
+        <li><a href="/blog">Blog</a></li>
     @if(!Auth::user())
     
     <li class="dropdown">

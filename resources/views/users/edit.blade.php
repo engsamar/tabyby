@@ -1,5 +1,6 @@
 @extends('homeViewLayout')
 @section('css')
+  <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
 @section('header')
     <div class="page-header">
@@ -81,6 +82,7 @@
     </div>
 @endsection
 @section('scripts')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
   <script src="/js/user_validation.js"></script>
   <script>
 

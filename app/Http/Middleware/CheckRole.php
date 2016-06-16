@@ -14,7 +14,7 @@ class CheckRole{
 		if (Auth::user()->userRoles[0]->type==0 ) {
 			return $next($request);
 		} 
-		return redirect('/');
+		return redirect('/error');
 
 	}
 }

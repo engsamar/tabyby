@@ -80,8 +80,13 @@ class VacationController extends Controller {
 		$reserve_array=[];
 		for($i=0;$i<=$no_of_days;$i++){
 			$dateAdd = strtotime("+".$i."days", $date);
-			array_push($date_array,date('Y-m-d', $dateAdd));
-			array_push($reserve_array,Reservation::where('date', $date_array[$i])->where('status','>',0)->count());
+			$pat_no=Reservation::where('date',date('Y-m-d', $dateAdd))->where('status','>',0)->count();
+			if($pat_no!=0)
+			{
+				array_push($date_array,date('Y-m-d', $dateAdd));
+				array_push($reserve_array,$pat_no);
+			}
+			
 		}
 		if($reserve_array)
 		{
@@ -103,6 +108,7 @@ class VacationController extends Controller {
 				# code...
 				array_push($date_array,$value->date);
 			}
+
 			return $date_array;
 
 		}
@@ -111,6 +117,7 @@ class VacationController extends Controller {
 		public function MoveAllPatients($old_date,$new_date)
 		{
 			$old_reservation = Reservation::where('date',$old_date)->where('status','>',0)->get();
+			$old_reservation_no = Reservation::where('date',$old_date)->where('status','>',0)->count();
 			$new_reservation = Reservation::where('date',$new_date)->where('status','>',0)->count();
 			$working_hours = WorkingHour::where('day',date('l',strtotime($new_date)))->value('fromTime');
 			$minutes = ($working_hours *60);
@@ -118,17 +125,17 @@ class VacationController extends Controller {
 			{
 				if($working_hours!=0)
 					{
-						foreach ($old_reservation as $value) {
+						foreach ($old_reservation as $key => $value) {
 							$value->date=$new_date;
-							$apntmnt=strtotime($value->appointment)+strtotime($working_hours);
+							$apntmnt=strtotime("+".(($key)*15)." minutes", strtotime($working_hours));
 							$value->appointment=date('h:i:s',$apntmnt);
 							$value->save();
-							return "true";
-					}
+						}
+						return "Patients Moved Succeffully";
 					}
 					else
 					{
-						return "0";
+						return "No working Hours in this day";
 					}
 
 				

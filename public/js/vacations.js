@@ -19,6 +19,7 @@ $(document).ready()
                     data: {},
                     success: function (data)
                     {
+        				$('#movePatients').show();
                         result=JSON.parse(data);
                         var HTMLtxt='<table class="table table-responsive table-bordered ">';
 						HTMLtxt+='<thead><tr>';
@@ -81,11 +82,12 @@ $('body').on('click', '.move2', function(event)
   //           });
 
         $("#move").change(function (e) {
-        var moveTime = new Date($('#move').val());
-        moveTime.setDate(moveTime.getDate() + 1);
-        var new_date= moveTime.toISOString().substring(0, 10);
-        // console.log(old_date);
-        // console.log(new_date);   	
+        	$('#movePatients').hide();
+	        var moveTime = new Date($('#move').val());
+	        moveTime.setDate(moveTime.getDate() + 1);
+	        var new_date= moveTime.toISOString().substring(0, 10);
+	        // console.log(old_date);
+	        // console.log(new_date);   	
         $.ajax
             ({
                 url: "/MoveAllPatients/"+old_date+"/"+new_date+"/",
@@ -94,7 +96,8 @@ $('body').on('click', '.move2', function(event)
                 success: function (data)
                 {
                 	console.log(data);
-                	$("#moveAll").hide();
+                	$("#moveAll").empty();
+                	$("#moveAll").append(data);
                 },
                 error: function (data) {
                     console.log('Error:', data);

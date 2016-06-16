@@ -132,6 +132,8 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                          <a class="btn btn-xs btn-warning btn-group" role="group" href="{{ route('reservations.edit', $reservation->id) }}"><i class="glyphicon glyphicon-edit"></i> Postpone</a>
                      <button type="submit" class="btn btn-xs btn-danger">Cancel Reservation <i class="glyphicon glyphicon-trash"></i></button>
+
+                     <a class="btn btn-xs btn-warning btn-group" role="group" href="/reservations/existed/{{$reservation->id}}"<i class="glyphicon glyphicon-edit"></i> Existed</a>
                      </form>
                      @endif
                      </td>

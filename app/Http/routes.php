@@ -57,6 +57,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("movePatients/{fromtim}/{totim}", "VacationController@movePatients");
     Route::get("/checkReservDate/{date}", "ReservationController@checkReservDate");
 
+    Route::get("specificDate", "VacationController@specificDate");
+
+
+    Route::get("/MoveAllPatients/{old_date}/{new_date}", "VacationController@MoveAllPatients");
+
+
     Route::get("reservations/cancelled", "ReservationController@cancel");
     Route::get("user_profiles/{id}/", "UserProfileController@index");
     Route::get("patient/{id}", "ReservationController@patientReserv");

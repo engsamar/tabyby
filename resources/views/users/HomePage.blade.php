@@ -1,44 +1,18 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Eyes' Clinic</title>
-    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/js/jquery.min.js"></script>
-    <!-- Custom Theme files -->
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <link href="/css/homes.css" rel='stylesheet' type='text/css'/>
-    <link href="/css/style.css" rel='stylesheet' type='text/css'/>
-    <!-- Custom Theme files -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="application/x-javascript"> addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        } </script>
-    <!---- start-smoth-scrolling---->
-    <script type="text/javascript" src="/js/move-top.js"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
-    <script type="text/javascript" src="/js/easing.js"></script>
-    {{--<script--}}
-    {{--src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD31ckr4GKqf6WcWU8WfIqwTj8zS3BtZZo">--}}
-    {{--</script>--}}
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $(".scroll").click(function (event) {
-                event.preventDefault();
-                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-            });
-        });
-    </script>
-    <script>
+    <!-- Stylesheets -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/rev-settings.css" rel="stylesheet">
+    <link href="/css/stylee.css" rel="stylesheet">
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+   <!-- <script>
         var myCenter = new google.maps.LatLng(30.740812, 31.256629);
         var marker;
 
@@ -75,374 +49,650 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 }
             });
         });
-    </script>
-    <!----//End-top-nav-script---->
+    </script>-->
 </head>
-<body>
-<!----- start-header---->
-<div id="home" class="header">
-    <div class="top-header">
-        <div class="container">
-            <div class="logo">
-                <a href="/"><img src="/images/logooo.png" title="doctor"/></a>
-            </div>
-            <!----start-top-nav---->
-            <nav class="top-nav">
-                <ul class="top-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Details')
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#about" class="scroll">@lang('validation.About us')
-                                </a></li>
-                            <li><a href="#team" class="scroll">@lang('validation.our team')
-                                </a></li>
-                            <li><a href="#services" class="scroll">@lang('validation.our services')
-                                </a></li>
-                            <li><a href="#contact" class="scroll">
-                                    @lang('validation.contact')
-                                </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/blog">Blog</a></li>
-                    @if(!Auth::user())
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.login')
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/register">
-                                        @lang('validation.register')
-                                    </a></li>
-                                <li><a href="/login">
-                                        @lang('validation.login')
-                                    </a></li>
-                            </ul>
-                        </li>
-                    @else
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Messages')
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ route('messages') }}">
-                                        @lang('validation.Messages')
-                                    </a></li>
-                                <li><a href="{{ route('messages.create') }}">
-                                        + @lang('validation.New Message')
-                                    </a></li>
-                            </ul>
-                        </li>
-                        @if(Auth::user()->userRoles[0]->type==0 || Auth::user()->userRoles[0]->type==1)
-                            <li class="dropdown">
-                                <a href="/chooseClinic">@lang('validation.Control Panel')
-                                </a>
-                            </li>
-                        @else
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Reservation')
+<body>
+<div class="page-wrapper">
+    <!--Preloader Box-->
+    <div class="preloader"></div>
+
+    <!-- Header Start -->
+    <header class="main-header">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="auto-box">
+                <div class="row clearfix">
+
+                    <div class="cont-info col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        Do You Have Any Questions? Call Us  <span>+49 123 456 789</span>  Or Send An Email <a href="mailto:support@email.com">support@email.com</a>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+                        Opening Hours : <span>Monday to Saturday - 8am to 9pm</span>   Contact : <span>+1-800-654-3210</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Nav Container -->
+        <div class="nav-container">
+
+            <div class="auto-box">
+                <div class="row clearfix">
+                    <!-- Logo -->
+                    <div class="col-md-3 col-sm-3 col-xs-6 logo"><a href="#"><img class="img-responsive" src="/images/logo.png" alt=""></a></div>
+                    <!-- Main Menu -->
+                    <nav class="col-md-9 col-sm-9 col-xs-12 main-menu">
+                        <ul>
+                            <li class="current"><a href="#">Home</a></li>
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Details')
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
-                                    <li><a href="/patientReservation">@lang('validation.View Reservation')</a></li>
+                                    <li><a href="#about" class="scroll">@lang('validation.About us')
+                                        </a></li>
+                                    <li><a href="#team" class="scroll">@lang('validation.our team')
+                                        </a></li>
+                                    <li><a href="#services" class="scroll">@lang('validation.our services')
+                                        </a></li>
+                                    <li><a href="#contact" class="scroll">
+                                            @lang('validation.contact')
+                                        </a></li>
                                 </ul>
                             </li>
-                        @endif
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/users/{{Auth::user()->id}}">
-                                        @lang('validation.Profile')
-                                    </a></li>
-                                <li><a href="/users/{{Auth::user()->id}}/edit">
-                                        @lang('validation.Edit Profile')
-                                    </a></li>
+                             <li><a href="/blog">Blog</a></li>
+                            @if(!Auth::user())
 
-                                <li><a href="/logout">
-                                        @lang('validation.logout')</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            @lang('validation.'. Config::get('languages')[App::getLocale()])
-
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @foreach (Config::get('languages') as $lang => $language)
-                                @if ($lang != App::getLocale())
-                                    <li>
-                                        <a href="{{ route('lang.switch', $lang) }}">@lang('validation.'.$language)</a>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.login')
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/register">
+                                                @lang('validation.register')
+                                            </a></li>
+                                        <li><a href="/login">
+                                                @lang('validation.login')
+                                            </a></li>
+                                    </ul>
+                                </li>
+                            @else
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Messages')
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ route('messages') }}">
+                                                @lang('validation.Messages')
+                                            </a></li>
+                                        <li><a href="{{ route('messages.create') }}">
+                                                + @lang('validation.New Message')
+                                            </a></li>
+                                    </ul>
+                                </li>
+                                @if(Auth::user()->userRoles[0]->type==0 || Auth::user()->userRoles[0]->type==1)
+                                    <li class="dropdown">
+                                        <a href="/chooseClinic">@lang('validation.Control Panel')
+                                        </a>
+                                    </li>
+                                @else
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Reservation')
+                                            <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/reservations/create">@lang('validation.Add Reservation')</a></li>
+                                            <li><a href="/patientReservation">@lang('validation.View Reservation')</a></li>
+                                        </ul>
                                     </li>
                                 @endif
-                            @endforeach
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/users/{{Auth::user()->id}}">
+                                                @lang('validation.Profile')
+                                            </a></li>
+                                        <li><a href="/users/{{Auth::user()->id}}/edit">
+                                                @lang('validation.Edit Profile')
+                                            </a></li>
+
+                                        <li><a href="/logout">
+                                                @lang('validation.logout')</a></li>
+                                    </ul>
+                                </li>
+                                @endif
+                                <li><a href="contact-us.html">Contact Us</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="contact-us-2.html">Contact Us 2</a></li>
+                                    </ul>
+                                </li>
                         </ul>
-                    </li>
-                </ul>
-                <a href="#" id="pull"><img src="/images/menu-icon.png" title="menu"/></a>
-            </nav>
-            <div class="clearfix"></div>
-        </div>
-    </div>
+                    </nav>
 
-</div>
-<!----- //End-header---->
-<!----start-slider-script---->
-<script src="js/responsiveslides.min.js"></script>
-<script>
-    // You can also use "$(window).load(function() {"
-    $(function () {
-        // Slideshow 4
-        $("#slider4").responsiveSlides({
-            auto: true,
-            pager: true,
-            nav: true,
-            speed: 500,
-            namespace: "callbacks",
-            before: function () {
-                $('.events').append("<li>before event fired.</li>");
-            },
-            after: function () {
-                $('.events').append("<li>after event fired.</li>");
-            }
-        });
+                    <!-- Toggle icon -->
+                    <div class="toggle-icon"></div>
 
-    });
-</script>
-<!----//End-slider-script---->
-<!-- Slideshow 4 -->
-<div id="top" class="callbacks_container">
-    <ul class="rslides" id="slider4">
-        <li>
-            <img src="images/slider2.jpg" alt="">
-            <div class="caption">
-            </div>
-        </li>
-        <li>
-            <img src="images/slider2.jpg" alt="">
-            <div class="caption">
-
-            </div>
-        </li>
-        <li>
-            <img src="images/slider2.jpg" alt="">
-            <div class="caption">
-                <div class="slide-text-info">
-                    {{--<h1>providing</h1>--}}
-                    {{--<label>highquality service for men & women</label>--}}
-                    {{--<a class="slide-btn" href="#">learn more</a>--}}
-                </div>
-            </div>
-        </li>
-    </ul>
-</div>
-<div class="clearfix"></div>
-<!----- //End-slider---->
-<!---- about ---->
-
-{{--about doctor--}}
-<div id="about" class="about">
-    <div class="container">
-        <div class="header about-header text-center">
-            <h2>Doctor</h2>
-            <br>
-            <p></p>
-        </div>
-        <div class="row">
-            <div class="col-md-5">
-                <img class="img-responsive" src="/images/doctor.jpg" alt="">
-            </div>
-            <div class="col-md-7" id="bio">
-                <strong><p class="listyle">Iam Dr. Galal Agina graduated in 1995 from faculty of medicine , Zagazig
-                        university</p></strong>
-                <ul>
-                    <li class="listyle">Got my fellowship in memorial institute of ophthalmology from 2000 to 2004</li>
-                    <li class="listyle">Graduated in opthalmology in 2007 diploma from Al-Azhar university</li>
-                    <li class="listyle">Graduated in 2009 from ministry of health for Egyptian board in ophthalmology
-                    </li>
-                    <li class="listyle">Appear in 1st and 2nd part in FRCS 2010</li>
-                    <li class="listyle">Worked in memorial institute of opthalmology and Mansoura eye spatiality
-                        hospital in Egypt and many hospitals in KSA
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-{{--clinics Information--}}
-<div id="about" class="about">
-    <div class="container">
-        <div class="header about-header text-center">
-            <h2>Clinics</h2>
-            <p></p>
-        </div>
-        <!---- About-grids ---->
-        <div class="row">
-            @foreach($clinics as $clinic)
-                <div class="col-md-5">
-                    <div class="about-grid">
-                        <img src="images/img1.jpg" title="name"/>
-                        <span class="t-icon1"></span>
-                        <div class="about-grid-info text-center">
-                            <h3><a href="#">{{ $clinic->name }}</a></h3>
-                            <h3>{{ $clinic->telephone }}</h3>
-                            <h3>{{ $clinic->address }}</h3>
-                            <?php
-                            //                        die($clinic->workingHours[0]->id);
-                            ?>
+                    <!-- Mobile Menu -->
+                    <nav class="mobile-menu" id="alter-nav">
+                        <div class="nav-box">
+                            <ul>
+                                <li class="current"><a href="index-2.html">Home</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="index-2.html">Home One</a></li>
+                                        <li><a href="index-3.html">Home Two</a></li>
+                                        <li><a href="index-4.html">Home Three</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="features.html">Features</a></li>
+                                <li><a href="about-us.html">About us</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="our-team.html">Our Team</a></li>
+                                        <li><a href="our-doctors.html">Our Doctors</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="services.html">Services</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="services.html">Dental Implants</a></li>
+                                        <li><a href="services.html">Medical Research</a></li>
+                                        <li><a href="services.html">Medical Counseling</a></li>
+                                        <li><a href="services.html">Pharmaceutical Advice</a></li>
+                                        <li><a href="services.html">Blood Bank</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="blog.html">News</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog-detail.html">Single News</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact-us.html">Contact Us</a>
+                                    <span class="toggle-icon"></span>
+                                    <ul class="sub-menu">
+                                        <li><a href="contact-us-2.html">Contact Us 2</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="container ">
-                    <div id="googleMap" style="width:700px;height:400px;"></div>
-                    </div>
-                </div>
-            @endforeach
+                    </nav>
 
-            <div class="clearfix"></div>
+                </div>
+            </div>
+
         </div>
-        <!---- About-grids ---->
-    </div>
+        <!-- Nav Container End -->
+    </header>
+    <!-- END Header -->
 
-</div>
-</div>
-<!--- team --->
+    <!-- Main Slider -->
+    <section class="main-slider-wrapper">
+        <div class="tp-banner-container">
+            <div class="tp-banner">
+                <ul>
+                    <li data-transition="fade" data-slotamount="10" data-masterspeed="1500">
+                        <img src="/resource/male-doctor-2.jpg" alt="slide 4">
+                        <div class="caption lfb stb"
+                             data-x="left"
+                             data-y="top"
+                             data-hoffset="15"
+                             data-voffset="220"
+                             data-speed="700"
+                             data-start="600"
+                             data-easing="easeOutExpo">
+                            <h4>EXCELLENT HEALLTH CARE SERVICES</h4>
+                        </div>
+                        <div class="caption lfb stb"
+                             data-x="left"
+                             data-y="top"
+                             data-hoffset="15"
+                             data-voffset="270"
+                             data-speed="700"
+                             data-start="1100"
+                             data-easing="easeOutExpo">
+                            <h2>WE TOTALLY CARE ABOUT EVERYONE</h2>
+                        </div>
+                        <div class="caption lfl stl"
+                             data-x="left"
+                             data-y="top"
+                             data-hoffset="15"
+                             data-voffset="340"
+                             data-speed="700"
+                             data-start="1800"
+                             data-easing="easeOutExpo">
+                            <h5>We also work very closely with our Community Healthcare Team who <br>provide antenatal, postnatal and nursing services and other specialist provision<br> such as the Quitters scheme.</h5>
+                        </div>
+                        <div class="caption lfb stb"
+                             data-x="left"
+                             data-y="top"
+                             data-hoffset="15"
+                             data-voffset="460"
+                             data-speed="700"
+                             data-start="2500"
+                             data-easing="easeOutExpo">
+                            <a href="#" class="btn-theme"><span class="icon flaticon-angle2"></span> &ensp; GET IN TOUCH</a>
+                        </div>
+                    </li>
 
-<!---- contact ---->
-<div id="contact" class="contact">
-    <div class="map">
-        <div class="contact-info">
-            <div class="container">
-                <!---- contact-grids ---->
-                <div class="contact-grids">
-                    <h3>contact us</h3>
-                    <div class="col-md-5 contact-grid-left">
-                        <h4>contact information</h4>
-                        <ul>
+                    <li data-transition="fade" data-slotamount="10" data-masterspeed="1500"> <img src="/resource/doctor-patient.jpg" alt="slide 4">
+                        <div class="caption lfb stb"
+                             data-x="center"
+                             data-y="top"
+                             data-hoffset="0"
+                             data-voffset="220"
+                             data-speed="700"
+                             data-start="600"
+                             data-easing="easeOutExpo">
+                            <h4>EXCELLENT HEALLTH CARE SERVICES</h4>
+                        </div>
+                        <div class="caption lfb stb"
+                             data-x="center"
+                             data-y="top"
+                             data-hoffset="0"
+                             data-voffset="270"
+                             data-speed="700"
+                             data-start="1100"
+                             data-easing="easeOutExpo">
+                            <h2>WE TOTALLY CARE ABOUT EVERYONE</h2>
+                        </div>
+                        <div class="caption lfb stb"
+                             data-x="center"
+                             data-y="top"
+                             data-hoffset="0"
+                             data-voffset="340"
+                             data-speed="700"
+                             data-start="1800"
+                             data-easing="easeOutExpo">
+                            <h5 class="text-center">We also work very closely with our Community Healthcare Team who provide antenatal, postnatal and nursing services <br>and other specialist provision such as the Quitters scheme.</h5>
+                        </div>
 
-                            {{--</select>--}}
-                            <li><span class="pin"> </span><label>Address :</label>
-                                <small>{{ $userRole->user->address }}</small>
-                            </li>
-                            <li><span class="phone"> </span><label>Phone :</label>
-                                <small>{{ $userRole->user->telephone }}</small>
-                            </li>
-                            <li><span class="mail"> </span><label>Email :</label>
-                                <small>{{ $userRole->user->email }}</small>
-                            </li>
-                        </ul>
+                        <div class="caption lfl stl"
+                             data-x="center"
+                             data-y="top"
+                             data-hoffset="-100"
+                             data-voffset="460"
+                             data-speed="700"
+                             data-start="2500"
+                             data-easing="easeOutExpo"><a href="#" class="btn-theme left"><span class="icon flaticon-angle2"></span> &ensp; GET IN TOUCH</a>
+                        </div>
+
+                        <div class="caption lfr str"
+                             data-x="center"
+                             data-y="top"
+                             data-hoffset="100"
+                             data-voffset="460"
+                             data-speed="700"
+                             data-start="2500"
+                             data-easing="easeOutExpo"><a href="#" class="btn-theme right">MAKE APPOINTMENT</a>
+                        </div>
+
+                    </li>
+
+                    <li data-transition="fade" data-slotamount="10" data-masterspeed="1500"> <img src="/resource/family-doctor-fm.jpg" alt="slide 4">
+                        <div class="caption lfb stb"
+                             data-x="right"
+                             data-y="top"
+                             data-hoffset="-15"
+                             data-voffset="220"
+                             data-speed="700"
+                             data-start="600"
+                             data-easing="easeOutExpo">
+                            <h4>EXCELLENT HEALLTH CARE SERVICES</h4>
+                        </div>
+                        <div class="caption lfb stb"
+                             data-x="right"
+                             data-y="top"
+                             data-hoffset="-15"
+                             data-voffset="270"
+                             data-speed="700"
+                             data-start="1100"
+                             data-easing="easeOutExpo">
+                            <h2>WE TOTALLY CARE ABOUT EVERYONE</h2>
+                        </div>
+                        <div class="caption lfr str"
+                             data-x="right"
+                             data-y="top"
+                             data-hoffset="-15"
+                             data-voffset="340"
+                             data-speed="700"
+                             data-start="1800"
+                             data-easing="easeOutExpo">
+                            <h5 class="text-right">We also work very closely with our Community Healthcare Team who <br>provide antenatal, postnatal and nursing services and other specialist provision<br> such as the Quitters scheme.</h5>
+                        </div>
+                        <div class="caption lfb stb"
+                             data-x="right"
+                             data-y="top"
+                             data-hoffset="-15"
+                             data-voffset="460"
+                             data-speed="700"
+                             data-start="2500"
+                             data-easing="easeOutExpo"><a href="#" class="btn-theme"><span class="icon flaticon-angle2"></span> &ensp; GET IN TOUCH</a> </div>
+                    </li>
+                </ul><!-- end ul -->
+            </div><!-- end tp-banner -->
+        </div><!-- end banner-container -->
+    </section>
+
+    <!-- Services -->
+        <!-- How We Help -->
+        <!-- Combo Section -->
+    <section class="combo">
+        <div class="auto-box">
+            <div class="row clearfix">
+
+                <!-- Departments -->
+                <div class="departments col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <h2 class="border-line-left">Why choose us?</h2>
+                    <!-- Accordion box / Style Two-->
+                    <div class="accordion-box style-two">
+
+                        <!-- Accordion -->
+                        <article class="accordion animated out" data-delay="0" data-animation="fadeInUp">
+                            <div class="acc-btn active"><span class="toggle-icon"></span> We work clean and try to help everyone </div>
+                            <div class="acc-content clearfix collapsed">
+                                <p>Our teams are up to date with the latest technologies, media trends and are keen to prove themselves in this industry and that’s what you want from an advertising agency.</p>
+                            </div>
+                        </article>
+                        <!-- Accordion -->
+                        <article class="accordion animated out" data-delay="0" data-animation="fadeInUp">
+                            <div class="acc-btn"><span class="toggle-icon"></span> Our teams work together to heal people</div>
+                            <div class="acc-content clearfix">
+                                <p>Our teams are up to date with the latest technologies, media trends and are keen to prove themselves in this industry and that’s what you want from an advertising agency.</p>
+                            </div>
+                        </article>
+                        <!-- Accordion -->
+                        <article class="accordion animated out" data-delay="0" data-animation="fadeInUp">
+                            <div class="acc-btn"><span class="toggle-icon"></span> We try to work for young, old and teens</div>
+                            <div class="acc-content clearfix">
+                                <p>Our teams are up to date with the latest technologies, media trends and are keen to prove themselves in this industry and that’s what you want from an advertising agency.</p>
+                            </div>
+                        </article>
+
                     </div>
-                    <div class="col-md-7 contact-grid-right">
-                        <h4>leave us a message</h4>
-                        <form>
-                            <input type="text" value="Name:" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Name:';}">
-                            <input type="text" value="Email:" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Email:';}">
-                            <input type="text" value="Phone No:" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Phone No:';}">
-                        <textarea rows="2" cols="70" onfocus="if(this.value == 'Message:') this.value='';"
-                                  onblur="if(this.value == '') this.value='Message:';">Message:</textarea>
-                            <input type="submit" value="SEND MESSAGE"/>
-                        </form>
-                    </div>
-                    <div class="clearfix"></div>
                 </div>
-                <!---- contact-grids ---->
+
+                <!-- Our Services -->
+                <div class="our-services col-lg-4 col-md-4 col-sm-6 col-xs-12 animated out" data-delay="100" data-animation="fadeInUp">
+                    <h2 class="border-line-left">Awesome Features</h2>
+                    <!-- Square Listing -->
+                    <ul class="square-listing anim-3-all">
+                        <li><a href="#">Health &amp; Medical Care</a></li>
+                        <li><a href="#">Medical Treatment</a></li>
+                        <li><a href="#">Emergency Help</a></li>
+                        <li><a href="#">Rehabilation Therapy</a></li>
+                        <li><a href="#">Medical Counseling</a></li>
+                    </ul>
+                </div>
+
+                <!-- Work Hours -->
+                <div class="work-hours col-lg-4 col-md-4 col-sm-12 col-xs-12 animated out" data-delay="200" data-animation="fadeInUp">
+                    <h2 class="border-line-left">Opening Hours</h2>
+                    <div class="accordion-box style-two">
+                    <article class="accordion animated out" data-delay="0" data-animation="fadeInUp">
+                        <div class="acc-btn active"><span class="toggle-icon"></span> We work clean and try to help everyone </div>
+                        <div class="acc-content clearfix collapsed">
+                            <div class="day clearfix">
+                                <span class="day-title pull-left">Monday</span><span class="day-timing pull-right">8:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="day clearfix">
+                                <span class="day-title pull-left">Tuesday</span><span class="day-timing pull-right">8:00 AM - 6:30 PM</span>
+                            </div>
+                            <div class="day clearfix">
+                                <span class="day-title pull-left">Wednesday</span><span class="day-timing pull-right">8:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="day clearfix">
+                                <span class="day-title pull-left">Thursday</span><span class="day-timing pull-right">10:00 AM - 8:00 PM</span>
+                            </div>
+                            <div class="day clearfix">
+                                <span class="day-title pull-left">Friday</span><span class="day-timing pull-right">8:00 AM - 12:00 AM</span>
+                            </div>
+                        </div>
+                    </article>
+                    </div>
+
+                </div>
+
             </div>
         </div>
-    </div>
-</div>
-<!---- contact ---->
-<div class="clearfix"></div>
-<!--- copy-right ---->
-<div class="copy-right">
-    <div class="container">
-        <div class="copy-right-left">
-            <p>Template by <a href="http://w3layouts.com/">W3layouts</a></p>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    /*
-                     var defaults = {
-                     containerID: 'toTop', // fading element id
-                     containerHoverID: 'toTopHover', // fading element hover id
-                     scrollSpeed: 1200,
-                     easingType: 'linear'
-                     };
-                     */
+    </section>
 
-                    $().UItoTop({easingType: 'easeOutQuart'});
+    <!-- Client Testimonials -->
+    <section class="client-testimonials margin-50">
+        <div class="auto-box">
+            <h1 class="border-line-center">What our patients said</h1>
 
-                });
-            </script>
-            <a href="#" id="toTop" style="display: block;"> <span id="toTopHover"
-                                                                  style="opacity: 1;"> </span></a>
+            <div class="slider">
+                <article class="slide">
+                    <figure><img class="img-circle" src="/resource/testimonial-image-1.png" alt=""></figure>
+                    <div class="text">"Our teams are up to date with the latest technologies, media trends and are keen to prove themselves in this industry and that’s what you want from an advertising agency, not someone who is relying on the same way of doing things."</div>
+                </article>
+                <article class="slide">
+                    <figure><img class="img-circle" src="/resource/testimonial-image-2.png" alt=""></figure>
+                    <div class="text">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."</div>
+                </article>
+                <article class="slide">
+                    <figure><img class="img-circle" src="/resource/team-2.jpg" alt=""></figure>
+                    <div class="text">"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."</div>
+                </article>
+            </div>
+
         </div>
-        <div class="copy-right-right">
-            <ul>
-                <li><a class="facebook" href="#"><span> </span></a></li>
-                <li><a class="twitter" href="#"><span> </span></a></li>
-                <li><a class="skype" href="#"><span> </span></a></li>
-                <div class="clearfix"></div>
-            </ul>
+    </section>
+
+    <!-- Meet The Team -->
+    <section class="meet-the-team">
+        <div class="auto-box">
+            <h1 class="border-line-center text-center">Meet our doctor</h1>
+            <div class="row clearfix">
+
+                <!-- Member -->
+                <article class="member col-lg-3 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="0" data-animation="fadeInUp">
+                    <figure><img src="/resource/team-1.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
+                    <div class="member-info">
+                        <h4>Dr. Jack Johnson</h4>
+                        <h5><a href="#">Rehabilitation Therapy</a></h5>
+                    </div>
+                    <ul class="social clearfix anim-3-all">
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
+                    </ul>
+                </article>
+
+                <!-- Member -->
+                <article class="member col-lg-3 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="150" data-animation="fadeInUp">
+                    <figure><img src="/resource/team-2.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
+                    <div class="member-info">
+                        <h4>Dr. Vanessa Smouic</h4>
+                        <h5><a href="#">Cardiac Clinic</a></h5>
+                    </div>
+                    <ul class="social clearfix anim-3-all">
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
+                    </ul>
+                </article>
+
+                <!-- Member -->
+                <article class="member col-lg-3 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="300" data-animation="fadeInUp">
+                    <figure><img src="/resource/team-3.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
+                    <div class="member-info">
+                        <h4>Dr. Yvonne Cadiline</h4>
+                        <h5><a href="#">Pediatric Clinic</a></h5>
+                    </div>
+                    <ul class="social clearfix anim-3-all">
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
+                    </ul>
+                </article>
+
+                <!-- Member -->
+                <article class="member col-lg-3 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="450" data-animation="fadeInUp">
+                    <figure><img src="/resource/team-4.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
+                    <div class="member-info">
+                        <h4>Dr. David Gresshoff</h4>
+                        <h5><a href="#">Laryngological Clinic</a></h5>
+                    </div>
+                    <ul class="social clearfix anim-3-all">
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
+                    </ul>
+                </article>
+
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </div>
+    </section>
+
+    <!-- Latest Blog -->
+    <section class="latest-blog">
+        <div class="auto-box">
+            <h1 class="border-line-center">Latest from the Blog</h1>
+            <div class="row clearfix">
+
+                <!-- Post -->
+                <article class="blog-post col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="image">
+                        <img class="img-responsive" src="/resource/blog-post-image-1.jpg" alt="">
+                        <div class="caption">
+                            <div class="date"><span class="day">18</span><span class="month">Jan</span></div>
+                            <div class="comments"><span class="flaticon-speech18"></span> &ensp; 23</div>
+                        </div>
+                        <a href="blog-detail.html" class="overlay"></a>
+                    </div>
+                    <h2><a href="#">Experimental monitoring</a></h2>
+                    <div class="desc"><p>We have the skills and resources to create professional films. Whether you want a corporate promotional film or a record of a conference we can provide the services you require.</p></div>
+                    <div class="more text-right"><a href="blog-detail.html">READ MORE &ensp; <span class="glyphicon glyphicon-arrow-right"></span></a></div>
+                </article>
+
+                <!-- Post -->
+                <article class="blog-post col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="image">
+                        <img class="img-responsive" src="/resource/blog-post-image-2.jpg" alt="">
+                        <div class="caption">
+                            <div class="date"><span class="day">14</span><span class="month">Jan</span></div>
+                            <div class="comments"><span class="flaticon-speech18"></span> &ensp; 42</div>
+                        </div>
+                        <a href="blog-detail.html" class="overlay"></a>
+                    </div>
+                    <h2><a href="#">Helping students and kids</a></h2>
+                    <div class="desc"><p>We have a team of writers who specialise in writing end of year reports to highlight the successes of your business and the forecast for the next year, which both current and potential.</p></div>
+                    <div class="more text-right"><a href="blog-detail.html">READ MORE &ensp; <span class="glyphicon glyphicon-arrow-right"></span></a></div>
+                </article>
+
+                <!-- Post -->
+                <article class="blog-post col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="image">
+                        <img class="img-responsive" src="/resource/blog-post-image-3.jpg" alt="">
+                        <div class="caption">
+                            <div class="date"><span class="day">12</span><span class="month">Jan</span></div>
+                            <div class="comments"><span class="flaticon-speech18"></span> &ensp; 11</div>
+                        </div>
+                        <a href="blog-detail.html" class="overlay"></a>
+                    </div>
+                    <h2><a href="#">Medical health on patients</a></h2>
+                    <div class="desc"><p>We have the skills and resources to create professional films. Whether you want a corporate promotional film or a record of a conference we can provide the services you require.</p></div>
+                    <div class="more text-right"><a href="blog-detail.html">READ MORE &ensp; <span class="glyphicon glyphicon-arrow-right"></span></a></div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Us -->
+    <section class="visit-us">
+        <div class="auto-box">
+            <div class="row">
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Logos -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- upper -->
+        <div class="upper anim-3-all">
+
+            <div class="auto-box">
+                <div class="row clearfix">
+
+                    <!-- About -->
+                    <article class="foot-block about col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="widget widget-about">
+                            <h2 class="border-line-left">About Medicon</h2>
+                            <div class="text ">We work with clients big and small across a range of sectors and we utilise all forms of media to get your name out there in a way that’s right for you. We believe that analysis of your company.</div>
+                        </div>
+                    </article>
+
+                    <!-- Services -->
+                    <article class="foot-block col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="widget widget-services">
+                            <h2 class="border-line-left">Our Services</h2>
+                            <ul class="square-listing">
+                                <li><a href="#">Health &amp; Medical Care</a></li>
+                                <li><a href="#">Cardio Monitoring</a></li>
+                                <li><a href="#">Medical Treatment</a></li>
+                                <li><a href="#">Emergency Help</a></li>
+                                <li><a href="#">Rehabilation Therapy</a></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- Twitter Feeds -->
+                    <article class="foot-block twitter-feeds col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="widget widget-twitter-feeds">
+                            <h2 class="border-line-left">Twitter Feeds</h2>
+                            <div class="feed">
+                                <p><a href="#">@medicon</a> We try to help all people, young, old...</p>
+                                <span class="time"># 2 hours ago</span>
+                            </div>
+                            <div class="feed">
+                                <p><a href="#">@medicon</a> Building up a new department for medical des...</p>
+                                <span class="time"># 3 hours ago</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Contact Info -->
+                    <article class="foot-block cont-info col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="widget widget-contact">
+                            <h2 class="border-line-left">Contact Us</h2>
+                            <ul>
+                                <li class="location">47 Sixth Ave San Francisco, CA</li>
+                                <li class="website"><a href="http://www.medicon.com/">http://www.medicon.com</a></li>
+                                <li class="phone">+49 123 456 798</li>
+                                <li class="mail"><a href="mailto:support@email.com">support@email.com</a></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom -->
+        <div class="bottom"><div class="auto-box">Copyright 2015 by Medicon | All rights reserved</div></div>
+
+    </footer>
+
 </div>
-<!--- copy-right ---->
+<!--End pagewrapper-->
 
-
-<script src="{{ asset('/js/all.js') }}" type="text/javascript"></script>
-@if(Auth::check())
-    <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        var pusher = new Pusher('{{Config::get('pusher.appKey')}}');
-        var channel = pusher.subscribe('for_user_{{Auth::id()}}');
-        channel.bind('new_message', function (data) {
-            var thread = $('#' + data.div_id);
-            var thread_id = data.thread_id;
-            var thread_plain_text = data.text;
-
-            if (thread.length) {
-                // add new message to thread
-                thread.append(data.html);
-
-                // make sure the thread is set to read
-                $.ajax({
-                    url: "/messages/" + thread_id + "/read"
-                });
-            } else {
-                var message = '<p>' + data.sender_name + ' said: ' + data.text + '</p><p><a href="' + data.thread_url + '">View Message</a></p>';
-
-                // notify the user
-                $.growl.notice({title: data.thread_subject, message: message});
-
-                // set unread count
-                $.ajax({
-                    url: "{{route('messages.unread')}}"
-                }).success(function (data) {
-                    var div = $('#unread_messages');
-
-                    var count = data.msg_count;
-                    if (count == 0) {
-                        $(div).addClass('hidden');
-                    } else {
-                        $(div).text(count).removeClass('hidden');
-
-                        // if on messages.index - add alert class and update latest message
-                        $('#thread_list_' + thread_id).addClass('alert-info');
-                        $('#thread_list_' + thread_id + '_text').html(thread_plain_text);
-                    }
-                });
-            }
-        });
-    </script>
-@endif
-
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bxslider.js"></script>
+<script src="/js/revolution.min.js"></script>
+<script src="/js/rev-slider.js"></script>
+<script src="/js/jquery.appear.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>
-

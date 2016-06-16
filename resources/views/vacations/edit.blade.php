@@ -46,5 +46,8 @@
   <script>
     $('.date-picker').datepicker({
     });
+    $("input[name='from_day'],input[name='to_day']").keypress(function (event) {
+        event.preventDefault();
+    });
   </script>
 @endsection

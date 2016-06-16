@@ -78,5 +78,8 @@
             dateFormate:'yyyy/mm/dd ',
             startDate: today,
         });
+        $("input[name='date']").keypress(function (event) {
+            event.preventDefault();
+        });
     </script>
     @endsection

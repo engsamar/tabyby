@@ -67,5 +67,8 @@
   <script>
     $('.date-picker').datepicker({
     });
+    $("input[name='graduate_date']").keypress(function (event) {
+        event.preventDefault();
+    });
   </script>
 @endsection

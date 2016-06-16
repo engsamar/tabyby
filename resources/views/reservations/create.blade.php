@@ -95,6 +95,9 @@ rel="stylesheet">
             dateFormate:'yyyy/mm/dd ',
             startDate: today,
         });
+        $("input[name='date']").keypress(function (event) {
+            event.preventDefault();
+        });
     </script>
     <script>
         $("#date-field").change(function (e) {

@@ -2,7 +2,6 @@
  * Created by mostafa on 03/06/16.
  */
 $(document).ready(function () {
-
     $("input[name='birthdate']").datepicker({
         dateFormat: "yy/mm/dd",
         minDate: "-3500w",
@@ -22,13 +21,11 @@ $(document).ready(function () {
                         $(":input[name='username']").next().text("username used").show();
                         $(":input[name='username']").focus();
                     }
-
                 }
             });
         } else {
             $(":input[name='username']").next().text("Enter Valid Username").show();
         }
-
     });
     $(":input[name='email']").on("blur", function () {
         if ($(":input[name='email']").val().trim() != "") {
@@ -50,11 +47,12 @@ $(document).ready(function () {
             $(":input[name='email']").next().text("Enter Valid E-mail").show();
         }
     });
+
     $("input[name='birthdate']").on("change", function () {
         $("input[name='birthdate']").datepicker({
             dateFormat: "yy/mm/dd",
-            startDate: "-100d",
-            maxDate: "NOW.Date"
+            minDate: "-3500w",
+            maxDate: "-1d"
         });
     });
 
@@ -63,52 +61,58 @@ $(document).ready(function () {
         $("input[name='birthdate']").datepicker();
     });
 
-    $("input[name='telephone']").on("keypress", function (e) {
-        if (e.keyCode >= 48 && e.keyCode <= 57) {
+    $("input[name='telephone']").on("keypress", function (event) {
+        console.log(event.charCode);
+        if (event.charCode >= 48 && event.charCode <= 57) {
             $("input[name='telephone']").next().hide();
         } else {
-            e.preventDefault();
+            event.preventDefault();
             $("input[name='telephone']").next().text("telephone numbers only").show();
         }
     });
-    $("input[name='telephone']").on("blur", function (e) {
-        if (this.value.length >= 10) {
+
+    $("input[name='telephone']").on("blur", function (event) {
+        if (this.value.length <= 10) {
             if  (this.value.substr(0, 1) == 0 && this.value.substr(2, 1) == 0){
                 $("input[name='telephone']").next().hide();
             } else {
                 $("input[name='telephone']").next().text("telephone starts with 0*0").show();
             }
         }else {
-            $("input[name='telephone']").next().text("incorrect telephone more than 10 numbers").show();
+            $("input[name='telephone']").next().text("incorrect telephone  10 numbers").show();
         }
-
     });
-    $("input[name='mobile']").on("keypress", function (e) {
-        if (e.keyCode >= 48 && e.keyCode <= 57) {
+
+    $("input[name='mobile']").on("keypress", function (event) {
+        console.log(event.charCode);
+        if (event.charCode >= 48 && event.charCode <= 57) {
             $("input[name='mobile']").next().hide();
         } else {
-            e.preventDefault();
+            event.preventDefault();
             $("input[name='mobile']").next().text("mobile numbers only").show();
         }
     });
+
     $("input[name='mobile']").on("blur", function () {
-        if (this.value.length >= 11) {
+        if (this.value.length <= 11) {
             if  (this.value.substr(0, 3) == 010 || this.value.substr(0, 3) == 011 || this.value.substr(0, 3) == 012){
                 $("input[name='mobile']").next().hide();
             } else {
                 $("input[name='mobile']").next().text("mobile starts with 010|011|012").show();
             }
         }else {
-            $("input[name='mobile']").next().text("incorrect mobile").show();
+            $("input[name='mobile']").next().text("incorrect mobile 11 numbers").show();
         }
     });
+
     $("input[name='password']").on("blur", function () {
         if ($("input[name='password']").val().trim().length >= 6) {
             $("input[name='password']").next().hide();
         } else {
             $("input[name='password']").next().text("password short").show();
         }
-    })
+    });
+
     $("input[name='password_confirmation']").on("blur", function () {
         if ($("input[name='password']").val().trim() == $("input[name='password_confirmation']").val().trim()) {
             $("input[name='password_confirmation']").next().hide();
@@ -116,5 +120,4 @@ $(document).ready(function () {
             $("input[name='password_confirmation']").next().text("password mismatch").show();
         }
     });
-})
-;
+});

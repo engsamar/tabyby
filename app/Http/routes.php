@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post("/reserv/searchByName","ReservationController@getReservationByName");
     Route::post("/reserv/searchByDate","ReservationController@getReservationByDate");
     Route::post("/reserv/searchByDuration","ReservationController@getReservationByDuration");
+    Route::post("/reserv/searchByNameAndDate","ReservationController@getReservationByDateAndName");
+   // Route::post("/reserv/searchByNameAndDate/{name}/{date}","ReservationController@searchByNameAndDate");
 
 
 });

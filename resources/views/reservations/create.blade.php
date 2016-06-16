@@ -100,7 +100,7 @@ rel="stylesheet">
         });
     </script>
     <script>
-        $("#date-field").change(function (e) {
+       /* $("#date-field").change(function (e) {
         var date = new Date($('#date-field').val());
         var clinic_id = $('#address-field').val();
         date.setDate(date.getDate() + 1);
@@ -138,6 +138,6 @@ rel="stylesheet">
                 console.log(data);
             }
         });
-    });
+    });*/
     </script>
     @endsection

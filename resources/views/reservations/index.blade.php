@@ -19,6 +19,7 @@
         <option value="1">Name</option>
         <option value="2">Date</option>
         <option value="3">Duration</option>
+        <option value="4">Name and Date</option>
 </select>
     
 <div id="name-search" hidden>
@@ -35,6 +36,30 @@
             <span class="help-block">{{ $errors->first("name") }}</span>
             @endif
         </div>
+    </form>
+</div>
+<div id="name-date-search" hidden>
+    <form action="/reserv/searchByNameAndDate" method="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="form-group @if($errors->has('name')) has-error @endif">
+            <label for="name-field">Patient Name</label>
+            <input list="searchResult" type="text" id="nameField" name="name" class="form-control" value="{{ old("name") }}"/>
+            
+            <datalist id="searchResult">
+            </datalist>
+            @if($errors->has("name"))
+            <span class="help-block">{{ $errors->first("name") }}</span>
+            @endif
+        </div>
+        <div class="form-group @if($errors->has('date')) has-error @endif">
+            <label for="date-field">date</label>
+            <input type="text" id="date-field" name="date"  class="form-control date-picker"
+            value="{{ old("date") }}"/>
+            @if($errors->has("date"))
+            <span class="help-block">{{ $errors->first("date") }}</span>
+            @endif
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 
@@ -76,6 +101,9 @@
 </div>
 @endsection
 @section('content')
+<div name="ssearch" id="ssearch">
+    
+</div>
 <div class="row">
     <div class="col-md-12">
         @if($reservations->count())
@@ -159,25 +187,69 @@ dateFormate:'yyyy/mm/dd ',
 <script>
 
 $(document).ready()
-{
+{/*
+    $('#date-field').change(function(e) {
+        var date = new Date($('#date-field').val());
+        var name = $('#nameField').val();
+        date.setDate(date.getDate() + 1);
+        var date= date.toISOString().substring(0, 10);
+        var myDiv=document.getElementById('ssearch');
+
+        $.ajax
+        ({
+            url: "/reserv/searchByNameAndDate/"+name+"/"+date,
+            type: 'GET',
+            data: {},
+            success: function (data)
+            {
+                var HTMLtxt='<select name="workingHour" class="form-control">';
+                HTMLtxt+='<option>choose suitable time</option>';
+                $.each(data,function(index, el) {
+                    HTMLtxt+='<option value='+el['id']+'> Name : '+ el['user_id']+ '</option>';
+                });
+
+                HTMLtxt += '</select>';
+              
+              
+                myDiv.innerHTML = HTMLtxt;
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });*/
     $("#name-search").hide();
     $("#date-search").hide();
     $("#duration-search").hide();
+    $('#name-date-search').hide();
     $("select[name='searchRes']").change(function () {
     if (this.value == 1) {
     $("#name-search").show();
     $("#date-search").hide();
     $("#duration-search").hide();
+    $('#name-date-search').hide();
+
     } 
     if(this.value == 2) {
     $("#date-search").show();
     $("#name-search").hide();
     $("#duration-search").hide();
+    $('#name-date-search').hide();
+
     }
     if(this.value == 3){
     $("#date-search").hide();
     $("#name-search").hide();
     $("#duration-search").show();
+    $('#name-date-search').hide();
+
+    }
+    if(this.value == 4){
+    $("#date-search").hide();
+    $("#name-search").hide();
+    $("#duration-search").hide();
+    $('#name-date-search').show();
+
     }
 });
 };

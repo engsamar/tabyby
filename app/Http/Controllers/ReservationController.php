@@ -560,6 +560,22 @@ class ReservationController extends Controller {
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
 		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 	}
+	public function getReservationByDateAndName(Request $request)
+	{
+		$dateCheck = $request->input("date");
+		$name = $request->input("name");
+		$userId = User::where('username', '=', $name)->value('id');
+		$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
+		$dateCheck = $dateTime->format('Y-m-d');
+		$reservations = Reservation::where('date', '=',$dateCheck)->where('user_id', '=',$userId)->paginate(10);
+		$reserveType =ClinicConstants::$reservationType;
+		$status= ClinicConstants::$status;
+		$message="";
+		$user = Auth::user();
+		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
+		//return $reservations;
+		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+	}
 	public function getReservationByDuration(Request $request)
 	{
 		$dateCheckFrom = $request->input("fromTime");

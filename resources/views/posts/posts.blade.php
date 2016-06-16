@@ -1,10 +1,5 @@
-@extends('homeViewLayout')
+@extends('layout')
 @section('css')
-	<link href="/css/blog/style.css" rel="stylesheet">
-<!-- Responsive -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<link href="/css/blog/responsive.css" rel="stylesheet">
 @endsection
 @section('content')
 <!-- Page Title -->
@@ -126,8 +121,5 @@
     </div>
 @endsection
 @section('scripts')
-<script src="/js/blog/jquery.js"></script> 
-<script src="/js/blog/bootstrap.min.js"></script>
-<script src="/js/blog/jquery.appear.js"></script>
-<script src="/js/blog/script.js"></script>
+
 @endsection

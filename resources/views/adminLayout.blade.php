@@ -359,6 +359,11 @@
                         <i class="fa fa-th"></i> <span>Add Reservation</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/users/create">
+                        <i class="fa fa-th"></i> <span>Add New Patient</span>
+                    </a>
+                </li>
                 @endif
                 <li class="treeview">
                     <a href="/vacations">

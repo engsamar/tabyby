@@ -20,6 +20,17 @@ class PostController extends Controller {
 
 		return view('posts.index', compact('posts'));
 	}
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function allPosts()
+	{
+		$posts = Post::orderBy('id', 'asc')->paginate(3);
+
+		return view('posts.posts', compact('posts'));
+	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -62,8 +73,31 @@ class PostController extends Controller {
 	{
 		$post = Post::findOrFail($id);
 
+		
+		if (Auth::user()->userRoles[0]->type==2) {
+			# code...
+		return view('posts.blog-detail', compact('post'));
+
+		}else{
 		return view('posts.show', compact('post'));
+
+		}
 	}
+	public function blogDetail($id)
+	{
+		$post = Post::findOrFail($id);
+
+		
+		if (Auth::user()->userRoles[0]->type==2) {
+			# code...
+		return view('posts.blog-detail', compact('post'));
+
+		}else{
+		return view('posts.show', compact('post'));
+
+		}
+	}
+	
 
 	/**
 	 * Show the form for editing the specified resource.

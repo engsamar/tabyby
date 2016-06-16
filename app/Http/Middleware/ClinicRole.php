@@ -1,7 +1,7 @@
 <?php namespace App\Http\Middleware;
 use Closure;
 use Auth;
-class CheckRole{
+class ClinicRole{
 	/**
 	 * Handle an incoming request.
 	 *
@@ -11,7 +11,7 @@ class CheckRole{
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (Auth::user()->userRoles[0]->type==0 ) {
+		if (Auth::user()->userRoles[0]->type==0 || Auth::user()->userRoles[0]->type==1 ) {
 			return $next($request);
 		} 
 		return redirect('/error');

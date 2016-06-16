@@ -104,6 +104,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </a></li>
                         </ul>
                     </li>
+                    <li><a href="/blog">Blog</a></li>
                     @if(!Auth::user())
 
                         <li class="dropdown">

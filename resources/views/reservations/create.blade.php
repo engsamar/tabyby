@@ -34,7 +34,7 @@ rel="stylesheet">
             @if($userRole ==2)
             <div  class="form-group @if($errors->has('address')) has-error @endif">
                 <label for="address-field">Address</label>
-                <select id="type-field" name="address" class="form-control">
+                <select id="address-field" name="address" class="form-control">
                     <option value="0">Choose Clinic</option>
                     @foreach($address as $key=>$value)
 
@@ -55,7 +55,9 @@ rel="stylesheet">
                 <span class="help-block">{{ $errors->first("date") }}</span>
                 @endif
             </div>
-
+            <div class="form-group" id="reservTime">
+                
+            </div>
 
             <div  class="form-group @if($errors->has('examination')) has-error @endif">
                 <label for="examination-field">Examination Type</label>
@@ -94,5 +96,38 @@ rel="stylesheet">
             dateFormate:'yyyy/mm/dd ',
             startDate: today,
         });
+    </script>
+    <script>
+        $("#date-field").change(function (e) {
+        var date = new Date($('#date-field').val());
+        var date = ('#address-field').val();
+        date.setDate(date.getDate() + 1);
+        var fromtim= date.toISOString().substring(0, 10);
+        var myDiv=document.getElementById('reservTime');
+        $.ajax
+        ({
+            url: "/checkReservDate/"+date+"/"+clinic_id,
+            type: 'GET',
+            data: {},
+            success: function (data)
+            {
+                console.log(data);
+                result=JSON.parse(data);
+                console.log(result.working_hours);
+                var HTMLtxt='<select class="form-group">';
+                HTMLtxt+='<option>choose suitable time</option>';
+                $.each(result.working_hours,function(index, el) {
+                    HTMLtxt+='<option value='.el['id'].'> From'+ el['fromTime']+' To '+el['fromTime']+ '</option>';
+                });
+
+                HTMLtxt += '</select>';
+                myDiv.innerHTML = HTMLtxt;
+
+            },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+    });
     </script>
     @endsection

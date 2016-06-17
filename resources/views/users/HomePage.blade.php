@@ -293,9 +293,9 @@
                 <article class="member col-lg-4 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="0"
                          data-animation="fadeInUp">
                     <figure><img src="/images/doctor.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
-                    <div class="member-info">
+                    <div class="member-info " id="info">
                         <h4>{{ $doctorRole->user->username }}</h4>
-                        <h5><a href="#">Rehabilitation Therapy</a></h5>
+                        <h5><a>Consultant Ophthalmology</a></h5>
                     </div>
                     <ul class="social clearfix anim-3-all">
                         <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>&nbsp;

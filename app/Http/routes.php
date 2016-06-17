@@ -1,11 +1,8 @@
 <?php
-
 Route::get("/", "UserController@homePage");
-
-
-//Roles Patients
 Route::auth();
 
+//Roles Doctor
 Route::group(['middleware' => ['auth','roles']], function () {
     Route::resource("clinics", "ClinicController");
     Route::resource("medical_histories", "MedicalHistoryController");
@@ -17,30 +14,49 @@ Route::group(['middleware' => ['auth','roles']], function () {
     Route::resource("complains", "ComplainController");
     Route::resource("user_roles", "UserRoleController");
     Route::resource("examinations", "ExaminationController");
+ //   Route::resource("role_types", "RoleTypeController");
+    Route::resource("/insertExamination", "ExaminationController@doctorExamination");
+    Route::resource("prescription_details", "PrescriptionDetailController");
+    Route::resource("prescriptions", "PrescriptionController");
+    Route::resource("exam_glasses", "ExamGlassController");
+    Route::resource("examGlassHome", "ExamGlassController@examGlass");
+    Route::get("createExamGlassHome/{id}", "ExamGlassController@examGlass");
+    Route::resource("posts","PostController");
+    Route::get("/medicine/find","MedicineController@find");
+
+
 });
+
+//Roles Doctor and Secretary
+Route::group(['middleware' => ['auth','clinicRoles']], function () {
+    Route::resource("clinics", "ClinicController@index");
+    Route::resource("working_hours", "WorkingHourController");
+    Route::get("reservations/today", "ReservationController@latest");
+    Route::resource("reservations", "ReservationController@index");
+    Route::resource("exam_glass_notes", "ExamGlassNoteController");
+    Route::get("newMedicalHistory/{id}", "MedicalHistoryController@create");
+    Route::get("newComplain/{res_id}", "ComplainController@create");
+    Route::get("insertExamination/{id}", "ExaminationController@doctorExamination");
+    Route::resource("vacations", "VacationController");
+    Route::get("/newPrescriptionDetails/{res_id}", "PrescriptionDetailController@create");
+
+});
+
+//Roles user login
 Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', array('uses' => 'HomeController@logout'));
     Route::get('/home', 'HomeController@index');
     Route::resource("/doctorHome", "UserController@doctorHome");
     Route::resource("/patientHome", "UserController@patientHome");
     Route::resource("/secretaryHome", "UserController@secretaryHome");
-
+    Route::get("/reservations/existed/{id}", "ReservationController@existed");
     Route::resource("consistitues", "ConsistitueController");
-    
+    Route::resource("reservations", "ReservationController");
     Route::resource("users", "UserController");
    
-    Route::resource("working_hours", "WorkingHourController");
-    Route::get("reservations/today", "ReservationController@latest");
-    Route::get("reservations/cancelled", "ReservationController@cancel");
-    Route::resource("reservations", "ReservationController");
-    Route::resource("role_types", "RoleTypeController");
-    Route::resource("/insertExamination", "ExaminationController@doctorExamination");
-
-    Route::resource("prescription_details", "PrescriptionDetailController");
-    Route::resource("prescriptions", "PrescriptionController");
-    Route::resource("vacations", "VacationController");
-
     Route::get("movePatients/{fromtim}/{totim}", "VacationController@movePatients");
+    Route::get("/checkReservDate/{date}/{clinic_id}", "ReservationController@checkReservDate");
+
     Route::get("specificDate", "VacationController@specificDate");
 
 
@@ -49,9 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("/moveSome_store/{new_date}/{old_date}/{user_id}", "VacationController@moveSome_store");
 
 
-    Route::resource("exam_glasses", "ExamGlassController");
-    Route::resource("examGlassHome", "ExamGlassController@examGlass");
-    Route::get("createExamGlassHome/{id}", "ExamGlassController@examGlass");
+    Route::get("reservations/cancelled", "ReservationController@cancel");
     Route::get("user_profiles/{id}/", "UserProfileController@index");
     Route::get("patient/{id}", "ReservationController@patientReserv");
     ///
@@ -61,12 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("/working_hours/date/{id}", "WorkingHourController@retreve");
     Route::get("/working_hours/{id}", "WorkingHourController@update");
     Route::get("/working_hours/create/{id}", "WorkingHourController@create");
-
-    Route::resource("exam_glass_notes", "ExamGlassNoteController");
-
-    Route::get("newMedicalHistory/{id}", "MedicalHistoryController@create");
-    Route::get("newComplain/{res_id}", "ComplainController@create");
-    Route::get("insertExamination/{id}", "ExaminationController@doctorExamination");
+    
 
     Route::get("/reservation/{res_id}", "ReservationController@getReservations");
     Route::get("/patientReservation", "ReservationController@patientReservations");
@@ -78,7 +87,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("reservations/searchKey/{key}", "ReservationController@searchKey");
     Route::get("/secretaries/find/{name}", "SecertaryController@find");
     Route::patch("reservcancel", "ReservationController@destroy");
-    Route::get("/newPrescriptionDetails/{res_id}", "PrescriptionDetailController@create");
 
     Route::get("reservations/testing/{key}", "ReservationController@getting");
 //    Route::get("/create", "ReservationController@create");
@@ -86,13 +94,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post("/reserv/searchByName","ReservationController@getReservationByName");
     Route::post("/reserv/searchByDate","ReservationController@getReservationByDate");
     Route::post("/reserv/searchByDuration","ReservationController@getReservationByDuration");
-    Route::resource("posts","PostController");
+    Route::post("/reserv/searchByNameAndDate","ReservationController@getReservationByDateAndName");
+   // Route::post("/reserv/searchByNameAndDate/{name}/{date}","ReservationController@searchByNameAndDate");
 
 
 });
 Route::group(['middleware' => ['web']], function () {
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
-
 });
 
 // verification token resend form
@@ -139,3 +147,12 @@ Route::get('profile', function()
 {
    return view('users.profile');
 });
+Route::get('/error', function()
+{
+   return view('errors');
+});
+
+
+Route::get('/blog', 'PostController@allPosts');
+Route::get('/blog-detail/{id}', 'PostController@blogDetail');
+Route::get('/contact', 'UserController@contact');

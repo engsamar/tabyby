@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('layout')
 @section('css')
     {{--<link rel="stylesheet" href="/css/bootstrap.css">--}}
     {{--<link rel="stylesheet" href="/css/style.css">--}}
@@ -7,13 +7,13 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    {{--<link rel="stylesheet" href="/dist/css/AdminLTE.min.css">--}}
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
 @endsection
 @section('scripts')
-    <script src="/plugins/fastclick/fastclick.js"></script>
+    {{--<script src="/plugins/fastclick/fastclick.js"></script>--}}
 @endsection
 <!-- ******************************** -->
 @section('content')

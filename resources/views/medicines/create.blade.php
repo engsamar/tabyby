@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('adminLayout')
 @section('css')
     <link href="/css/bootstrap-datepicker.css"
           rel="stylesheet">
@@ -21,6 +21,7 @@
                 <div class="form-group @if($errors->has('name')) has-error @endif">
                     <label for="name-field">Name</label>
                     <input type="text" id="name-field" name="name" class="form-control" value="{{ old("name") }}"/>
+                    <span class="help-block"></span>
                     @if($errors->has("name"))
                         <span class="help-block">{{ $errors->first("name") }}</span>
                     @endif
@@ -69,6 +70,7 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/medicine.js"></script>
     <script>
         $('.date-picker').datepicker({});
     </script>

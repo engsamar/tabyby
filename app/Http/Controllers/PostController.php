@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\UserRole;
 use App\Post;
 use Auth;
 use Illuminate\Http\Request;
@@ -20,6 +20,18 @@ class PostController extends Controller {
 
 		return view('posts.index', compact('posts'));
 	}
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+//	public function allPosts()
+//	{
+//		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+//		$posts = Post::orderBy('id', 'asc')->paginate(3);
+//
+//		return view('posts.posts', compact('posts','doctorRole'));
+//	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -62,8 +74,33 @@ class PostController extends Controller {
 	{
 		$post = Post::findOrFail($id);
 
+		
+		if (Auth::user()->userRoles[0]->type==2) {
+			# code...
+		return view('posts.blog-detail', compact('post'));
+
+		}else{
 		return view('posts.show', compact('post'));
+
+		}
 	}
+	public function blogDetail($id)
+	{
+
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
+		$post = Post::findOrFail($id);
+
+//		if (Auth::user()->userRoles[0]->type==2) {
+//			# code...
+//		return view('posts.blog-detail', compact('post'));
+//
+//		}else{
+		return view('posts.show', compact('post','doctorRole'));
+
+//		}
+	}
+	
 
 	/**
 	 * Show the form for editing the specified resource.

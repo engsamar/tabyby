@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('adminLayout')
 @section('css')
   <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection

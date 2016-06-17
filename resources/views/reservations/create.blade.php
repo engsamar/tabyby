@@ -1,4 +1,4 @@
-@extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )or ( isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0)) ? 'adminLayout' : 'homeViewLayout')
+@extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )or ( isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0)) ? 'adminLayout' : 'layout')
 @section('css')
 <link href="/css/bootstrap-datepicker.css"
 rel="stylesheet">
@@ -34,7 +34,7 @@ rel="stylesheet">
             @if($userRole ==2)
             <div  class="form-group @if($errors->has('address')) has-error @endif">
                 <label for="address-field">Address</label>
-                <select id="type-field" name="address" class="form-control">
+                <select id="address-field" name="address" class="form-control">
                     <option value="0">Choose Clinic</option>
                     @foreach($address as $key=>$value)
 
@@ -55,7 +55,9 @@ rel="stylesheet">
                 <span class="help-block">{{ $errors->first("date") }}</span>
                 @endif
             </div>
-
+            <div class="form-group" id="reservTime">
+                
+            </div>
 
             <div  class="form-group @if($errors->has('examination')) has-error @endif">
                 <label for="examination-field">Examination Type</label>
@@ -86,7 +88,6 @@ rel="stylesheet">
     </div>
     @endsection
     @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script>
         var nowDate = new Date();
         var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
@@ -94,5 +95,49 @@ rel="stylesheet">
             dateFormate:'yyyy/mm/dd ',
             startDate: today,
         });
+        $("input[name='date']").keypress(function (event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+       /* $("#date-field").change(function (e) {
+        var date = new Date($('#date-field').val());
+        var clinic_id = $('#address-field').val();
+        date.setDate(date.getDate() + 1);
+        var date= date.toISOString().substring(0, 10);
+        var myDiv=document.getElementById('reservTime');
+        $.ajax
+        ({
+            url: "/checkReservDate/"+date+"/"+clinic_id,
+            type: 'GET',
+            data: {},
+            success: function (data)
+            {
+                if(data=='vacation'){
+                    var HTMLtxt='<p style="font-weight:bold;color:blue">This date is vacation , please try other one</p>';
+                }else if(data=='complete'){
+                     var HTMLtxt='<p style="font-weight:bold;color:blue">this date is fully completed , please try another one</p>';
+                    
+                }else if(data=='noTime'){
+                     var HTMLtxt='<p style="font-weight:bold;color:blue">we do\'nt have any working hour in this dat, please try another one</p>';
+                    
+                }
+                else{
+                     var HTMLtxt='<select name="workingHour" class="form-control">';
+                HTMLtxt+='<option>choose suitable time</option>';
+                $.each(data,function(index, el) {
+                    HTMLtxt+='<option value='+el['id']+'> From : '+ el['fromTime']+' To : '+el['toTime']+ '</option>';
+                });
+
+                HTMLtxt += '</select>';
+                }
+              
+                myDiv.innerHTML = HTMLtxt;
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });*/
     </script>
     @endsection

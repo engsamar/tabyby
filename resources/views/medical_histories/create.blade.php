@@ -62,5 +62,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script>
         $('.date-picker').datepicker({});
+        $("input[name='begin_at']").keypress(function (event) {
+            event.preventDefault();
+        });
     </script>
 @endsection

@@ -1,13 +1,14 @@
 <?php namespace App\Http\Controllers;
 
+use App\DoctorDegree;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ClinicConstants;
+use App\Post;
 use App\User;
 use App\UserRole;
-use App\Clinic;
 use App\WorkingHour;
-//use App\Working
+use App\Clinic;
 use Auth;
 use App\Reservation;
 use Illuminate\Http\Request;
@@ -21,75 +22,26 @@ class UserController extends Controller
      *
      * @return Response
      */
+    public function contact()
+    {
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+        return view('users.contact', compact('doctorRole'));
+    }
+
     public function homePage()
     {
-        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
-        //select all clinics address
-//        $w =WorkingHour::class
-        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
-//        die($clinics[0]->workingHours);
-
-        $user=Auth::user();
-        if($user){
-        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
-        }else{
-            $userRoleType=null;
+        $posts = Post::all();
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+        $doctorDegree = DoctorDegree::all();
+        $clinics = Clinic::all();
+        $workHours = WorkingHour::all();
+        $user = Auth::user();
+        if ($user) {
+            $userRoleType = UserRole::where('user_id', '=', $user->id)->value('type');
+        } else {
+            $userRoleType = null;
         }
-        return view('users.HomePage',compact('userRole','userRoleType'),['clinics' => $clinics, 'day' => ClinicConstants::$day]);
-    }
-
-    public function patientHome()
-    {
-        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
-        //select all clinics address
-        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
-        //clinic appointments
-        $user=Auth::user();
-        if($user){
-        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
-        }else{
-            $userRoleType=null;
-        }
-        $reservation = Reservation::where('user_id', $user->id)->get();
-//        $clinic_name=Clinic::where
-        return view('users.patientHome', compact('userRole','userRoleType'), ['clinics' => $clinics, 'reservation' => $reservation, 'reservationType' => ClinicConstants::$reservationType, 'day' => ClinicConstants::$day]);
-    }
-
-    public function secretaryHome()
-    {
-        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
-        //select all clinics address
-        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
-        //clinic appointments
-
-        // return view('users.secretaryHome', compact('userRole'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
-
-        $user=Auth::user();
-        if($user){
-        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
-        }else{
-            $userRoleType=null;
-        }
-
-        return view('users.secretaryHome', compact('userRole','userRoleType'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
-
-    }
-
-    public function doctorHome()
-    {
-        // clinic Info
-        $userRole = UserRole::where('type', '=', 0)->firstOrFail();
-        //select all clinics address
-        $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
-        //clinic appointments
-        $user=Auth::user();
-        if($user){
-        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
-        }else{
-            $userRoleType=null;
-        }
-
-        return view('users.doctorHome', compact('userRole','userRoleType'), ['clinics' => $clinics, 'day' => ClinicConstants::$day]);
+        return view('users.HomePage', compact('doctorRole', 'userRoleType', 'doctorDegree', 'posts'), ['clinics' => $clinics, 'day' => ClinicConstants::$day, 'workingHours' => $workHours]);
     }
 
     public function index()
@@ -128,11 +80,11 @@ class UserController extends Controller
         $user->password = bcrypt($request->input("password"));
         $user->birthdate = $request->input("birthdate");
         $user->password = $request->input("password");
-        $user->gender=$request->input("gender");
+        $user->gender = $request->input("gender");
         $user->save();
         $user_role = new UserRole();
         $user_role->type = 2;
-        $user_role->user_id=$user->id;
+        $user_role->user_id = $user->id;
         $user_role->save();
 
         return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
@@ -146,14 +98,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
         $reservations = Reservation::where('user_id', $id)->get();
 
-        $reserveType =ClinicConstants::$reservationType;
+        $reserveType = ClinicConstants::$reservationType;
         $user = User::findOrFail($id);
         $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 
 
-        return view('users.show', compact('user', 'userRoleType', 'reservations'));
+        return view('users.show', compact('doctorRole','user', 'userRoleType', 'reservations'));
     }
 
     /**
@@ -164,9 +117,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
         $user = User::findOrFail($id);
 
-        return view('users.edit', compact('user'));
+        return view('users.edit', compact('doctorRole','user'));
     }
 
     /**

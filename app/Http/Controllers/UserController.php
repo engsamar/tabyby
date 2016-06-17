@@ -98,6 +98,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
         $reservations = Reservation::where('user_id', $id)->get();
 
         $reserveType = ClinicConstants::$reservationType;
@@ -105,7 +106,7 @@ class UserController extends Controller
         $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 
 
-        return view('users.show', compact('user', 'userRoleType', 'reservations'));
+        return view('users.show', compact('doctorRole','user', 'userRoleType', 'reservations'));
     }
 
     /**
@@ -116,9 +117,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
         $user = User::findOrFail($id);
 
-        return view('users.edit', compact('user'));
+        return view('users.edit', compact('doctorRole','user'));
     }
 
     /**

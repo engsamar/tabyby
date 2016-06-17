@@ -1,5 +1,4 @@
 <?php
-
 Route::get("/", "UserController@homePage");
 Route::auth();
 
@@ -150,6 +149,7 @@ Route::get('/error', function()
 {
    return view('errors');
 });
+
 
 Route::get('/blog', 'PostController@allPosts');
 Route::get('/blog-detail/{id}', 'PostController@blogDetail');

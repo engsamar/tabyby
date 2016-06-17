@@ -14,7 +14,8 @@ use DB;
 class UserProfileController extends Controller
 {
     public function index($id)
-	{	
+	{
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
         $userInfo = DB::table('users')->where('users.id', $id)->get();
 
         $histories = DB::table('users')
@@ -56,6 +57,6 @@ class UserProfileController extends Controller
             ->where('users.id', $id)
             ->get();
 
-        return view('user_profiles.index', compact('histories', 'examinations', 'userInfo','complains','medicines','glassExams')); 
+        return view('user_profiles.index', compact('doctorRole','histories', 'examinations', 'userInfo','complains','medicines','glassExams'));
 	}
 }

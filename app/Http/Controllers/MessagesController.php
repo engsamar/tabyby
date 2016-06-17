@@ -35,13 +35,14 @@ class MessagesController extends Controller
      */
     public function index()
     {
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
         $currentUserId = Auth::user()->id;
 
         // All threads that user is participating in
         $threads = Thread::forUser($currentUserId)->get();
         $userRole = UserRole::where('user_id', '=', $currentUserId)->value('type');
 
-        return view('messenger.index', compact('threads', 'currentUserId'))->with('userRoleType',$userRole);
+        return view('messenger.index', compact('threads', 'currentUserId','doctorRole'))->with('userRoleType',$userRole);
     }
 
     /**
@@ -78,10 +79,10 @@ class MessagesController extends Controller
     {
         $currentUserId = Auth::user()->id;
         $users=User::all();
-      //  $users = User::where('id', '!=', Auth::id())->get();
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
         $userRole = UserRole::where('user_id', '=', $currentUserId)->value('type');
 
-        return view('messenger.create', compact('users'))->with('userRoleType',$userRole);
+        return view('messenger.create', compact('users','doctorRole'))->with('userRoleType',$userRole);
     }
 
     /**

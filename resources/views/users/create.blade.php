@@ -1,4 +1,4 @@
-@extends('homeViewLayout')
+@extends('layout')
 @section('css')
     <link href="/css/bootstrap-datepicker.css"
           rel="stylesheet">

@@ -152,4 +152,5 @@ Route::get('/error', function()
 });
 
 Route::get('/blog', 'PostController@allPosts');
-Route::get('/blog-details/{id}', 'PostController@blogDetail');
+Route::get('/blog-detail/{id}', 'PostController@blogDetail');
+Route::get('/contact', 'UserController@contact');

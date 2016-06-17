@@ -1,47 +1,123 @@
-@extends('adminLayout')
-@section('header')
-<div class="page-header">
-        <h1>Posts / Show #{{$post->id}}</h1>
-        <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="btn-group pull-right" role="group" aria-label="...">
-                <a class="btn btn-warning btn-group" role="group" href="{{ route('posts.edit', $post->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                <button type="submit" class="btn btn-danger">Delete <i class="glyphicon glyphicon-trash"></i></button>
-            </div>
-        </form>
-    </div>
+@extends('layout')
+@section('css')
 @endsection
-
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
+        <!-- Page Title -->
+<article class="page-title">
+    <div class="auto-box">
+        <div class="row clearfix">
 
-            <form action="#">
-                {{--<div class="form-group">--}}
-                    {{--<label for="nome">ID</label>--}}
-                    {{--<p class="form-control-static"></p>--}}
-                {{--</div>--}}
-                <div class="form-group">
-                     <label for="title">TITLE</label>
-                     <p class="form-control-static">{{$post->title}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="content">CONTENT</label>
-                     <p class="form-control-static">{{$post->content}}</p>
-                </div>
-                    {{--<div class="form-group">--}}
-                     {{--<label for="user_id">USER_ID</label>--}}
-                     {{--<p class="form-control-static">{{$post->user_id}}</p>--}}
-                {{--</div>--}}
-                    <div class="form-group">
-                    <img class="img-rounded" width="300" height="200" src="{{URL::asset('/images/posts/'.$post->picture_path )}}">
-                </div>
-            </form>
+            <div class="col-lg-6 col-xs-6">
+                <h2>Our Blog</h2>
+            </div>
 
-            <a class="btn btn-link" href="{{ route('posts.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+            <div class="col-lg-6 col-xs-6 text-right">
+                Pages / <span class="page-name">Our Blog</span>
+            </div>
+
 
         </div>
     </div>
+</article>
+
+<!-- Sidebar Page -->
+<div class="sidebar-page">
+    <div class="auto-box">
+        <div class="row clearfix">
+
+            <!-- Left Content -->
+            <section class="left-content col-lg-8 col-md-8 col-sm-7 col-xs-12 pull-left">
+                @if($post->count())
+                    <article class="blog-post anim-3-all animated out" data-delay="0" data-animation="fadeInUp">
+                        <div class="post-image">
+                            <img class="img-responsive" src="{{URL::asset('/images/posts/'.$post->picture_path )}}"
+                                 alt="img">
+                            <div class="caption">
+                                <div class="date"><span
+                                            class="day">{{date('d', strtotime($post->created_at))}}</span><span
+                                            class="month">{{date('M', strtotime($post->created_at))}}</span></div>
+                                <div class="comments"><span class="flaticon-speech18"></span> &ensp; 23</div>
+                            </div>
+                            <a href="/blog-detail" class="overlay"><span class="icon"></span></a>
+                        </div>
+                        <h2><a href="#">{{$post->title}}</a></h2>
+                        <div class="desc"><p>{{$post->content}}</p></div>
+                        {{--<div class="more text-right"><a href="/blog-detail/{{$post->id}}">READ MORE &ensp; <span--}}
+                                        {{--class="glyphicon glyphicon-arrow-right"></span></a></div>--}}
+                    </article>
+                @endif
+            </section>
+
+
+            <!-- Side Bar -->
+            <aside class="side-bar col-lg-4 col-md-4 col-sm-5 col-xs-12 pull-right anim-5-all">
+
+                <!-- Search Form -->
+                <div class="widget search-form animated out" data-delay="0" data-animation="fadeInUp">
+                    <h2 class="border-line-left">Search</h2>
+
+                    <form method="post" action="http://demo.templatepath.com/medicon/blog.html">
+                        <div class="form-group">
+                            <input type="search" name="search" value="" placeholder="search for something">
+                            <input type="submit" name="submit" value="">
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- Popular Tags -->
+                <div class="widget tags animated out" data-delay="100" data-animation="fadeInUp">
+                    <h2 class="border-line-left">Popular tags</h2>
+
+                    <ul>
+                        <li><a href="#">MEDICAL</a></li>
+                        <li><a href="#">MEDICINE</a></li>
+                        <li><a href="#">HELPING</a></li>
+                        <li><a href="#">PLACES</a></li>
+                        <li><a href="#">EMERGENCY</a></li>
+                        <li><a href="#">OPERATION</a></li>
+                        <li><a href="#">MEDICAL THERAPY</a></li>
+                    </ul>
+
+                </div>
+
+                <!-- Twitter Feeds -->
+                <div class="widget twitter-feeds animated out" data-delay="200" data-animation="fadeInUp">
+                    <h2 class="border-line-left">Twitter Feeds</h2>
+
+                    <div class="feed">
+                        <p><a href="#">@envato</a> Creating a new theme for medical industry and medical health...</p>
+                        <span class="time"># 2 hours ago</span>
+                    </div>
+                    <div class="feed">
+                        <p><a href="#">@envato</a> Creating a new theme for medical industry and medical health...</p>
+                        <span class="time"># 3 hours ago</span>
+                    </div>
+
+                </div>
+
+                <!-- Social / Follow us -->
+                <div class="widget follow-us animated out" data-delay="300" data-animation="fadeInUp">
+                    <h2 class="border-line-left">Follow us on</h2>
+
+                    <a href="#" class="facebook"><span class="flaticon-facebook31"></span></a>
+                    <a href="#" class="twitter"><span class="flaticon-twitter1"></span></a>
+                    <a href="#" class="dribble"><span class="flaticon-webdesign3"></span></a>
+                    <a href="#" class="vimeo"><span class="flaticon-social140"></span></a><br>
+                    <a href="#" class="google-plus"><span class="flaticon-google116"></span></a>
+                    <a href="#" class="youtube"><span class="flaticon-youtube18"></span></a>
+                    <a href="#" class="pinterest"><span class="flaticon-pinterest34"></span></a>
+                    <a href="#" class="instagram"><span class="flaticon-instagram11"></span></a>
+
+                </div>
+
+
+            </aside>
+
+        </div>
+    </div>
+</div>
+@endsection
+@section('scripts')
 
 @endsection

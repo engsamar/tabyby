@@ -50,13 +50,13 @@
             <div class="auto-box">
                 <div class="row clearfix">
                     <!-- Logo -->
-                    <div class="col-md-3 col-sm-3 col-xs-6 logo"><a href="#"><img class="img-responsive"
+                    <div class="col-md-3 col-sm-3 col-xs-6 logo"><a href="/"><img class="img-responsive"
                                                                                   src="/images/logo.png" alt=""></a>
                     </div>
                     <!-- Main Menu -->
                     <nav class="col-md-9 col-sm-9 col-xs-12 main-menu">
                         <ul>
-                            <li class="current"><a href="#">Home</a></li>
+                            <li class="current"><a href="/">Home</a></li>
 
                             @if(!Auth::user())
 
@@ -134,10 +134,7 @@
                                     @endforeach
                                 </ul>
                             </li>
-                            <li><a href="contact-us.html">Contact Us</a>
-                                <ul class="sub-menu">
-                                    <li><a href="contact-us-2.html">Contact Us 2</a></li>
-                                </ul>
+                            <li><a href="/contact">Contact Us</a>
                             </li>
                         </ul>
                     </nav>
@@ -149,7 +146,7 @@
                     <nav class="mobile-menu" id="alter-nav">
                         <div class="nav-box">
                             <ul>
-                                <li class="current"><a href="index-2.html">Home</a>
+                                <li class="current"><a href="/">Home</a>
                                 </li>
                                 <li><a href="features.html">Features</a></li>
                                 <li><a href="about-us.html">About us</a>
@@ -177,9 +174,9 @@
                                 </li>
                                 <li><a href="contact-us.html">Contact Us</a>
                                     <span class="toggle-icon"></span>
-                                    <ul class="sub-menu">
-                                        <li><a href="contact-us-2.html">Contact Us 2</a></li>
-                                    </ul>
+                                    {{--<ul class="sub-menu">--}}
+                                        {{--<li><a href="contact-us-2.html">Contact Us 2</a></li>--}}
+                                    {{--</ul>--}}
                                 </li>
                             </ul>
                         </div>
@@ -212,7 +209,7 @@
                 <div class="row clearfix">
 
                     <!-- About -->
-                    <article class="foot-block about col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <article class="foot-block about col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="widget widget-about">
                             <h2 class="border-line-left">About Medicon</h2>
                             <div class="text ">We work with clients big and small across a range of sectors and we
@@ -223,7 +220,7 @@
                     </article>
 
                     <!-- Services -->
-                    <article class="foot-block col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <article class="foot-block col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="widget widget-services">
                             <h2 class="border-line-left">Our Services</h2>
                             <ul class="square-listing">
@@ -237,28 +234,28 @@
                     </article>
 
                     <!-- Twitter Feeds -->
-                    <article class="foot-block twitter-feeds col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="widget widget-twitter-feeds">
-                            <h2 class="border-line-left">Twitter Feeds</h2>
-                            <div class="feed">
-                                <p><a href="#">@medicon</a> We try to help all people, young, old...</p>
-                                <span class="time"># 2 hours ago</span>
-                            </div>
-                            <div class="feed">
-                                <p><a href="#">@medicon</a> Building up a new department for medical des...</p>
-                                <span class="time"># 3 hours ago</span>
-                            </div>
-                        </div>
-                    </article>
+                    {{--<article class="foot-block twitter-feeds col-lg-3 col-md-3 col-sm-6 col-xs-12">--}}
+                        {{--<div class="widget widget-twitter-feeds">--}}
+                            {{--<h2 class="border-line-left">Twitter Feeds</h2>--}}
+                            {{--<div class="feed">--}}
+                                {{--<p><a href="#">@medicon</a> We try to help all people, young, old...</p>--}}
+                                {{--<span class="time"># 2 hours ago</span>--}}
+                            {{--</div>--}}
+                            {{--<div class="feed">--}}
+                                {{--<p><a href="#">@medicon</a> Building up a new department for medical des...</p>--}}
+                                {{--<span class="time"># 3 hours ago</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</article>--}}
 
                     <!-- Contact Info -->
-                    <article class="foot-block cont-info col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <article class="foot-block cont-info col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="widget widget-contact">
                             <h2 class="border-line-left">Contact Us</h2>
                             <ul>
                                 <li class="location">{{ $doctorRole->user->address }}</li>
                                 <li class="website"><a href="http://www.medicon.com/">http://www.medicon.com</a></li>
-                                <li class="phone">{{ $doctorRole->user->telephone }}</li>
+                                <li class="phone">{{ $doctorRole->user->mobile }}</li>
                                 <li class="mail"><a href="mailto:support@email.com">dr.vision.site@gmail.com</a></li>
                             </ul>
                         </div>
@@ -271,7 +268,7 @@
 
         <!-- Bottom -->
         <div class="bottom">
-            <div class="auto-box">Copyright 2015 by Medicon | All rights reserved</div>
+            <div class="auto-box">Copyright 2015 by EyeCareClinicITI | All rights reserved</div>
         </div>
 
     </footer>

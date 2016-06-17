@@ -178,39 +178,7 @@
 			}
 		 
 		});
-	}
-	
-	
-	//Form Validation
-	if($('#contact-form').length){
-		$('#contact-form').validate({ // initialize the plugin
-			rules: {
-				subject: {
-					required: true
-				},
-				name: {
-					required: true
-				},
-				email: {
-					required: true,
-					email: true
-				},
-				ptype: {
-					required: true
-				},
-				priority: {
-					required: true
-				},
-				message: {
-					required: true
-				}
-			},
-			submitHandler: function (form) { 
-				alert('Form Submitted');
-				return true; 
-			}
-		});
-	}
+	}	
 	
 /* ==========================================================================
    When document is ready, do

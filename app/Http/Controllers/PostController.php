@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\UserRole;
 use App\Post;
 use Auth;
 use Illuminate\Http\Request;
@@ -25,12 +25,13 @@ class PostController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function allPosts()
-	{
-		$posts = Post::orderBy('id', 'asc')->paginate(3);
-
-		return view('posts.posts', compact('posts'));
-	}
+//	public function allPosts()
+//	{
+//		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+//		$posts = Post::orderBy('id', 'asc')->paginate(3);
+//
+//		return view('posts.posts', compact('posts','doctorRole'));
+//	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -85,17 +86,19 @@ class PostController extends Controller {
 	}
 	public function blogDetail($id)
 	{
+
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
 		$post = Post::findOrFail($id);
 
-		
-		if (Auth::user()->userRoles[0]->type==2) {
-			# code...
-		return view('posts.blog-detail', compact('post'));
+//		if (Auth::user()->userRoles[0]->type==2) {
+//			# code...
+//		return view('posts.blog-detail', compact('post'));
+//
+//		}else{
+		return view('posts.show', compact('post','doctorRole'));
 
-		}else{
-		return view('posts.show', compact('post'));
-
-		}
+//		}
 	}
 	
 

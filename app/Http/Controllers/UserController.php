@@ -4,6 +4,7 @@ use App\DoctorDegree;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ClinicConstants;
+use App\Post;
 use App\User;
 use App\UserRole;
 use App\WorkingHour;
@@ -21,20 +22,28 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function homePage()
+    public function contact()
     {
         $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
-        $doctorDegree=DoctorDegree::all();
-        $clinics = Clinic::all();
-        $workHours=WorkingHour::all();
-        $user=Auth::user();
-        if($user){
-        $userRoleType=UserRole::where('user_id', '=', $user->id)->value('type');
-        }else{
-            $userRoleType=null;
-        }
-        return view('users.HomePage',compact('doctorRole','userRoleType','doctorDegree'),['clinics' => $clinics, 'day' => ClinicConstants::$day,'workingHours'=>$workHours]);
+        return view('users.contact', compact('doctorRole'));
     }
+
+    public function homePage()
+    {
+        $posts = Post::all();
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+        $doctorDegree = DoctorDegree::all();
+        $clinics = Clinic::all();
+        $workHours = WorkingHour::all();
+        $user = Auth::user();
+        if ($user) {
+            $userRoleType = UserRole::where('user_id', '=', $user->id)->value('type');
+        } else {
+            $userRoleType = null;
+        }
+        return view('users.HomePage', compact('doctorRole', 'userRoleType', 'doctorDegree', 'posts'), ['clinics' => $clinics, 'day' => ClinicConstants::$day, 'workingHours' => $workHours]);
+    }
+
     public function index()
     {
         $users = User::orderBy('id', 'asc')->paginate(10);
@@ -71,11 +80,11 @@ class UserController extends Controller
         $user->password = bcrypt($request->input("password"));
         $user->birthdate = $request->input("birthdate");
         $user->password = $request->input("password");
-        $user->gender=$request->input("gender");
+        $user->gender = $request->input("gender");
         $user->save();
         $user_role = new UserRole();
         $user_role->type = 2;
-        $user_role->user_id=$user->id;
+        $user_role->user_id = $user->id;
         $user_role->save();
 
         return redirect()->route('reservations.index')->with('message', 'Item created successfully.');
@@ -91,7 +100,7 @@ class UserController extends Controller
     {
         $reservations = Reservation::where('user_id', $id)->get();
 
-        $reserveType =ClinicConstants::$reservationType;
+        $reserveType = ClinicConstants::$reservationType;
         $user = User::findOrFail($id);
         $userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
 

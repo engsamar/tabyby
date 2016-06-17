@@ -103,7 +103,6 @@
                              data-voffset="460"
                              data-speed="700"
                              data-start="2500"
-                             data-easing="easeOutExpo"><a href="#" class="btn-theme right">MAKE APPOINTMENT</a>
                         </div>
 
                     </li>
@@ -326,59 +325,22 @@
             <div class="row clearfix">
 
                 <!-- Post -->
-                <article class="blog-post col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="image">
-                        <img class="img-responsive" src="/resource/blog-post-image-1.jpg" alt="">
-                        <div class="caption">
-                            <div class="date"><span class="day">18</span><span class="month">Jan</span></div>
-                            <div class="comments"><span class="flaticon-speech18"></span> &ensp; 23</div>
+                @foreach($posts as $post)
+                    <article class="blog-post col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="image">
+                            <img class="img-responsive" src="{{URL::asset('/images/posts/'.$post->picture_path )}}"  alt="img">
+                            <div class="caption">
+                                <div class="date"><span class="day">{{date('d', strtotime($post->created_at))}}</span><span class="month">{{date('M', strtotime($post->created_at))}}</span></div>
+                                {{--<div class="comments"><span class="flaticon-speech18"></span> &ensp; 23</div>--}}
+                            </div>
+                            <a href="/blog-detail/{{$post->id}}" class="overlay"><span class="icon"></span></a>
                         </div>
-                        <a href="blog-detail.html" class="overlay"></a>
-                    </div>
-                    <h2><a href="#">Experimental monitoring</a></h2>
-                    <div class="desc"><p>We have the skills and resources to create professional films. Whether you want
-                            a corporate promotional film or a record of a conference we can provide the services you
-                            require.</p></div>
-                    <div class="more text-right"><a href="blog-detail.html">READ MORE &ensp; <span
-                                    class="glyphicon glyphicon-arrow-right"></span></a></div>
-                </article>
+                        <h2><a href="">{{$post->title}}</a></h2>
+{{--                        <div class="desc"><p>{{$post->content}}</p></div>--}}
+                        <div class="more text-right"><a href="/blog-detail/{{$post->id}}">READ MORE &ensp; <span class="glyphicon glyphicon-arrow-right"></span></a></div>
+                    </article>
 
-                <!-- Post -->
-                <article class="blog-post col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="image">
-                        <img class="img-responsive" src="/resource/blog-post-image-2.jpg" alt="">
-                        <div class="caption">
-                            <div class="date"><span class="day">14</span><span class="month">Jan</span></div>
-                            <div class="comments"><span class="flaticon-speech18"></span> &ensp; 42</div>
-                        </div>
-                        <a href="blog-detail.html" class="overlay"></a>
-                    </div>
-                    <h2><a href="#">Helping students and kids</a></h2>
-                    <div class="desc"><p>We have a team of writers who specialise in writing end of year reports to
-                            highlight the successes of your business and the forecast for the next year, which both
-                            current and potential.</p></div>
-                    <div class="more text-right"><a href="blog-detail.html">READ MORE &ensp; <span
-                                    class="glyphicon glyphicon-arrow-right"></span></a></div>
-                </article>
-
-                <!-- Post -->
-                <article class="blog-post col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="image">
-                        <img class="img-responsive" src="/resource/blog-post-image-3.jpg" alt="">
-                        <div class="caption">
-                            <div class="date"><span class="day">12</span><span class="month">Jan</span></div>
-                            <div class="comments"><span class="flaticon-speech18"></span> &ensp; 11</div>
-                        </div>
-                        <a href="blog-detail.html" class="overlay"></a>
-                    </div>
-                    <h2><a href="#">Medical health on patients</a></h2>
-                    <div class="desc"><p>We have the skills and resources to create professional films. Whether you want
-                            a corporate promotional film or a record of a conference we can provide the services you
-                            require.</p></div>
-                    <div class="more text-right"><a href="blog-detail.html">READ MORE &ensp; <span
-                                    class="glyphicon glyphicon-arrow-right"></span></a></div>
-                </article>
-
+                @endforeach
             </div>
         </div>
     </section>

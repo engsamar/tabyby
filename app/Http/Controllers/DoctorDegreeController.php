@@ -17,9 +17,10 @@ class DoctorDegreeController extends Controller {
 	 */
 	public function index()
 	{
-		$doctor_degrees = DoctorDegree::orderBy('id', 'desc')->paginate(10);
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+		$doctor_degrees = DoctorDegree::orderBy('id', 'asc')->paginate(10);
 
-		return view('doctor_degrees.index', compact('doctor_degrees'));
+		return view('doctor_degrees.index', compact('doctor_degrees'),['doctorRole'=>$doctorRole]);
 	}
 
 	/**
@@ -29,9 +30,10 @@ class DoctorDegreeController extends Controller {
 	 */
 	public function create()
 	{
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 		$user = Auth::user();
 		$user_role = UserRole::where('user_id',$user->id)->get();
-		return view('doctor_degrees.create',['userRole'=>$user_role]);
+		return view('doctor_degrees.create',['userRole'=>$user_role,'doctorRole'=>$doctorRole]);
 	}
 
 	/**
@@ -63,9 +65,10 @@ class DoctorDegreeController extends Controller {
 	 */
 	public function show($id)
 	{
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 		$doctor_degree = DoctorDegree::findOrFail($id);
 
-		return view('doctor_degrees.show', compact('doctor_degree'));
+		return view('doctor_degrees.show', compact('doctor_degree'),['doctorRole'=>$doctorRole]);
 	}
 
 	/**
@@ -76,9 +79,10 @@ class DoctorDegreeController extends Controller {
 	 */
 	public function edit($id)
 	{
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 		$doctor_degree = DoctorDegree::findOrFail($id);
 
-		return view('doctor_degrees.edit', compact('doctor_degree'));
+		return view('doctor_degrees.edit', compact('doctor_degree'),['doctorRole'=>$doctorRole]);
 	}
 
 	/**

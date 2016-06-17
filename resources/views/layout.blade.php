@@ -31,15 +31,9 @@
                 <div class="row clearfix">
 
                     <div class="cont-info col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        Do You Have Any Questions? Call Us <span>+49 123 456 789</span> Or Send An Email <a
-                                href="mailto:support@email.com">support@email.com</a>
+                        Do You Have Any Questions? Call Us <span>{{ $doctorRole->user->mobile }}</span> Or Send An Email <a
+                                href="mailto:support@email.com">dr.vision.site@gmail.com</a>
                     </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-                        Opening Hours : <span>Monday to Saturday - 8am to 9pm</span> Contact :
-                        <span>+1-800-654-3210</span>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -57,21 +51,7 @@
                     <nav class="col-md-9 col-sm-9 col-xs-12 main-menu">
                         <ul>
                             <li class="current"><a href="#">Home</a></li>
-                            <li>
-                                <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Details')
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#about" class="scroll">@lang('validation.About us')
-                                        </a></li>
-                                    <li><a href="#team" class="scroll">@lang('validation.our team')
-                                        </a></li>
-                                    <li><a href="#services" class="scroll">@lang('validation.our services')
-                                        </a></li>
-                                    <li><a href="#contact" class="scroll">
-                                            @lang('validation.contact')
-                                        </a></li>
-                                </ul>
-                            </li>
+
                             @if(!Auth::user())
 
                                 <li class="dropdown">
@@ -133,6 +113,21 @@
                                     </ul>
                                 </li>
                             @endif
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    @lang('validation.'. Config::get('languages')[App::getLocale()])
+
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach (Config::get('languages') as $lang => $language)
+                                        @if ($lang != App::getLocale())
+                                            <li>
+                                                <a href="{{ route('lang.switch', $lang) }}">@lang('validation.'.$language)</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </li>
                             <li><a href="contact-us.html">Contact Us</a>
                                 <ul class="sub-menu">
                                     <li><a href="contact-us-2.html">Contact Us 2</a></li>
@@ -190,6 +185,7 @@
         </div>
         <!-- Nav Container End -->
     </header>
+        @yield('header')
         @yield('content')
     <section class="visit-us">
         <div class="auto-box">
@@ -254,10 +250,10 @@
                         <div class="widget widget-contact">
                             <h2 class="border-line-left">Contact Us</h2>
                             <ul>
-                                <li class="location">47 Sixth Ave San Francisco, CA</li>
+                                <li class="location">{{ $doctorRole->user->address }}</li>
                                 <li class="website"><a href="http://www.medicon.com/">http://www.medicon.com</a></li>
-                                <li class="phone">+49 123 456 798</li>
-                                <li class="mail"><a href="mailto:support@email.com">support@email.com</a></li>
+                                <li class="phone">{{ $doctorRole->user->telephone }}</li>
+                                <li class="mail"><a href="mailto:support@email.com">dr.vision.site@gmail.com</a></li>
                             </ul>
                         </div>
                     </article>

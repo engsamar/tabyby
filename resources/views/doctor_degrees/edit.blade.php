@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group @if($errors->has('graduate_date')) has-error @endif">
                        <label for="graduate_date-field">Graduate_date</label>
-                    <input type="text" id="graduate_date-field" name="graduate_date" class="form-control date-picker" value="{{ $doctor_degree->graduate_date }}"/>
+                    <input type="text" id="graduate_date-field" name="graduate_date" class="form-control" value="{{ $doctor_degree->graduate_date }}"/>
                        @if($errors->has("graduate_date"))
                         <span class="help-block">{{ $errors->first("graduate_date") }}</span>
                        @endif

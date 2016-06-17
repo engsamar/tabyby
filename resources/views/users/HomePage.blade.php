@@ -227,19 +227,24 @@
                     <h2 class="border-line-left">Opening Hours</h2>
                     <div class="accordion-box style-two">
                         @foreach($clinics as $clinic)
-
-
                             <article class="accordion animated out" data-delay="0" data-animation="fadeInUp">
                                 <div class="acc-btn active"><span class="toggle-icon"></span> {{$clinic->name}} </div>
-
-                                <div class="acc-content clearfix collapsed">
-                                    <div class="day clearfix">
-                                        <span class="day-title pull-left">Monday</span><span
-                                                class="day-timing pull-right">8:00 AM - 6:00 PM</span>
+                                    @foreach($workingHours as $hour)
+                                        <?php
+//                                            var_dump($hour->clinic_id);
+//                                            die();
+                                    ?>
+                                        @if($hour->clinic_id==$clinic->id)
+                                    <div class="acc-content clearfix collapsed">
+                                        <div class="day clearfix">
+                                        <span class="day-title pull-left">{{$hour->day}}</span><span
+                                                class="day-timing pull-right">{{$hour->fromTime}} - {{$hour->toTime}}</span>
                                     </div>
+                                        @endif
+                                        @endforeach
                                 </div>
                             </article>
-                            @endforeach
+                        @endforeach
                     </div>
 
                 </div>
@@ -286,68 +291,29 @@
             <div class="row clearfix">
 
                 <!-- Member -->
-                <article class="member col-lg-3 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="0"
+                <article class="member col-lg-4 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="0"
                          data-animation="fadeInUp">
-                    <figure><img src="/resource/team-1.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
+                    <figure><img src="/images/doctor.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
                     <div class="member-info">
-                        <h4>Dr. Jack Johnson</h4>
+                        <h4>{{ $doctorRole->user->username }}</h4>
                         <h5><a href="#">Rehabilitation Therapy</a></h5>
                     </div>
                     <ul class="social clearfix anim-3-all">
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>&nbsp;
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>&nbsp;
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>&nbsp;
+                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>&nbsp;
                     </ul>
                 </article>
-
-                <!-- Member -->
-                <article class="member col-lg-3 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="150"
-                         data-animation="fadeInUp">
-                    <figure><img src="/resource/team-2.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
-                    <div class="member-info">
-                        <h4>Dr. Vanessa Smouic</h4>
-                        <h5><a href="#">Cardiac Clinic</a></h5>
-                    </div>
-                    <ul class="social clearfix anim-3-all">
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
-                    </ul>
-                </article>
-
-                <!-- Member -->
-                <article class="member col-lg-3 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="300"
-                         data-animation="fadeInUp">
-                    <figure><img src="/resource/team-3.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
-                    <div class="member-info">
-                        <h4>Dr. Yvonne Cadiline</h4>
-                        <h5><a href="#">Pediatric Clinic</a></h5>
-                    </div>
-                    <ul class="social clearfix anim-3-all">
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
-                    </ul>
-                </article>
-
-                <!-- Member -->
-                <article class="member col-lg-3 col-md-3 col-sm-6 col-xs-12 animated out" data-delay="450"
-                         data-animation="fadeInUp">
-                    <figure><img src="/resource/team-4.jpg" alt=""><a class="overlay" href="about-us.html"></a></figure>
-                    <div class="member-info">
-                        <h4>Dr. David Gresshoff</h4>
-                        <h5><a href="#">Laryngological Clinic</a></h5>
-                    </div>
-                    <ul class="social clearfix anim-3-all">
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-facebook31"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-twitter1"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-google116"></span></a></li>
-                        <li class="hvr-ripple-out"><a href="#"><span class="flaticon-instagram12"></span></a></li>
-                    </ul>
-                </article>
+                <div class="member col-lg-8 col-md-8 col-sm-6 col-xs-12 animated out" data-delay="100" data-animation="fadeInUp">
+                        <h2 class="border-line-left">{{ $doctorRole->user->username }}</h2>
+                        <!-- Square Listing -->
+                        <ul class="square-listing anim-3-all">
+                            @foreach($doctorDegree as $degree)
+                            <li><a >In:{{$degree->graduate_date}} &nbsp; {{$degree->degree}}&nbsp;from&nbsp;{{$degree->university}}</a></li>
+                            @endforeach
+                        </ul>
+                </div>
 
             </div>
         </div>
@@ -416,4 +382,4 @@
             </div>
         </div>
     </section>
-    @endsection
+@endsection

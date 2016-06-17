@@ -1154,7 +1154,8 @@ input:-moz-placeholder { color:#7f7f7f !important; font-weight:400; text-transfo
 
 .meet-the-team .member .member-info{
 	position:relative;
-	padding:25px 25px;	
+
+    padding: 31px 98px;	
 }
 
 .meet-the-team .member h4{
@@ -1182,6 +1183,7 @@ input:-moz-placeholder { color:#7f7f7f !important; font-weight:400; text-transfo
 	left:-20px;
 	text-align:center;
 	margin:0px;
+        margin-left: 43px;
 	min-width:290px;
 }
 

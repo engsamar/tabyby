@@ -20,7 +20,7 @@
 
                 <div class="form-group @if($errors->has('username')) has-error @endif">
                        <label for="username-field">Username</label>
-                    <input type="text" id="username-field" name="username" class="form-control" value="{{ $user->username }}"/>
+                    <input type="text" id="username-field" name="username" class="form-control" value="{{ $user->username }}" required/>
                     <span id="error" class="help-block"></span>
                        @if($errors->has("username"))
                         <span class="help-block">{{ $errors->first("username") }}</span>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group @if($errors->has('email')) has-error @endif">
                        <label for="email-field">Email</label>
-                    <input type="text" id="email-field" name="email" class="form-control" value="{{ $user->email }}"/>
+                    <input type="text" id="email-field" name="email" class="form-control" value="{{ $user->email }}" required/>
                         <span id="error" class="help-block"></span>
                        @if($errors->has("email"))
                         <span class="help-block">{{ $errors->first("email") }}</span>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="form-group @if($errors->has('birthdate')) has-error @endif">
                        <label for="birthdate-field">Birthdate</label>
-                    <input type="date" id="birthdate-field" name="birthdate" class="form-control" value="{{ $user->birthdate }}"/>
+                    <input type="text" id="birthdate-field" name="birthdate" class="form-control datepicker" value="{{ $user->birthdate }}" required/>
                        @if($errors->has("birthdate"))
                         <span class="help-block">{{ $errors->first("birthdate") }}</span>
                        @endif
@@ -85,7 +85,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
   <script src="/js/user_validation.js"></script>
   <script>
-    $('.date-picker').datepicker({
-    });
+
   </script>
 @endsection

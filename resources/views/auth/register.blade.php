@@ -122,7 +122,7 @@
 
                 <div class="input-container @if($errors->has('birthdate')) has-error @endif" >
                     <input type="text" id="birthdate-field" required="required" name="birthdate"
-                           value="{{ old("birthdate") }}" />
+                           value="{{ old("birthdate") }}" class="datepicker"/>
                     <label for="birthdate-field">@lang('validation.Birthdate')</label>
 
 

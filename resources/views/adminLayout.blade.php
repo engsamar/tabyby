@@ -328,35 +328,46 @@
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 @if(Auth::user()->userRoles[0]->type==0)
-                <li>
-                    <a href="/chooseClinic">
-                        <i class="fa fa-th"></i> <span>Dashboard</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="/chooseClinic">
+                            <i class="fa fa-th"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="/clinics">
-                        <i class="fa fa-th"></i> <span>Clinic</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="/secertaries">
-                        <i class="fa fa-pie-chart"></i>
-                        <span>Secretary</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="/posts">
-                        <i class="fa fa-edit"></i> <span>Posts</span>
-                    </a>
+                    <li>
+                        <a href="/clinics">
+                            <i class="fa fa-th"></i> <span>Clinic</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="/secertaries">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Secretary</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="/posts">
+                            <i class="fa fa-edit"></i> <span>Posts</span>
+                        </a>
 
-                </li>
+                    </li>
+                    <li >
+                        <a href="medicines">
+                            <i class="fa fa-edit"></i> <span>Medicines</span>
+                        </a>
+
+                    </li>
                 @endif
 
                 @if(Auth::user()->userRoles[0]->type==1)
                 <li>
                     <a href="/reservations/create">
                         <i class="fa fa-th"></i> <span>Add Reservation</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/users/create">
+                        <i class="fa fa-th"></i> <span>Add New Patient</span>
                     </a>
                 </li>
                 @endif
@@ -418,7 +429,8 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.3.3
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="#">ITI</a>.</strong> All rights reserved.</footer>
+        <strong>Copyright &copy; 2014-2015 <a href="#">ITI</a>.</strong> All rights reserved.
+    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

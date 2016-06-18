@@ -14,9 +14,8 @@
 			<tr>
 			@foreach($pat_data as $pat_deta)
 				<td>{{ $pat_deta->username}}</td>
-				<td> <input class="form-control oldDate" data-rowdate="{{$date}}+{{$pat_deta->id}}" value="{{ $date }}" readonly="readonly">
-				</td>
-				<td><div id="gdeed"><input type="text" id="mveSme" class="form-control date-picker mveSme" /></div></td>
+				<td> {{ $date }}</td>
+				<td><div id="gdeed"><input type="text" id="mveSme" data-rowdate="{{$date}}+{{$pat_deta->id}}"  class="form-control date-picker mveSme" /></div></td>
 			</tr>
 	@endforeach
 			</tbody></table>
@@ -36,7 +35,7 @@
 					<tr>
 						<td>{{ $pat_date[$index] }}</td>
 						<td>{{$nom}}</td>
-						<td>{{ $pat_free[$index] }}</td>
+						<td>{{ $pat_free[$index] - $nom }}</td>
 					</tr>
 				@endforeach
 				</tbody>

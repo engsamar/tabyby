@@ -379,7 +379,7 @@
 
                 </li>
                  <li class="treeview">
-                    <a href="/reservations/cancelled">
+                    <a href="/cancelledReservation">
                         <i class="fa fa-laptop"></i>
                         <span>Cancelled Reservation</span>
                     </a>

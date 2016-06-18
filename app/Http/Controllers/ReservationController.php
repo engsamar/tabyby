@@ -43,7 +43,9 @@ class ReservationController extends Controller {
 
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
-		return view('reservations.patient_reservations', compact('reservations','cancel_reservations','status','reserveType','userRole'))->with('message',"")->with('userRoleType',$userRole);
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
+		return view('reservations.patient_reservations', compact('reservations','cancel_reservations','status','reserveType','userRole'),['doctorRole'=>$doctorRole])->with('message',"")->with('userRoleType',$userRole);
 
 	}
 
@@ -53,7 +55,9 @@ class ReservationController extends Controller {
 		$appointments=WorkingHour::all();
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"error")->with('userRoleType',$userRole);
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType,'doctorRole'=>$doctorRole])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"error")->with('userRoleType',$userRole);
 	}
 
 
@@ -209,6 +213,7 @@ class ReservationController extends Controller {
 		}
 		if (Auth::user()->userRoles[0]->type==2) {
 			# code...
+
 			return redirect('/patientReservation')->with('message',$message);
 
 		}else{
@@ -405,21 +410,13 @@ class ReservationController extends Controller {
 	{
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-/*
 		$reservations = Reservation::where('status','=',0)->paginate(10);
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
-		return redirect()->route('reservations.index')->with('message', '');
+	//	return redirect()->route('reservations.index')->with('message', '');
 		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );*/
-		if (Auth::user()->userRoles[0]->type==2) {
-			# code...
-			return redirect('/patientReservation')->with('message','Item cancelled successfully.');
-
-		}else{
-			return redirect()->route('reservations.index')->with('message','Item cancelled successfully.');
-			
-		}
+		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		
 	}
 
 	public function getReservations($id)

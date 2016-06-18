@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth','clinicRoles']], function () {
     Route::get("insertExamination/{id}", "ExaminationController@doctorExamination");
     Route::resource("vacations", "VacationController");
     Route::get("/newPrescriptionDetails/{res_id}", "PrescriptionDetailController@create");
+    Route::get("/cancelledReservation", "ReservationController@cancel");
+    
 
 });
 
@@ -64,7 +66,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("/MoveAllPatients/{old_date}/{new_date}", "VacationController@MoveAllPatients");
 
 
-    Route::get("reservations/cancelled", "ReservationController@cancel");
     Route::get("user_profiles/{id}/", "UserProfileController@index");
     Route::get("patient/{id}", "ReservationController@patientReserv");
     ///

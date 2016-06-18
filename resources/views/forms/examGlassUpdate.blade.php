@@ -57,7 +57,7 @@
                     <select id="type-field" name="type" class="form-control">
                         @foreach($examGlassType as $key=>$types)
                             @if($exam['exam_glass_type'] ==$key)
-                                <option selected value={{ $types[$exam['exam_glass_type']] }}>{{ $types }}</option>
+                              
                             @else
                                 <option value={{ $key }}>{{ $types }}</option>
                             @endif

@@ -4,6 +4,22 @@
 rel="stylesheet">
 @endsection
 @section('header')
+@if($userRole ==0)
+            <div  class="form-group @if($errors->has('address')) has-error @endif">
+                <label for="address-field">Address</label>
+                <select id="address-field" name="address" class="form-control">
+                    <option value="0">Choose Clinic</option>
+                    @foreach($address as $key=>$value)
+
+                    <option value={{ $value->id }}>{{ $value->name }} :: {{ $value->address }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has("address"))
+                <span class="help-block">{{ $errors->first("address") }}</span>
+                @endif
+            </div>
+
+            @endif 
 
 @endsection
 

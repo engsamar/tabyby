@@ -13,7 +13,26 @@
      <button type="button" class="btn btn-info pull-right"><a href='/all_reservation/{{$examPatients->user_id}}'style="color:white">Start Exam</a></button>
      @endif
     </h2>
+
 </div>
+
+@if(Auth::user()->userRoles[0]->type==0)
+            <div  class="form-group @if($errors->has('address')) has-error @endif">
+                <label for="address-field">Address</label>
+                <select id="address-field" name="address" class="form-control">
+                    <option value="0">Choose Clinic</option>
+                    @foreach($clinic as $key=>$value)
+
+                    <option value={{ $value->id }}>{{ $value->name }} :: {{ $value->address }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has("address"))
+                <span class="help-block">{{ $errors->first("address") }}</span>
+                @endif
+            </div>
+
+    @endif 
+
 
 <div class="form-group @if($errors->has('searchRes')) has-error @endif">
     <select id="searchRes-field" name="searchRes" class="form-control">
@@ -136,7 +155,7 @@
                     @if(Auth::user()->userRoles[0]->type==0)
                     <td><a href='/users/{{$reservation->user_id}}'>{{$reservation->user->username}}</a></td>
                     <td>{{$reservation->appointment}}</td>
-                    
+
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td class="text-right">
                         <a class="btn btn-xs btn-primary" href='/all_reservation/{{$reservation->user_id}}'><i class="glyphicon glyphicon-eye-open"></i> View History</a>

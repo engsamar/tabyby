@@ -429,15 +429,6 @@ class ReservationController extends Controller {
 	{
 
 		$reservations = Reservation::where('user_id', $id)->get();
-        // return view('reservations.all_reservations', compact('reservations'));
-//		if(count($reservations)==0){
-//			$reservation_id=$reservations[0]->id;
-//		}
-//		echo "<pre>";
-//			var_dump($reservations[0]->prescription->PrescriptionDetails[0]["id"]);
-//			var_dump($reservations[0]->id);
-//			echo "</pre>";
-//			die();
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$medicalHistoryType=ClinicConstants::$medicalHistoryType;

@@ -32,7 +32,15 @@
             <i class="glyphicon glyphicon-align-justify"></i> 
             Patient Name : 
                 @foreach ($reservations as $reservation)
+                
                     {{$reservation->user['username']}}
+                    @if($reservation->status !=4)
+        <button type="button" class="btn btn-info pull-right"><a href='/exitReserv/{{$reservation->id}}'style="color:white">Exit Exam</a></button>
+
+        <button type="button" class="btn btn-info pull-right"><a href='/nextReserv/{{$reservation->id}}'style="color:white">Next</a></button>
+                
+                @endif
+
                 @endforeach
         </h1>
 

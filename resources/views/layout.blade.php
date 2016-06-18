@@ -57,6 +57,7 @@
                     <nav class="col-md-9 col-sm-9 col-xs-12 main-menu">
                         <ul>
                             <li class="current"><a href="/">Home</a></li>
+                            <li><a href="/blog">Blog</a></li>
 
                             @if(!Auth::user())
 
@@ -87,7 +88,7 @@
                                 </li>
                                 @if(Auth::user()->userRoles[0]->type==0 || Auth::user()->userRoles[0]->type==1)
                                     <li class="dropdown">
-                                        <a href="/chooseClinic">@lang('validation.Control Panel')
+                                        <a href="/reservations/today">@lang('validation.Control Panel')
                                         </a>
                                     </li>
                                 @else
@@ -174,9 +175,6 @@
                                 </li>
                                 <li><a href="contact-us.html">Contact Us</a>
                                     <span class="toggle-icon"></span>
-                                    {{--<ul class="sub-menu">--}}
-                                        {{--<li><a href="contact-us-2.html">Contact Us 2</a></li>--}}
-                                    {{--</ul>--}}
                                 </li>
                             </ul>
                         </div>
@@ -232,22 +230,6 @@
                             </ul>
                         </div>
                     </article>
-
-                    <!-- Twitter Feeds -->
-                    {{--<article class="foot-block twitter-feeds col-lg-3 col-md-3 col-sm-6 col-xs-12">--}}
-                        {{--<div class="widget widget-twitter-feeds">--}}
-                            {{--<h2 class="border-line-left">Twitter Feeds</h2>--}}
-                            {{--<div class="feed">--}}
-                                {{--<p><a href="#">@medicon</a> We try to help all people, young, old...</p>--}}
-                                {{--<span class="time"># 2 hours ago</span>--}}
-                            {{--</div>--}}
-                            {{--<div class="feed">--}}
-                                {{--<p><a href="#">@medicon</a> Building up a new department for medical des...</p>--}}
-                                {{--<span class="time"># 3 hours ago</span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</article>--}}
-
                     <!-- Contact Info -->
                     <article class="foot-block cont-info col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="widget widget-contact">

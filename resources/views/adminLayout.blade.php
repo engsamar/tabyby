@@ -352,7 +352,7 @@
 
                     </li>
                     <li >
-                        <a href="medicines">
+                        <a href="/medicines">
                             <i class="fa fa-edit"></i> <span>Medicines</span>
                         </a>
 

@@ -42,7 +42,7 @@
 
                     <div class="form-group @if($errors->has('plan')) has-error @endif">
                        <label for="plan-field">Plan</label>
-                    <input type="text" id="plan-field" name="plan" class="form-control" value="{{ old("plan") }}"/>
+                    <textarea rows="10" id="plan-field" name="plan" class="form-control" value="{{ old("plan") }}"></textarea>
                        @if($errors->has("plan"))
                         <span class="help-block">{{ $errors->first("plan") }}</span>
                        @endif

@@ -114,6 +114,8 @@
                 <tr>
                     @if(Auth::user()->userRoles[0]->type==0)
                     <th>Patient_Name</th>
+                    <th>Appointment</th>
+
                     <th>RESERVATION_TYPE</th>
                     <th class="text-right">OPTIONS</th>                    
                     @else
@@ -133,6 +135,8 @@
                 <tr>
                     @if(Auth::user()->userRoles[0]->type==0)
                     <td><a href='/users/{{$reservation->user_id}}'>{{$reservation->user->username}}</a></td>
+                    <td>{{$reservation->appointment}}</td>
+                    
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td class="text-right">
                         <a class="btn btn-xs btn-primary" href='/all_reservation/{{$reservation->user_id}}'><i class="glyphicon glyphicon-eye-open"></i> View History</a>

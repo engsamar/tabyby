@@ -408,7 +408,9 @@ class ReservationController extends Controller {
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+
+		return view('reservations.index', compact('message','reservations','status','reserveType','userRole','examPatients'))->with('userRoleType',$userRole );
 	}
 
 	public function cancel()
@@ -420,7 +422,9 @@ class ReservationController extends Controller {
 		$status= ClinicConstants::$status;
 	//	return redirect()->route('reservations.index')->with('message', '');
 		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+
+		return view('reservations.index', compact('message','examPatients','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 		
 	}
 	public function exitReserv($id)

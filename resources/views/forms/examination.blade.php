@@ -1,5 +1,4 @@
     <div class="row">
-        @foreach ($reservation->examGlass as $exam)
         <div class="col-md-3">
             <form action="{{ route('examinations.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -203,5 +202,4 @@
             </form>
 
         </div>
-        @endforeach
     </div>

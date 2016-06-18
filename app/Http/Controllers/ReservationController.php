@@ -27,11 +27,12 @@ class ReservationController extends Controller {
 		$reservations = Reservation::where('status','>=',2)->orderBy('status', 'asc')->paginate(10);
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		$reservations = Reservation::where('status','>=',2)->orderBy('status', 'asc')->paginate(10);
 		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
-		return view('reservations.index', compact('reservations','examPatients','status','reserveType','userRole','doctorRole'))->with('message',"")->with('userRoleType',$userRole);
+		$clinic = Clinic::all();
+
+		return view('reservations.index', compact('reservations','examPatients','status','reserveType','userRole','doctorRole','clinic'))->with('message',"")->with('userRoleType',$userRole);
 	}
 
 	public function patientReservations()
@@ -408,9 +409,11 @@ class ReservationController extends Controller {
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$message="";
+		$clinic = Clinic::all();
+
 		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
 
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole','examPatients'))->with('userRoleType',$userRole );
+		return view('reservations.index', compact('clinic','message','reservations','status','reserveType','userRole','examPatients'))->with('userRoleType',$userRole );
 	}
 
 	public function cancel()

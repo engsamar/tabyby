@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\ClinicConstants;
 use App\Http\Requests;
 use App\Secertary;
-use \App\UserRole;
+use App\UserRole;
 use App\Clinic;
 use App\User;
 use Auth;
@@ -48,10 +48,11 @@ class SecertaryController extends Controller
      */
     public function store(Request $request)
     {
-        $user_role = new UserRole();
-        $user_role->type = 1;
-        $user_name = $request->input("name");
-        $user_role->user_id = User::where('username', $request->input("name"))->value('id');;
+       // $user_role = new UserRole();
+        $user_id = User::where('username', $request->input("name"))->value('id');
+        $user_role = UserRole::where('user_id',$user_id)->first();
+        // $user_name = $request->input("name");
+        $user_role->type = 1;       
         $user_role->save();
 
         $secertary = new Secertary();
@@ -131,6 +132,10 @@ class SecertaryController extends Controller
     public function destroy($id)
     {
         $secertary = Secertary::findOrFail($id);
+        $user_role = UserRole::where('id',$secertary->userRole_id)->first();
+        $user_role->type = 2;       
+        $user_role->save();
+
         $secertary->delete();
 
         return redirect()->route('secertaries.index')->with('message', 'Item deleted successfully.');

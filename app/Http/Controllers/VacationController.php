@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use \DateTime;
 use Carbon\Carbon;
 use App\Vacation;
+use App\UserRole;
 use Illuminate\Http\Request;
 use App\Reservation;
 use App\WorkingHour;
@@ -143,6 +144,59 @@ class VacationController extends Controller {
 			else 
 			{
 				return "false";
+			}
+
+		}
+
+		public function moveSome_Patients($date)
+		{
+			$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+			$reservations=Reservation::where('date',$date)->where('status','>',0)->get();
+			$reserved=Reservation::where('date','>',$date)->where('status','>',0)->groupBy('date')->distinct()->get();
+			// number of reserved patients
+			$pat_no=[];
+			// space reservations
+			$pat_free=[];
+			// dates of reservations
+			$pat_date=[];
+			foreach ($reserved as $key => $value) {
+				$num=Reservation::select('date')->where('date',$value->date)->where('status','>',0)->where('clinic_id',$value->clinic_id)->count();
+				$fromTime = WorkingHour::select('fromTime')->where('day',date('l',strtotime($date)))->where('clinic_id',$value->clinic_id)->get();
+				$toTime = WorkingHour::select('toTime')->where('day',date('l',strtotime($date)))->where('clinic_id',$value->clinic_id)->get();
+				$no_of_patient=(strtotime($toTime[0]->toTime)-strtotime($fromTime[0]->fromTime))/(15*60);
+				if ($num!=0) {
+					array_push($pat_free,$no_of_patient);
+					array_push($pat_no,$num);
+					array_push($pat_date,$value->date);
+				}
+
+			 }
+			 // var_dump($pat_date)."</br>";
+			 // var_dump($pat_no)."</br>";
+			 // var_dump($pat_date)."</br>";
+			 // die();
+			// reserved patients data
+			$pat_data=[];
+			foreach ($reservations as $key => $value) {
+				array_push($pat_data, $value->user);
+			}
+			return view('vacations.movePatients')->with('doctorRole',$doctorRole)->with('date',$date)->with('pat_free',$pat_free)->with('pat_data',$pat_data)->with('pat_no',$pat_no)->with('pat_date',$pat_date);
+		}
+
+
+		public function moveSome_store($new_date,$old_date,$user_id)
+		{
+
+			$user_reservation=Reservation::where('date',$old_date)->where('user_id',$user_id)->get();
+			// return $user_reservation;
+			foreach ($user_reservation as $key => $value) {
+				$value->date=$new_date;
+				$no_reservation=Reservation::where('date',$new_date)->where('status','>',0)->where('clinic_id',$value->clinic_id)->count();
+				$fromTime = WorkingHour::select('fromTime')->where('day',date('l',strtotime($new_date)))->where('clinic_id',$value->clinic_id)->get();
+				$apntmnt=strtotime("+".(($no_reservation)*15)." minutes", strtotime($fromTime[$key]->fromTime));
+				$value->appointment=date('h:i:s',$apntmnt);
+				$value->save();
+				return "appointment successfully updated";
 			}
 
 		}

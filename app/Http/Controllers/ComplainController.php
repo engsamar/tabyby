@@ -40,8 +40,8 @@ class ComplainController extends Controller {
 		$complain->complain = $request->input("complain");
         $complain->h_of_complain = $request->input("h_of_complain");
         $complain->reservation_id = $request->input("res_id");
-
-        $complain->save();
+		$complain->save();
+		
 		$complain_details = new ComplainDetail();
         $complain_details->diagnose = $request->input("diagnose");
         $complain_details->plan = $request->input("plan");
@@ -100,10 +100,16 @@ class ComplainController extends Controller {
 
 		$complain->complain = $request->input("complain");
         $complain->h_of_complain = $request->input("h_of_complain");
-
 		$complain->save();
+		
+		$complain_detail = ComplainDetail::where("complain_id", "=", $complain->id);
+		$complain_detail->diagnose = $request->input("diagnose");
+        $complain_detail->plan = $request->input("plan");
 
-		return redirect()->route('complains.index')->with('message', 'Item updated successfully.');
+		$complain_detail->save();
+
+
+		return redirect()->action('ReservationController@getReservations',[$complain->reservation->user["id"]]);
 	}
 
 	/**

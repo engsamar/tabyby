@@ -138,7 +138,19 @@ return [
     'timezone'             => 'ﻥﻮﻜﻳ ﻥﺃ ﺐﺠﻳ :attribute ﺎًﺤﻴﺤﺻ ﺎًﻴﻨﻣﺯ ﺎًﻗﺎﻄﻧ',
     'unique'               => 'ﻞﻘﺤﻟا ﺔﻤﻴﻗ :attribute ﻞﺒﻗ ﻦﻣ ﺔﻣﺪﺨﺘﺴُﻣ',
     'url'                  => 'ﻂﺑاﺮﻟا ﺔﻐﻴﺻ :attribute ﺔﺤﻴﺤﺻ ﺮﻴﻏ',
-
+    'Forgot Your Password?' => 'هل نسيت كلمه المرور؟',
+    'vision clinic'    => 'رؤية للعيون',
+    'Home'=>'الصفحة الرئيسية',
+    'Blog'=>'المقالات',
+    'ContactUs'=>'الإتصال بنا',
+    'All rights reserved'=>'جميع الحقوق محفوظة',
+    'Copyright'=>'حقوق النشر بواسطة',
+    'Enter email and password to log on:'=>'ادخل البريد الإلكترونى و كلمة المرور',
+    'Username'=>'اسم المستخدم',
+    'email'=>'البريد الإلكترونى',
+    'Password'=>'كلمة السر',
+    'Sign up'=>'تسجيل',
+    'Fill in the form below to get instant access:'=>'من فضلك املأ البيانات',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

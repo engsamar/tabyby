@@ -328,11 +328,11 @@
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 @if(Auth::user()->userRoles[0]->type==0)
-                    <li>
-                        <a href="/chooseClinic">
-                            <i class="fa fa-th"></i> <span>Dashboard</span>
-                        </a>
-                    </li>
+                    {{--<li>--}}
+                        {{--<a href="/chooseClinic">--}}
+                            {{--<i class="fa fa-th"></i> <span>Dashboard</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
 
                     <li>
                         <a href="/clinics">

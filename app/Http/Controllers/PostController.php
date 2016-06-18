@@ -25,13 +25,13 @@ class PostController extends Controller {
 	 *
 	 * @return Response
 	 */
-//	public function allPosts()
-//	{
-//		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
-//		$posts = Post::orderBy('id', 'asc')->paginate(3);
-//
-//		return view('posts.posts', compact('posts','doctorRole'));
-//	}
+	public function allPosts()
+	{
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+		$posts = Post::orderBy('id', 'asc')->paginate(3);
+
+		return view('posts.posts', compact('posts','doctorRole'));
+	}
 
 	/**
 	 * Show the form for creating a new resource.

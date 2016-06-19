@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group @if($errors->has('picture_path')) has-error @endif">
                        <label for="picture_path-field">Picture_path</label>
-                    <input type="text" id="picture_path-field" name="picture_path" class="form-control" value="{{ $post->picture_path }}"/>
+                    <input type="file" id="picture_path-field" name="picture_path" class="form-control" value="{{ $post->picture_path }}"/>
                        @if($errors->has("picture_path"))
                         <span class="help-block">{{ $errors->first("picture_path") }}</span>
                        @endif

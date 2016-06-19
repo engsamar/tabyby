@@ -58,7 +58,6 @@ class ComplainController extends Controller {
 			}
 		}
 		return redirect()->action('ReservationController@getReservations',[$complain->reservation->user["id"]]);
-        
     }
 
 	/**
@@ -102,7 +101,10 @@ class ComplainController extends Controller {
         $complain->h_of_complain = $request->input("h_of_complain");
 		$complain->save();
 		
-		$complain_detail = ComplainDetail::where("complain_id", "=", $complain->id);
+
+		$complain_detail = ComplainDetail::where("complain_id", "=", $complain->id)->first();
+
+
 		$complain_detail->diagnose = $request->input("diagnose");
         $complain_detail->plan = $request->input("plan");
 

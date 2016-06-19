@@ -15,35 +15,42 @@
     <script>
 
         $(function() {
+            
             $( ".tabs" ).tabs();
         });
 
         $(function() {
             $( "#accordion" ).accordion();
 
-        });
+        });  
     </script>
 
 @endsection
 
 @section('content')
+
     <div>
         <h1>
+
             <i class="glyphicon glyphicon-align-justify"></i> 
-            Patient Name : 
-                @foreach ($reservations as $reservation)
-                
-                    {{$reservation->user['username']}}
+                @foreach ($reservations as $reservation)           
+
                     @if($reservation->status !=4)
         <button type="button" class="btn btn-info pull-right"><a href='/exitReserv/{{$reservation->id}}'style="color:white">Exit Exam</a></button>
+        @if($examPatients != null)
         <button type="button" class="btn btn-info pull-right"><a href='/nextReserv/{{$reservation->id}}'style="color:white">Next</a></button>
-  
+        @endif
                 @endif
-
                 @endforeach
+
+        
+        @if($examPatientNo == 0)
+        <button type="button" class="btn btn-info pull-right"><a href='/reservation/today'style="color:white">Exit Exam</a></button>
+        @endif
         </h1>
 
     </div>
+
     <div id="accordion">
         <?php $i = 0?>
 
@@ -73,10 +80,9 @@
                         </div>
                         <!-- ******************************* -->
                         <div id="tabs-{{$i}}2">
-                            @if(count($reservation->examination) != 0)
-                                
-                                @include("forms.examinationUpdate")
 
+                            @if(count($reservation->examination) != 0)     
+                                @include("forms.examinationUpdate")
 
                             @endif
                             @if(count($reservation->examination) == 0)
@@ -86,10 +92,9 @@
                         </div>
                         <!-- ************************************************* -->
                         <div id="tabs-{{$i}}3">
+                            <h1> hamada</h1>
                             @if(count($reservation->examGlass) != 0)
                               @include("forms.examGlassUpdate")
-
-                               
                             @endif
 
                             @if(count($reservation->examGlass) == 0)
@@ -158,7 +163,7 @@
                                             @foreach ($reservation->complain->complainDetail as $detail)
                                                 <td>{{$detail['plan']}}</td>
                                                 <td>{{$detail['diagnose']}}</td>
-                                                 <td> <a class="btn btn-xs btn-warning" href="{{ route('complains.edit', $reservation->complain['id']) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+                                                
                                             @endforeach
                                         @endif
                                     </tr>

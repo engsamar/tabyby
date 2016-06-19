@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>@lang('validation.vision clinic')</title>
+    <title>@lang('validation.EyeCareClinic')</title>
     <!-- Stylesheets -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/rev-settings.css" rel="stylesheet">

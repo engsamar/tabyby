@@ -141,7 +141,19 @@ return [
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
-
+    'Forgot Your Password?'=>'Forgot Your Password?',
+    'vision clinic' => 'vision clinic',
+    'Home'=>'Home',
+    'Blog'=>'Blog',
+    'ContactUs'=>'ContactUs',
+    'All rights reserved'=>'All rights reserved',
+    'Copyright'=>'Copyright',
+    'Enter email and password to log on:'=>'Enter email and password to log on:',
+    'Username'=>'Username',
+    'email'=>'email',
+    'Password'=>'Password',
+    'Sign up'=>'Sign up',
+    'Fill in the form below to get instant access:'=>'Fill in the form below to get instant access:',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

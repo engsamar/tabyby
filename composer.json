@@ -10,9 +10,9 @@
         "laralib/l5scaffold": "dev-master",
         "nesbot/carbon": "^1.21",
         "caouecs/laravel-lang": "~3.0",
-        "ablunier/laravel-lang-installer": "^1.0",
         "edvinaskrucas/laravel-user-email-verification": "^1.0",
-        "cornford/googlmapper": "2.*"
+        "cornford/googlmapper": "2.*",
+        "twbs/bootstrap": "^3.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

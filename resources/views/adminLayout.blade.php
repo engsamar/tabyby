@@ -328,11 +328,11 @@
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 @if(Auth::user()->userRoles[0]->type==0)
-                    <li>
-                        <a href="/chooseClinic">
-                            <i class="fa fa-th"></i> <span>Dashboard</span>
-                        </a>
-                    </li>
+                    {{--<li>--}}
+                        {{--<a href="/chooseClinic">--}}
+                            {{--<i class="fa fa-th"></i> <span>Dashboard</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
 
                     <li>
                         <a href="/clinics">
@@ -352,7 +352,7 @@
 
                     </li>
                     <li >
-                        <a href="medicines">
+                        <a href="/medicines">
                             <i class="fa fa-edit"></i> <span>Medicines</span>
                         </a>
 
@@ -379,7 +379,7 @@
 
                 </li>
                  <li class="treeview">
-                    <a href="/reservations/cancelled">
+                    <a href="/cancelledReservation">
                         <i class="fa fa-laptop"></i>
                         <span>Cancelled Reservation</span>
                     </a>

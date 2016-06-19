@@ -127,14 +127,14 @@
                     <div class="widget follow-us animated out" data-delay="300" data-animation="fadeInUp">
                     	<h2 class="border-line-left">Follow us on</h2>
                         
-                        <a href="#" class="facebook"><span class="flaticon-facebook31"></span></a>
-                        <a href="#" class="twitter"><span class="flaticon-twitter1"></span></a>
-                        <a href="#" class="dribble"><span class="flaticon-webdesign3"></span></a>
-                        <a href="#" class="vimeo"><span class="flaticon-social140"></span></a><br>
-                        <a href="#" class="google-plus"><span class="flaticon-google116"></span></a>
-                        <a href="#" class="youtube"><span class="flaticon-youtube18"></span></a>
-                        <a href="#" class="pinterest"><span class="flaticon-pinterest34"></span></a>
-                        <a href="#" class="instagram"><span class="flaticon-instagram11"></span></a>
+                        <a href="https://www.facebook.com/galals2" class="facebook"><span class="flaticon-facebook31"></span></a>
+                        <a href="https://twitter.com/dr_agina?s=07" class="twitter"><span class="flaticon-twitter1"></span></a>
+                        <a href="" class="dribble"><span class="flaticon-webdesign3"></span></a>
+                        <a href="" class="vimeo"><span class="flaticon-social140"></span></a><br>
+                        <a href="aginaclinic@gmail.com" class="google-plus"><span class="flaticon-google116"></span></a>
+                        <a href="" class="youtube"><span class="flaticon-youtube18"></span></a>
+                        <a href="" class="pinterest"><span class="flaticon-pinterest34"></span></a>
+                        <a href="" class="instagram"><span class="flaticon-instagram11"></span></a>
                         
                     </div>
                 

@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ClinicConstants;
 use App\Medicine;
+use App\UserRole;
 use Illuminate\Http\Request;
 
 class MedicineController extends Controller
@@ -18,8 +19,9 @@ class MedicineController extends Controller
     public function index()
     {
         $medicines = Medicine::orderBy('id', 'asc')->paginate(10);
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-        return view('medicines.index', compact('medicines'), ['medicineType' => ClinicConstants::$medicineType]);
+        return view('medicines.index', compact('medicines','doctorRole'), ['medicineType' => ClinicConstants::$medicineType]);
     }
 
     /**
@@ -29,7 +31,9 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        return view('medicines.create', ['medicineType' => ClinicConstants::$medicineType], ['constituent' => Consistitue::all()]);
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
+        return view('medicines.create',compact('doctorRole'), ['medicineType' => ClinicConstants::$medicineType,'constituent' => Consistitue::all()]);
     }
 
     /**
@@ -41,10 +45,10 @@ class MedicineController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|unique:medicines',
-            'type' => 'required|number',
+            'name' => 'string|required|unique:medicines',
+            'type' => 'required|numeric',
             'company' => 'required|string',
-            'consistitue_id' => 'required|number',
+            'consistitue_id' => 'required|numeric',
         ]);
         $medicine = new Medicine();
 
@@ -54,8 +58,9 @@ class MedicineController extends Controller
         $medicine->consistitue_id = $request->input("constituent");
 
         $medicine->save();
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-        return redirect()->route('medicines.index')->with('message', 'Item created successfully.');
+        return redirect()->route('medicines.index')->with('message', 'Item created successfully.')->with('doctorRole',$doctorRole);
     }
 
     /**
@@ -67,8 +72,9 @@ class MedicineController extends Controller
     public function show($id)
     {
         $medicine = Medicine::findOrFail($id);
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-        return view('medicines.show', compact('medicine'), ['medicineType' => ClinicConstants::$medicineType]);
+        return view('medicines.show', compact('doctorRole','medicine'), ['medicineType' => ClinicConstants::$medicineType]);
     }
 
     /**
@@ -81,8 +87,9 @@ class MedicineController extends Controller
     {
         $medicine = Medicine::findOrFail($id);
         $constituent = Consistitue::all();
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-        return view('medicines.edit', compact('medicine', 'constituent'), ['medicineType' => ClinicConstants::$medicineType]);
+        return view('medicines.edit', compact('doctorRole','medicine', 'constituent'), ['medicineType' => ClinicConstants::$medicineType]);
     }
 
     /**
@@ -96,9 +103,9 @@ class MedicineController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|unique:medicines',
-            'type' => 'required|number',
+            'type' => 'required|numeric',
             'company' => 'required|string',
-            'consistitue_id' => 'required|number',
+            'consistitue_id' => 'required|numeric',
         ]);
         $medicine = Medicine::findOrFail($id);
 
@@ -108,8 +115,9 @@ class MedicineController extends Controller
         $medicine->consistitue_id = $request->input("constituent");
 
         $medicine->save();
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-        return redirect()->route('medicines.index')->with('message', 'Item updated successfully.');
+        return redirect()->route('medicines.index')->with('doctorRole',$doctorRole)->with('message', 'Item updated successfully.');
     }
 
     /**
@@ -122,8 +130,9 @@ class MedicineController extends Controller
     {
         $medicine = Medicine::findOrFail($id);
         $medicine->delete();
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-        return redirect()->route('medicines.index')->with('message', 'Item deleted successfully.');
+        return redirect()->route('medicines.index')->with('doctorRole',$doctorRole)->with('message', 'Item deleted successfully.');
     }
 
     public function find(Request $request)

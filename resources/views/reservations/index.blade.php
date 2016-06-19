@@ -6,12 +6,33 @@
     {{--<a class="btn btn-success pull-right" href="{{ route('reservations.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>--}}
      <a class="btn btn-primary pull-right" href="/allReservations"></i>All Reservations</a>
      @if(Auth::user()->userRoles[0]->type==1)
-    <button type="button" class="btn btn-info pull-right"><a href="{{ route('users.create') }}"
+    <button type="button" class="btn btn-info pull-right"><a href="{{ route('users.create') }} "style="color:white">New Patient</a></button>
+     @endif
+     @if(Auth::user()->userRoles[0]->type==0)
 
-     style="color:white">New Patient</a></button>
+     <button type="button" class="btn btn-info pull-right"><a href='/all_reservation/{{$examPatients->user_id}}'style="color:white">Start Exam</a></button>
      @endif
     </h2>
+
 </div>
+
+@if(Auth::user()->userRoles[0]->type==0)
+            <div  class="form-group @if($errors->has('address')) has-error @endif">
+                <label for="address-field">Address</label>
+                <select id="address-field" name="address" class="form-control">
+                    <option value="0">Choose Clinic</option>
+                    @foreach($clinic as $key=>$value)
+
+                    <option value={{ $value->id }}>{{ $value->name }} :: {{ $value->address }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has("address"))
+                <span class="help-block">{{ $errors->first("address") }}</span>
+                @endif
+            </div>
+
+    @endif 
+
 
 <div class="form-group @if($errors->has('searchRes')) has-error @endif">
     <select id="searchRes-field" name="searchRes" class="form-control">
@@ -112,16 +133,16 @@
                 <tr>
                     @if(Auth::user()->userRoles[0]->type==0)
                     <th>Patient_Name</th>
+                    <th>Appointment</th>
+
                     <th>RESERVATION_TYPE</th>
-                    <th class="text-right">OPTIONS</th>
-                    
+                    <th class="text-right">OPTIONS</th>                    
                     @else
                     <th>Patient_Name</th>
                     <th>CLINIC_Name</th>
                     <th>Appointment</th>
                     <th>Date</th>
                     <th>RESERVATION_TYPE</th>
-                    <th>Previous RESERVATION</th>
                     <th>STATUS</th>
                     <th class="text-right">OPTIONS</th>
 
@@ -132,36 +153,31 @@
                 @foreach($reservations as $reservation)
                 <tr>
                     @if(Auth::user()->userRoles[0]->type==0)
-                    <td><a href='#'>{{$reservation->user->username}}</a></td>
+                    <td><a href='/users/{{$reservation->user_id}}'>{{$reservation->user->username}}</a></td>
+                    <td>{{$reservation->appointment}}</td>
+
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
                     <td class="text-right">
                         <a class="btn btn-xs btn-primary" href='/all_reservation/{{$reservation->user_id}}'><i class="glyphicon glyphicon-eye-open"></i> View History</a>
                     </td>
                     @else
                     
-                    <td><a href='#'>{{$reservation->user->username}}</a></td>
+                    <td><a href='/users/{{$reservation->user_id}}'>{{$reservation->user->username}}</a></td>
                     <td>{{$reservation->clinic->name}}</td>
                     <td>{{$reservation->appointment}}</td>
                     <td>{{$reservation->date}}</td>
                     <td>{{$reserveType[$reservation->reservation_type_id]}}</td>
-                    <td>
-                        @if($reservation->reservation_type_id-1 >=0 )
-                        {{$reserveType[$reservation->reservation_type_id-1]}}
-                        @else
-                        this is first reservation
-                        @endif
-                        
-                    </td>
+                    
                     <td>{{$status[$reservation->status]}}</td>
                     <td class="text-right">
-                        @if($reservation->status != 0)
+                        @if( $reservation->status >2)
                       <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Cancel Reservation ? Are you sure?')) { return true } else {return false };">
                       <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                         <a class="btn btn-xs btn-warning btn-group" role="group" href="{{ route('reservations.edit', $reservation->id) }}"><i class="glyphicon glyphicon-edit"></i> Postpone</a>
-                     <button type="submit" class="btn btn-xs btn-danger">Cancel Reservation <i class="glyphicon glyphicon-trash"></i></button>
+                         <a class="btn btn-xs btn-warning btn-group" role="group" href="{{ route('reservations.edit', $reservation->id) }}"><i class="glyphicon glyphicon-edit"></i>Postpone</a>
+                     <button type="submit" class="btn btn-xs btn-danger">Cancel<i class="glyphicon glyphicon-trash"></i></button>
 
-                     <a class="btn btn-xs btn-warning btn-group" role="group" href="/reservations/existed/{{$reservation->id}}"<i class="glyphicon glyphicon-edit"></i> Existed</a>
+                     <a class="btn btn-xs btn-info btn-group" role="group" href="/reservations/existed/{{$reservation->id}}"<i class="glyphicon glyphicon-edit"></i>Existed</a>
                      </form>
                      @endif
                      </td>

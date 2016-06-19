@@ -24,13 +24,15 @@ class ReservationController extends Controller {
 	public function index()
 	{
 		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
-		$reservations = Reservation::where('status','>',0)->orderBy('id', 'asc')->paginate(10);
+		$reservations = Reservation::where('status','>=',2)->orderBy('status', 'asc')->paginate(10);
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-
+		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
-		return view('reservations.index', compact('reservations','status','reserveType','userRole','doctorRole'))->with('message',"")->with('userRoleType',$userRole);
+		$clinic = Clinic::all();
+
+		return view('reservations.index', compact('reservations','examPatients','status','reserveType','userRole','doctorRole','clinic'))->with('message',"")->with('userRoleType',$userRole);
 	}
 
 	public function patientReservations()
@@ -44,7 +46,10 @@ class ReservationController extends Controller {
 
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
-		return view('reservations.patient_reservations', compact('reservations','doctorRole','cancel_reservations','status','reserveType','userRole'))->with('message',"")->with('userRoleType',$userRole);
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
+		return view('reservations.patient_reservations', compact('reservations','cancel_reservations','status','reserveType','userRole'),['doctorRole'=>$doctorRole])->with('message',"")->with('userRoleType',$userRole);
+
 
 	}
 
@@ -55,7 +60,9 @@ class ReservationController extends Controller {
 		$appointments=WorkingHour::all();
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.create',compact('doctorRole'),['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"error")->with('userRoleType',$userRole);
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
+		return view('reservations.create',['status' => ClinicConstants::$status],['reserveType' => ClinicConstants::$reservationType,'doctorRole'=>$doctorRole])->with('userRole',$userRole)->with('address', $clinic)->with('appointment', $appointments)->with('message',"error")->with('userRoleType',$userRole);
 	}
 
 
@@ -211,6 +218,7 @@ class ReservationController extends Controller {
 		}
 		if (Auth::user()->userRoles[0]->type==2) {
 			# code...
+
 			return redirect('/patientReservation')->with('message',$message);
 
 		}else{
@@ -401,43 +409,48 @@ class ReservationController extends Controller {
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		$clinic = Clinic::all();
+
+		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+
+		return view('reservations.index', compact('clinic','message','reservations','status','reserveType','userRole','examPatients'))->with('userRoleType',$userRole );
 	}
 
 	public function cancel()
 	{
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-/*
 		$reservations = Reservation::where('status','=',0)->paginate(10);
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
-		return redirect()->route('reservations.index')->with('message', '');
+	//	return redirect()->route('reservations.index')->with('message', '');
 		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );*/
-		if (Auth::user()->userRoles[0]->type==2) {
-			# code...
-			return redirect('/patientReservation')->with('message','Item cancelled successfully.');
+		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
 
-		}else{
-			return redirect()->route('reservations.index')->with('message','Item cancelled successfully.');
-			
-		}
+		return view('reservations.index', compact('message','examPatients','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		
+	}
+	public function exitReserv($id)
+	{
+		$reservation = Reservation::findOrFail($id);
+		$reservation->status=4;
+		$reservation->save();
+		return redirect()->route('reservations.index')->with('message', 'Examination Done');
+	}
+	public function nextReserv($id)
+	{
+		$reservation = Reservation::findOrFail($id);
+		$reservation->status=4;
+		$reservation->save();
+		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+
+		return redirect('/all_reservation/'.$examPatients->user_id);
 	}
 
 	public function getReservations($id)
 	{
 
 		$reservations = Reservation::where('user_id', $id)->get();
-        // return view('reservations.all_reservations', compact('reservations'));
-//		if(count($reservations)==0){
-//			$reservation_id=$reservations[0]->id;
-//		}
-//		echo "<pre>";
-//			var_dump($reservations[0]->prescription->PrescriptionDetails[0]["id"]);
-//			var_dump($reservations[0]->id);
-//			echo "</pre>";
-//			die();
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$medicalHistoryType=ClinicConstants::$medicalHistoryType;

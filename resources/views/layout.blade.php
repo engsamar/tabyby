@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Eyes' Clinic</title>
+    <title>@lang('validation.EyeCareClinic')</title>
     <!-- Stylesheets -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/rev-settings.css" rel="stylesheet">
@@ -56,8 +56,8 @@
                     <!-- Main Menu -->
                     <nav class="col-md-9 col-sm-9 col-xs-12 main-menu">
                         <ul>
-                            <li class="current"><a href="/">Home</a></li>
-                            <li><a href="/blog">Blog</a></li>
+                            <li class="current"><a href="/">@lang('validation.Home')</a></li>
+                            <li><a href="/blog">@lang('validation.Blog')</a></li>
 
                             @if(!Auth::user())
 
@@ -74,18 +74,6 @@
                                     </ul>
                                 </li>
                             @else
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown">@lang('validation.Messages')
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ route('messages') }}">
-                                                @lang('validation.Messages')
-                                            </a></li>
-                                        <li><a href="{{ route('messages.create') }}">
-                                                + @lang('validation.New Message')
-                                            </a></li>
-                                    </ul>
-                                </li>
                                 @if(Auth::user()->userRoles[0]->type==0 || Auth::user()->userRoles[0]->type==1)
                                     <li class="dropdown">
                                         <a href="/reservations/today">@lang('validation.Control Panel')
@@ -135,7 +123,7 @@
                                     @endforeach
                                 </ul>
                             </li>
-                            <li><a href="/contact">Contact Us</a>
+                            <li><a href="/contact">@lang('validation.ContactUs')</a>
                             </li>
                         </ul>
                     </nav>
@@ -149,15 +137,7 @@
                             <ul>
                                 <li class="current"><a href="/">Home</a>
                                 </li>
-                                <li><a href="features.html">Features</a></li>
-                                <li><a href="about-us.html">About us</a>
-                                    <span class="toggle-icon"></span>
-                                    <ul class="sub-menu">
-                                        <li><a href="our-team.html">Our Team</a></li>
-                                        <li><a href="our-doctors.html">Our Doctors</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="services.html">Services</a>
+                                <li><a href="#">Services</a>
                                     <span class="toggle-icon"></span>
                                     <ul class="sub-menu">
                                         <li><a href="services.html">Dental Implants</a></li>

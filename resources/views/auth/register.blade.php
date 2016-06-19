@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/form-elements.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
     <link rel="shortcut icon" href="assets/ico/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114-precomposed.png">
@@ -17,7 +18,7 @@
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/scripts.js"></script>
     <script src="/js/jquery-ui.min.js"></script>
-    <script src="/js/bootstrap-datepicker.js"></script>
+    {{--<script src="/js/bootstrap-datepicker.js"></script>--}}
     <script src="/js/user_validation.js"></script>
 @endsection
 @section('content')
@@ -52,7 +53,7 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="sr-only" for="email">@lang('validation.E-Mail Address')</label>
                             <input type="email" name="email" placeholder="@lang('validation.E-Mail Address')..."
-                                   class="form-email form-control" id="email">
+                                   class="form-email form-control" id="email" required="required">
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                 </span>
@@ -81,7 +82,7 @@
 
                         <div class="form-group @if($errors->has('address')) has-error @endif">
                             <label class="sr-only" for="address-field">@lang('validation.Address')</label>
-                            <input type="text" id="address-field" placeholder="@lang('validation.Confirm Password')" name="address"
+                            <input type="text" id="address-field" placeholder="@lang('validation.Address')" name="address"
                                    value="{{ old("address") }}"/>
                             @if($errors->has("address"))
                                 <span class="help-block"><strong>
@@ -120,9 +121,9 @@
                             @endif
                         </div>
                 {{--/       ////////////////--}}
-                        <div class="form-group @if($errors->has('birthdate')) has-error @endif">
+                        <div class=" form-group @if($errors->has('birthdate')) has-error @endif">
                             <label class="sr-only" for="birthdate-field">@lang('validation.Birthdate')</label>
-                            <input type="text" id="birthdate-field" required="required" name="birthdate"
+                            <input class="datepicker" type="text" id="birthdate-field" placeholder="@lang('validation.Birthdate')" required="required" name="birthdate"
                                    value="{{ old("birthdate") }}" />
 
                             @if($errors->has("birthdate"))

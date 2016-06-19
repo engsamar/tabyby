@@ -73,14 +73,14 @@ class PostController extends Controller {
 	public function show($id)
 	{
 		$post = Post::findOrFail($id);
-
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 		
 		if (Auth::user()->userRoles[0]->type==2) {
 			# code...
 		return view('posts.blog-detail', compact('post'));
 
 		}else{
-		return view('posts.show', compact('post'));
+		return view('posts.show', compact('post','doctorRole'));
 
 		}
 	}
@@ -129,10 +129,10 @@ class PostController extends Controller {
 		$post->title = $request->input("title");
         $post->content = $request->input("content");
         $post->user_id = $request->input("user_id");
-        $post->picture_path = $request->input("picture_path");
+		$post->picture_path = $request->file("picture_path")->getClientOriginalName();
 
 		$post->save();
-
+		$request->file('picture_path')->move(public_path('images/posts/'), $request->file("picture_path")->getClientOriginalName() );
 		return redirect()->route('posts.index')->with('message', 'Item updated successfully.');
 	}
 

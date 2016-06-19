@@ -100,7 +100,7 @@ class ReservationController extends Controller {
 		else{
 			
 			$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
-			$dateCheck = $dateTime->format('Y-m-d');
+			//$dateCheck = $dateTime->format('Y-m-d');
 		}
 		#status waiting
 		$reservation->status = 3;
@@ -125,6 +125,9 @@ class ReservationController extends Controller {
 				}		
 			}else{
 				$working_hours = WorkingHour::where('clinic_id',$clinic_id)->where('day',date('l',strtotime($dateCheck)))->get();
+				if(! $working_hours){
+					return Redirect::back()->withErrors(['msg', 'There is no working hour in this date ']);
+				}
 				foreach ($working_hours as $working_hour) {
 				$from_time=$working_hour->fromTime;
 				$no_of_patient=(strtotime($working_hour->toTime)-strtotime($working_hour->fromTime))/(15*60);
@@ -308,7 +311,10 @@ class ReservationController extends Controller {
 		$clinic_id=$request->input("clinic_id");
 
 		$dateTime = DateTime::createFromFormat('m/d/Y', $dateCheck);
-		$dateCheck = $dateTime->format('Y-m-d');
+	//	echo $dateTime ."hiii";
+		//echo $dateCheck;
+		//die();
+		//$dateCheck = $dateTime->format('Y-m-d');
 		#status waiting
 		$reservation->status = 3;
 		$reservation->date=$dateCheck;
@@ -319,10 +325,26 @@ class ReservationController extends Controller {
 			
 		}else{
 			
-			$working_hours = WorkingHour::where('clinic_id',$clinic_id)->where('day',date('l',strtotime($dateCheck)))->get();
+			$working_hs = WorkingHour::where('clinic_id',$clinic_id)->where('day',date('l',strtotime($dateCheck)))->count();
+			if ($working_hs>1) {
+				# code...$workingHour
+			$workingHour = $request->input("workingHour");
+			$working_hours = WorkingHour::where('id',$workingHour)->get();
+			
 			foreach ($working_hours as $working_hour) {
 				$from_time=$working_hour->fromTime;
 				$no_of_patient=(strtotime($working_hour->toTime)-strtotime($working_hour->fromTime))/(15*60);
+				}		
+			}else{
+				$working_hours = WorkingHour::where('clinic_id',$clinic_id)->where('day',date('l',strtotime($dateCheck)))->get();
+				if(! $working_hours){
+					return Redirect::back()->withErrors(['msg', 'There is no working hour in this date ']);
+				}
+				foreach ($working_hours as $working_hour) {
+				$from_time=$working_hour->fromTime;
+				$no_of_patient=(strtotime($working_hour->toTime)-strtotime($working_hour->fromTime))/(15*60);
+				}			
+			
 			}
 			
 			$no_of_reserve = Reservation::where('date', $dateCheck)->where('clinic_id',$clinic_id)->where('status','>',0)->count();
@@ -652,6 +674,8 @@ class ReservationController extends Controller {
 		}
 		else{
 			$working_hours = WorkingHour::where('clinic_id',$clinic_id)->where('day',date('l',strtotime($date)))->count();
+			echo $working_hours;
+			die();
 			if ($working_hours==0) {
 				return 'noTime';
 			}

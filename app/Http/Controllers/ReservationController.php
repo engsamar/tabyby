@@ -11,7 +11,7 @@ use App\Secertary;
 use App\Vacation;
 use App\Reservation;
 use App\Clinic;
-use \App\UserRole;
+use App\UserRole;
 use App\User;
 use App\MedicalHistory;
 use App\Examination;
@@ -68,6 +68,10 @@ class ReservationController extends Controller {
 
 	public function store(Request $request)
 	{
+		$this->validate($request, [
+          // 'name' => 'required|string',
+            'date' => 'required|date',
+        ]);
 		$reservation = new Reservation();
 		$no_of_patient=0 ;
 		$no_of_reserve=0;
@@ -185,9 +189,6 @@ class ReservationController extends Controller {
 					if ($reservationCh!=NULL){
 						$status= $reservationCh->status;
 						if($status==3){
-						//echo "you have another reservation that doesn't attend.  </br>";
-						//echo " your appointment at ".$reservationCheck->appointment;
-						//echo  "  ".$reservationCheck->date;
 						return Redirect::back()->withErrors(['msg', 'you have another reservation that doesn\'t attend your appointment at '.$reservationCh->appointment.' -- '.$reservationCh->date]);
 
 
@@ -273,7 +274,7 @@ class ReservationController extends Controller {
 		$medicalHistoryType=ClinicConstants::$medicalHistoryType;
 		
 		$user = Auth::user();
-		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
+		$userRoleType = UserRole::where('user_id', '=', $user->id)->value('type');
 		return view('reservations.show', compact('doctorRole','userRoleType','reservation','histories', 'examinations', 'userInfo','complains','medicines','status','reserveType','medicalHistoryType'));
 	}
 
@@ -287,6 +288,9 @@ class ReservationController extends Controller {
 
 	public function update(Request $request, $id)
 	{
+		$this->validate($request, [
+            'date' => 'required|date',
+        ]);
 		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 		$reservation = Reservation::findOrFail($id);
 
@@ -567,7 +571,7 @@ class ReservationController extends Controller {
 
 	public function searchKey($key)
 	{
-		$query= \App\User::where('username', 'like', $key.'%')->get();
+		$query= User::where('username', 'like', $key.'%')->get();
 		return $query;
 
 

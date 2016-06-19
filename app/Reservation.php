@@ -38,5 +38,6 @@ class Reservation extends Model
     {
         return $this->hasMany('App\ExamGlass');
     }
+
     public $timestamps = false;
 }

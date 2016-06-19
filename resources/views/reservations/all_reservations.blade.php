@@ -12,8 +12,8 @@
     <script src="/js/jquery-ui.min.js"></script>
     {{--<link rel="stylesheet" href="/resources/demos/style.css">--}}
     {{--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">--}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script>
-
         $(function() {
             
             $( ".tabs" ).tabs();
@@ -22,8 +22,25 @@
         $(function() {
             $( "#accordion" ).accordion();
 
-        });  
+        });
+
+         $(function() {
+            $( "#accordion2" ).accordion();
+
+        })  
+
+
+        $(document).ready(function(){
+            $("#accordion2").fadeIn();
+            $("#show").click(function(){
+                $("#accordion2").fadeToggle('300');
+            });
+        });
     </script>
+
+    </script>
+            <script src="/js/examination_validation.js"></script>
+
 
 @endsection
 
@@ -50,15 +67,72 @@
         </h1>
 
     </div>
+    <!-- ************************************************* -->
+   <button id="show" class=" btn btn-info glyphicon glyphicon-sort">Medical History</button>
+    
+    <div id="accordion2">
+       <h3>Medical History</h3>
+       @if(count($reservation->user->medicalHistories) != 0)
+            <div class="tabs">
+                <ul>
+                    <li><a href="#tabs-1">Surgies</a></li>
+                    <li><a href="#tabs-2">Diseases</a></li>
+                    <li><a href="#tabs-3">Medicines</a></li>
+                </ul>
+                <div id="tabs-1">
+                    @if(count($reservation->user->medicalHistories) != 0)
+                        @foreach($reservation->user->medicalHistories as $history)
+                            @if($history->type == 0)
+                                <h4>Begined at: {{$history['begin_at']}}</h4>
+                                <h4>Details: {{$history->medicalHistoryDetail['description']}}</h4>
+                                <hr>
 
+                                
+                            @endif
+                        @endforeach
+                    @endif
+                </div>
+                <!-- ******************************* -->
+                <div id="tabs-2">
+                    @if(count($reservation->user->medicalHistories) != 0)
+
+                        @foreach($reservation->user->medicalHistories as $history)
+                            @if($history->type == 1)
+                                @foreach ($history->medicalHistoryDetail as $detail)
+                                    <h4>{{$detail['description']}}</h4><hr/><br/>
+                                @endforeach 
+                            @endif
+                        @endforeach 
+                    @endif  
+                </div>
+                <!-- ************************************************* -->
+                <div id="tabs-3">
+                    @if(count($reservation->user->medicalHistories) != 0)
+                        @foreach($reservation->user->medicalHistories as $history)
+                            @if($history->type == 2)
+                                @foreach ($history->medicalHistoryDetail as $detail)
+                                         <h4>{{$detail['description']}}</h4><hr/><br/>
+                                @endforeach 
+                            @endif
+                        @endforeach
+                    @endif
+                </div>
+                
+            </div>
+        @endif
+        
+    </div>
+
+    <!-- ***************************************************** -->
     <div id="accordion">
+
         <?php $i = 0?>
 
         @if(count($reservations) != 0)
             @foreach ($reservations as $reservation)
-            <?php $i++ ?>
+                <?php $i++ ?>
 
-            <h3>{{$reservation->date}}</h3>
+                <h3>{{$reservation->date}}</h3>
 
                 <div class="tabs">
                     <ul>
@@ -92,15 +166,10 @@
                         </div>
                         <!-- ************************************************* -->
                         <div id="tabs-{{$i}}3">
-                            <h1> hamada</h1>
                             @if(count($reservation->examGlass) != 0)
                               @include("forms.examGlassUpdate")
                             @endif
 
-                            @if(count($reservation->examGlass) == 0)
-
-                              @include("forms.examGlass")
-                            @endif
                         </div>
                         <!-- *********************************************** -->
                         <div id="tabs-{{$i}}4">
@@ -226,12 +295,8 @@
                                 </table>
                             @endif
                         </div>
-
-                        <div id="tabs-{{$i}}4">
-
-                        </div>
                     @endif
-                    </div>
+                </div>
             @endforeach
         @else
             <p align="center">There are no Reservations till now</p>

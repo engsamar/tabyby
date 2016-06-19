@@ -33,12 +33,6 @@ class MedicalHistoryController extends Controller
         return view('medical_histories.create',['patient_id'=>$patient_id,'res_id'=>$res_id,'medicalHistoryType' => ClinicConstants::$medicalHistoryType]);
     }
   
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
         $medical_history = new MedicalHistory();
@@ -51,7 +45,8 @@ class MedicalHistoryController extends Controller
         $medical_history_detail->description = $request->input("description");
         $medical_history_detail->medical_history_id=$medical_history->id;
         $medical_history_detail->save();
-        return redirect('/patient/'.$request->input("res_id").'/'.$request->input("patient_id"));
+
+        return redirect()->action('ReservationController@getReservations',[$medical_history->reservation->user["id"]]);    
     }
 
     /**

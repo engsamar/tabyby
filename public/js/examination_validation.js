@@ -1,3 +1,4 @@
-alert("fdfdf");
-
-
+$(document).ready(function () {
+	// alert("hello");
+	
+});

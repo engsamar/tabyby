@@ -58,7 +58,6 @@ class ComplainController extends Controller {
 			}
 		}
 		return redirect()->action('ReservationController@getReservations',[$complain->reservation->user["id"]]);
-        
     }
 
 	/**

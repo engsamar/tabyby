@@ -29,7 +29,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     @yield('css')
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="/js/html5shiv.min.js"></script>
@@ -44,7 +44,7 @@
         <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             {{--<span class="logo-mini"><b>A</b>LT</span>--}}
-            <!-- logo for regular state and mobile devices -->
+                    <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>Control Panel</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
@@ -70,7 +70,8 @@
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user2-160x160.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Support Team
@@ -83,7 +84,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user3-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 AdminLTE Design Team
@@ -95,7 +97,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user4-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Developers
@@ -107,7 +110,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user3-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Sales Department
@@ -119,7 +123,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="/dist/img/user4-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Reviewers
@@ -151,7 +156,8 @@
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                            <i class="fa fa-warning text-yellow"></i> Very long description here that
+                                            may not fit into the
                                             page and may cause design problems
                                         </a>
                                     </li>
@@ -193,7 +199,9 @@
                                                 <small class="pull-right">20%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">20% Complete</span>
                                                 </div>
                                             </div>
@@ -207,7 +215,9 @@
                                                 <small class="pull-right">40%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-green" style="width: 40%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">40% Complete</span>
                                                 </div>
                                             </div>
@@ -221,7 +231,9 @@
                                                 <small class="pull-right">60%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-red" style="width: 60%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">60% Complete</span>
                                                 </div>
                                             </div>
@@ -235,7 +247,9 @@
                                                 <small class="pull-right">80%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-yellow" style="width: 80%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">80% Complete</span>
                                                 </div>
                                             </div>
@@ -313,25 +327,15 @@
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-            <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
-            <!-- /.search form -->
+
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 @if(Auth::user()->userRoles[0]->type==0)
                     {{--<li>--}}
-                        {{--<a href="/chooseClinic">--}}
-                            {{--<i class="fa fa-th"></i> <span>Dashboard</span>--}}
-                        {{--</a>--}}
+                    {{--<a href="/chooseClinic">--}}
+                    {{--<i class="fa fa-th"></i> <span>Dashboard</span>--}}
+                    {{--</a>--}}
                     {{--</li>--}}
 
                     <li>
@@ -345,13 +349,14 @@
                             <span>Secretary</span>
                         </a>
                     </li>
+
                     <li class="treeview">
                         <a href="/posts">
                             <i class="fa fa-edit"></i> <span>Posts</span>
                         </a>
 
                     </li>
-                    <li >
+                    <li>
                         <a href="/medicines">
                             <i class="fa fa-edit"></i> <span>Medicines</span>
                         </a>
@@ -360,6 +365,7 @@
                 @endif
 
                 @if(Auth::user()->userRoles[0]->type==1)
+
                 <li>
                     <a href="/reservations/create">
                         <i class="fa fa-th"></i> <span>Add Reservation</span>
@@ -370,6 +376,12 @@
                         <i class="fa fa-th"></i> <span>Add New Patient</span>
                     </a>
                 </li>
+                <li>
+                        <a href='/clinics'>
+                            <i class="fa fa-th"></i> <span>Clinic</span>
+>>>>>>> 13000588786f9f712015fa2e920b1ac37081973f
+                        </a>
+                    </li>
                 @endif
                 <li class="treeview">
                     <a href="/vacations">
@@ -378,7 +390,7 @@
                     </a>
 
                 </li>
-                 <li class="treeview">
+                <li class="treeview">
                     <a href="/cancelledReservation">
                         <i class="fa fa-laptop"></i>
                         <span>Cancelled Reservation</span>
@@ -392,12 +404,12 @@
                     </a>
 
                 </li>
-                <li>
-                    <a href="pages/calendar.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
-                        <small class="label pull-right bg-red">3</small>
-                    </a>
-                </li>
+                {{--<li>--}}
+                    {{--<a href="pages/calendar.html">--}}
+                        {{--<i class="fa fa-calendar"></i> <span>Calendar</span>--}}
+                        {{--<small class="label pull-right bg-red">3</small>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
                 <li>
                     <a href="/messages">
                         <i class="fa fa-envelope"></i> <span>Mailbox</span>
@@ -412,17 +424,16 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="header">
-            @yield('header')
-        </div>
-        <div class="content">
-  <div id="page-wrapper">
-             @yield('content')
-        </div>
+
+        <div class="content  col-md-12">
+            <div id="page-wrapper" >
+                @yield('header')
+                @yield('content')
+            </div>
         </div>
 
 
-                <!-- /.content -->
+        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
@@ -639,8 +650,7 @@
 <script src="/js/bootstrap.min-3.3.1.js"></script>
 <!-- Morris.js charts -->
 <script src="/js/raphael-min.js"></script>
-<!-- <script src="/js/jquery-1.11.3.min.js"></script>
- -->
+ <script src="/js/site.js"></script>
 <!-- Sparkline -->
 <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->

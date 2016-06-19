@@ -130,9 +130,9 @@ class PostController extends Controller {
         $post->content = $request->input("content");
         $post->user_id = $request->input("user_id");
 		$post->picture_path = $request->file("picture_path")->getClientOriginalName();
-
-		$post->save();
 		$request->file('picture_path')->move(public_path('images/posts/'), $request->file("picture_path")->getClientOriginalName() );
+		$post->save();
+		$post->save();
 		return redirect()->route('posts.index')->with('message', 'Item updated successfully.');
 	}
 

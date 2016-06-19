@@ -7,6 +7,9 @@
   <h1><i class="glyphicon glyphicon-plus"></i> Secertaries / Create </h1>
 </div>
 @endsection
+@section('scripts')
+    <script src="/js/secretary.js"></script>
+@endsection
 @section('content')
 @include('error')
 <div class="row">

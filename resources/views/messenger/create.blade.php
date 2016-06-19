@@ -17,13 +17,14 @@
         </div>
 
         @if($users->count() > 0)
-        
+
             @foreach($users as $user)
             <div class="checkbox">
                 <label title="{{ $user->username }}"><input type="checkbox" name="recipients[]" value="{{ $user->id }}">{{ $user->username }}</label>
                 </div>
             @endforeach
-        
+
+                
         @endif
 
         <!-- Submit Form Input -->

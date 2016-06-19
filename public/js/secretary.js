@@ -2,6 +2,7 @@
  * Created by mostafa on 14/06/16.
  */
 $(document).ready(function () {
+    console.log('hi');
     $("input[name='name']").on("blur", function () {
 
         if (this.value.trim() != "") {

@@ -76,7 +76,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
+        return view('users.create',compact('doctorRole'));
     }
 
     /**
@@ -158,7 +160,6 @@ class UserController extends Controller
         $user->telephone = $request->input("telephone");
         $user->mobile = $request->input("mobile");
         $user->birthdate = $request->input("birthdate");
-
         $user->save();
 
         return redirect('/')->with('message', 'Item updated successfully.');

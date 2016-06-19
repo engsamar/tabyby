@@ -5,7 +5,12 @@ $(document).ready(function () {
     $("input[name='birthdate']").datepicker({
         dateFormat: "yy/mm/dd",
         minDate: "-3500w",
-        maxDate: "-1d"
+        maxDate: "-1d",
+        yearRange:"c-10:c+40",
+        chaneYear:true,
+        changeMonth:true,
+        changeDay:true,
+        showButtonPanel:true,
     });
     $(":input[name='username']").on("blur", function () {
         if ($(":input[name='username']").val().trim() != "") {

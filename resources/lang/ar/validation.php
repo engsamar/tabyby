@@ -139,7 +139,7 @@ return [
     'unique'               => 'ﻞﻘﺤﻟا ﺔﻤﻴﻗ :attribute ﻞﺒﻗ ﻦﻣ ﺔﻣﺪﺨﺘﺴُﻣ',
     'url'                  => 'ﻂﺑاﺮﻟا ﺔﻐﻴﺻ :attribute ﺔﺤﻴﺤﺻ ﺮﻴﻏ',
     'Forgot Your Password?' => 'هل نسيت كلمه المرور؟',
-    'vision clinic'    => 'رؤية للعيون',
+    'EyeCareClinic'    => 'رؤية للعيون',
     'Home'=>'الصفحة الرئيسية',
     'Blog'=>'المقالات',
     'ContactUs'=>'الإتصال بنا',

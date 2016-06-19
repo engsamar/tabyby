@@ -78,67 +78,35 @@
                 
                 <!-- Side Bar -->
                 <aside class="side-bar col-lg-4 col-md-4 col-sm-5 col-xs-12 pull-right anim-5-all">
-                	
+
                     <!-- Search Form -->
-                	<div class="widget search-form animated out" data-delay="0" data-animation="fadeInUp">
-                    	<h2 class="border-line-left">Search</h2>
-                        
+                    <div class="widget search-form animated out" data-delay="0" data-animation="fadeInUp">
+                        <h2 class="border-line-left">Search</h2>
+
                         <form method="post" action="http://demo.templatepath.com/medicon/blog.html">
-                        	<div class="form-group">
+                            <div class="form-group">
                                 <input type="search" name="search" value="" placeholder="search for something">
                                 <input type="submit" name="submit" value="">
                             </div>
                         </form>
-                        
+
                     </div>
-                    
-                    <!-- Popular Tags -->
-                    <div class="widget tags animated out" data-delay="100" data-animation="fadeInUp">
-                    	<h2 class="border-line-left">Popular tags</h2>
-                        
-                        <ul>
-                        	<li><a href="#">MEDICAL</a></li>
-                            <li><a href="#">MEDICINE</a></li>
-                            <li><a href="#">HELPING</a></li>
-                            <li><a href="#">PLACES</a></li>
-                            <li><a href="#">EMERGENCY</a></li>
-                            <li><a href="#">OPERATION</a></li>
-                            <li><a href="#">MEDICAL THERAPY</a></li>
-                        </ul>
-                        
-                    </div>
-                    
+
+
                     <!-- Twitter Feeds -->
-                    <div class="widget twitter-feeds animated out" data-delay="200" data-animation="fadeInUp">
-                    	<h2 class="border-line-left">Twitter Feeds</h2>
-                        
-                        <div class="feed">
-                        	<p><a href="#">@envato</a> Creating a new theme for medical industry and medical health...</p>
-                            <span class="time"># 2 hours ago</span> 
-                        </div>
-                        <div class="feed">
-                        	<p><a href="#">@envato</a> Creating a new theme for medical industry and medical health...</p>
-                            <span class="time"># 3 hours ago</span> 
-                        </div>
-                        
-                    </div>
-                    
+
+
                     <!-- Social / Follow us -->
                     <div class="widget follow-us animated out" data-delay="300" data-animation="fadeInUp">
-                    	<h2 class="border-line-left">Follow us on</h2>
-                        
+                        <h2 class="border-line-left">Contact us on</h2>
+
                         <a href="https://www.facebook.com/galals2" class="facebook"><span class="flaticon-facebook31"></span></a>
                         <a href="https://twitter.com/dr_agina?s=07" class="twitter"><span class="flaticon-twitter1"></span></a>
-                        <a href="" class="dribble"><span class="flaticon-webdesign3"></span></a>
-                        <a href="" class="vimeo"><span class="flaticon-social140"></span></a><br>
                         <a href="aginaclinic@gmail.com" class="google-plus"><span class="flaticon-google116"></span></a>
-                        <a href="" class="youtube"><span class="flaticon-youtube18"></span></a>
-                        <a href="" class="pinterest"><span class="flaticon-pinterest34"></span></a>
-                        <a href="" class="instagram"><span class="flaticon-instagram11"></span></a>
-                        
+
                     </div>
-                
-                
+
+
                 </aside>
             
             </div>

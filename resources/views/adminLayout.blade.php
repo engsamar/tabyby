@@ -345,6 +345,7 @@
                             <span>Secretary</span>
                         </a>
                     </li>
+
                     <li class="treeview">
                         <a href="/posts">
                             <i class="fa fa-edit"></i> <span>Posts</span>
@@ -370,6 +371,11 @@
                         <i class="fa fa-th"></i> <span>Add New Patient</span>
                     </a>
                 </li>
+                <li>
+                        <a href='/clinics'>
+                            <i class="fa fa-th"></i> <span>Clinic</span>
+                        </a>
+                    </li>
                 @endif
                 <li class="treeview">
                     <a href="/vacations">
@@ -639,8 +645,7 @@
 <script src="/js/bootstrap.min-3.3.1.js"></script>
 <!-- Morris.js charts -->
 <script src="/js/raphael-min.js"></script>
-<!-- <script src="/js/jquery-1.11.3.min.js"></script>
- -->
+ <script src="/js/site.js"></script>
 <!-- Sparkline -->
 <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->

@@ -10,11 +10,15 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png">
+
 @endsection
 @section('scripts')
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/scripts.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="/js/user_validation.js"></script>
 @endsection
 @section('content')
 
@@ -119,7 +123,7 @@
                         <div class="form-group @if($errors->has('birthdate')) has-error @endif">
                             <label class="sr-only" for="birthdate-field">@lang('validation.Birthdate')</label>
                             <input type="text" id="birthdate-field" required="required" name="birthdate"
-                                   value="{{ old("birthdate") }}" class="datepicker"/>
+                                   value="{{ old("birthdate") }}" />
 
                             @if($errors->has("birthdate"))
                                 <span class="help-block"><strong>{{ $errors->first("birthdate") }}</strong></span>

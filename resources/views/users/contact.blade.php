@@ -38,7 +38,7 @@
 
                         <div class="form-container anim-5-all clearfix animated out" data-delay="200"
                              data-animation="fadeIn">
-                            <form method="post" action="#"
+                            <form method="post" action=""
                                   id="contact-form">
                                 <div class="form-group col-lg-6 col-md-6 col-xs-12">
                                     <input type="text" name="subject" required value="" placeholder="Subject">

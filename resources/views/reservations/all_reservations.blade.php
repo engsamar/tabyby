@@ -15,13 +15,14 @@
     <script>
 
         $(function() {
+            
             $( ".tabs" ).tabs();
         });
 
         $(function() {
             $( "#accordion" ).accordion();
 
-        });
+        });  
     </script>
 
 @endsection
@@ -81,10 +82,9 @@
                         </div>
                         <!-- ******************************* -->
                         <div id="tabs-{{$i}}2">
-                            @if(count($reservation->examination) != 0)
-                                
-                                @include("forms.examinationUpdate")
 
+                            @if(count($reservation->examination) != 0)     
+                                @include("forms.examinationUpdate")
 
                             @endif
                             @if(count($reservation->examination) == 0)
@@ -96,8 +96,6 @@
                         <div id="tabs-{{$i}}3">
                             @if(count($reservation->examGlass) != 0)
                               @include("forms.examGlassUpdate")
-
-                               
                             @endif
 
                             @if(count($reservation->examGlass) == 0)

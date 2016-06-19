@@ -22,19 +22,19 @@ $(document).ready()
         				$('#movePatients').show();
                         result=JSON.parse(data);
                         var HTMLtxt='<table class="table table-responsive table-bordered ">';
-						HTMLtxt+='<thead><tr>';
-						HTMLtxt+='<th>no of patients</th>';
-						HTMLtxt+='<th>day date</th>';
-						HTMLtxt+='<th>Move All</th>';
-						HTMLtxt+='<th>Move Some</th>';
-						HTMLtxt+='</tr></thead>';
-						$.each(result.reserve_array,function(index, el) {
-							HTMLtxt+='<tr>';
-							HTMLtxt+='<td> '+ el+' </td>';
-							HTMLtxt+='<td> '+ result.date_array[index] +'</td>';
-							HTMLtxt+='<td><input type="button" id="allPat" data-rowdate="'+result.date_array[index]+'" class="btn btn-primary move2 "  value="Move All"/>';
-							HTMLtxt+='<td><a href="/moveSome_Patients/'+result.date_array[index]+' " id="somePat" class="btn btn-info "  value="'+result.date_array[index]+'">Move Some</a>';
-							HTMLtxt+='</td></tr>';
+            						HTMLtxt+='<thead><tr>';
+            						HTMLtxt+='<th>no of patients</th>';
+            						HTMLtxt+='<th>day date</th>';
+            						HTMLtxt+='<th>Move All</th>';
+            						HTMLtxt+='<th>Move Some</th>';
+            						HTMLtxt+='</tr></thead>';
+            						$.each(result.reserve_array,function(index, el) {
+            							HTMLtxt+='<tr>';
+            							HTMLtxt+='<td> '+ el+' </td>';
+            							HTMLtxt+='<td> '+ result.date_array[index] +'</td>';
+            							HTMLtxt+='<td><input type="button" id="allPat" data-rowdate="'+result.date_array[index]+'" class="btn btn-primary move2 "  value="Move All"/>';
+            							HTMLtxt+='<td><a href="/moveSome_Patients/'+result.date_array[index]+' " id="somePat" class="btn btn-info "  value="'+result.date_array[index]+'">Move Some</a>';
+            							HTMLtxt+='</td></tr>';
 						});
 
 						HTMLtxt += '</table>';

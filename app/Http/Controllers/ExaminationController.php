@@ -7,6 +7,7 @@ use App\Examination;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Reservation;
 
 class ExaminationController extends Controller {
 
@@ -58,6 +59,13 @@ class ExaminationController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		
+ 		$lastReservation = Reservation::all()->last()->id; 
+        $examinations = Examination::where("reservation_id", "=", $lastReservation)->get();
+        foreach ($examinations as $exam) {
+           $exam->delete();
+        }
+
 		$examination = new Examination();
 		$examination1 = new Examination();
 		$examination->eye_type = 1;
@@ -120,13 +128,6 @@ class ExaminationController extends Controller {
 		return view('examinations.edit', compact('examination'),['eyeType' => ClinicConstants::$eyeType],['vision' => ClinicConstants::$vision]);
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @param Request $request
-	 * @return Response
-	 */
 	public function update(Request $request, $id)
 	{
 		$examination = Examination::findOrFail($id);
@@ -146,7 +147,7 @@ class ExaminationController extends Controller {
 
 		$examination->save();
 
-		return redirect()->route('examinations.index')->with('message', 'Item updated successfully.');
+ 		return redirect()->action('ReservationController@getReservations',[$examination->reservation->user["id"]]);   	// 	return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
 	}
 
 	/**

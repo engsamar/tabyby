@@ -203,6 +203,3 @@
 
     </div>
 </div>
-
- <script src="/js/examGlass_validation.js"></script>    
-</script>

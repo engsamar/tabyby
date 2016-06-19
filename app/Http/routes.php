@@ -23,10 +23,9 @@ Route::group(['middleware' => ['auth','roles']], function () {
     Route::get("createExamGlassHome/{id}", "ExamGlassController@examGlass");
     Route::resource("posts","PostController");
     Route::get("/medicine/find","MedicineController@find");
-    Route::get("/examGlass/update/{id}","ExamGlassController@updatey");
 
-
-
+    Route::get("/exitReserv/{id}", "ReservationController@exitReserv");
+    Route::get("/nextReserv/{id}", "ReservationController@nextReserv");
 
 });
 

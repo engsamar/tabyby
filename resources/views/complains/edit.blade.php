@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group @if($errors->has('h_of_complain')) has-error @endif">
                        <label for="h_of_complain-field">H_of_complain</label>
-                    <input type="text" id="h_of_complain-field" name="h_of_complain" class="form-control" value="{{ $complain->h_of_complain }}"/>
+                    <textarea id="h_of_complain-field" name="h_of_complain" class="form-control" value="{{ $complain->h_of_complain }}"></textarea>
                        @if($errors->has("h_of_complain"))
                         <span class="help-block">{{ $errors->first("h_of_complain") }}</span>
                        @endif

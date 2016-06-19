@@ -22,7 +22,7 @@
                 <input type="hidden" name="userId" id="userId" value="{{ $user->id }}"/>
                 <div class="form-group @if($errors->has('username')) has-error @endif">
                     <label for="username-field">Username</label>
-                    <input type="text" id="username-field" name="username" class="form-control" value="{{ $user->username }}"/>
+                    <input type="text" id="username-field" name="username" class="form-control" value="{{ $user->username }}" readonly/>
                     <span id="error" class="help-block"></span>
                     @if($errors->has("username"))
                         <span class="help-block">{{ $errors->first("username") }}</span>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group @if($errors->has('email')) has-error @endif">
                     <label for="email-field">Email</label>
-                    <input type="text" id="email-field" name="email" class="form-control" value="{{ $user->email }}"/>
+                    <input type="text" id="email-field" name="email" class="form-control" value="{{ $user->email }}" readonly/>
                     <span id="error" class="help-block"></span>
                     @if($errors->has("email"))
                         <span class="help-block">{{ $errors->first("email") }}</span>
@@ -48,28 +48,28 @@
 
                 <div class="form-group @if($errors->has('address')) has-error @endif">
                     <label for="address-field">Address</label>
-                    <input type="text" id="address-field" name="address" class="form-control" value="{{ $user->address }}"/>
+                    <input type="text" id="address-field" name="address" class="form-control" value="{{ $user->address }}" readonly/>
                     @if($errors->has("address"))
                         <span class="help-block">{{ $errors->first("address") }}</span>
                     @endif
                 </div>
                 <div class="form-group @if($errors->has('telephone')) has-error @endif">
                     <label for="telephone-field">Telephone</label>
-                    <input type="text" id="telephone-field" name="telephone" class="form-control" value="{{ $user->telephone }}"/>
+                    <input type="text" id="telephone-field" name="telephone" class="form-control" value="{{ $user->telephone }}" readonly/>
                     @if($errors->has("telephone"))
                         <span class="help-block">{{ $errors->first("telephone") }}</span>
                     @endif
                 </div>
                 <div class="form-group @if($errors->has('mobile')) has-error @endif">
                     <label for="mobile-field">Mobile</label>
-                    <input type="text" id="mobile-field" name="mobile" class="form-control" value="{{ $user->mobile }}"/>
+                    <input type="text" id="mobile-field" name="mobile" class="form-control" value="{{ $user->mobile }}" readonly/>
                     @if($errors->has("mobile"))
                         <span class="help-block">{{ $errors->first("mobile") }}</span>
                     @endif
                 </div>
                 <div class="form-group @if($errors->has('birthdate')) has-error @endif">
                     <label for="birthdate-field">Birthdate</label>
-                    <input type="date" id="birthdate-field" name="birthdate" class="form-control" value="{{ $user->birthdate }}"/>
+                    <input type="date" id="birthdate-field" name="birthdate" class="form-control" value="{{ $user->birthdate }}" readonly/>
                     @if($errors->has("birthdate"))
                         <span class="help-block">{{ $errors->first("birthdate") }}</span>
                     @endif

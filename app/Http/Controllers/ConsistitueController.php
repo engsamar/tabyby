@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Consistitue;
+use App\UserRole;
 use Illuminate\Http\Request;
 
 class ConsistitueController extends Controller {
@@ -16,8 +17,9 @@ class ConsistitueController extends Controller {
 	public function index()
 	{
 		$consistitues = Consistitue::orderBy('id', 'asc')->paginate(10);
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-		return view('consistitues.index', compact('consistitues'));
+		return view('consistitues.index', compact('consistitues','doctorRole'));
 	}
 
 	/**
@@ -27,7 +29,9 @@ class ConsistitueController extends Controller {
 	 */
 	public function create()
 	{
-		return view('consistitues.create');
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
+
+		return view('consistitues.create',compact('doctorRole'));
 	}
 
 	/**
@@ -43,8 +47,9 @@ class ConsistitueController extends Controller {
 		$consistitue->active_consistitue = $request->input("active_consistitue");
 
 		$consistitue->save();
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-		return redirect()->route('consistitues.index')->with('message', 'Item created successfully.');
+		return redirect()->route('consistitues.index')->with('doctorRole',$doctorRole)->with('message', 'Item created successfully.');
 	}
 
 	/**
@@ -56,8 +61,9 @@ class ConsistitueController extends Controller {
 	public function show($id)
 	{
 		$consistitue = Consistitue::findOrFail($id);
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-		return view('consistitues.show', compact('consistitue'));
+		return view('consistitues.show', compact('consistitue','doctorRole'));
 	}
 
 	/**
@@ -69,8 +75,9 @@ class ConsistitueController extends Controller {
 	public function edit($id)
 	{
 		$consistitue = Consistitue::findOrFail($id);
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-		return view('consistitues.edit', compact('consistitue'));
+		return view('consistitues.edit', compact('consistitue','doctorRole'));
 	}
 
 	/**
@@ -87,8 +94,9 @@ class ConsistitueController extends Controller {
 		$consistitue->active_consistitue = $request->input("active_consistitue");
 
 		$consistitue->save();
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-		return redirect()->route('consistitues.index')->with('message', 'Item updated successfully.');
+		return redirect()->route('consistitues.index')->with('doctorRole',$doctorRole)->with('message', 'Item updated successfully.');
 	}
 
 	/**
@@ -101,8 +109,9 @@ class ConsistitueController extends Controller {
 	{
 		$consistitue = Consistitue::findOrFail($id);
 		$consistitue->delete();
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 
-		return redirect()->route('consistitues.index')->with('message', 'Item deleted successfully.');
+		return redirect()->route('consistitues.index')->with('doctorRole',$doctorRole)->with('message', 'Item deleted successfully.');
 	}
 	public function find(Request $request)
 	{

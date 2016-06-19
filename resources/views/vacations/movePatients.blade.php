@@ -15,9 +15,10 @@
 			@foreach($pat_data as $pat_deta)
 				<td>{{ $pat_deta->username}}</td>
 				<td> {{ $date }}</td>
-				<td><div class="gdeed"><input type="text" id="string{{$pat_deta->id}}" data-rowdate="{{$date}}+{{$pat_deta->id}}"  class="form-control date-picker mveSme" /></div></td>
+				<td><div class="gdeed"><input type="text" id="string{{$pat_deta->id}}" data-rowdate="{{$date}}+{{$pat_deta->id}}+{{sizeof($pat_data)}}"  class="form-control date-picker mveSme" /></div></td>
 			</tr>
 	@endforeach
+
 			</tbody></table>
 
 

@@ -167,8 +167,11 @@
         </div>
         <!-- Nav Container End -->
     </header>
+
+    <div >
         @yield('header')
         @yield('content')
+    </div>
     <section class="visit-us">
         <div class="auto-box">
             <div class="row">

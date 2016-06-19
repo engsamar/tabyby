@@ -1,4 +1,4 @@
-     <div class="row">
+  <div class="row">
         <div class="col-md-4">
             <form action="{{ route('examinations.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -135,7 +135,7 @@
                 <div class="form-group @if($errors->has('conjunctiva')) has-error @endif">
                     <label for="conjunctiva-field">Conjunctiva</label>
                     <input type="text" id="conjunctiva-field" name="conjunctiva1" class="form-control"
-                           value="{{  $reservation->examination[1]["conjuctiva"]}}"/>
+                           value="{{  $reservation->examination[1]["conjunctiva"]}}"/>
                     @if($errors->has("conjunctiva"))
                         <span class="help-block">{{ $errors->first("conjunctiva") }}</span>
                     @endif
@@ -172,7 +172,7 @@
                 <div class="form-group @if($errors->has('fundus')) has-error @endif">
                     <label for="fundus-field">Fundus</label>
                     <input type="text" id="fundus-field" name="fundus1" class="form-control"
-                           value="{{  $reservation->examination[1]["fundu"] }}"
+                           value="{{  $reservation->examination[1]["fundus"] }}" />
                    @if($errors->has("fundus"))
                         <span class="help-block">{{ $errors->first("fundus") }}</span>
                     @endif

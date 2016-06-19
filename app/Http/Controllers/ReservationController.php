@@ -396,7 +396,8 @@ class ReservationController extends Controller {
 
 		$reservation->save();
 
-		return redirect()->route('reservations.index')->with('message', 'Item cancelled successfully.');
+		//return redirect()->route('reservations.index')->with('message', 'Item cancelled successfully.');
+		return Redirect::back()->withErrors(['msg', 'this date is not available, it is vacation, try with aother date']);
 	}
 
 	public function latest()

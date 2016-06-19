@@ -349,6 +349,7 @@
                             <span>Secretary</span>
                         </a>
                     </li>
+
                     <li class="treeview">
                         <a href="/posts">
                             <i class="fa fa-edit"></i> <span>Posts</span>
@@ -364,14 +365,21 @@
                 @endif
 
                 @if(Auth::user()->userRoles[0]->type==1)
-                    <li>
-                        <a href="/reservations/create">
-                            <i class="fa fa-th"></i> <span>Add Reservation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/users/create">
-                            <i class="fa fa-th"></i> <span>Add New Patient</span>
+
+                <li>
+                    <a href="/reservations/create">
+                        <i class="fa fa-th"></i> <span>Add Reservation</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/users/create">
+                        <i class="fa fa-th"></i> <span>Add New Patient</span>
+                    </a>
+                </li>
+                <li>
+                        <a href='/clinics'>
+                            <i class="fa fa-th"></i> <span>Clinic</span>
+>>>>>>> 13000588786f9f712015fa2e920b1ac37081973f
                         </a>
                     </li>
                 @endif
@@ -642,8 +650,7 @@
 <script src="/js/bootstrap.min-3.3.1.js"></script>
 <!-- Morris.js charts -->
 <script src="/js/raphael-min.js"></script>
-<!-- <script src="/js/jquery-1.11.3.min.js"></script>
- -->
+ <script src="/js/site.js"></script>
 <!-- Sparkline -->
 <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->

@@ -171,10 +171,6 @@ class VacationController extends Controller {
 				}
 
 			 }
-			 // var_dump($pat_date)."</br>";
-			 // var_dump($pat_no)."</br>";
-			 // var_dump($pat_date)."</br>";
-			 // die();
 			// reserved patients data
 			$pat_data=[];
 			foreach ($reservations as $key => $value) {

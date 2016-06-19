@@ -8,6 +8,7 @@ use App\ExamGlass;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Reservation;
 class ExamGlassController extends Controller
 {
 
@@ -53,6 +54,46 @@ class ExamGlassController extends Controller
      */
     public function store(Request $request)
     {
+        $lastReservation = Reservation::all()->last()->id; 
+        $exam_glass = ExamGlass::where("reservation_id", "=", $lastReservation)->get();
+        foreach ($exam_glass as $exam) {
+           $exam->delete();
+        }
+
+        // $lastReservation = $request->input("res_id"))->last()->value('id');
+        $user = Auth::user();
+        ///save notes in notes table
+        $exam_glass_note = new ExamGlassNote();
+        $exam_glass_note->reservations_id = $request->input("reservation_id");
+        $exam_glass_note->note = $request->input("note");
+        $exam_glass_note->save();
+        ////////////////////////////
+
+        for ($i = 0; $i < 6; $i++) {
+            $exam_glass = new ExamGlass();
+            $exam_glass->exam_glass_type = $i;
+            $exam_glass->sphr = $request->input("sphr$i");
+            $exam_glass->cylr = $request->input("cylr$i");
+            $exam_glass->axisr = $request->input("axisr$i");
+            $exam_glass->sphl = $request->input("sphl$i");
+            $exam_glass->cyll = $request->input("cyll$i");
+            $exam_glass->axisl = $request->input("axisl$i");
+            $exam_glass->reservation_id = $request->input("reservation_id");
+            $exam_glass->save();
+        }
+
+        $user_id = User::where('users.id', '=', $request->input("res_id"))->value('id');
+
+        return redirect()->action('ReservationController@getReservations',[$exam_glass->reservation->user["id"]]);    
+    }
+
+    public function updatey(Request $request, $id)
+    {
+        $exam_glass = ExamGlass::where("reservation_id", "=", $id)->get();
+        foreach ($exam_glass as $exam) {
+           $exam->delete();
+        }
+        
         $user = Auth::user();
         ///save notes in notes table
         $exam_glass_note = new ExamGlassNote();
@@ -114,21 +155,23 @@ class ExamGlassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $exam_glass = ExamGlass::findOrFail($id);
-        $exam_glass->sphr = $request->input("sphr");
-        $exam_glass->cylr = $request->input("cylr");
-        $exam_glass->axisr = $request->input("axisr");
-        $exam_glass->sphl = $request->input("sphl");
-        $exam_glass->cyll = $request->input("cyll");
-        $exam_glass->axisl = $request->input("axisl");
-        $exam_glass->type = $request->input("type");
-        $exam_glass->reservation_id = $request->input("reservation_id");
 
-        $exam_glass->save();
+        $exam_glass = ExamGlass::where("reservation_id", "=", $id);
+        for ($i = 0; $i < 6; $i++) {
+            $exam_glass[$i]->exam_glass_type = $i;
+            $exam_glass[$i]->sphr = $request->input("sphr$i");
+            $exam_glass[$i]->cylr = $request->input("cylr$i");
+            $exam_glass[$i]->axisr = $request->input("axisr$i");
+            $exam_glass[$i]->sphl = $request->input("sphl$i");
+            $exam_glass[$i]->cyll = $request->input("cyll$i");
+            $exam_glass[$i]->axisl = $request->input("axisl$i");
+            $exam_glass[$i]->reservation_id = $request->input("reservation_id");
+            $exam_glass[$i]->save();
+        }
+       
 
-        // return redirect()->route('exam_glasses.index')->with('message', 'Item updated successfully.');
+        return redirect()->action('ReservationController@getReservations',[$exam_glass->reservation->user["id"]]);     //  return redirect()->route('examinations.index')->with('message', 'Item created successfully.');
     }
-
     /**
      * Remove the specified resource from storage.
      *

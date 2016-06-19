@@ -11,5 +11,10 @@ class ExamGlass extends Model
     {
         return $this->belongsTo('App\Reservation');
     }
+
+    public function glassExamNote(){
+		return $this->hasOne('App\ExamGlassNote');
+
+    }
     public $timestamps = false;
 }

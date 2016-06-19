@@ -25,7 +25,25 @@ class UserController extends Controller
     public function contact()
     {
         $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
-        return view('users.contact', compact('doctorRole'));
+        $clinics = Clinic::all();
+        if (count($clinics)!=0){
+            $address=[];
+            foreach ($clinics as $clinic){
+
+                $prepAddr = str_replace(' ','+',$clinic->address);
+                $geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
+                $output= json_decode($geocode);
+                $latitude = $output->results[0]->geometry->location->lat;
+                $longitude = $output->results[0]->geometry->location->lng;
+                array_push($address,$latitude,$longitude);
+            }
+
+            return view('users.contact', compact('doctorRole'),['addresses'=>$address]);
+        }else{
+            return view('users.contact', compact('doctorRole'));
+        }
+
+
     }
 
     public function homePage()

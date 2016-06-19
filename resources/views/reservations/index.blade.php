@@ -17,7 +17,6 @@
 </div>
 
 
-
 <div class="form-group @if($errors->has('searchRes')) has-error @endif">
     <select id="searchRes-field" name="searchRes" class="form-control">
         <option  selected value="0">Search By</option>

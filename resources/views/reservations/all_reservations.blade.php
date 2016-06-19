@@ -37,8 +37,6 @@
             });
         });
     </script>
-
-    </script>
             <script src="/js/examination_validation.js"></script>
 
 
@@ -63,10 +61,10 @@
 
         
         @if($examPatientNo == 0)
-        <button type="button" class="btn btn-info pull-right"><a href='/reservation/today'style="color:white">Exit Exam</a></button>
+        <button type="button" class="btn btn-info pull-right"><a href='/reservation/today'style="color:white">Exit Examination</a></button>
         @endif
 
-        {!! Form::text('date_created', old('date_created', Carbon\Carbon::today()->format('Y-m-d')),['class'=>'form-control date-picker']) !!}
+{{--        {!! Form::text('date_created',old('date_created', Carbon\Carbon::today()->format('Y-m-d')),['class'=>'form-control date-picker']) !!}--}}
         </h1>
 
     </div>

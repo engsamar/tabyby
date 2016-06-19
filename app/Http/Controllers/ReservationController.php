@@ -442,7 +442,7 @@ class ReservationController extends Controller {
 		$reservation = Reservation::findOrFail($id);
 		$reservation->status=4;
 		$reservation->save();
-		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'desc')->first();
 
 		return redirect('/all_reservation/'.$examPatients->user_id);
 	}

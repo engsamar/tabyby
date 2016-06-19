@@ -27,23 +27,31 @@
 @endsection
 
 @section('content')
+
     <div>
         <h1>
+
             <i class="glyphicon glyphicon-align-justify"></i> 
             Patient Name : 
-                @foreach ($reservations as $reservation)
-                
+                @foreach ($reservations as $reservation)           
                     {{$reservation->user['username']}}
+
                     @if($reservation->status !=4)
         <button type="button" class="btn btn-info pull-right"><a href='/exitReserv/{{$reservation->id}}'style="color:white">Exit Exam</a></button>
+        @if($examPatients != null)
         <button type="button" class="btn btn-info pull-right"><a href='/nextReserv/{{$reservation->id}}'style="color:white">Next</a></button>
-  
+        @endif
                 @endif
-
                 @endforeach
+
+        
+        @if($examPatientNo == 0)
+        <button type="button" class="btn btn-info pull-right"><a href='/reservation/today'style="color:white">Exit Exam</a></button>
+        @endif
         </h1>
 
     </div>
+
     <div id="accordion">
         <?php $i = 0?>
 

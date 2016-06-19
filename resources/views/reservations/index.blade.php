@@ -8,7 +8,7 @@
      @if(Auth::user()->userRoles[0]->type==1)
     <button type="button" class="btn btn-info pull-right"><a href="{{ route('users.create') }} "style="color:white">New Patient</a></button>
      @endif
-     @if(Auth::user()->userRoles[0]->type==0)
+     @if(Auth::user()->userRoles[0]->type==0 && $examPatients != null)
 
      <button type="button" class="btn btn-info pull-right"><a href='/all_reservation/{{$examPatients->user_id}}'style="color:white">Start Exam</a></button>
      @endif
@@ -16,22 +16,6 @@
 
 </div>
 
-@if(Auth::user()->userRoles[0]->type==0)
-            <div  class="form-group @if($errors->has('address')) has-error @endif">
-                <label for="address-field">Address</label>
-                <select id="address-field" name="address" class="form-control">
-                    <option value="0">Choose Clinic</option>
-                    @foreach($clinic as $key=>$value)
-
-                    <option value={{ $value->id }}>{{ $value->name }} :: {{ $value->address }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has("address"))
-                <span class="help-block">{{ $errors->first("address") }}</span>
-                @endif
-            </div>
-
-    @endif 
 
 
 <div class="form-group @if($errors->has('searchRes')) has-error @endif">

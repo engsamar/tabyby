@@ -27,7 +27,7 @@ class ReservationController extends Controller {
 		$reservations = Reservation::where('status','>=',2)->orderBy('status', 'asc')->paginate(10);
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$clinic = Clinic::all();
@@ -311,10 +311,7 @@ class ReservationController extends Controller {
 
 		$vacations=Vacation::where('from_day','<=',$dateCheck)->where('to_day','>=',$dateCheck)->count();
 		if($vacations){
-			$message="this date is not available, it is vacation, try with aother date";
-			echo $message;
-			die();
-			return redirect()->route('reservations.create')->with('message',$message);
+			return Redirect::back()->withErrors(['msg', 'this date is not available, it is vacation, try with aother date']);
 			
 		}else{
 			
@@ -398,6 +395,7 @@ class ReservationController extends Controller {
 		$reservation->status=2;
 
 		$reservation->save();
+
 		return redirect()->route('reservations.index')->with('message', 'Item cancelled successfully.');
 	}
 
@@ -405,13 +403,13 @@ class ReservationController extends Controller {
 	{
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		$reservations = Reservation::where('status','>',0)->where('date', '=',Carbon::today()->toDateString())->paginate(10);
+		$reservations = Reservation::where('status','>',0)->where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->paginate(10);
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$message="";
 		$clinic = Clinic::all();
 
-		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
 
 		return view('reservations.index', compact('clinic','message','reservations','status','reserveType','userRole','examPatients'))->with('userRoleType',$userRole );
 	}
@@ -425,7 +423,7 @@ class ReservationController extends Controller {
 		$status= ClinicConstants::$status;
 	//	return redirect()->route('reservations.index')->with('message', '');
 		$message="";
-		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
 
 		return view('reservations.index', compact('message','examPatients','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 		
@@ -442,9 +440,25 @@ class ReservationController extends Controller {
 		$reservation = Reservation::findOrFail($id);
 		$reservation->status=4;
 		$reservation->save();
-		$examPatients = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+		$examPatientNo = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->count();
+		if ($examPatientNo>0) {
+		return redirect('/all_reservation/'.$examPatients->user_id)->with('examPatients','examPatients')->with('examPatientNo','examPatientNo');
+			# code...
+		}else{
+			$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','=',4)->orderBy('appointment', 'desc')->first();
+		return redirect('/all_reservation/'.$examPatients->user_id)->with('examPatients','examPatients')->with('examPatientNo','examPatientNo');
 
-		return redirect('/all_reservation/'.$examPatients->user_id);
+		}
+		    
+		/*if ($examPatientNo>0) {
+			return redirect('/all_reservation/'.$examPatients->user_id,compact('examPatientNo'));
+			
+		}else{
+			return Redirect::back()->withErrors(['msg', 'This is no other reservation ,Exit if you want']);
+
+		}*/
+
 	}
 
 	public function getReservations($id)
@@ -455,8 +469,14 @@ class ReservationController extends Controller {
 		$status= ClinicConstants::$status;
 		$medicalHistoryType=ClinicConstants::$medicalHistoryType;
 		$user = Auth::user();
-		$userRoleType = \App\UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.all_reservations', compact('userRoleType','reservations','status','reserveType','medicalHistoryType'),['examGlassType' => ClinicConstants::$examGlassType]);
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+		
+		$examPatientNo = Reservation::where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->count();
+
+		$userRoleType = UserRole::where('user_id', '=', $user->id)->value('type');
+
+		return view('reservations.all_reservations', compact('examPatients','userRoleType','reservations','status','reserveType','medicalHistoryType'),['examGlassType' => ClinicConstants::$examGlassType])->with('examPatientNo',$examPatientNo);
+		   
 	}
 
 	public function info($id)
@@ -561,7 +581,9 @@ class ReservationController extends Controller {
 		$reserveType =ClinicConstants::$reservationType;
 		$status= ClinicConstants::$status;
 		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+
+		return view('reservations.index', compact('examPatients','message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 	}
 	public function getReservationByDate(Request $request)
 	{
@@ -574,7 +596,9 @@ class ReservationController extends Controller {
 		$message="";
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+
+		return view('reservations.index', compact('examPatients','message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 	}
 	public function getReservationByDateAndName(Request $request)
 	{
@@ -590,7 +614,9 @@ class ReservationController extends Controller {
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
 		//return $reservations;
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+
+		return view('reservations.index', compact('examPatients','message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 	}
 	public function getReservationByDuration(Request $request)
 	{
@@ -608,7 +634,9 @@ class ReservationController extends Controller {
 		$user = Auth::user();
 		$userRole = UserRole::where('user_id', '=', $user->id)->value('type');
 		$message="";
-		return view('reservations.index', compact('message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
+		$examPatients = Reservation::where('date', '=',Carbon::today()->toDateString())->where('status','>=',2)->where('status','<=',3)->orderBy('appointment', 'asc')->first();
+
+		return view('reservations.index', compact('examPatients','message','reservations','status','reserveType','userRole'))->with('userRoleType',$userRole );
 	}
 	public function checkReservDate($date,$clinic_id)
 	{

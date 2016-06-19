@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/assets/css/form-elements.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
     <link rel="shortcut icon" href="assets/ico/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114-precomposed.png">
@@ -44,6 +45,7 @@
                             <input type="text" id="name" name="username" value="{{ old('username') }}"
                                    required="required" placeholder="@lang('validation.Full Name')..."
                                    class="form-first-name form-control">
+                            <span class="help-block"></span>
                             @if ($errors->has('username'))
                                 <span class="help-block">
                                 <strong>{{ $errors->first('username') }}</strong>
@@ -54,6 +56,7 @@
                             <label class="sr-only" for="email">@lang('validation.E-Mail Address')</label>
                             <input type="email" name="email" placeholder="@lang('validation.E-Mail Address')..."
                                    class="form-email form-control" id="email" required="required">
+                            <span class="help-block"></span>
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                 </span>
@@ -62,6 +65,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label class="sr-only" for="password">@lang('validation.Password')</label>
                             <input type="password" id="password" placeholder="@lang('validation.Password')" required="required" name="password"/>
+                            <span class="help-block"></span>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -73,6 +77,7 @@
                             <label class="sr-only" for="password-confirm">@lang('validation.Confirm Password')</label>
                             <input type="password" id="password-confirm" required="required" placeholder="@lang('validation.Confirm Password')"
                                    name="password_confirmation"/>
+                            <span class="help-block"></span>
                             @if ($errors->has('password_confirmation'))
                                 <span class="help-block">
                             <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -84,6 +89,7 @@
                             <label class="sr-only" for="address-field">@lang('validation.Address')</label>
                             <input type="text" id="address-field" placeholder="@lang('validation.Address')" name="address"
                                    value="{{ old("address") }}"/>
+                            <span class="help-block"></span>
                             @if($errors->has("address"))
                                 <span class="help-block"><strong>
                                         {{ $errors->first("address") }}
@@ -107,6 +113,7 @@
                             <label class="sr-only" for="telephone-field">@lang('validation.Telephone')</label>
                             <input type="text" id="telephone-field" placeholder="@lang('validation.Telephone')" name="telephone"
                                    value="{{ old("telephone") }}"/>
+                            <span class="help-block"></span>
                             @if($errors->has("telephone"))
                                 <span class="help-block"><strong>{{ $errors->first("telephone") }}</strong></span>
                             @endif
@@ -116,6 +123,7 @@
                         <div class="form-group @if($errors->has('mobile')) has-error @endif">
                             <label class="sr-only" for="mobile-field">@lang('validation.Mobile')</label>
                             <input type="text" id="mobile-field" placeholder="@lang('validation.Mobile')" name="mobile" value="{{ old("mobile") }}"/>
+                            <span class="help-block"></span>
                             @if($errors->has("mobile"))
                                 <span class="help-block"><strong>{{ $errors->first("mobile") }}</strong></span>
                             @endif
@@ -123,9 +131,9 @@
                 {{--/       ////////////////--}}
                         <div class=" form-group @if($errors->has('birthdate')) has-error @endif">
                             <label class="sr-only" for="birthdate-field">@lang('validation.Birthdate')</label>
-                            <input class="datepicker" type="text" id="birthdate-field" placeholder="@lang('validation.Birthdate')" required="required" name="birthdate"
+                            <input  type="text" id="birthdate-field" placeholder="@lang('validation.Birthdate')" required="required" name="birthdate"
                                    value="{{ old("birthdate") }}" />
-
+                            <span class="help-block"></span>
                             @if($errors->has("birthdate"))
                                 <span class="help-block"><strong>{{ $errors->first("birthdate") }}</strong></span>
                             @endif

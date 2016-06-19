@@ -50,10 +50,11 @@
         <h1>
 
             <i class="glyphicon glyphicon-align-justify"></i> 
+
                 @foreach ($reservations as $reservation)           
 
                     @if($reservation->status !=4)
-        <button type="button" class="btn btn-info pull-right"><a href='/exitReserv/{{$reservation->id}}'style="color:white">Exit Exam</a></button>
+        <button type="button" class="btn btn-info pull-right"><a href='/exitReserv/{{$reservation->id}}'style="color:white">Exit Examination</a></button>
         @if($examPatients != null)
         <button type="button" class="btn btn-info pull-right"><a href='/nextReserv/{{$reservation->id}}'style="color:white">Next</a></button>
         @endif
@@ -64,6 +65,8 @@
         @if($examPatientNo == 0)
         <button type="button" class="btn btn-info pull-right"><a href='/reservation/today'style="color:white">Exit Exam</a></button>
         @endif
+
+        {!! Form::text('date_created', old('date_created', Carbon\Carbon::today()->format('Y-m-d')),['class'=>'form-control date-picker']) !!}
         </h1>
 
     </div>

@@ -4,6 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Clinic;
+use Auth;
+use App\UserRole;
+use App\Secertary;
 use Illuminate\Http\Request;
 
 class ClinicController extends Controller
@@ -21,9 +24,13 @@ class ClinicController extends Controller
     }
     public function index()
     {
+        $id=Auth::user()->id;
+        $user_role = UserRole::where('user_id',$id)->value('id');
+        $secertary = Secertary::where('userRole_id',$user_role)->value('clinic_id');
+
         $clinics = Clinic::orderBy('id', 'asc')->paginate(10);
 
-        return view('clinics.index', compact('clinics'));
+        return view('clinics.index', compact('clinics','secertary'));
     }
 
     /**

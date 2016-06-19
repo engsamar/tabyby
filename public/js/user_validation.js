@@ -1,16 +1,18 @@
 /**
  * Created by mostafa on 03/06/16.
  */
+
 $(document).ready(function () {
     $("input[name='birthdate']").datepicker({
         dateFormat: "yy/mm/dd",
+        changeYear:true,
+        changeMonth:true,
         minDate: "-3500w",
         maxDate: "-1d",
-        yearRange:"c-10:c+40",
-        chaneYear:true,
-        changeMonth:true,
-        changeDay:true,
-        showButtonPanel:true,
+        yearRange:"c-60:c+0",
+        weekHeader: "W",
+        showWeek: true,
+
     });
     $(":input[name='username']").on("blur", function () {
         if ($(":input[name='username']").val().trim() != "") {
@@ -67,7 +69,6 @@ $(document).ready(function () {
     });
 
     $("input[name='telephone']").on("keypress", function (event) {
-        console.log(event.charCode);
         if (event.charCode >= 48 && event.charCode <= 57) {
             $("input[name='telephone']").next().hide();
         } else {
@@ -77,8 +78,8 @@ $(document).ready(function () {
     });
 
     $("input[name='telephone']").on("blur", function (event) {
-        if (this.value.length <= 10) {
-            if  (this.value.substr(0, 1) == 0 && this.value.substr(2, 1) == 0){
+        if ($(this).value.length <= 10) {
+            if  ($(this).value.substr(0, 1) == 0 && $(this).value.substr(2, 1) == 0){
                 $("input[name='telephone']").next().hide();
             } else {
                 $("input[name='telephone']").next().text("telephone starts with 0*0").show();
@@ -89,7 +90,6 @@ $(document).ready(function () {
     });
 
     $("input[name='mobile']").on("keypress", function (event) {
-        console.log(event.charCode);
         if (event.charCode >= 48 && event.charCode <= 57) {
             $("input[name='mobile']").next().hide();
         } else {
@@ -99,8 +99,8 @@ $(document).ready(function () {
     });
 
     $("input[name='mobile']").on("blur", function () {
-        if (this.value.length <= 11) {
-            if  (this.value.substr(0, 3) == 010 || this.value.substr(0, 3) == 011 || this.value.substr(0, 3) == 012){
+        if ($(this).value.length <= 11) {
+            if  ($(this).value.substr(0, 3) == 010 || $(this).value.substr(0, 3) == 011 || $(this).value.substr(0, 3) == 012){
                 $("input[name='mobile']").next().hide();
             } else {
                 $("input[name='mobile']").next().text("mobile starts with 010|011|012").show();

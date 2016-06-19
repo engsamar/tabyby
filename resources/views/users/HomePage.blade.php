@@ -1,4 +1,9 @@
 @extends('layout')
+@section('css')
+    {{--<link rel="stylesheet" href="/css/bootstrap-rtl.css">--}}
+
+
+@endsection
 @section('content')
     <section class="main-slider-wrapper">
         <div class="tp-banner-container">

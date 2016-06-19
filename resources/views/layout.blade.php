@@ -13,6 +13,7 @@
     <link href="/css/responsive.css" rel="stylesheet">
        <!-- Date Picker -->
     <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+    {{--<link rel="stylesheet" href="/css/bootstrap-rtl.css">--}}
     <!-- Daterange picker -->
     <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker-bs3.css">
     <!-- bootstrap wysihtml5 - text editor -->

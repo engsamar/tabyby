@@ -280,9 +280,10 @@ class ReservationController extends Controller {
 
 	public function edit($id)
 	{
+		$doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
 		$reservation = Reservation::findOrFail($id);
 
-		return view('reservations.edit', compact('reservation'));
+		return view('reservations.edit', compact('reservation','doctorRole'));
 	}
 
 	public function update(Request $request, $id)

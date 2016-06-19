@@ -1,6 +1,7 @@
 @extends('layout')
 @section('css')
   <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
 @endsection
 @section('content')
 
@@ -78,9 +79,7 @@
     </div>
 @endsection
 @section('scripts')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+  {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>--}}
   <script src="/js/user_validation.js"></script>
-  <script>
-
-  </script>
+  <script src="/js/jquery-ui.min.js"></script>
 @endsection

@@ -6,19 +6,18 @@
     <link rel="stylesheet" href="/assets/css/form-elements.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">  <!--date-->
     <link rel="shortcut icon" href="assets/ico/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png">
-
 @endsection
 @section('scripts')
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/scripts.js"></script>
-    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script> <!--date-->
     {{--<script src="/js/bootstrap-datepicker.js"></script>--}}
     <script src="/js/user_validation.js"></script>
 @endsection

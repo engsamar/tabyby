@@ -1,19 +1,18 @@
 @extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )or ( isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0)) ? 'adminLayout' : 'layout')
 @section('css')
   <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/jquery-ui.css">  <!--date-->
 @endsection
 @section('header')
-    <div class="page-header">
-        <h1><i class="glyphicon glyphicon-edit"></i> Reservations / Edit #{{$reservation->id}}</h1>
-    </div>
 @endsection
 
 @section('content')
     @include('error')
 
     <div class="row">
-        <div class="col-md-12">
 
+        <div class="col-md-12">
+            <h1><i class="glyphicon glyphicon-edit"></i> Reservations / Edit #{{$reservation->id}}</h1>
             <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -70,7 +69,8 @@
     </div>
 @endsection
   @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+      <script src="/js/jquery-ui.min.js"></script> <!--date-->
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>--}}
     <script>
         var nowDate = new Date();
         var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);

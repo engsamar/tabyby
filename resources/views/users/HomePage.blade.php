@@ -301,7 +301,7 @@
                         <li class="hvr-ripple-out"><a href="https://www.facebook.com/galals2"><span class="flaticon-facebook31"></span></a></li>&nbsp;
                         <li class="hvr-ripple-out"><a href="https://twitter.com/dr_agina?s=07"><span class="flaticon-twitter1"></span></a></li>&nbsp;
                         <li class="hvr-ripple-out"><a href="aginaclinic@gmail.com"><span class="flaticon-google116"></span></a></li>&nbsp;
-                        <li class="hvr-ripple-out"><a href=""><span class="flaticon-instagram12"></span></a></li>&nbsp;
+                        {{--<li class="hvr-ripple-out"><a href=""><span class="flaticon-instagram12"></span></a></li>&nbsp;--}}
                     </ul>
                 </article>
                 <div class="member col-lg-8 col-md-8 col-sm-6 col-xs-12 animated out" data-delay="100" data-animation="fadeInUp">

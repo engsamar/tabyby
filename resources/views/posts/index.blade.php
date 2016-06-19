@@ -41,8 +41,8 @@
                 <h3>{{$post->title}}</h3>
                 <p>{{$post->content}}</p>
                 {{--<a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>--}}
-                <a class="btn btn-xs btn-primary" href="{{ route('posts.show', $post->id) }}"><i
-                            class="glyphicon glyphicon-eye-open"></i> View</a>
+                {{--<a class="btn btn-xs btn-primary" href="{{ route('posts.show', $post->id) }}"><i--}}
+                            {{--class="glyphicon glyphicon-eye-open"></i> View</a>--}}
                 <a class="btn btn-xs btn-warning" href="{{ route('posts.edit', $post->id) }}"><i
                             class="glyphicon glyphicon-edit"></i> Edit</a>
                 <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: inline;"

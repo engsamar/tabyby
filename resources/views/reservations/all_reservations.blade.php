@@ -164,7 +164,7 @@
                                             @foreach ($reservation->complain->complainDetail as $detail)
                                                 <td>{{$detail['plan']}}</td>
                                                 <td>{{$detail['diagnose']}}</td>
-                                                 <td> <a class="btn btn-xs btn-warning" href="{{ route('complains.edit', $reservation->complain['id']) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a></td>
+                                                
                                             @endforeach
                                         @endif
                                     </tr>

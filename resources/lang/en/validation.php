@@ -142,7 +142,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
     'Forgot Your Password?'=>'Forgot Your Password?',
-    'vision clinic' => 'vision clinic',
+    'EyeCareClinic' => 'EyeCareClinic',
     'Home'=>'Home',
     'Blog'=>'Blog',
     'ContactUs'=>'ContactUs',

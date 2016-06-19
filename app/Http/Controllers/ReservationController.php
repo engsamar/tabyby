@@ -184,12 +184,11 @@ class ReservationController extends Controller {
 					$reservationCh = Reservation::where('user_id',$reservation->user_id)->orderBy('user_id','desc')->first();
 					if ($reservationCh!=NULL){
 						$status= $reservationCh->status;
-
 						if($status==3){
 						//echo "you have another reservation that doesn't attend.  </br>";
 						//echo " your appointment at ".$reservationCheck->appointment;
 						//echo  "  ".$reservationCheck->date;
-							return Redirect::back()->withErrors(['msg', 'you have another reservation that doesn\'t attendyour appointment at '.$reservationCheck->appointment.'  '.$reservationCheck->date]);
+						return Redirect::back()->withErrors(['msg', 'you have another reservation that doesn\'t attend your appointment at '.$reservationCh->appointment.' -- '.$reservationCh->date]);
 
 
 						}else{

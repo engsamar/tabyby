@@ -1,7 +1,6 @@
 @extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )or ( isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0)) ? 'adminLayout' : 'layout')
 @section('css')
-<link href="/css/bootstrap-datepicker.css"
-rel="stylesheet">
+<link href="/css/jquery-ui.css" rel="stylesheet">
 @endsection
 @section('header')
 
@@ -87,19 +86,26 @@ rel="stylesheet">
     </div>
     @endsection
     @section('scripts')
+      <script src="/js/jquery-ui.min.js"></script> <!--date-->
     <script>
-        var nowDate = new Date();
+        $(document).ready(function() {
+      
+       var nowDate = new Date();
         var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
-        $('.date-picker').datepicker({
-            dateFormate:'yyyy/mm/dd ',
-            startDate: today,
-        });
+            $("input[name='date']").datepicker({
+        dateFormat: "yy/mm/dd",
+        changeYear:true,
+        changeMonth:true,
+        minDate: "-0d",
+
+    });
         $("input[name='date']").keypress(function (event) {
             event.preventDefault();
         });
+    });
     </script>
     <script>
-       /* $("#date-field").change(function (e) {
+       $("#date-field").change(function (e) {
         var date = new Date($('#date-field').val());
         var clinic_id = $('#address-field').val();
         date.setDate(date.getDate() + 1);
@@ -118,7 +124,7 @@ rel="stylesheet">
                      var HTMLtxt='<p style="font-weight:bold;color:blue">this date is fully completed , please try another one</p>';
                     
                 }else if(data=='noTime'){
-                     var HTMLtxt='<p style="font-weight:bold;color:blue">we do\'nt have any working hour in this dat, please try another one</p>';
+                     var HTMLtxt='<p style="font-weight:bold;color:blue">we do\'nt have any working hour in this date, please try another one</p>';
                     
                 }
                 else{
@@ -137,6 +143,6 @@ rel="stylesheet">
                 console.log(data);
             }
         });
-    });*/
+    });
     </script>
     @endsection

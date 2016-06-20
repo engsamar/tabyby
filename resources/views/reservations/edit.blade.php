@@ -1,30 +1,30 @@
 @extends(( (isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==1 )or ( isset(Auth::user()->id) and Auth::user()->userRoles[0]->type==0)) ? 'adminLayout' : 'layout')
 @section('css')
   <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/jquery-ui.css">  <!--date-->
 @endsection
 @section('header')
-    <div class="page-header">
-        <h1><i class="glyphicon glyphicon-edit"></i> Reservations / Edit #{{$reservation->id}}</h1>
-    </div>
 @endsection
 
 @section('content')
     @include('error')
 
     <div class="row">
-        <div class="col-md-12">
 
+        <div class="col-md-12">
+            <h1><i class="glyphicon glyphicon-edit"></i> Reservations / Edit #{{$reservation->id}}</h1>
             <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group @if($errors->has('date')) has-error @endif">
                        <label for="date-field">Date</label>
-                    <input type="text" id="date-field" name="date" class="form-control date-picker" value="{{ $reservation->date }}"/>
+                    <input type="text" id="date-field" name="date" class="form-control date-picker" value="{{ $reservation->date }}" required />
                        @if($errors->has("date"))
                         <span class="help-block">{{ $errors->first("date") }}</span>
                        @endif
                     </div>
+                    <div class="form-group" id="reservTime">
                     <div hidden class="form-group @if($errors->has('status')) has-error @endif">
                        <label for="status-field">Status</label>
                     <input type="text" id="status-field" name="status" class="form-control" value="{{ $reservation->status }}"/>
@@ -70,16 +70,65 @@
     </div>
 @endsection
   @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+      <script src="/js/jquery-ui.min.js"></script> <!--date-->
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>--}}
     <script>
-        var nowDate = new Date();
+    $(document).ready(function() {
+      
+       var nowDate = new Date();
         var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
-        $('.date-picker').datepicker({
-            dateFormate:'yyyy/mm/dd ',
-            startDate: today,
-        });
+            $("input[name='date']").datepicker({
+        dateFormat: "yy/mm/dd",
+        changeYear:true,
+        changeMonth:true,
+        minDate: "-0d",
+
+    });
         $("input[name='date']").keypress(function (event) {
             event.preventDefault();
         });
+    });
+       
+    </script>
+    <script>
+       $("#date-field").change(function (e) {
+        var date = new Date($('#date-field').val());
+        var clinic_id = $('#address-field').val();
+        date.setDate(date.getDate() + 1);
+        var date= date.toISOString().substring(0, 10);
+        var myDiv=document.getElementById('reservTime');
+        $.ajax
+        ({
+            url: "/checkReservDate/"+date+"/"+clinic_id,
+            type: 'GET',
+            data: {},
+            success: function (data)
+            {
+                if(data=='vacation'){
+                    var HTMLtxt='<p style="font-weight:bold;color:blue">This date is vacation , please try other one</p>';
+                }else if(data=='complete'){
+                     var HTMLtxt='<p style="font-weight:bold;color:blue">this date is fully completed , please try another one</p>';
+                    
+                }else if(data=='noTime'){
+                     var HTMLtxt='<p style="font-weight:bold;color:blue">we do\'nt have any working hour in this dat, please try another one</p>';
+                    
+                }
+                else{
+                     var HTMLtxt='<select name="workingHour" class="form-control">';
+                HTMLtxt+='<option>choose suitable time</option>';
+                $.each(data,function(index, el) {
+                    HTMLtxt+='<option value='+el['id']+'> From : '+ el['fromTime']+' To : '+el['toTime']+ '</option>';
+                });
+
+                HTMLtxt += '</select>';
+                }
+              
+                myDiv.innerHTML = HTMLtxt;
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
     </script>
     @endsection

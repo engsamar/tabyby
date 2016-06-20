@@ -26,7 +26,9 @@
         <div class="auto-box">
             <div class="row clearfix">
       <div class="col-lg-6 col-xs-6">
+      @if(! $reservations->count())
                  <a class="btn btn-primary pull-right" href="{{ route('reservations.create') }}"> New Reservation</a>
+        @endif
                 </div>
                 </div>
                 </div>

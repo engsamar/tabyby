@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-md-7">
                 <a href="#">
-                    <img class="img-responsive" src="{{URL::asset('/images/posts/'.$post->picture_path )}}" alt="">
+                    <img class="img-responsive col-md-11" src="{{URL::asset('/images/posts/'.$post->picture_path )}}" alt="">
                 </a>
             </div>
             <div class="col-md-5">

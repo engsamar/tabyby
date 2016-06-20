@@ -74,7 +74,7 @@
 
     </div>
     <!-- ************************************************* -->
-   <button class="btn btn-info" id="show" >MedicalHistory</button>
+<!--     <button class="btn btn-info" id="show" >MedicalHistory</button>
     <div id="tabs" style="height:50px">
         <ul>
             <li><a href="#tabs-1">Surgies</a></li>
@@ -94,7 +94,7 @@
             @endif
         </div>
         <!-- ******************************* -->
-        <div id="tabs-2">
+       <!--  <div id="tabs-2">
             @if(count($reservation->user->medicalHistories) != 0)
                 @foreach($reservation->user->medicalHistories as $history)
                     @if($history->type == 1)
@@ -106,7 +106,7 @@
             @endif 
         </div>
         <!-- ************************************************* -->
-        <div id="tabs-3">
+        <!-- <div id="tabs-3">
            @if(count($reservation->user->medicalHistories) != 0)
                 @foreach($reservation->user->medicalHistories as $history)
                     @if($history->type == 2)
@@ -120,8 +120,8 @@
         <div id="tab-4">
              @include("forms.medicalHistory")
 
-        </div>   
-    </div>  
+        </div>  -->  
+    <!-- </div>   -->
     <!-- ***************************************************** -->
 
         <div id="accordion">

@@ -1,11 +1,8 @@
-@extends('layout')
+@extends('adminLayout')
 @section('css')
   <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
 @section('header')
-    <div class="page-header">
-        <h1><i class="glyphicon glyphicon-edit"></i> DoctorDegrees / Edit #{{$doctor_degree->id}}</h1>
-    </div>
 @endsection
 
 @section('content')
@@ -13,6 +10,7 @@
 
     <div class="row">
         <div class="col-md-12">
+            <h1><i class="glyphicon glyphicon-edit"></i> DoctorDegrees / Edit #{{$doctor_degree->id}}</h1>
 
             <form action="{{ route('doctor_degrees.update', $doctor_degree->id) }}" method="POST">
                 <input type="hidden" name="_method" value="PUT">

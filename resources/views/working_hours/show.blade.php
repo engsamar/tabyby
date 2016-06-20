@@ -2,7 +2,7 @@
 @section('header')
     <div class="page-header clearfix">
         <h1>
-            <i class="glyphicon glyphicon-align-justify"></i>{{$working_hour[0]->clinic['name']}}
+{{--            <i class="glyphicon glyphicon-align-justify"></i>{{$working_hour[0]->clinic->['name']}}--}}
 
         </h1>
 

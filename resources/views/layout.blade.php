@@ -141,7 +141,6 @@
                                 <li><a href="#">Services</a>
                                     <span class="toggle-icon"></span>
                                     <ul class="sub-menu">
-                                        <li><a href="services.html">Dental Implants</a></li>
                                         <li><a href="services.html">Medical Research</a></li>
                                         <li><a href="services.html">Medical Counseling</a></li>
                                         <li><a href="services.html">Pharmaceutical Advice</a></li>
@@ -193,8 +192,8 @@
                     <!-- About -->
                     <article class="foot-block about col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="widget widget-about">
-                            <h2 class="border-line-left">About Medicon</h2>
-                            <div class="text ">We work with clients big and small across a range of sectors and we
+                            <h2 class="border-line-left"></h2>
+                            <div class="text ">I work with clients big and small across a range of sectors and we
                                 utilise all forms of media to get your name out there in a way that’s right for you. We
                                 believe that analysis of your company.
                             </div>
@@ -220,7 +219,6 @@
                             <h2 class="border-line-left">Contact Us</h2>
                             <ul>
                                 <li class="location">{{ $doctorRole->user->address }}</li>
-                                <li class="website"><a href="http://www.medicon.com/">http://www.medicon.com</a></li>
                                 <li class="phone">{{ $doctorRole->user->mobile }}</li>
                                 <li class="mail"><a href="mailto:support@email.com">dr.vision.site@gmail.com</a></li>
                             </ul>

@@ -176,33 +176,33 @@
 
                         <!-- Accordion -->
                         <article class="accordion animated out" data-delay="0" data-animation="fadeInUp">
-                            <div class="acc-btn active"><span class="toggle-icon"></span> We work clean and try to help
+                            <div class="acc-btn active"><span class="toggle-icon"></span> I work clean and try to help
                                 everyone
                             </div>
                             <div class="acc-content clearfix collapsed">
-                                <p>Our teams are up to date with the latest technologies, media trends and are keen to
+                                <p>Iam up to date with the latest technologies, media trends and keen to
                                     prove themselves in this industry and that’s what you want from an advertising
                                     agency.</p>
                             </div>
                         </article>
                         <!-- Accordion -->
                         <article class="accordion animated out" data-delay="0" data-animation="fadeInUp">
-                            <div class="acc-btn"><span class="toggle-icon"></span> Our teams work together to heal
+                            <div class="acc-btn"><span class="toggle-icon"></span> I work to heal
                                 people
                             </div>
                             <div class="acc-content clearfix">
-                                <p>Our teams are up to date with the latest technologies, media trends and are keen to
+                                <p>Iam up to date with the latest technologies, media trends and keen to
                                     prove themselves in this industry and that’s what you want from an advertising
                                     agency.</p>
                             </div>
                         </article>
                         <!-- Accordion -->
                         <article class="accordion animated out" data-delay="0" data-animation="fadeInUp">
-                            <div class="acc-btn"><span class="toggle-icon"></span> We try to work for young, old and
+                            <div class="acc-btn"><span class="toggle-icon"></span> I try to work for young, old and
                                 teens
                             </div>
                             <div class="acc-content clearfix">
-                                <p>Our teams are up to date with the latest technologies, media trends and are keen to
+                                <p>Iam up to date with the latest technologies, media trends and are keen to
                                     prove themselves in this industry and that’s what you want from an advertising
                                     agency.</p>
                             </div>
@@ -263,26 +263,26 @@
             <h1 class="border-line-center">What our patients said</h1>
 
             <div class="slider">
-                <article class="slide">
-                    <figure><img class="img-circle" src="/resource/testimonial-image-1.png" alt=""></figure>
-                    <div class="text">"Our teams are up to date with the latest technologies, media trends and are keen
-                        to prove themselves in this industry and that’s what you want from an advertising agency, not
-                        someone who is relying on the same way of doing things."
-                    </div>
-                </article>
-                <article class="slide">
-                    <figure><img class="img-circle" src="/resource/testimonial-image-2.png" alt=""></figure>
-                    <div class="text">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                        Ipsum has been the industry's standard dummy text ever since the 1500s."
-                    </div>
-                </article>
-                <article class="slide">
-                    <figure><img class="img-circle" src="/resource/team-2.jpg" alt=""></figure>
-                    <div class="text">"It is a long established fact that a reader will be distracted by the readable
-                        content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                        more-or-less normal distribution of letters."
-                    </div>
-                </article>
+                {{--<article class="slide">--}}
+                    {{--<figure><img class="img-circle" src="/resource/testimonial-image-1.png" alt=""></figure>--}}
+                    {{--<div class="text">"Iam up to date with the latest technologies, media trends and keen--}}
+                        {{--to prove themselves in this industry and that’s what you want from an advertising agency, not--}}
+                        {{--someone who is relying on the same way of doing things."--}}
+                    {{--</div>--}}
+                {{--</article>--}}
+                {{--<article class="slide">--}}
+                    {{--<figure><img class="img-circle" src="/resource/testimonial-image-2.png" alt=""></figure>--}}
+                    {{--<div class="text">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem--}}
+                        {{--Ipsum has been the industry's standard dummy text ever since the 1500s."--}}
+                    {{--</div>--}}
+                {{--</article>--}}
+                {{--<article class="slide">--}}
+                    {{--<figure><img class="img-circle" src="/resource/team-2.jpg" alt=""></figure>--}}
+                    {{--<div class="text">"It is a long established fact that a reader will be distracted by the readable--}}
+                        {{--content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a--}}
+                        {{--more-or-less normal distribution of letters."--}}
+                    {{--</div>--}}
+                {{--</article>--}}
             </div>
 
         </div>

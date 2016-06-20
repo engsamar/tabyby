@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -359,6 +360,12 @@
                     <li>
                         <a href="/medicines">
                             <i class="fa fa-edit"></i> <span>Medicines</span>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="/doctor_degrees">
+                            <i class="fa fa-edit"></i> <span>DoctorDegrees</span>
                         </a>
 
                     </li>

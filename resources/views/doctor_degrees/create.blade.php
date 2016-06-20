@@ -1,11 +1,8 @@
-@extends('layout')
+@extends('adminLayout')
 @section('css')
   <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
 @section('header')
-    <div class="page-header">
-        <h1><i class="glyphicon glyphicon-plus"></i> DoctorDegrees / Create </h1>
-    </div>
 @endsection
 
 @section('content')
@@ -13,7 +10,7 @@
 
     <div class="row">
         <div class="col-md-12">
-
+            <h1><i class="glyphicon glyphicon-plus"></i> DoctorDegrees / Create </h1>
             <form action="{{ route('doctor_degrees.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

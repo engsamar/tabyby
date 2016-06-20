@@ -47,7 +47,7 @@
             @endif 
             <div class="form-group @if($errors->has('date')) has-error @endif">
                 <label for="date-field">date</label>
-                <input type="text" id="date-field" name="date"  class="form-control date-picker"
+                <input type="text" id="date-field" name="date"  class="form-control "
                 value="{{ old("date") }}"/>
                 @if($errors->has("date"))
                 <span class="help-block">{{ $errors->first("date") }}</span>
@@ -88,20 +88,22 @@
     @section('scripts')
       <script src="/js/jquery-ui.min.js"></script> <!--date-->
     <script>
-        $(document).ready(function() {
-      
-       var nowDate = new Date();
+//        console.log("ghjk");
+        var nowDate = new Date();
         var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
-            $("input[name='date']").datepicker({
-        dateFormat: "yy/mm/dd",
-        changeYear:true,
-        changeMonth:true,
-        minDate: "-0d",
+        $("input[name='date']").datepicker({
+            dateFormat: "yy/mm/dd",
+            changeYear:true,
+            changeMonth:true,
+            minDate: "-0d",
 
-    });
+        });
         $("input[name='date']").keypress(function (event) {
             event.preventDefault();
         });
+        $(document).ready(function() {
+
+
     });
     </script>
     <script>

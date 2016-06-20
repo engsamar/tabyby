@@ -162,7 +162,7 @@ class UserController extends Controller
         $user->birthdate = $request->input("birthdate");
         $user->save();
 
-        return redirect('/')->with('message', 'Item updated successfully.');
+        return redirect()->action('UserController@show',[$user["id"]]);
     }
 
     /**

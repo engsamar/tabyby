@@ -267,7 +267,17 @@
     <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-
-
 @endsection
+
+<script src="/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/css/jquery-ui.css">
+
+<script type="text/javascript">
+
+$("input[name='birthdate']").datepicker({
+    dateFormat: "yy/mm/dd",
+    minDate: "-3500w",
+    maxDate: "-1d"
+});
+
+</script>

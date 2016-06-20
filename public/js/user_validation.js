@@ -58,8 +58,13 @@ $(document).ready(function () {
     $("input[name='birthdate']").on("change", function () {
         $("input[name='birthdate']").datepicker({
             dateFormat: "yy/mm/dd",
+            changeYear:true,
+            changeMonth:true,
             minDate: "-3500w",
-            maxDate: "-1d"
+            maxDate: "-1d",
+            yearRange:"c-80:c+0",
+            weekHeader: "W",
+            showWeek: true,
         });
     });
 
@@ -78,14 +83,23 @@ $(document).ready(function () {
     });
 
     $("input[name='telephone']").on("blur", function (event) {
-        if ($("input[name='telephone']").val().length <= 10) {
-            if  ($("input[name='telephone']").val().substr(0, 1) == 0 && $("input[name='telephone']").val().substr(2, 1) == 0){
-                $("input[name='telephone']").next().hide();
+        if ($("input[name='telephone']").val().trim() != "") {
+            if ($("input[name='telephone']").val().length <= 10) {
+                if ($("input[name='telephone']").val().length = 10) {
+                    if ($("input[name='telephone']").val().substr(0, 1) == 0 ) {
+                        $("input[name='telephone']").next().hide();
+                    } else {
+                        $("input[name='telephone']").next().text("telephone starts with 0").show();
+                        $("input[name='telephone']").focus();
+                    }
+                } else {
+                    $("input[name='telephone']").next().text("telephone 10 numbers").show();
+                    $("input[name='telephone']").focus();
+                }
             } else {
-                $("input[name='telephone']").next().text("telephone starts with 0*0").show();
+                $("input[name='telephone']").next().text("incorrect telephone  10 numbers").show();
+                $("input[name='telephone']").focus();
             }
-        }else {
-            $("input[name='telephone']").next().text("incorrect telephone  10 numbers").show();
         }
     });
 
@@ -99,14 +113,23 @@ $(document).ready(function () {
     });
 
     $("input[name='mobile']").on("blur", function () {
-        if ($("input[name='mobile']").val().length <= 11) {
-            if  ($("input[name='mobile']").val().substr(0, 3) == 010 || $("input[name='mobile']").val().substr(0, 3) == 011 || $("input[name='mobile']").val().substr(0, 3) == 012){
-                $("input[name='mobile']").next().hide();
+        if ($("input[name='mobile']").val().trim() != "") {
+            if ($("input[name='mobile']").val().length <= 11) {
+                if ($("input[name='mobile']").val().length = 11) {
+                    if  ($("input[name='mobile']").val().substr(0, 3) == 010 || $("input[name='mobile']").val().substr(0, 3) == 011 || $("input[name='mobile']").val().substr(0, 3) == 012){
+                        $("input[name='mobile']").next().hide();
+                    } else {
+                        $("input[name='mobile']").next().text("mobile starts with 010|011|012").show();
+                        $("input[name='mobile']").focus();
+                    }
+                } else {
+                    $("input[name='mobile']").next().text("incorrect mobile 11 numbers").show();
+                    $("input[name='mobile']").focus();
+                }
             } else {
-                $("input[name='mobile']").next().text("mobile starts with 010|011|012").show();
+                $("input[name='mobile']").next().text("incorrect mobile 11 numbers").show();
+                $("input[name='mobile']").focus();
             }
-        }else {
-            $("input[name='mobile']").next().text("incorrect mobile 11 numbers").show();
         }
     });
 
@@ -115,6 +138,7 @@ $(document).ready(function () {
             $("input[name='password']").next().hide();
         } else {
             $("input[name='password']").next().text("password short").show();
+            $("input[name='password']").focus();
         }
     });
 
@@ -123,6 +147,7 @@ $(document).ready(function () {
             $("input[name='password_confirmation']").next().hide();
         } else {
             $("input[name='password_confirmation']").next().text("password mismatch").show();
+            $("input[name='password_confirmation']").focus();
         }
     });
 });

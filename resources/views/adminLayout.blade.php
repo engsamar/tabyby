@@ -363,6 +363,7 @@
 
                     </li>
                 @endif
+               
 
                 @if(Auth::user()->userRoles[0]->type==1)
 
@@ -415,6 +416,8 @@
                         <small class="label pull-right bg-yellow">12</small>
                     </a>
                 </li>
+
+                
             </ul>
         </section>
         <!-- /.sidebar -->

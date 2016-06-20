@@ -460,7 +460,7 @@ class ReservationController extends Controller {
 		$reservation = Reservation::findOrFail($id);
 		$reservation->status=4;
 		$reservation->save();
-		return redirect()->route('reservations.index')->with('message', 'Examination Done');
+		return redirect('/reservations/today');
 	}
 	public function nextReserv($id)
 	{

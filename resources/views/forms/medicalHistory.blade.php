@@ -7,6 +7,8 @@
                 <input type="hidden" name="patient_id" value="{{ $reservation->user["id"] }}">
                 <input type="hidden" name="res_id" value="{{ $reservation->id}}">
                 <div class="form-group @if($errors->has('type')) has-error @endif">
+                    <?php $medicalHistoryType=array('surgery','disease','medicine'); ?>
+
                     <label for="type-field">Type</label>
                     <select id="type-field" name="type" class="form-control">
                         @foreach($medicalHistoryType as $key=>$type)

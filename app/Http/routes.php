@@ -81,7 +81,6 @@ Route::group(['middleware' => ['auth']], function () {
     
 
     Route::get("/reservation/{res_id}", "ReservationController@getReservations");
-    Route::get("/patientReservation", "ReservationController@patientReservations");
 
 
     Route::get('/home', 'HomeController@index');
@@ -94,6 +93,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get("reservations/testing/{key}", "ReservationController@getting");
 //    Route::get("/create", "ReservationController@create");
     Route::get("/all_reservation/{id}", "ReservationController@getReservations");
+    Route::get("/medicalHistory/{id}", "ReservationController@getReservations");
+
     Route::post("/reserv/searchByName","ReservationController@getReservationByName");
     Route::post("/reserv/searchByDate","ReservationController@getReservationByDate");
     Route::post("/reserv/searchByDuration","ReservationController@getReservationByDuration");

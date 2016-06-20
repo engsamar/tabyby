@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class MedicalHistoryController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +45,8 @@ class MedicalHistoryController extends Controller
         $medical_history_detail->medical_history_id=$medical_history->id;
         $medical_history_detail->save();
 
-        return redirect()->action('ReservationController@getReservations',[$medical_history->reservation->user["id"]]);    
+    
+    
     }
 
     /**

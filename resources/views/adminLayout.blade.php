@@ -363,6 +363,7 @@
 
                     </li>
                 @endif
+               
 
                 @if(Auth::user()->userRoles[0]->type==1)
 
@@ -379,7 +380,6 @@
                 <li>
                         <a href='/clinics'>
                             <i class="fa fa-th"></i> <span>Clinic</span>
->>>>>>> 13000588786f9f712015fa2e920b1ac37081973f
                         </a>
                     </li>
                 @endif
@@ -416,6 +416,8 @@
                         <small class="label pull-right bg-yellow">12</small>
                     </a>
                 </li>
+
+                
             </ul>
         </section>
         <!-- /.sidebar -->

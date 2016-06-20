@@ -10,11 +10,16 @@ use App\User;
 use App\MedicalHistory;
 use App\Examination;
 use DB;
+use App\Reservation;
+use App\UserRole;
 
 class UserProfileController extends Controller
 {
     public function index($id)
 	{
+        
+        $reservations = Reservation::where('user_id', $id)->get();
+
         $doctorRole = UserRole::where('type', '=', 0)->firstOrFail();
         $userInfo = DB::table('users')->where('users.id', $id)->get();
 
@@ -57,6 +62,6 @@ class UserProfileController extends Controller
             ->where('users.id', $id)
             ->get();
 
-        return view('user_profiles.index', compact('doctorRole','histories', 'examinations', 'userInfo','complains','medicines','glassExams'));
+        return view('user_profiles.index', compact('doctorRole','histories', 'examinations', 'userInfo','complains','medicines','glassExams', 'reservations'));
 	}
 }

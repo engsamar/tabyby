@@ -19,28 +19,23 @@
             $( ".tabs" ).tabs();
         });
 
-         $(function() {
-            
-            $( "#tabs" ).tabs();
-        });
-
         $(function() {
             $( "#accordion" ).accordion();
 
         });
-        $(function() {
-           $( "#accordion2" ).accordion();
-        });  
+
+         $(function() {
+            $( "#accordion2" ).accordion();
+
+        })  
 
 
-    $(document).ready(function(){
-        $("#show").click(function(){
-            $("#tabs").fadeToggle('300');
+        $(document).ready(function(){
+            $("#accordion2").fadeIn();
+            $("#show").click(function(){
+                $("#accordion2").fadeToggle('300');
+            });
         });
-    });
-
-
-        
     </script>
 
     </script>
@@ -54,12 +49,11 @@
     <div>
         <h1>
 
-        <i class="glyphicon glyphicon-align-justify"></i> 
+            <i class="glyphicon glyphicon-align-justify"></i> 
+                @foreach ($reservations as $reservation)           
 
-        @foreach ($reservations as $reservation)           
-
-            @if($reservation->status !=4)
-        <button type="button" class="btn btn-info pull-right"><a href='/exitReserv/{{$reservation->id}}'style="color:white">Exit Examination</a></button>
+                    @if($reservation->status !=4)
+        <button type="button" class="btn btn-info pull-right"><a href='/exitReserv/{{$reservation->id}}'style="color:white">Exit Exam</a></button>
         @if($examPatients != null)
         <button type="button" class="btn btn-info pull-right"><a href='/nextReserv/{{$reservation->id}}'style="color:white">Next</a></button>
         @endif
@@ -70,63 +64,67 @@
         @if($examPatientNo == 0)
         <button type="button" class="btn btn-info pull-right"><a href='/reservation/today'style="color:white">Exit Exam</a></button>
         @endif
-
-        {!! Form::text('date_created', old('date_created', Carbon\Carbon::today()->format('Y-m-d')),['class'=>'form-control date-picker']) !!}
         </h1>
 
     </div>
     <!-- ************************************************* -->
-   <button class="btn btn-info" id="show" >MedicalHistory</button>
-    <div id="tabs" style="height:50px">
-        <ul>
-            <li><a href="#tabs-1">Surgies</a></li>
-            <li><a href="#tabs-2">Diseases</a></li>
-            <li><a href="#tabs-3">Medicines</a></li>
-            <li><a href="#tabs-4">Add</a></li>
-        </ul>
-        <div id="tabs-1">
-            @if(count($reservation->user->medicalHistories) != 0)
-                @foreach($reservation->user->medicalHistories as $history)
-                    @if($history->type == 0)
-                        <h4>Begined at: {{$history['begin_at']}}</h4>
-                        <h4>Details: {{$history->medicalHistoryDetail['description']}}</h4>
-                        <hr>     
-                    @endif
-                @endforeach
-            @endif
-        </div>
-        <!-- ******************************* -->
-        <div id="tabs-2">
-            @if(count($reservation->user->medicalHistories) != 0)
-                @foreach($reservation->user->medicalHistories as $history)
-                    @if($history->type == 1)
-                        <h4>Begined at: {{$history['begin_at']}}</h4>
-                        <h4>Details: {{$history->medicalHistoryDetail['description']}}</h4>
-                        <hr>     
-                    @endif
-                @endforeach
-            @endif 
-        </div>
-        <!-- ************************************************* -->
-        <div id="tabs-3">
-           @if(count($reservation->user->medicalHistories) != 0)
-                @foreach($reservation->user->medicalHistories as $history)
-                    @if($history->type == 2)
-                        <h4>Begined at: {{$history['begin_at']}}</h4>
-                        <h4>Details: {{$history->medicalHistoryDetail['description']}}</h4>
-                        <hr>     
-                    @endif
-                @endforeach
-            @endif
-        </div>
-        <div id="tab-4">
-             @include("forms.medicalHistory")
+   <button id="show" class=" btn btn-info glyphicon glyphicon-sort">Medical History</button>
+    
+    <div id="accordion2">
+       <h3>Medical History</h3>
+       @if(count($reservation->user->medicalHistories) != 0)
+            <div class="tabs">
+                <ul>
+                    <li><a href="#tabs-1">Surgies</a></li>
+                    <li><a href="#tabs-2">Diseases</a></li>
+                    <li><a href="#tabs-3">Medicines</a></li>
+                </ul>
+                <div id="tabs-1">
+                    @if(count($reservation->user->medicalHistories) != 0)
+                        @foreach($reservation->user->medicalHistories as $history)
+                            @if($history->type == 0)
+                                <h4>Begined at: {{$history['begin_at']}}</h4>
+                                <h4>Details: {{$history->medicalHistoryDetail['description']}}</h4>
+                                <hr>
 
-        </div>   
-    </div>  
+                                
+                            @endif
+                        @endforeach
+                    @endif
+                </div>
+                <!-- ******************************* -->
+                <div id="tabs-2">
+                    @if(count($reservation->user->medicalHistories) != 0)
+
+                        @foreach($reservation->user->medicalHistories as $history)
+                            @if($history->type == 1)
+                                @foreach ($history->medicalHistoryDetail as $detail)
+                                    <h4>{{$detail['description']}}</h4><hr/><br/>
+                                @endforeach 
+                            @endif
+                        @endforeach 
+                    @endif  
+                </div>
+                <!-- ************************************************* -->
+                <div id="tabs-3">
+                    @if(count($reservation->user->medicalHistories) != 0)
+                        @foreach($reservation->user->medicalHistories as $history)
+                            @if($history->type == 2)
+                                @foreach ($history->medicalHistoryDetail as $detail)
+                                         <h4>{{$detail['description']}}</h4><hr/><br/>
+                                @endforeach 
+                            @endif
+                        @endforeach
+                    @endif
+                </div>
+                
+            </div>
+        @endif
+        
+    </div>
+
     <!-- ***************************************************** -->
-
-        <div id="accordion">
+    <div id="accordion">
 
         <?php $i = 0?>
 
@@ -135,6 +133,7 @@
                 <?php $i++ ?>
 
                 <h3>{{$reservation->date}}</h3>
+
                 <div class="tabs">
                     <ul>
                         <li><a href="#tabs-{{$i}}1">Complain</a></li>
@@ -302,7 +301,5 @@
         @else
             <p align="center">There are no Reservations till now</p>
         @endif
-
-         
 
 @endsection

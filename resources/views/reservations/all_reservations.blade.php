@@ -71,7 +71,6 @@
 
 {{--        {!! Form::text('date_created',old('date_created', Carbon\Carbon::today()->format('Y-m-d')),['class'=>'form-control date-picker']) !!}--}}
         </h1>
-
     </div>
     <!-- ************************************************* -->
 <!--     <button class="btn btn-info" id="show" >MedicalHistory</button>
@@ -123,7 +122,7 @@
         </div>  -->  
     <!-- </div>   -->
     <!-- ***************************************************** -->
-
+    
         <div id="accordion">
 
         <?php $i = 0?>

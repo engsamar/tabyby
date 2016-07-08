@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
     
 
     Route::get("/reservation/{res_id}", "ReservationController@getReservations");
-
+    Route::get("/patientReservation", "ReservationController@patientReservations");
 
     Route::get('/home', 'HomeController@index');
     Route::post('/medicines/find/', 'MedicineController@find');

@@ -116,7 +116,7 @@ $(document).ready(function () {
         if ($("input[name='mobile']").val().trim() != "") {
             if ($("input[name='mobile']").val().length <= 11) {
                 if ($("input[name='mobile']").val().length = 11) {
-                    if  ($("input[name='mobile']").val().substr(0, 3) == 010 || $("input[name='mobile']").val().substr(0, 3) == 011 || $("input[name='mobile']").val().substr(0, 3) == 012){
+                    if  ($("input[name='mobile']").val().substr(0, 3) == '010' || $("input[name='mobile']").val().substr(0, 3) == '011' || $("input[name='mobile']").val().substr(0, 3) == '012'){
                         $("input[name='mobile']").next().hide();
                     } else {
                         $("input[name='mobile']").next().text("mobile starts with 010|011|012").show();
